@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#hlavní wiki stránka projektu Smart Fine
 
 = Smart Fine =
 == Systém evidence pokut pomocí chytrých telefonu ==
