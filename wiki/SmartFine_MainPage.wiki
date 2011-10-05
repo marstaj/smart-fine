@@ -14,3 +14,6 @@ Michal Líška (liskamiso@gmail.com)
 
 = Dokumenty =
 [https://docs.google.com/spreadsheet/ccc?key=0AmLh4aPUNQq_dFpzcVU5RFdScGlmNkhuNE9vbHdCNWc#gid=0 Projektový deník]
+
+= Odkazy =
+[http://code.google.com/p/e-ombudsman/ Stránky projektu e-Ombudsman]
