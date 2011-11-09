@@ -11,7 +11,7 @@ Martin Štajner (stajnmar@fel.cvut.cz, 732 173 025)
 = Dokumenty =
 [https://docs.google.com/spreadsheet/ccc?key=0AmLh4aPUNQq_dFpzcVU5RFdScGlmNkhuNE9vbHdCNWc#gid=0 Projektový deník]
 
-[http://smart-fine.googlecode.com/files/POS-Smart-Fine-v2.pdf Finální verze Project Overview Statement (*.pdf)]
+[http://smart-fine.googlecode.com/files/SF-POS-v2.pdf Finální verze Project Overview Statement (*.pdf)]
 
 [http://smart-fine.googlecode.com/files/SF-Analyza_v2.pdf Analýza projektu (*.pdf)]
 
