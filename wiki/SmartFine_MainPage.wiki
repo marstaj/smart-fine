@@ -13,7 +13,7 @@ Martin Štajner (stajnmar@fel.cvut.cz, 732 173 025)
 
 [http://smart-fine.googlecode.com/files/POS-Smart-Fine-v2.pdf Finální verze Project Overview Statement (*.pdf)]
 
-[http://smart-fine.googlecode.com/files/SF-Analyza-v1.pdf Analýza projektu (*.pdf)]
+[http://smart-fine.googlecode.com/files/SF-Analyza_v2.pdf Analýza projektu (*.pdf)]
 
 = Odkazy =
 == Issue Tracker ==
