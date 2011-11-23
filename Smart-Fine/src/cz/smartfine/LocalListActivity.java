@@ -26,7 +26,7 @@ public class LocalListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.locallist);
 		
-		// Prirazeni instance aplikace - kvuli pristupu k datum z ruznych aktivit
+		// Prirazeni instance aplikace - kvuli pristupu k datum z ruznych aktivit PRDEL
 		app = (MyApp) this.getApplication();
 
 		// Nastaveni listu
