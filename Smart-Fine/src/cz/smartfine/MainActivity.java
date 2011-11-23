@@ -23,6 +23,8 @@ public class MainActivity extends Activity {
         
         // Prirazeni instance aplikace - kvuli pristupu k datum z ruznych aktivit
     	app = (MyApp) this.getApplication();
+    	
+    	String strin = new String();
     }
         
     /**
