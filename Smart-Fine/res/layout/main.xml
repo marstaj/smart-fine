@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#EDEEFF"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15pt"
+        android:layout_marginTop="20pt"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20pt" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical|center" >
+
+        <Button
+            android:id="@+id/newTicketButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="newTicketClick"
+            android:text="@string/new_ticket_title" />
+
+        <Button
+            android:id="@+id/localListButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="listClick"
+            android:text="@string/local_list_title" />
+
+    </LinearLayout>
+
+</LinearLayout>

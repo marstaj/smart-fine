@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:background="#EDEEFF" >
+
+    <LinearLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="420dp"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout18"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/spzTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Vozidlo_RZ_SPZ" />
+
+            <TextView
+                android:id="@+id/TextView07"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Hvezdicka" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/spz"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+            <ImageButton
+                android:id="@+id/scanSpzButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_button_scan" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/mpzTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/MPZ" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Hvezdicka" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout10"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/mpz"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+            <Spinner
+                android:id="@+id/mpzSpinner"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/mpz"
+                android:prompt="@string/Mezinarodni_poznavaci_znacka" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout02"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/spzColorTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Barva_RZ_SPZ" />
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Hvezdicka" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/spzColor"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+            <Spinner
+                android:id="@+id/spzColorSpinner"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/spzColor"
+                android:prompt="@string/Barva_RZ_SPZ" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout13"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/vehicleTypeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Druh_vozidla" />
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Hvezdicka" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout11"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/vehicleType"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text" >
+
+                <requestFocus />
+            </EditText>
+
+            <Spinner
+                android:id="@+id/vehicleTypeSpinner"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/vehicleType"
+                android:prompt="@string/Druh_vozidla" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout14"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/vehicleBrandTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Tovarni_znacka" />
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Hvezdicka" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout12"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/vehicleBrand"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+            <Spinner
+                android:id="@+id/vehicleBrandSpinner"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/vehicleBrand"
+                android:prompt="@string/Tovarni_znacka" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout03"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout05"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout04"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout15"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/mestoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Mesto" />
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Hvezdicka" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout06"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+            <ImageButton
+                android:id="@+id/scanLocationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_button_location" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout07"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout09"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout16"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/streetTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Ulice" />
+
+                    <TextView
+                        android:id="@+id/TextView05"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Hvezdicka" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/street"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout08"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout17"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/numberTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Cislo" />
+
+                    <TextView
+                        android:id="@+id/TextView06"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Hvezdicka" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/number"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number" android:cursorVisible="false"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/locationTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.04"
+            android:text="@string/Misto" />
+
+        <EditText
+            android:id="@+id/location"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/descriptionDZTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00"
+            android:text="@string/Popis_jednani_DZ" />
+
+        <EditText
+            android:id="@+id/descriptionDZ"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text|textMultiLine" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <CheckBox
+                android:id="@+id/tow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Odtah" />
+
+            <CheckBox
+                android:id="@+id/moveableDZ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Pranosne_DZ" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/violationTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Prestupek" />
+
+        <Spinner
+            android:id="@+id/violationSpinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/law"
+            android:prompt="@string/Druh_prestupku" />
+
+        <EditText
+            android:id="@+id/violation"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="@string/Vyberte_z_nabidky" />
+
+        <TextView
+            android:id="@+id/eventDescriptionTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Popis_situace" />
+
+        <EditText
+            android:id="@+id/eventDescription"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text|textMultiLine" />
+
+        <Button
+            android:id="@+id/saveTicketButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="saveTicket"
+            android:text="@string/Ulozit_zaznam" />
+
+    </LinearLayout>
+
+</ScrollView>

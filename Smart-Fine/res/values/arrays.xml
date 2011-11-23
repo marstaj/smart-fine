@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="law">
+        <item>- Vlastní -</item>
+        <item>Přestupek 1</item>
+        <item>Přestupek 2</item>
+        <item>Přestupek 3</item>
+        <item>Přestupek 4</item>
+        <item>Přestupek 5</item>
+    </string-array>
+    
+    <string-array name="mpz">
+        <item>- Vlastní -</item>
+        <item>CZ</item>
+        <item>SK</item>
+        <item>D</item>
+        <item>A</item>
+        <item>PL</item>
+    </string-array>
+    
+    <string-array name="spzColor">
+        <item>- Vlastní -</item>s
+        <item>Bílá</item>
+        <item>Oranžová</item>
+    </string-array>
+    
+    <string-array name="vehicleType">
+        <item>- Vlastní -</item>
+        <item>Osobní</item>
+        <item>Nákladní</item>
+    </string-array>
+    
+    <string-array name="vehicleBrand">
+        <item>- Vlastní -</item>
+        <item>Audi</item>
+        <item>Škoda</item>
+        <item>Subaru</item>
+        <item>Ford</item>
+        <item>Volvo</item>
+        <item>BMW</item>
+        <item>Alfa Romeo</item>
+    </string-array>
+    
+</resources>

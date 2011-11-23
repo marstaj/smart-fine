@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart-Fine</string>
+    <string name="new_ticket_title">Nový lístek</string>
+    <string name="local_list_title">Lokální záznamy</string>
+    <string name="Vozidlo_RZ_SPZ">Vozidlo RZ/SPZ</string>
+    <string name="MPZ">MPZ</string>
+    <string name="Barva_RZ_SPZ">Barva RZ/SPZ</string>
+    <string name="Scan">Scan</string>
+    <string name="Druh_vozidla">Druh vozidla</string>
+    <string name="Tovarni_znacka">Tovární značka</string>
+    <string name="Adresa">Adresa</string>
+    <string name="Misto">Místo</string>
+    <string name="Popis_jednani_DZ">Popis jednání (DZ)</string>
+    <string name="Odtah">Odtah</string>
+    <string name="Pranosne_DZ">Přenosné DZ</string>
+    <string name="Identifikacni_cislo">Identifikační číslo</string>
+    <string name="Ulozit_zaznam">Uložit záznam</string>
+    <string name="Druh_prestupku">Druh přestupku</string>
+    <string name="Nahrat_zaznamy_na_server">Nahrát záznamy na server</string>
+    <string name="Vyberte_z_nabidky">Vyberte z nabídky</string>
+    <string name="Prestupek">Přestupek</string>
+    <string name="Parkovaci_listek_ulozen">Parkovací lístek úspěšně uložen.</string>
+    <string name="Popis_situace">Popis situace</string>
+    <string name="Mesto">Město</string>
+    <string name="Ulice">Ulice</string>
+    <string name="Cislo">Číslo</string>
+    <string name="Mezinarodni_poznavaci_znacka">Mezinárodní poznávací značka</string>
+    <string name="Hvezdicka"> *</string>
+
+</resources>
