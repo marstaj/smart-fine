@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:layout_weight="1"
     android:background="#EDEEFF" >
-
+
     <LinearLayout
         android:id="@+id/rootLayout"
         android:layout_width="fill_parent"
@@ -21,13 +21,13 @@
                 android:id="@+id/spzTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Vozidlo_RZ_SPZ" />
+                android:text="@string/view_ticket_spz" />
 
             <TextView
                 android:id="@+id/TextView07"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Hvezdicka" />
+                android:text="@string/view_required" />
         </LinearLayout>
 
         <LinearLayout
@@ -41,13 +41,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text" />
-
+
             <ImageButton
                 android:id="@+id/scanSpzButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_button_scan" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -59,14 +58,13 @@
                 android:id="@+id/mpzTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/MPZ" />
-
+                android:text="@string/view_ticket_mpz" />
+
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Hvezdicka" />
-
+                android:text="@string/view_required" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,14 +78,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text" />
-
+
             <Spinner
                 android:id="@+id/mpzSpinner"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:entries="@array/mpz"
-                android:prompt="@string/Mezinarodni_poznavaci_znacka" />
-
+                android:entries="@array/ticket_mpz"
+                android:prompt="@string/view_ticket_mpz1" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,13 +96,13 @@
                 android:id="@+id/spzColorTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Barva_RZ_SPZ" />
+                android:text="@string/view_ticket_spzColor" />
 
             <TextView
                 android:id="@+id/TextView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Hvezdicka" />
+                android:text="@string/view_required" />
         </LinearLayout>
 
         <LinearLayout
@@ -119,32 +116,31 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text" />
-
+
             <Spinner
                 android:id="@+id/spzColorSpinner"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:entries="@array/spzColor"
-                android:prompt="@string/Barva_RZ_SPZ" />
-
+                android:entries="@array/ticket_spzColor"
+                android:prompt="@string/view_ticket_spzColor" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/LinearLayout13"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
-
+
             <TextView
                 android:id="@+id/vehicleTypeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Druh_vozidla" />
+                android:text="@string/view_ticket_vehicleType" />
 
             <TextView
                 android:id="@+id/TextView02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Hvezdicka" />
+                android:text="@string/view_required" />
         </LinearLayout>
 
         <LinearLayout
@@ -161,32 +157,31 @@
 
                 <requestFocus />
             </EditText>
-
+
             <Spinner
                 android:id="@+id/vehicleTypeSpinner"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:entries="@array/vehicleType"
-                android:prompt="@string/Druh_vozidla" />
-
+                android:entries="@array/ticket_vehicleType"
+                android:prompt="@string/view_ticket_vehicleType" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/LinearLayout14"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
-
+
             <TextView
                 android:id="@+id/vehicleBrandTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Tovarni_znacka" />
+                android:text="@string/view_ticket_vehicleBrand" />
 
             <TextView
                 android:id="@+id/TextView03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Hvezdicka" />
+                android:text="@string/view_required" />
         </LinearLayout>
 
         <LinearLayout
@@ -200,14 +195,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text" />
-
+
             <Spinner
                 android:id="@+id/vehicleBrandSpinner"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:entries="@array/vehicleBrand"
-                android:prompt="@string/Tovarni_znacka" />
-
+                android:entries="@array/ticket_vehicleBrand"
+                android:prompt="@string/view_ticket_vehicleBrand" />
         </LinearLayout>
 
         <LinearLayout
@@ -236,38 +230,37 @@
             android:id="@+id/LinearLayout15"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
-
+
             <TextView
                 android:id="@+id/mestoTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Mesto" />
+                android:text="@string/view_ticket_city" />
 
             <TextView
                 android:id="@+id/TextView04"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Hvezdicka" />
+                android:text="@string/view_required" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/LinearLayout06"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
-
+
             <EditText
                 android:id="@+id/city"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:inputType="text" />
-
+
             <ImageButton
                 android:id="@+id/scanLocationButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_button_location" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -286,27 +279,26 @@
                     android:id="@+id/LinearLayout16"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" >
-
+
                     <TextView
                         android:id="@+id/streetTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Ulice" />
+                        android:text="@string/view_ticket_street" />
 
                     <TextView
                         android:id="@+id/TextView05"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Hvezdicka" />
+                        android:text="@string/view_required" />
                 </LinearLayout>
-
+
                 <EditText
                     android:id="@+id/street"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="text" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -320,27 +312,27 @@
                     android:id="@+id/LinearLayout17"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" >
-
+
                     <TextView
                         android:id="@+id/numberTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Cislo" />
+                        android:text="@string/view_ticket_number" />
 
                     <TextView
                         android:id="@+id/TextView06"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Hvezdicka" />
+                        android:text="@string/view_required" />
                 </LinearLayout>
-
+
                 <EditText
                     android:id="@+id/number"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="number" android:cursorVisible="false"/>
-
+                    android:cursorVisible="false"
+                    android:inputType="number" />
             </LinearLayout>
         </LinearLayout>
 
@@ -349,21 +341,21 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.04"
-            android:text="@string/Misto" />
-
+            android:text="@string/view_ticket_location" />
+
         <EditText
             android:id="@+id/location"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
-
+
         <TextView
             android:id="@+id/descriptionDZTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.00"
-            android:text="@string/Popis_jednani_DZ" />
-
+            android:text="@string/view_ticket_descriptionDZ" />
+
         <EditText
             android:id="@+id/descriptionDZ"
             android:layout_width="fill_parent"
@@ -380,44 +372,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/Odtah" />
+                android:text="@string/view_ticket_tow" />
 
             <CheckBox
                 android:id="@+id/moveableDZ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/Pranosne_DZ" />
+                android:text="@string/view_ticket_moveableDZ" />
 
         </LinearLayout>
-
+
         <TextView
             android:id="@+id/violationTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Prestupek" />
-
+            android:text="@string/view_ticket_law" />
+
         <Spinner
             android:id="@+id/violationSpinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/law"
-            android:prompt="@string/Druh_prestupku" />
-
+            android:entries="@array/ticket_law"
+            android:prompt="@string/view_ticket_law" />
+
         <EditText
             android:id="@+id/violation"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:text="@string/Vyberte_z_nabidky" />
-
+            android:focusableInTouchMode="false" />
+
         <TextView
             android:id="@+id/eventDescriptionTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Popis_situace" />
-
+            android:text="@string/view_ticket_description" />
+
         <EditText
             android:id="@+id/eventDescription"
             android:layout_width="fill_parent"
@@ -430,7 +421,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:onClick="saveTicket"
-            android:text="@string/Ulozit_zaznam" />
+            android:text="@string/view_ticket_saveTicketButton" />
 
     </LinearLayout>
 

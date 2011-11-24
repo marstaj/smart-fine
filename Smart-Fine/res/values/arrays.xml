@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="law">
+    <string-array name="ticket_law">
         <item>- Vlastní -</item>
         <item>Přestupek 1</item>
         <item>Přestupek 2</item>
@@ -10,7 +10,7 @@
         <item>Přestupek 5</item>
     </string-array>
     
-    <string-array name="mpz">
+    <string-array name="ticket_mpz">
         <item>- Vlastní -</item>
         <item>CZ</item>
         <item>SK</item>
@@ -19,19 +19,19 @@
         <item>PL</item>
     </string-array>
     
-    <string-array name="spzColor">
+    <string-array name="ticket_spzColor">
         <item>- Vlastní -</item>s
         <item>Bílá</item>
         <item>Oranžová</item>
     </string-array>
     
-    <string-array name="vehicleType">
+    <string-array name="ticket_vehicleType">
         <item>- Vlastní -</item>
         <item>Osobní</item>
         <item>Nákladní</item>
     </string-array>
     
-    <string-array name="vehicleBrand">
+    <string-array name="ticket_vehicleBrand">
         <item>- Vlastní -</item>
         <item>Audi</item>
         <item>Škoda</item>

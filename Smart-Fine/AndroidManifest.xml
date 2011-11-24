@@ -18,11 +18,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="@string/new_ticket_title"
+            android:label="@string/ticket_edit_title"
             android:name=".TicketEditActivity" >
         </activity>
-        <activity android:name=".TicketListActivity" android:label="@string/local_list_title"></activity>
-        <activity android:name=".TicketDetailActivity"></activity>
+        <activity android:name=".TicketListActivity" android:label="@string/ticket_list_title"></activity>
+        <activity android:name=".TicketDetailActivity" android:label="@string/ticket_detail_title"></activity>
     </application>
 
 </manifest>

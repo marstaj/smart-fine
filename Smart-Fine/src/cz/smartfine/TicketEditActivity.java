@@ -32,7 +32,8 @@ public class TicketEditActivity extends Activity {
 		this.getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-		// Prirazeni instance aplikace - kvuli pristupu k datum z ruznych aktivit
+		// Prirazeni instance aplikace - kvuli pristupu k datum z ruznych
+		// aktivit
 		app = (MyApp) this.getApplication();
 
 		setAllSpinnerListeners();
@@ -40,8 +41,9 @@ public class TicketEditActivity extends Activity {
 
 	/**
 	 * Obsluha tlacitka - Ulozit listek
+	 * 
 	 * @param target
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void saveTicket(View target) {
 		Ticket ticket = createTicket();
@@ -49,32 +51,35 @@ public class TicketEditActivity extends Activity {
 		if (error != null) {
 			Toaster.toast(error, Toaster.LONG);
 		} else {
-				try {
-					app.getTicketDao().saveTicket(ticket);
-					Toaster.toast(R.string.Parkovaci_listek_ulozen, Toaster.LONG);
-					finish();
-				} catch (Exception e) {
-					// Odstraneni posledniho pridaneho listku z arraylistu
-					app.getTicketDao().getLocals().remove(app.getTicketDao().getLocals().size()-1);
-					Toaster.toast("Lístek se nepodaøilo uložit!", Toaster.LONG);
-					e.printStackTrace();
-				}	
+			try {
+				app.getTicketDao().saveTicket(ticket);
+				Toaster.toast(R.string.val_ticket_success, Toaster.LONG);
+				finish();
+			} catch (Exception e) {
+				// Odstraneni posledniho pridaneho listku z arraylistu
+				app.getTicketDao().getLocals()
+						.remove(app.getTicketDao().getLocals().size() - 1);
+				Toaster.toast(R.string.val_ticket_failure, Toaster.LONG);
+				e.printStackTrace();
+			}
 		}
 	}
 
 	/**
 	 * Vytvoreni noveho listku a prirazeni jeho atributu
+	 * 
 	 * @return
 	 */
 	private Ticket createTicket() {
 		Ticket ticket = new Ticket();
 
 		ticket.setDate(new Date());
-		
+
 		// TODO prozatimni random cislo odznaku
 		ticket.setBadgeNumber(3403234);
 
-		ticket.setSpz(((EditText) this.findViewById(R.id.spz)).getText().toString());
+		ticket.setSpz(((EditText) this.findViewById(R.id.spz)).getText()
+				.toString());
 		ticket.setMpz(((EditText) findViewById(R.id.mpz)).getText().toString());
 		ticket.setSpzColor(((EditText) findViewById(R.id.spzColor)).getText()
 				.toString());
@@ -109,31 +114,32 @@ public class TicketEditActivity extends Activity {
 
 	/**
 	 * Kontrola vsech povinnych udaju a vraceni varovani
+	 * 
 	 * @param ticket
 	 * @return
 	 */
 	private String checkTicket(Ticket ticket) {
 		String error = "";
 		if (ticket.getSpz().equals("")) {
-			error += "SPZ musí být vyplnìna.\n";
+			error += getString(R.string.val_ticket_err_spz);
 		}
 		if (ticket.getMpz().equals("")) {
-			error += "MPZ musí být vyplnìna.\n";
+			error += getString(R.string.val_ticket_err_mpz);
 		}
 		if (ticket.getVehicleType().equals("")) {
-			error += "Druh vozidla musý být vyplnìn.\n";
+			error += getString(R.string.val_ticket_err_vehicleType);
 		}
 		if (ticket.getVehicleBrand().equals("")) {
-			error += "Tovární znaèku vozidla musí být vyplnìna.\n";
+			error += getString(R.string.val_ticket_err_vehicleBrand);
 		}
 		if (ticket.getCity().equals("")) {
-			error += "Mìsto musí být vyplnìno.\n";
+			error += getString(R.string.val_ticket_err_city);
 		}
 		if (ticket.getStreet().equals("")) {
-			error += "Ulice musí být vyplnìna.\n";
+			error += getString(R.string.val_ticket_err_street);
 		}
 		if (ticket.getNumber() == 0) {
-			error += "Èíslo ulice musí být vyplnìno.";
+			error += getString(R.string.val_ticket_err_number);
 		}
 
 		if (error.length() != 0) {
@@ -142,38 +148,41 @@ public class TicketEditActivity extends Activity {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Obsluha nastaveni listeneru
 	 */
 	private void setAllSpinnerListeners() {
-		int ids[][] = {
-				{ R.id.mpzSpinner, R.id.mpz },
+		int ids[][] = { { R.id.mpzSpinner, R.id.mpz },
 				{ R.id.spzColorSpinner, R.id.spzColor },
 				{ R.id.vehicleTypeSpinner, R.id.vehicleType },
 				{ R.id.vehicleBrandSpinner, R.id.vehicleBrand } };
-		
-		for(int i = 0; i < ids.length; i++) {
+
+		for (int i = 0; i < ids.length; i++) {
 			setSimpleSpinnerListener(ids[i][0], ids[i][1]);
 		}
 	}
 
 	/**
 	 * Nastaveni listeneru na vybrany spinner
+	 * 
 	 * @param spin
 	 * @param txt
 	 */
 	private void setSimpleSpinnerListener(int spin, final int txt) {
-		
+
 		final Spinner spinner = (Spinner) findViewById(spin);
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			
+
 			/**
-			 * Zda se jedna o prvotni inicializaci, nebo akci uzivatele
+			 * Zda se jedna o prvotni inicializaci, nebo akci uzivatele (spinner
+			 * se totiz zavola jeste pred tim, nez uzivatel staci cokoliv
+			 * udelat)
 			 */
 			boolean init = true;
 
-			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
 				if (!init) {
 					String text = spinner.getSelectedItem().toString();
 					if (text.equals("- Vlastní -")) {
@@ -184,7 +193,7 @@ public class TicketEditActivity extends Activity {
 					init = false;
 				}
 			}
-			
+
 			public void onNothingSelected(AdapterView<?> arg0) {
 				//
 			}

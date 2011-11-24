@@ -9,11 +9,11 @@ package cz.smartfine;
 
 public final class R {
     public static final class array {
-        public static final int law=0x7f040000;
-        public static final int mpz=0x7f040001;
-        public static final int spzColor=0x7f040002;
-        public static final int vehicleBrand=0x7f040004;
-        public static final int vehicleType=0x7f040003;
+        public static final int ticket_law=0x7f040000;
+        public static final int ticket_mpz=0x7f040001;
+        public static final int ticket_spzColor=0x7f040002;
+        public static final int ticket_vehicleBrand=0x7f040004;
+        public static final int ticket_vehicleType=0x7f040003;
     }
     public static final class attr {
     }
@@ -60,7 +60,6 @@ public final class R {
         public static final int linearLayout2=0x7f06000a;
         public static final int linearLayout4=0x7f06003a;
         public static final int listView1=0x7f060043;
-        public static final int localListButton=0x7f060004;
         public static final int location=0x7f060037;
         public static final int locationTitle=0x7f060036;
         public static final int mestoTitle=0x7f060026;
@@ -86,6 +85,7 @@ public final class R {
         public static final int street=0x7f060030;
         public static final int streetTitle=0x7f06002e;
         public static final int textView1=0x7f06000c;
+        public static final int ticketListButton=0x7f060004;
         public static final int tow=0x7f06003b;
         public static final int vehicleBrand=0x7f060020;
         public static final int vehicleBrandSpinner=0x7f060021;
@@ -104,32 +104,43 @@ public final class R {
         public static final int ticketlistitem=0x7f030003;
     }
     public static final class string {
-        public static final int Adresa=0x7f050009;
-        public static final int Barva_RZ_SPZ=0x7f050005;
-        public static final int Cislo=0x7f050018;
-        public static final int Druh_prestupku=0x7f050010;
-        public static final int Druh_vozidla=0x7f050007;
-        public static final int Hvezdicka=0x7f05001a;
-        public static final int Identifikacni_cislo=0x7f05000e;
-        public static final int MPZ=0x7f050004;
-        public static final int Mesto=0x7f050016;
-        public static final int Mezinarodni_poznavaci_znacka=0x7f050019;
-        public static final int Misto=0x7f05000a;
-        public static final int Nahrat_zaznamy_na_server=0x7f050011;
-        public static final int Odtah=0x7f05000c;
-        public static final int Parkovaci_listek_ulozen=0x7f050014;
-        public static final int Popis_jednani_DZ=0x7f05000b;
-        public static final int Popis_situace=0x7f050015;
-        public static final int Pranosne_DZ=0x7f05000d;
-        public static final int Prestupek=0x7f050013;
-        public static final int Scan=0x7f050006;
-        public static final int Tovarni_znacka=0x7f050008;
-        public static final int Ulice=0x7f050017;
-        public static final int Ulozit_zaznam=0x7f05000f;
-        public static final int Vozidlo_RZ_SPZ=0x7f050003;
-        public static final int Vyberte_z_nabidky=0x7f050012;
-        public static final int app_name=0x7f050000;
-        public static final int local_list_title=0x7f050002;
-        public static final int new_ticket_title=0x7f050001;
+        public static final int Adresa=0x7f050015;
+        public static final int Cislo=0x7f050023;
+        public static final int Druh_prestupku=0x7f05001c;
+        public static final int Druh_vozidla=0x7f050013;
+        public static final int Identifikacni_cislo=0x7f05001a;
+        public static final int Mesto=0x7f050021;
+        public static final int Misto=0x7f050016;
+        public static final int Nahrat_zaznamy_na_server=0x7f05001d;
+        public static final int Odtah=0x7f050018;
+        public static final int Popis_jednani_DZ=0x7f050017;
+        public static final int Popis_situace=0x7f050020;
+        public static final int Pranosne_DZ=0x7f050019;
+        public static final int Prestupek=0x7f05001f;
+        public static final int Tovarni_znacka=0x7f050014;
+        public static final int Ulice=0x7f050022;
+        public static final int Ulozit_zaznam=0x7f05001b;
+        public static final int Vyberte_z_nabidky=0x7f05001e;
+        public static final int app_name=0x7f05000a;
+        public static final int file_tickets=0x7f050000;
+        public static final int ticket_detail_title=0x7f05000d;
+        public static final int ticket_edit_title=0x7f05000b;
+        public static final int ticket_list_title=0x7f05000c;
+        public static final int val_ticket_err_city=0x7f050005;
+        public static final int val_ticket_err_mpz=0x7f050002;
+        public static final int val_ticket_err_number=0x7f050007;
+        public static final int val_ticket_err_spz=0x7f050001;
+        public static final int val_ticket_err_street=0x7f050006;
+        public static final int val_ticket_err_vehicleBrand=0x7f050004;
+        public static final int val_ticket_err_vehicleType=0x7f050003;
+        public static final int val_ticket_failure=0x7f050008;
+        public static final int val_ticket_success=0x7f050009;
+        public static final int view_main_newTicketButton=0x7f05000e;
+        public static final int view_main_ticketListButton=0x7f05000f;
+        public static final int view_required=0x7f050025;
+        public static final int view_ticket_mpz=0x7f050011;
+        public static final int view_ticket_mpz1=0x7f050024;
+        public static final int view_ticket_spz=0x7f050010;
+        public static final int view_ticket_spzColor=0x7f050012;
     }
 }

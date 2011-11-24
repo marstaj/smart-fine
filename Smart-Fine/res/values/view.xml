@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart-Fine</string>
+    <string name="ticket_edit_title">Vytvoření / úprava parkovacího lístku</string>
+    <string name="ticket_list_title">Uložené parkovací lístky</string>
+    <string name="ticket_detail_title">Detail parkovacího lístku</string>
+    <string name="view_main_newTicketButton">Nový parkovací lístek</string>
+    <string name="view_main_ticketListButton">Uložené lístky</string>    
+    <string name="view_ticketList_uploadButton">Nahrát záznamy na server</string>
+        
+    <string name="view_ticket_spz">Vozidlo RZ/SPZ</string>
+    <string name="view_ticket_mpz">MPZ</string>    
+    <string name="view_ticket_mpz1">Mezinárodní poznávací značka</string>
+    <string name="view_ticket_spzColor">Barva RZ/SPZ</string>
+    <string name="view_ticket_vehicleType">Druh vozidla</string>
+    <string name="view_ticket_vehicleBrand">Tovární značka</string>
+    <string name="view_ticket_address">Adresa</string>
+    <string name="view_ticket_location">Místo</string>
+    <string name="view_ticket_descriptionDZ">Popis jednání (DZ)</string>
+    <string name="view_ticket_tow">Odtah</string>
+    <string name="view_ticket_moveableDZ">Přenosné DZ</string>
+    <string name="view_ticket_id">Identifikační číslo</string>
+    <string name="view_ticket_law">Druh přestupek</string>
+    <string name="view_ticket_description">Popis situace</string>
+    <string name="view_ticket_city">Město</string>
+    <string name="view_ticket_street">Ulice</string>
+    <string name="view_ticket_number">Číslo</string>
+    <string name="view_required"> *</string>
+    <string name="view_ticket_saveTicketButton">Uložit záznam</string>
+</resources>

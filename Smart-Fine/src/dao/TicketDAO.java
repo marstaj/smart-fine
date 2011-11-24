@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.ArrayList;
+
+import cz.smartfine.R;
 import android.content.Context;
 import model.Ticket;
 
@@ -59,7 +61,7 @@ public class TicketDAO {
          */
         public void saveTicket(Ticket ticket) throws Exception{
                 locals.add(ticket);
-                dao.saveObjectToFile(locals, "data.smf");
+                dao.saveObjectToFile(locals, context.getString(R.string.file_tickets));
         }
 
         /**
@@ -67,7 +69,7 @@ public class TicketDAO {
          */
         @SuppressWarnings("unchecked")
         public void loadTickets() throws Exception {
-                Object o = dao.loadObjectFromFile("data.smf");
+                Object o = dao.loadObjectFromFile(context.getString(R.string.file_tickets));
                 if (o instanceof ArrayList) {
                         locals = (ArrayList<Ticket>) o;
                 }

@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
      * Obsluha tlacitka - Lokalni zaznamy
      * @param target
      */
-    public void listClick(View target) {
+    public void ticketListClick(View target) {
     	this.startActivity(new Intent(this, TicketListActivity.class));
 	}
 
