@@ -1,8 +1,5 @@
 package cz.smartfine;
 
-import java.util.ArrayList;
-
-import model.Ticket;
 import model.Toaster;
 import dao.TicketDao;
 import android.app.Application;
@@ -14,40 +11,28 @@ import android.app.Application;
 public class MyApp extends Application {
 
 	/**
-	 * List vsech lokalne ulozenych listku
-	 */
-	ArrayList<Ticket> locals;
-	/**
 	 * Pristup k DAO
 	 */
-	TicketDao dao;
-	
+	TicketDao ticketDao;	
 	
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		Toaster.context = getApplicationContext();
-		dao = new TicketDao(getApplicationContext());
-		// Nacteni lokalne ulozenych listku ze souboru
-		locals = dao.loadTickets();
-		if (locals == null) {
-			locals = new ArrayList<Ticket>();
-		}		
+		ticketDao = TicketDao.getInstance(getApplicationContext());
+		try {
+			ticketDao.loadTickets();
+		} catch (Exception e) {
+			Toaster.toast("Nepodaøilo se naèíst uložené lístky", Toaster.LONG);
+			e.printStackTrace();
+		}
 	}
 
-	public ArrayList<Ticket> getLocals() {
-		return locals;
+	public TicketDao getTicketDao() {
+		return ticketDao;
 	}
 
-	public void setLocals(ArrayList<Ticket> locals) {
-		this.locals = locals;
-	}
-
-	public TicketDao getDao() {
-		return dao;
-	}
-
-	public void setDao(TicketDao dao) {
-		this.dao = dao;
+	public void setTicketDao(TicketDao dao) {
+		this.ticketDao = dao;
 	}
 }

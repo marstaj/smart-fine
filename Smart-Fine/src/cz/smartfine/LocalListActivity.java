@@ -32,7 +32,7 @@ public class LocalListActivity extends Activity {
 		// Nastaveni listu
 		ListView lv = (ListView) this.findViewById(R.id.listView1);
 		lv.setTextFilterEnabled(true);
-		lv.setAdapter(new TicketAdapter(this, R.layout.listitem, app.getLocals()));
+		lv.setAdapter(new TicketAdapter(this, R.layout.listitem, app.getTicketDao().getLocals()));
 		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,

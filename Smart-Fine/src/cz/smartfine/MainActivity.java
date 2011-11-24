@@ -14,6 +14,7 @@ public class MainActivity extends Activity {
 	/**
 	 * Instance aplikace
 	 */
+	@SuppressWarnings("unused")
 	private MyApp app;
 	
     @Override
@@ -30,7 +31,7 @@ public class MainActivity extends Activity {
      * @param target
      */
     public void newTicketClick(View target) {
-    	this.startActivityForResult(new Intent(this, NewTicketActivity.class), 1);
+    	this.startActivity(new Intent(this, NewTicketActivity.class));
 	}
     
     /**
@@ -39,17 +40,6 @@ public class MainActivity extends Activity {
      */
     public void listClick(View target) {
     	this.startActivity(new Intent(this, LocalListActivity.class));
-	}
-    
-    @Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);		
-		if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-            	// Ulozeni vsech listku do souboru
-            	app.getDao().saveTicket(app.getLocals());
-            }
-        }
 	}
 
 }

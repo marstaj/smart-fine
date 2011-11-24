@@ -41,6 +41,7 @@ public class NewTicketActivity extends Activity {
 	/**
 	 * Obsluha tlacitka - Ulozit listek
 	 * @param target
+	 * @throws Exception 
 	 */
 	public void saveTicket(View target) {
 		Ticket ticket = createTicket();
@@ -48,10 +49,16 @@ public class NewTicketActivity extends Activity {
 		if (error != null) {
 			Toaster.toast(error, Toaster.LONG);
 		} else {
-			Toaster.toast(R.string.Parkovaci_listek_ulozen, Toaster.LONG);
-			app.getLocals().add(ticket);
-			this.setResult(RESULT_OK);
-			finish();
+				try {
+					app.getTicketDao().saveTicket(ticket);
+					Toaster.toast(R.string.Parkovaci_listek_ulozen, Toaster.LONG);
+					finish();
+				} catch (Exception e) {
+					// Odstraneni posledniho pridaneho listku z arraylistu
+					app.getTicketDao().getLocals().remove(app.getTicketDao().getLocals().size()-1);
+					Toaster.toast("Lístek se nepodaøilo uložit!", Toaster.LONG);
+					e.printStackTrace();
+				}	
 		}
 	}
 
