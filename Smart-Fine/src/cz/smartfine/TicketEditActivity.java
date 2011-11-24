@@ -18,7 +18,7 @@ import android.widget.Spinner;
  * @author Martin Stajner
  * 
  */
-public class NewTicketActivity extends Activity {
+public class TicketEditActivity extends Activity {
 
 	/**
 	 * Instance aplikace

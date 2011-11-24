@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:label="@string/new_ticket_title"
-            android:name=".NewTicketActivity" >
+            android:name=".TicketEditActivity" >
         </activity>
         <activity android:name=".LocalListActivity" android:label="@string/local_list_title"></activity>
     </application>

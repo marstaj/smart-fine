@@ -62,9 +62,9 @@ public class DAO {
 	public Object loadObjectFromFile(String path) throws Exception {
 		FileInputStream fis = context.openFileInput(path);
 		ObjectInputStream ois = new ObjectInputStream(fis);
-		Object o = ois.readObject();
+		Object object = ois.readObject();
 		ois.close();
 		fis.close();
-		return o;
+		return object;
 	}
 }

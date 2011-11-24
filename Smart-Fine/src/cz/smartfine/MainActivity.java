@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
      * @param target
      */
     public void newTicketClick(View target) {
-    	this.startActivity(new Intent(this, NewTicketActivity.class));
+    	this.startActivity(new Intent(this, TicketEditActivity.class));
 	}
     
     /**
