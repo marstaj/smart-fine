@@ -40,7 +40,7 @@ public class TicketAdapter extends ArrayAdapter<Ticket> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.listitem, null);
+			convertView = mInflater.inflate(R.layout.ticketlistitem, null);
 		}
 		Ticket ticket = items.get(position);
 		((TextView) convertView.findViewById(R.id.showSpz)).setText("SPZ: "+ ticket.getSpz());

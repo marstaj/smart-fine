@@ -22,6 +22,7 @@
             android:name=".TicketEditActivity" >
         </activity>
         <activity android:name=".TicketListActivity" android:label="@string/local_list_title"></activity>
+        <activity android:name=".TicketDetailActivity"></activity>
     </application>
 
 </manifest>
