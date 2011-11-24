@@ -14,7 +14,7 @@ import android.widget.TextView;
  * @author Martin Stajner
  *
  */
-public class LocalListActivity extends Activity {
+public class TicketListActivity extends Activity {
 	
 	/**
 	 * Instance aplikace

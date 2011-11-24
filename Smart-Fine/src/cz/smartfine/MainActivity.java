@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
      * @param target
      */
     public void listClick(View target) {
-    	this.startActivity(new Intent(this, LocalListActivity.class));
+    	this.startActivity(new Intent(this, TicketListActivity.class));
 	}
 
 }
