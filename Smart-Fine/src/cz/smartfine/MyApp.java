@@ -19,6 +19,7 @@ public class MyApp extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		
 		Toaster.context = getApplicationContext();
 		ticketDAO = FileTicketDAO.getInstance(getApplicationContext());
 		try {
@@ -36,4 +37,5 @@ public class MyApp extends Application {
 	public void setTicketDao(TicketDAO dao) {
 		this.ticketDAO = dao;
 	}
+
 }
