@@ -7,7 +7,6 @@
     <string name="view_main_newTicketButton">Nový parkovací lístek</string>
     <string name="view_main_ticketListButton">Uložené lístky</string>    
     <string name="view_ticketList_uploadButton">Nahrát záznamy na server</string>
-        
     <string name="view_ticket_spz">Vozidlo RZ/SPZ</string>
     <string name="view_ticket_mpz">MPZ</string>    
     <string name="view_ticket_mpz1">Mezinárodní poznávací značka</string>
