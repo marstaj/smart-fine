@@ -1,72 +1,101 @@
 package model;
 
+import model.Validators.URLValidator;
+import android.content.Context;
+import android.preference.*;
+
 /**
- * @author Martin Stajner
- * TODO
+ * Tøída pro zajištìní pøístupu k nastavení aplikace skze kód
+ * @author Pavel Brož
  */
 public class Settings {
 
 	/**
-	 * Reprezentuje služební èíslo policisty, který aktuálnì používá aplikaci.
+	 * Reprezentuje nastavení programu
 	 */
-	private String badgeNumber;
+	private static Settings settings;
+	
 	/**
-	 * Reprezentuje název mìsta, který se pøedvyplòuje v parkovacím lístku.
+	 * Privátní konstruktor
 	 */
-	private String city;
+	private Settings(){	}
+
 	/**
-	 * Reprezentuje URL adresu, na kterou jsou nahrávány lokální záznamy.
+	 * Vrací instanci nastavení aplikace
+	 * @return Vrátí instanci pro pøístup k nastavení aplikace
 	 */
-	private String syncUrl;
-
-	public Settings(){
-
+	public static Settings getInstance(){
+		if (settings == null){
+			settings = new Settings();
+		}
+		return settings;
 	}
-
+	
 	public void finalize() throws Throwable {
 
 	}
 
 	/**
-	 * @return the badgeNumber
+	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
+	 * @return Vrací služební èíslo policisty
 	 */
-	public String getBadgeNumber() {
-		return badgeNumber;
+	public String getBadgeNumber(Context context) {
+		//získá pøístup k nastavení aplikace a poté získá hodnotu preference
+		return PreferenceManager.getDefaultSharedPreferences(context).getString("pref_badgenumber", null);
 	}
 
 	/**
-	 * @param badgeNumber the badgeNumber to set
+	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
+	 * @param badgeNumber Reprezentuje služební èíslo policisty
+	 * @return Vrací true, pokud vložení nové hodnoty probìhlo v poøádku a false pokud došlo k chybì pøi ukládání
 	 */
-	public void setBadgeNumber(String badgeNumber) {
-		this.badgeNumber = badgeNumber;
+	public boolean setBadgeNumber(Context context, String badgeNumber) {
+		//získá pøístup k nastavení aplikace, spustí editaci, vloží hodnotu a commituje
+		return PreferenceManager.getDefaultSharedPreferences(context).edit().putString("pref_badgenumber", badgeNumber).commit();
 	}
 
 	/**
-	 * @return the city
+	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
+	 * @return Vrací mìsto, ve kterém se udìlují PL
 	 */
-	public String getCity() {
-		return city;
+	public String getCity(Context context) {
+		//získá pøístup k nastavení aplikace a poté získá hodnotu preference
+		return PreferenceManager.getDefaultSharedPreferences(context).getString("pref_city", null);
 	}
 
 	/**
-	 * @param city the city to set
+	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
+	 * @param city Reprezentuje mìsto, ve kterém se udìlují PL
+	 * @return Vrací true, pokud vložení nové hodnoty probìhlo v poøádku a false pokud došlo k chybì pøi ukládání
 	 */
-	public void setCity(String city) {
-		this.city = city;
+	public boolean setCity(Context context, String city) {
+		//získá pøístup k nastavení aplikace, spustí editaci, vloží hodnotu a commituje
+		return PreferenceManager.getDefaultSharedPreferences(context).edit().putString("pref_city", city).commit();
 	}
 
 	/**
-	 * @return the syncUrl
+	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
+	 * @return Vrací adresu serveru pro nahrávání PL
 	 */
-	public String getSyncUrl() {
-		return syncUrl;
+	public String getSyncUrl(Context context) {
+		//získá pøístup k nastavení aplikace a poté získá hodnotu preference
+		return PreferenceManager.getDefaultSharedPreferences(context).getString("pref_syncserverurl", null);
 	}
 
 	/**
-	 * @param syncUrl the syncUrl to set
+	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
+	 * @param syncUrl Reprezentuje URL adresu serveru pro nahrávání PL
+	 * @return Vrací true, pokud vložení nové hodnoty probìhlo v poøádku a false pokud došlo k chybì pøi ukládání nebo byla nová hodnota URL nevalidní
 	 */
-	public void setSyncUrl(String syncUrl) {
-		this.syncUrl = syncUrl;
+	public boolean setSyncUrl(Context context, String syncUrl) {
+		//kontrola validity parametru//
+		if(URLValidator.isURLValid(syncUrl)){
+			//získá pøístup k nastavení aplikace, spustí editaci, vloží hodnotu a commituje
+			return PreferenceManager.getDefaultSharedPreferences(context).edit().putString("pref_syncserverurl", syncUrl).commit();
+		}else{ //nová hodnota url není v poøádku
+			return false;
+		}
+
 	}
 
 }
