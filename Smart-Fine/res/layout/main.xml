@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:background="#EDEEFF"
     android:orientation="vertical" >
-
+
     <TextView
         android:id="@+id/appTitle"
         android:layout_width="fill_parent"
@@ -22,21 +22,26 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center_vertical|center" >
-
-        <Button
+        <Button
             android:id="@+id/newTicketButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="newTicketClick"
             android:text="@string/view_main_newTicketButton" />
-
+
         <Button
             android:id="@+id/ticketListButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="ticketListClick"
             android:text="@string/view_main_ticketListButton" />
-
+		
+		<Button
+            android:id="@+id/preferencesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="preferencesClick"
+            android:text="@string/view_main_preferencesButton" />
     </LinearLayout>
 
 </LinearLayout>
