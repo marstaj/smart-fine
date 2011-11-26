@@ -2,6 +2,7 @@ package cz.smartfine;
 
 import model.Toaster;
 import dao.TicketDAO;
+import dao.FileTicketDAO;
 import android.app.Application;
 
 /**
@@ -19,7 +20,7 @@ public class MyApp extends Application {
 	public void onCreate() {
 		super.onCreate();
 		Toaster.context = getApplicationContext();
-		ticketDAO = TicketDAO.getInstance(getApplicationContext());
+		ticketDAO = FileTicketDAO.getInstance(getApplicationContext());
 		try {
 			ticketDAO.loadTickets();
 		} catch (Exception e) {
