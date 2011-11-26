@@ -27,4 +27,6 @@
     <string name="view_ticket_number">Číslo</string>
     <string name="view_required"> *</string>
     <string name="view_ticket_saveTicketButton">Uložit záznam</string>
+    <string name="view_main_preferencesButton">Nastavení</string>
+    <string name="preferences_title">Nastavení</string>
 </resources>
