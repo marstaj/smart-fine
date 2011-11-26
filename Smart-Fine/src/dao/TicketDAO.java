@@ -2,80 +2,34 @@ package dao;
 
 import java.util.ArrayList;
 
-import cz.smartfine.R;
-import android.content.Context;
 import model.Ticket;
 
 /**
- * @author Martin Stajner
+ * @author Pavel Brož
  * 
  */
-public class TicketDAO {
+public interface TicketDAO {
 
-        /**
-         * Kontext aplikace - kvuli relativni ceste k ulozenym souborum aplikace
-         */
-        Context context;
-        /**
-         * DAO
-         */
-        DAO dao;
-        /**
-         * List vsech lokalne ulozenych listku
-         */
-        ArrayList<Ticket> locals;
-        /**
-         * Instance sama sebe - kvuli singletonu
-         */
-        static TicketDAO ticketDAO;
+	/**
+	 * Uloží PL pøedaný v parametru
+	 * @param ticket PL urèený k uložení
+	 */
+	public abstract void saveTicket(Ticket ticket) throws Exception;
 
-        /**
-         * Singleton TicketDAO
-         * 
-         * @return
-         */
-        public static TicketDAO getInstance(Context context) {
-                if (ticketDAO == null) {
-                        ticketDAO = new TicketDAO(context);
-                }
-                return ticketDAO;
-        }
-        
-        /**
-         * Konstruktor
-         * 
-         * @param context
-         */
-        public TicketDAO(Context context) {
-                super();
-                this.context = context;
-                this.dao = DAO.getInstance(context);
-                this.locals = new ArrayList<Ticket>();
-        }
+	//TODO: pøedìlat void loadTickets() na ArrayList<Ticket> loadTickets() a odstranit getLocals
+	/**
+	 * Naète PL z úložištì do pamìti
+	 * @return Pole všech naètených PL
+	 * @throws Exception
+	 */
+	//public abstract ArrayList<Ticket> loadTickets() throws Exception;
 
-        /**
-         * Ulozeni listu zaznamu privatne na disk
-         * 
-         * @param ticket
-         * @return
-         */
-        public void saveTicket(Ticket ticket) throws Exception{
-                locals.add(ticket);
-                dao.saveObjectToFile(locals, context.getString(R.string.file_tickets));
-        }
+	/**
+	 * Naète PL z úložištì do pamìti
+	 * @throws Exception
+	 */
+	public abstract void loadTickets() throws Exception;
+	
+	public abstract ArrayList<Ticket> getLocals();
 
-        /**
-         * Nacteni listu zaznamu ze souboru z disku
-         */
-        @SuppressWarnings("unchecked")
-        public void loadTickets() throws Exception {
-                Object o = dao.loadObjectFromFile(context.getString(R.string.file_tickets));
-                if (o instanceof ArrayList) {
-                        locals = (ArrayList<Ticket>) o;
-                }
-        }
-
-        public ArrayList<Ticket> getLocals() {
-                return locals;
-        }
 }

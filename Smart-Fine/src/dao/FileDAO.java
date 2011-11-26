@@ -12,18 +12,18 @@ import android.content.Context;
  * @author Martin Stajner
  * 
  */
-public class DAO {
+public class FileDAO {
 
 	/**
 	 * Instance sama sebe - kvuli singletonu
 	 */
-	static DAO dao;
+	static FileDAO dao;
 	/**
 	 * Kontext aplikace - kvuli relativni ceste k ulozenym souborum aplikace
 	 */
 	Context context;
 
-	private DAO(Context context) {
+	private FileDAO(Context context) {
 		this.context = context;
 	}
 
@@ -32,9 +32,9 @@ public class DAO {
 	 * 
 	 * @return
 	 */
-	static DAO getInstance(Context context) {
+	static FileDAO getInstance(Context context) {
 		if (dao == null) {
-			dao = new DAO(context);
+			dao = new FileDAO(context);
 		}
 		return dao;
 	}
