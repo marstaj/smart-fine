@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".TicketListActivity" android:label="@string/ticket_list_title"></activity>
         <activity android:name=".TicketDetailActivity" android:label="@string/ticket_detail_title"></activity>
+        <activity android:name=".PreferencesActivity" android:label="@string/preferences_title"></activity>
     </application>
 
 </manifest>
