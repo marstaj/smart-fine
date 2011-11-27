@@ -1,6 +1,6 @@
 package model;
 
-import model.Validators.URLValidator;
+import model.validators.URLValidator;
 import android.content.Context;
 import android.preference.*;
 
