@@ -39,7 +39,7 @@ public class TicketListActivity extends Activity {
 					int position, long id) {
 				// Spusteni nove aktivity
 				Intent intent = new Intent(parent.getContext(), TicketDetailActivity.class);
-				intent.putExtra("Ticket", position-1);
+				intent.putExtra("Ticket", position);
 				parent.getContext().startActivity(intent);
 			}
 		});
