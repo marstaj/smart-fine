@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+	<ScrollView
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_weight="1"
+	    android:background="#EDEEFF" >
+	
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:padding="10dp" >
+
+	        <TextView
+	            android:id="@+id/dateTimeTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_dateTime" />
+	
+	        <EditText
+	            android:id="@+id/dateTime"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	        
+	        <TextView
+	            android:id="@+id/spzTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_spz" />
+	
+	        <EditText
+	            android:id="@+id/spz"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	
+	        <TextView
+	            android:id="@+id/mpzTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_mpz" />
+	
+	        <EditText
+	            android:id="@+id/mpz"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	
+	        <TextView
+	            android:id="@+id/spzColorTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_spzColor" />
+	
+	        <EditText
+	            android:id="@+id/spzColor"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	
+	        <TextView
+	            android:id="@+id/vehicleTypeTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_vehicleType" />
+	
+	        <EditText
+	            android:id="@+id/vehicleType"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	
+	        <TextView
+	            android:id="@+id/vehicleBrandTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_vehicleBrand" />
+	
+	        <EditText
+	            android:id="@+id/vehicleBrand"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	
+	        <TextView
+	            android:id="@+id/cityTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_city" />
+	
+	        <EditText
+	            android:id="@+id/city"
+	            android:layout_width="fill_parent"
+	            android:layout_height="fill_parent"
+	            android:enabled="false"
+				android:editable="false" />
+	
+	        <TextView
+	            android:id="@+id/streetTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_street" />
+	
+	        <EditText
+	            android:id="@+id/street"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	
+	        <TextView
+	            android:id="@+id/numberTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_number" />
+	
+	        <EditText
+	            android:id="@+id/number"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	
+	        <TextView
+	            android:id="@+id/locationTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_location" />
+	
+	        <EditText
+	            android:id="@+id/location"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	
+			<TextView
+	            android:id="@+id/descriptionDZTitle"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_descriptionDZ" />
+	
+	        <EditText
+	            android:id="@+id/descriptionDZ"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:inputType="text|textMultiLine"
+	            android:enabled="false"
+	            android:editable="false" />
+	
+	        <LinearLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content" >
+		
+	            <CheckBox
+	                android:id="@+id/tow"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:text="@string/view_ticket_tow"
+	                android:clickable="false" />
+
+	            <CheckBox
+	                android:id="@+id/moveableDZ"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:text="@string/view_ticket_moveableDZ"
+	                android:clickable="false" />
+			</LinearLayout>
+	
+	        <TextView
+	            android:id="@+id/violationTitle"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_law" />
+	
+	        <EditText
+	            android:id="@+id/violation"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	
+	        <TextView
+	            android:id="@+id/eventDescriptionTitle"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_description" />
+	
+	        <EditText
+	            android:id="@+id/eventDescription"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:inputType="textMultiLine"
+	            android:enabled="false"
+	            android:editable="false" />
+	        <View
+	            android:layout_width="fill_parent"
+	            android:layout_height="2px"
+	            android:background="#000000" />
+
+	        <TextView
+	            android:id="@+id/badgeNumberTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/view_ticket_badgeNumber" />
+	
+	        <EditText
+	            android:id="@+id/badgeNumber"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:enabled="false"
+	            android:editable="false" />
+	        
+	        <CheckBox
+	            android:id="@+id/printed"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:clickable="false"
+	            android:text="@string/view_ticket_printed" />
+	        
+	    </LinearLayout>
+	</ScrollView>
+	
+    <LinearLayout
+        android:id="@+id/buttonArea"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp">
+
+        <Button
+            android:id="@+id/printTicketButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:onClick="printTicket"
+            android:text="@string/view_ticket_printTicketButton" />
+        <Button
+            android:id="@+id/editTicketButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:onClick="editTicket"
+            android:text="@string/view_ticket_editTicketButton" />
+
+    </LinearLayout>
+</LinearLayout>
