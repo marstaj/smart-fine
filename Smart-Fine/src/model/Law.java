@@ -2,7 +2,6 @@ package model;
 
 /**
  * @author Martin Stajner
- * TODO
  */
 public class Law {
 
@@ -79,4 +78,9 @@ public class Law {
 		this.ruleOfLaw = ruleOfLaw;
 	}
 
+	@Override
+	public String toString() {
+		// TODO: dodìlat, aby metoda vracela správný formát zákona
+		return super.toString();
+	}
 }
