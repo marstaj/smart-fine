@@ -3,7 +3,7 @@
  */
 package cz.smartfine;
 
-import model.Validators.URLValidator;
+import model.validators.URLValidator;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.preference.Preference;
