@@ -1,10 +1,14 @@
 package cz.smartfine;
 
 import java.util.Date;
+
+import model.Settings;
 import model.Ticket;
-import model.Toaster;
+import model.util.TicketSetter;
+import model.util.Toaster;
 import cz.smartfine.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,6 +28,14 @@ public class TicketEditActivity extends Activity {
 	 * Instance aplikace
 	 */
 	private MyApp app;
+	/**
+	 * Tento vyvolany intent
+	 */
+	private Intent intent;
+	/**
+	 * PL urceny k editaci
+	 */
+	private Ticket ticketForEdit;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +48,29 @@ public class TicketEditActivity extends Activity {
 		// aktivit
 		app = (MyApp) this.getApplication();
 
+		// Zjisteni zda se jedna o editaci ci nikoliv, a pripadne vyplneni
+		// hodnot ve formulari
+		intent = this.getIntent();
+		if (intent.hasExtra("Ticket")) {
+			// získá index do DAO na lístek, který s má zobrazit, pøedaný ze
+			// spouštìjící aktivity
+			int ticketIndex = intent.getExtras().getInt("Ticket");
+
+			ticketForEdit = app.getTicketDao().getTicket(ticketIndex);
+
+			if (ticketForEdit != null) {
+				TicketSetter.setTicketBasic(this, ticketForEdit);
+			}
+		}
+
+		// Nastavi Listenery na spinnery
 		setAllSpinnerListeners();
+		
+		// Nastavi Mesto ze settings
+		EditText cityEditText = (EditText) findViewById(R.id.city);
+		if (cityEditText.getText().toString().equals("")) {
+			cityEditText.setText(Settings.getInstance().getCity(getApplicationContext()));
+		}
 	}
 
 	/**
@@ -46,38 +80,47 @@ public class TicketEditActivity extends Activity {
 	 * @throws Exception
 	 */
 	public void saveTicket(View target) {
-		Ticket ticket = createTicket();
+		Ticket ticket = setTicketData();
 		String error = checkTicket(ticket);
 		if (error != null) {
 			Toaster.toast(error, Toaster.LONG);
 		} else {
 			try {
+				// Ulozi PL
 				app.getTicketDao().saveTicket(ticket);
 				Toaster.toast(R.string.val_ticket_success, Toaster.LONG);
+				// Nastavi result pro pripad editace, aby se mohl detail listku refreshnout
+				setResult(Activity.RESULT_OK, new Intent().putExtra("Ticket", app.getTicketDao().getAllTickets().indexOf(ticket)));
 				finish();
 			} catch (Exception e) {
-				// Odstraneni posledniho pridaneho listku z arraylistu
-				app.getTicketDao().getLocals()
-						.remove(app.getTicketDao().getLocals().size() - 1);
+				// Odstraneni posledniho pridaneho listku z arraylistu v pripade
+				// vytvareni noveho listku, nikoliv editace
+				if (ticketForEdit == null) {
+					app.getTicketDao().deleteTicket(ticket);
+				}
 				Toaster.toast(R.string.val_ticket_failure, Toaster.LONG);
-				e.printStackTrace();
 			}
 		}
 	}
 
 	/**
-	 * Vytvoreni noveho listku a prirazeni jeho atributu
+	 * Vytvoreni noveho listku a prirazeni jeho atributu NEBO zmena udaju PL,
+	 * ktery editujeme
 	 * 
 	 * @return
 	 */
-	private Ticket createTicket() {
-		Ticket ticket = new Ticket();
-
-		ticket.setDate(new Date());
-
-		// TODO prozatimni random cislo odznaku
-		ticket.setBadgeNumber(3403234);
-
+	private Ticket setTicketData() {
+		Ticket ticket;
+		// Pokud editujeme PL, tak zmenime atributy, pokud vyplnujeme novy PL,
+		// vytvorime novy PL
+		if (ticketForEdit != null) {
+			ticket = ticketForEdit;
+		} else {
+			ticket = new Ticket();
+			ticket.setDate(new Date());
+			// TODO prozatimni random cislo odznaku
+			ticket.setBadgeNumber(3403234);
+		}
 		ticket.setSpz(((EditText) this.findViewById(R.id.spz)).getText()
 				.toString());
 		ticket.setMpz(((EditText) findViewById(R.id.mpz)).getText().toString());
@@ -185,10 +228,16 @@ public class TicketEditActivity extends Activity {
 					int arg2, long arg3) {
 				if (!init) {
 					String text = spinner.getSelectedItem().toString();
+					EditText editText = (EditText) findViewById(txt);
+					// Kdyz je vybrano "Vlastni" tak vyprazni pole a odblokuje ho aby mohlo byt editovalne
 					if (text.equals("- Vlastní -")) {
 						text = "";
+						editText.setEnabled(true);
+					} else {
+						editText.setEnabled(false);
 					}
-					((EditText) findViewById(txt)).setText(text);
+					editText.setText(text);
+					
 				} else {
 					init = false;
 				}

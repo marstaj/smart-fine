@@ -1,4 +1,4 @@
-package model;
+package model.util;
 
 import android.content.Context;
 import android.widget.Toast;

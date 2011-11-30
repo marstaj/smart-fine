@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="pref_city_title">Výchozí město</string>
-<string name="pref_city_summary">Město, které se předvyplní při vytvoření nového parkovacího lístku.</string>
-<string name="pref_city_dialogtitle">Zadejte název města</string>
-<string name="pref_syncserver_title">URL synch. serveru</string>
-<string name="pref_syncserverurl_summary">URL serveru, na který se nahrávají vyplnění parkovací lístky.</string>
-<string name="pref_syncserverurl_dialogtitle">Zadejte URL synch. serveru</string>
+<resources>
+	<string name="pref_city_title">Výchozí město</string>
+	<string name="pref_city_summary">Město, které se předvyplní při vytvoření nového
+		parkovacího lístku.</string>
+	<string name="pref_city_dialogtitle">Zadejte název města</string>
+	<string name="pref_syncserver_title">URL synch. serveru</string>
+	<string name="pref_syncserverurl_summary">URL serveru, na který se nahrávají vyplnění
+		parkovací lístky.</string>
+	<string name="pref_syncserverurl_dialogtitle">Zadejte URL synch. serveru</string>
 
-    
 </resources>

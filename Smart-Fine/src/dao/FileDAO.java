@@ -15,29 +15,14 @@ import android.content.Context;
 public class FileDAO {
 
 	/**
-	 * Instance sama sebe - kvuli singletonu
-	 */
-	static FileDAO dao;
-	/**
 	 * Kontext aplikace - kvuli relativni ceste k ulozenym souborum aplikace
 	 */
 	Context context;
 
-	private FileDAO(Context context) {
+	public FileDAO(Context context) {
 		this.context = context;
 	}
 
-	/**
-	 * Singleton DAO
-	 * 
-	 * @return
-	 */
-	static FileDAO getInstance(Context context) {
-		if (dao == null) {
-			dao = new FileDAO(context);
-		}
-		return dao;
-	}
 
 	/**
 	 * Ulozeni listu zaznamu privatne na disk
@@ -46,14 +31,13 @@ public class FileDAO {
 	 * @return
 	 */
 	public void saveObjectToFile(ArrayList<Ticket> list, String path) throws Exception {
-		FileOutputStream fos;
-		fos = context.openFileOutput(path, Context.MODE_PRIVATE);
+		FileOutputStream fos = context.openFileOutput(path, Context.MODE_PRIVATE);
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
 		oos.writeObject(list);
 		oos.close();
 		fos.close();
 	}
-
+	
 	/**
 	 * Nacteni listu zaznamu ze souboru z disku
 	 * 

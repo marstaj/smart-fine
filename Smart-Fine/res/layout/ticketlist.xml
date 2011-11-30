@@ -3,6 +3,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#EDEEFF"
     android:orientation="vertical" >
 
     <ListView

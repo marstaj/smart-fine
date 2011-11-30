@@ -32,15 +32,13 @@ public class TicketListActivity extends Activity {
 		ListView lv = (ListView) this.findViewById(R.id.listView1);
 		lv.setTextFilterEnabled(true);
 		lv.setAdapter(new TicketAdapter(this, R.layout.ticketlistitem, app
-				.getTicketDao().getLocals()));
+				.getTicketDao().getAllTickets()));
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// Spusteni nove aktivity
-				Intent intent = new Intent(parent.getContext(), TicketDetailActivity.class);
-				intent.putExtra("Ticket", position);
-				parent.getContext().startActivity(intent);
+				parent.getContext().startActivity(new Intent(parent.getContext(), TicketDetailActivity.class).putExtra("Ticket", position));
 			}
 		});
 	}

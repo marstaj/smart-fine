@@ -12,24 +12,38 @@ public interface TicketDAO {
 
 	/**
 	 * Uloží PL pøedaný v parametru
-	 * @param ticket PL urèený k uložení
+	 * 
+	 * @param ticket
+	 *            PL urèený k uložení
+	 * @throws Exception
 	 */
 	public abstract void saveTicket(Ticket ticket) throws Exception;
 
-	//TODO: pøedìlat void loadTickets() na ArrayList<Ticket> loadTickets() a odstranit getLocals
 	/**
-	 * Naète PL z úložištì do pamìti
-	 * @return Pole všech naètených PL
-	 * @throws Exception
+	 * Vrati list ulozenych PL v pameti
+	 * 
+	 * @return List ulozenych PL v pameti
 	 */
-	//public abstract ArrayList<Ticket> loadTickets() throws Exception;
+	public abstract ArrayList<Ticket> getAllTickets();
 
 	/**
-	 * Naète PL z úložištì do pamìti
+	 * Vrati PL dle indexu
+	 * 
+	 * @param index Index zadaneho PL
+	 * @return Listek
+	 */
+	public abstract Ticket getTicket(int index);
+
+	/**
+	 * Smaze vsechny lokalne ulozene PL
+	 * 
 	 * @throws Exception
 	 */
-	public abstract void loadTickets() throws Exception;
-	
-	public abstract ArrayList<Ticket> getLocals();
+	public abstract void deleteAllTickets() throws Exception;
+
+	/**
+	 * Smaze PL
+	 */
+	public abstract void deleteTicket(Ticket ticket);
 
 }

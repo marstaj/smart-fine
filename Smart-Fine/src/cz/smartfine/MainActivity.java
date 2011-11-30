@@ -18,6 +18,8 @@ public class MainActivity extends Activity {
 	@SuppressWarnings("unused")
 	private MyApp app;
 	
+	private int NEW_TICKET = 1;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +37,11 @@ public class MainActivity extends Activity {
      * @param target
      */
     public void newTicketClick(View target) {
-    	this.startActivity(new Intent(this, TicketEditActivity.class));
+    	this.startActivityForResult(new Intent(this, TicketEditActivity.class), NEW_TICKET);
 	}
     
     /**
-     * Obsluha tlacitka - Lokalni zaznamy
+     * Obsluha tlacitka - List listku
      * @param target
      */
     public void ticketListClick(View target) {
@@ -52,6 +54,19 @@ public class MainActivity extends Activity {
      */
     public void preferencesClick(View target) {
     	this.startActivity(new Intent(this, PreferencesActivity.class));
-	} 
+	}
+    
+    /* (non-Javadoc)
+	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		// Navrat z EditActivity uspesnem po dokonceni vytvareni PL a jeho vracenem indexu.
+		if (requestCode == NEW_TICKET && resultCode == RESULT_OK && data.getExtras().containsKey("Ticket")) {
+			startActivity(new Intent(getApplicationContext(), TicketDetailActivity.class).putExtra("Ticket", data.getExtras().getInt("Ticket")));
+		}
+	}	
 
 }
