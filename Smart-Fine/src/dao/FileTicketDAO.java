@@ -89,6 +89,7 @@ public class FileTicketDAO implements TicketDAO {
 	 */
 	public void deleteAllTickets() throws Exception {
 		tickets.clear();
+		dao.saveObjectToFile(tickets, context.getString(R.string.file_tickets));
 	}
 
 	/*
