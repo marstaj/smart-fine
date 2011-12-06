@@ -5,8 +5,7 @@
 	android:layout_height="fill_parent" android:orientation="vertical">
 
 	<ScrollView android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:layout_weight="1"
-		android:background="#EDEEFF">
+		android:layout_height="fill_parent" android:layout_weight="1">
 
 		<LinearLayout android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:orientation="vertical"
