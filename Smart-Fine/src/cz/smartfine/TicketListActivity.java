@@ -31,8 +31,7 @@ public class TicketListActivity extends Activity {
 		// Nastaveni listu
 		ListView lv = (ListView) this.findViewById(R.id.listView1);
 		lv.setTextFilterEnabled(true);
-		lv.setAdapter(new TicketAdapter(this, R.layout.ticketlistitem, app
-				.getTicketDao().getAllTickets()));
+		lv.setAdapter(new TicketAdapter(this, R.layout.ticketlistitem, app.getTicketDao().getAllTickets()));
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,

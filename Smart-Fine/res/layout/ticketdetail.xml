@@ -111,14 +111,6 @@
 					android:clickable="false" />
 			</LinearLayout>
 
-			<TextView android:id="@+id/violationTitle"
-				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:text="@string/view_ticket_law" />
-
-			<EditText android:id="@+id/violation" android:layout_width="fill_parent"
-				android:layout_height="wrap_content" android:enabled="false"
-				android:editable="false" />
-
 			<TextView android:id="@+id/eventDescriptionTitle"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:text="@string/view_ticket_description" />
@@ -127,6 +119,157 @@
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:inputType="textMultiLine" android:enabled="false"
 				android:editable="false" />
+			
+			<LinearLayout
+            android:id="@+id/lawLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout30"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout31"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/ruleOfLawTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_ticket_law_ruleOfLaw" />
+
+                    <EditText
+                        android:id="@+id/ruleOfLaw"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number" android:editable="false" android:enabled="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout29"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/paragraphTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_ticket_law_paragraph" />
+
+                    <EditText
+                        android:id="@+id/paragraph"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:cursorVisible="false"
+                        android:inputType="number" android:editable="false" android:enabled="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout26"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/letterTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_ticket_law_letter" />
+
+                    <EditText
+                        android:id="@+id/letter"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="text" android:editable="false" android:enabled="false"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout25"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout24"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:id="@+id/LinearLayout28"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/lawNumberTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/view_ticket_law_lawNumber" />
+
+                        <TextView
+                            android:id="@+id/TextView13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/view_required" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/lawNumber"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:cursorVisible="false"
+                        android:inputType="number" android:editable="false" android:enabled="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout20"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:id="@+id/LinearLayout23"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/collectionTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/view_ticket_law_collection" />
+
+                        <TextView
+                            android:id="@+id/TextView11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/view_required" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/collection"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number" android:enabled="false" android:editable="false"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+			
 			<View android:layout_width="fill_parent" android:layout_height="2px"
 				android:background="#000000" />
 

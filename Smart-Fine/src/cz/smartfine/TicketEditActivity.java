@@ -2,6 +2,7 @@ package cz.smartfine;
 
 import java.util.Date;
 
+import model.Law;
 import model.Settings;
 import model.Ticket;
 import model.util.TicketSetter;
@@ -36,6 +37,7 @@ public class TicketEditActivity extends Activity {
 	 * PL urceny k editaci
 	 */
 	private Ticket ticketForEdit;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,7 @@ public class TicketEditActivity extends Activity {
 		}
 
 		// Nastavi Listenery na spinnery
-		setAllSpinnerListeners();
+		setAllSpinnersListeners();
 		
 		// Nastavi Mesto ze settings
 		EditText cityEditText = (EditText) findViewById(R.id.city);
@@ -111,47 +113,64 @@ public class TicketEditActivity extends Activity {
 	 */
 	private Ticket setTicketData() {
 		Ticket ticket;
-		// Pokud editujeme PL, tak zmenime atributy, pokud vyplnujeme novy PL,
-		// vytvorime novy PL
+		// Pokud editujeme PL, tak zmenime atributy, pokud vyplnujeme novy PL, vytvorime novy PL
 		if (ticketForEdit != null) {
 			ticket = ticketForEdit;
 		} else {
 			ticket = new Ticket();
+			ticket.setLaw(new Law());
 			ticket.setDate(new Date());
+			
 			// TODO prozatimni random cislo odznaku
 			ticket.setBadgeNumber(3403234);
 		}
-		ticket.setSpz(((EditText) this.findViewById(R.id.spz)).getText()
-				.toString());
+		
+		// Pokud je formularik stringu prazdny, vyplni se automaticky hodnota "";
+		ticket.setSpz(((EditText) this.findViewById(R.id.spz)).getText().toString());
 		ticket.setMpz(((EditText) findViewById(R.id.mpz)).getText().toString());
-		ticket.setSpzColor(((EditText) findViewById(R.id.spzColor)).getText()
-				.toString());
-		ticket.setVehicleType(((EditText) findViewById(R.id.vehicleType))
-				.getText().toString());
-		ticket.setVehicleBrand(((EditText) findViewById(R.id.vehicleBrand))
-				.getText().toString());
-		ticket.setCity(((EditText) findViewById(R.id.city)).getText()
-				.toString());
-		ticket.setStreet(((EditText) findViewById(R.id.street)).getText()
-				.toString());
-		if ((((EditText) findViewById(R.id.number)).getText().toString())
-				.equals("")) {
+		ticket.setSpzColor(((EditText) findViewById(R.id.spzColor)).getText().toString());
+		ticket.setVehicleType(((EditText) findViewById(R.id.vehicleType)).getText().toString());
+		ticket.setVehicleBrand(((EditText) findViewById(R.id.vehicleBrand)).getText().toString());
+		ticket.setCity(((EditText) findViewById(R.id.city)).getText().toString());
+		ticket.setStreet(((EditText) findViewById(R.id.street)).getText().toString());
+		
+		try {
+			ticket.setNumber(Integer.valueOf(((EditText) findViewById(R.id.number)).getText().toString()));
+		} catch (Exception e) {
 			ticket.setNumber(0);
-		} else {
-			ticket.setNumber(Integer
-					.valueOf(((EditText) findViewById(R.id.number)).getText()
-							.toString()));
 		}
-		ticket.setLocation(((EditText) findViewById(R.id.location)).getText()
-				.toString());
-		ticket.setDescriptionDZ(((EditText) findViewById(R.id.descriptionDZ))
-				.getText().toString());
+		
+		ticket.setLocation(((EditText) findViewById(R.id.location)).getText().toString());
+		ticket.setDescriptionDZ(((EditText) findViewById(R.id.descriptionDZ)).getText().toString());
 		ticket.setTow(((CheckBox) findViewById(R.id.tow)).isChecked());
-		ticket.setMoveableDZ(((CheckBox) findViewById(R.id.moveableDZ))
-				.isChecked());
-		ticket.setEventDescription(((EditText) findViewById(R.id.eventDescription))
-				.getText().toString());
-
+		ticket.setMoveableDZ(((CheckBox) findViewById(R.id.moveableDZ)).isChecked());
+		ticket.setEventDescription(((EditText) findViewById(R.id.eventDescription)).getText().toString());
+		
+		// Nastavi law, pokud je policko prazdne, vyhodi to vyjimku a zustane tam defaultne 0 (coz je jako null u int)
+		try {
+			ticket.getLaw().setRuleOfLaw(Integer.valueOf(((EditText) findViewById(R.id.ruleOfLaw)).getText().toString()));
+		} catch (Exception e) {
+			ticket.getLaw().setRuleOfLaw(0);
+		}
+		try {
+			ticket.getLaw().setParagraph(Integer.valueOf(((EditText) findViewById(R.id.paragraph)).getText().toString()));
+		} catch (Exception e) {
+			ticket.getLaw().setParagraph(0);
+		}
+		
+		ticket.getLaw().setLetter(((EditText) findViewById(R.id.letter)).getText().toString());
+		
+		try {
+			ticket.getLaw().setLawNumber(Integer.valueOf(((EditText) findViewById(R.id.lawNumber)).getText().toString()));
+		} catch (Exception e) {
+			ticket.getLaw().setLawNumber(0);
+		}
+		try {
+			ticket.getLaw().setCollection(Integer.valueOf(((EditText) findViewById(R.id.collection)).getText().toString()));
+		} catch (Exception e) {
+			ticket.getLaw().setCollection(0);
+		}
+		
 		return ticket;
 	}
 
@@ -184,6 +203,13 @@ public class TicketEditActivity extends Activity {
 		if (ticket.getNumber() == 0) {
 			error += getString(R.string.val_ticket_err_number);
 		}
+		
+		if (ticket.getLaw().getLawNumber() == 0) {
+			error += getString(R.string.val_ticket_err_lawNumber);
+		}
+		if (ticket.getLaw().getCollection() == 0) {
+			error += getString(R.string.val_ticket_err_collection);
+		}
 
 		if (error.length() != 0) {
 			return error;
@@ -195,17 +221,93 @@ public class TicketEditActivity extends Activity {
 	/**
 	 * Obsluha nastaveni listeneru
 	 */
-	private void setAllSpinnerListeners() {
+	private void setAllSpinnersListeners() {
 		int ids[][] = { { R.id.mpzSpinner, R.id.mpz },
 				{ R.id.spzColorSpinner, R.id.spzColor },
 				{ R.id.vehicleTypeSpinner, R.id.vehicleType },
-				{ R.id.vehicleBrandSpinner, R.id.vehicleBrand } };
+				{ R.id.vehicleBrandSpinner, R.id.vehicleBrand }};
 
+		// Nastavi vsechny jednoduche spinnery
 		for (int i = 0; i < ids.length; i++) {
 			setSimpleSpinnerListener(ids[i][0], ids[i][1]);
-		}
+		}		
+		// Nastavi jeste Law spinner
+		 setLawListener();
 	}
 
+	private void setLawListener() {		
+		final Spinner spinner = (Spinner) findViewById(R.id.lawSpinner);
+		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			/**
+			 * Zda se jedna o prvotni inicializaci, nebo akci uzivatele (spinner
+			 * se totiz zavola jeste pred tim, nez uzivatel staci cokoliv
+			 * udelat)
+			 */
+			boolean init = true;
+
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				if (!init) {
+					
+					String text = spinner.getSelectedItem().toString();
+					
+					EditText ruleOfLaw = (EditText) findViewById(R.id.ruleOfLaw);
+					EditText paragraph = (EditText) findViewById(R.id.paragraph);
+					EditText letter = (EditText) findViewById(R.id.letter);
+					EditText lawNumber = (EditText) findViewById(R.id.lawNumber);
+					EditText collection = (EditText) findViewById(R.id.collection);
+					
+					ruleOfLaw.setText("");
+					paragraph.setText("");
+					letter.setText("");
+					lawNumber.setText("");
+					collection.setText("");
+					
+					// Kdyz je vybrano "Vlastni" tak vyprazni pole a odblokuje je aby mohla byt editovalna
+					if (text.equals(getString(R.string.own_spinner))) {
+						ruleOfLaw.setEnabled(true);
+						paragraph.setEnabled(true);
+						letter.setEnabled(true);						
+						lawNumber.setEnabled(true);						
+						collection.setEnabled(true);
+					} else {
+						// Pokud je vybrana polozka, formulare se zablokuji a vyplni daty automaticky
+						Law law = app.getLaws().get(position-1);
+						
+						ruleOfLaw.setEnabled(false);
+						if (law.getRuleOfLaw() != 0) {
+							ruleOfLaw.setText(String.valueOf(law.getRuleOfLaw()));
+						}						
+						paragraph.setEnabled(false);
+						if (law.getParagraph() != 0) {
+							paragraph.setText(String.valueOf(law.getParagraph()));
+						}
+						lawNumber.setEnabled(false);
+						if (law.getLawNumber() != 0) {
+							lawNumber.setText(String.valueOf(law.getLawNumber()));
+						}						
+						collection.setEnabled(false);
+						if (law.getCollection() != 0) {
+							collection.setText(String.valueOf(law.getCollection()));
+						}
+						
+						letter.setEnabled(false);
+						letter.setText(law.getLetter());
+						
+					}
+					
+				} else {
+					init = false;
+				}
+			}
+
+			public void onNothingSelected(AdapterView<?> arg0) {
+				//
+			}
+		});
+	}
+	
 	/**
 	 * Nastaveni listeneru na vybrany spinner
 	 * 
@@ -230,7 +332,7 @@ public class TicketEditActivity extends Activity {
 					String text = spinner.getSelectedItem().toString();
 					EditText editText = (EditText) findViewById(txt);
 					// Kdyz je vybrano "Vlastni" tak vyprazni pole a odblokuje ho aby mohlo byt editovalne
-					if (text.equals("- Vlastní -")) {
+					if (text.equals(getString(R.string.own_spinner))) {
 						text = "";
 						editText.setEnabled(true);
 					} else {
@@ -248,5 +350,4 @@ public class TicketEditActivity extends Activity {
 			}
 		});
 	}
-
 }

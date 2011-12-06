@@ -16,11 +16,11 @@ public class Toaster {
 	/**
 	 * Dlouha delka zobrazeni
 	 */
-	public static int LONG = 1;
+	public static final int LONG = 1;
 	/**
 	 * Kratka delka zobrazeni
 	 */
-	public static int SHORT = 0;
+	public static final int SHORT = 0;
 
 	/**
 	 * Vytvoreni a odeslani "toast" upozorneni
@@ -41,7 +41,7 @@ public class Toaster {
 	 * @param length
 	 */
 	public static void toast(int message, int length) {
-		if (length == 1) {
+		if (length == LONG) {
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		} else {
 			Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

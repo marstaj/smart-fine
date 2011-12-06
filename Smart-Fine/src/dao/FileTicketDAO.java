@@ -35,7 +35,6 @@ public class FileTicketDAO implements TicketDAO {
 		this.context = context;
 		this.dao = new FileDAO(context);
 		this.tickets = new ArrayList<Ticket>();
-		this.loadTickets();
 	}
 
 	/*
@@ -56,9 +55,8 @@ public class FileTicketDAO implements TicketDAO {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	private void loadTickets() throws Exception {
-		Object o = dao.loadObjectFromFile(context
-				.getString(R.string.file_tickets));
+	public void loadTickets() throws Exception {
+		Object o = dao.loadObjectFromFile(context.getString(R.string.file_tickets));
 		if (o instanceof ArrayList) {
 			tickets = (ArrayList<Ticket>) o;
 		}

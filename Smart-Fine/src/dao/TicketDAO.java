@@ -45,5 +45,10 @@ public interface TicketDAO {
 	 * Smaze PL
 	 */
 	public abstract void deleteTicket(Ticket ticket);
-
+	
+	/**
+	 * Nahraje listky ze souboru
+	 * @throws Exception
+	 */
+	public void loadTickets() throws Exception;
 }

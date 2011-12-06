@@ -1,18 +1,21 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * @author Martin Stajner
  */
-public class Law {
+@SuppressWarnings("serial")
+public class Law implements Serializable {
 
 	/**
 	 * Sbírka
 	 */
 	private int collection;
 	/**
-	 * Odstavec
+	 * Popis
 	 */
-	private int description;
+	private String description;
 	/**
 	 * Èíslo zákona
 	 */
@@ -38,11 +41,11 @@ public class Law {
 		this.collection = collection;
 	}
 
-	public int getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(int description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 

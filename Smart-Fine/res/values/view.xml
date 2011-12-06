@@ -22,7 +22,7 @@
 	<string name="view_ticket_tow">Odtah</string>
 	<string name="view_ticket_moveableDZ">Přenosné DZ</string>
 	<string name="view_ticket_id">Identifikační číslo</string>
-	<string name="view_ticket_law">Druh přestupek</string>
+	<string name="view_ticket_law">Druh přestupku</string>
 	<string name="view_ticket_description">Popis situace</string>
 	<string name="view_ticket_city">Město</string>
 	<string name="view_ticket_street">Ulice</string>
@@ -34,4 +34,10 @@
 	<string name="view_ticket_dateTime">Datum a čas</string>
 	<string name="view_ticket_badgeNumber">Služební číslo</string>
 	<string name="view_ticket_printed">Vytištěno</string>
+	
+	<string name="view_ticket_law_ruleOfLaw">Paragraf (§)</string>
+	<string name="view_ticket_law_paragraph">Odstavec</string>
+	<string name="view_ticket_law_letter">Písmeno</string>
+	<string name="view_ticket_law_lawNumber">Číslo zákona</string>
+	<string name="view_ticket_law_collection">Sbírka</string>
 </resources>

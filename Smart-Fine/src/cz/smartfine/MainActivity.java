@@ -18,7 +18,10 @@ public class MainActivity extends Activity {
 	@SuppressWarnings("unused")
 	private MyApp app;
 	
-	private int NEW_TICKET = 1;
+	/**
+	 * Priznak, ze se jedna o vytváreni noveho PL
+	 */
+	private final int NEW_TICKET = 1;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,7 @@ public class MainActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		// Navrat z EditActivity uspesnem po dokonceni vytvareni PL a jeho vracenem indexu.
+		// Navrat z EditActivity po dokonceni vytvareni PL a jeho vracenem indexu.
 		if (requestCode == NEW_TICKET && resultCode == RESULT_OK && data.getExtras().containsKey("Ticket")) {
 			startActivity(new Intent(getApplicationContext(), TicketDetailActivity.class).putExtra("Ticket", data.getExtras().getInt("Ticket")));
 		}

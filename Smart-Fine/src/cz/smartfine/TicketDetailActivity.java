@@ -10,7 +10,7 @@ import android.view.View;
 /**
  * Tøída aktivity pro zobrazení informací z parkovacího lístku
  * 
- * @author Pavel Brož
+ * @author Pavel Brož, Martin Štajner
  */
 public class TicketDetailActivity extends Activity {
 
