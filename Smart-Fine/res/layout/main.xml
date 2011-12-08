@@ -4,52 +4,46 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/appTitle"
+
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60pt"
-        android:layout_marginTop="20pt"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="20pt" />
-
+        android:src="@drawable/logo" android:layout_marginTop="30dp"/>
+
     <LinearLayout
-        android:id="@+id/linearLayout1"
+        android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical|center" >
-
-        <Button
-            android:id="@+id/newTicketButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="newTicketClick"
-            android:text="@string/view_main_newTicketButton" />
-
-        <Button
-            android:id="@+id/ticketListButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="ticketListClick"
-            android:text="@string/view_main_ticketListButton" />
-    </LinearLayout>
+        android:orientation="vertical" android:layout_marginTop="20pt">
 
-    <LinearLayout
-        android:id="@+id/LinearLayout01"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical|center" >
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center">
+
+            <Button
+                android:id="@+id/newTicketButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="newTicketClick"
+                android:text="@string/view_main_newTicketButton" />
+
+            <Button
+                android:id="@+id/ticketListButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ticketListClick"
+                android:text="@string/view_main_ticketListButton" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/preferencesButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="preferencesClick"
-            android:text="@string/view_main_preferencesButton" />
-
+            android:text="@string/view_main_preferencesButton" android:layout_gravity="center" android:layout_marginTop="10dp"/>
     </LinearLayout>
 
 </LinearLayout>

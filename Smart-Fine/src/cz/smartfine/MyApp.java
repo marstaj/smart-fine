@@ -39,11 +39,9 @@ public class MyApp extends Application {
 	public TicketDAO getTicketDao() {
 		return ticketDAO;
 	}
-
 	public void setTicketDao(TicketDAO dao) {
 		this.ticketDAO = dao;
 	}
-
 	public ArrayList<Law> getLaws() {
 		// TODO Upravit Laws do nejake normalni podoby
 		if (laws == null) {

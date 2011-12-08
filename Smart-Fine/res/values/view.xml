@@ -27,6 +27,8 @@
 	<string name="view_ticket_city">Město</string>
 	<string name="view_ticket_street">Ulice</string>
 	<string name="view_ticket_number">Číslo</string>
+	<string name="view_ticket_photoDocumentation">Fotodokumentace</string>
+	
 	<string name="view_required"> *</string>
 	<string name="view_ticket_saveTicketButton">Uložit záznam</string>
 	<string name="view_ticket_printTicketButton">Vytisknout</string>
@@ -34,6 +36,7 @@
 	<string name="view_ticket_dateTime">Datum a čas</string>
 	<string name="view_ticket_badgeNumber">Služební číslo</string>
 	<string name="view_ticket_printed">Vytištěno</string>
+	
 	
 	<string name="view_ticket_law_ruleOfLaw">Paragraf (§)</string>
 	<string name="view_ticket_law_paragraph">Odstavec</string>

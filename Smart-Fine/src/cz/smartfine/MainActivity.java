@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 	/**
 	 * Priznak, ze se jedna o vytváreni noveho PL
 	 */
-	private final int NEW_TICKET = 1;
+	private static final int NEW_TICKET = 0;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {

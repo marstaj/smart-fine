@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_weight="1">
+    android:layout_weight="1" >
 
     <LinearLayout
         android:id="@+id/rootLayout"
@@ -40,13 +40,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text" />
-
+
             <ImageButton
                 android:id="@+id/scanSpzButton"
                 android:layout_width="60dp"
                 android:layout_height="fill_parent"
+                android:onClick="photoClick"
                 android:src="@android:drawable/ic_menu_camera" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -255,13 +255,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text" />
-
+
             <ImageButton
                 android:id="@+id/scanLocationButton"
                 android:layout_width="60dp"
                 android:layout_height="fill_parent"
                 android:src="@android:drawable/ic_menu_compass" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -374,6 +373,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:nextFocusDown="@id/moveableDZ"
                 android:text="@string/view_ticket_tow" />
 
             <CheckBox
@@ -419,6 +419,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:entries="@array/ticket_law"
+            android:nextFocusDown="@id/ruleOfLaw"
             android:prompt="@string/view_ticket_law" />
 
         <LinearLayout
@@ -450,7 +451,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="number"/>
+                        android:inputType="number"
+                        android:nextFocusDown="@id/paragraph" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -472,7 +474,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:cursorVisible="false"
-                        android:inputType="number"/>
+                        android:inputType="number"
+                        android:nextFocusDown="@id/letter" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -493,7 +496,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="text"/>
+                        android:inputType="text"
+                        android:nextFocusDown="@id/lawNumber" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -533,7 +537,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:cursorVisible="false"
-                        android:inputType="number"/>
+                        android:inputType="number"
+                        android:nextFocusDown="@id/collection" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -571,11 +576,51 @@
             </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2px"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/photoDocumentationTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/view_ticket_photoDocumentation" />
+
+        <LinearLayout
+            android:id="@+id/photoDocumentationLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2px"
+            android:layout_marginTop="10dp"
+            android:background="#000000" />
+
+        <ImageButton
+            android:id="@+id/testButton"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:src="@android:drawable/ic_input_add"
+            android:background="@android:drawable/editbox_background_normal" />
+
         <Button
             android:id="@+id/saveTicketButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
             android:onClick="saveTicket"
             android:text="@string/view_ticket_saveTicketButton" />
     </LinearLayout>

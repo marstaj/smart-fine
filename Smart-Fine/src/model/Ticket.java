@@ -1,6 +1,8 @@
 package model;
 
+import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -49,7 +51,7 @@ public class Ticket implements Serializable {
 	/**
 	 * Fotografie události
 	 */
-	private String[] photos;
+	private ArrayList<File> photos;
 	/**
 	 * Státní poznávací znaèka
 	 */
@@ -156,11 +158,11 @@ public class Ticket implements Serializable {
 		this.number = number;
 	}
 
-	public String[] getPhotos() {
+	public ArrayList<File> getPhotos() {
 		return photos;
 	}
 
-	public void setPhotos(String[] photos) {
+	public void setPhotos(ArrayList<File> photos) {
 		this.photos = photos;
 	}
 
