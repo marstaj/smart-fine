@@ -68,7 +68,6 @@ public final class R {
         public static final int TextView13=0x7f090030;
         public static final int badgeNumber=0x7f09003b;
         public static final int badgeNumberTitle=0x7f09003a;
-        public static final int button2=0x7f090067;
         public static final int buttonArea=0x7f09003d;
         public static final int city=0x7f090014;
         public static final int cityTitle=0x7f090013;
@@ -131,6 +130,7 @@ public final class R {
         public static final int textView1=0x7f090043;
         public static final int ticketListButton=0x7f090005;
         public static final int tow=0x7f09001d;
+        public static final int uploadButton=0x7f090067;
         public static final int vehicleBrand=0x7f090012;
         public static final int vehicleBrandSpinner=0x7f090051;
         public static final int vehicleBrandTitle=0x7f090011;

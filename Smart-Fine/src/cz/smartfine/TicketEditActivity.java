@@ -114,7 +114,20 @@ public class TicketEditActivity extends Activity {
 		}
 	}
 	
-	public void photoClick(View target) {
+	public void scanClick(View button) {
+		// TODO Dummy!!
+		EditText spz = (EditText) findViewById(R.id.spz);
+		spz.setText("3U1-3491");
+	}
+	
+	public void gpsClick(View button) {
+		// TODO Dummy!!
+		EditText city = (EditText) findViewById(R.id.city);
+		city.setText("Praha");
+		EditText street = (EditText) findViewById(R.id.street);
+		street.setText("Plzeòská");
+		EditText number = (EditText) findViewById(R.id.number);
+		number.setText("41");
 	}
 	
 	// ------------------------------- INICIALIZACE ---------------------------------------//

@@ -8,14 +8,17 @@ import model.util.TicketSetter;
 import model.util.Toaster;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,6 +60,13 @@ public class TicketDetailActivity extends Activity {
 		// ovìøí, zda se nìo vrátilo a zavolá metodu pro naplnìní widgetù daty//
 		if (ticket != null) {
 			setTicket(ticket);
+			
+			// TODO Tohle zmenit pri implementaci tisku - ted je to jenom dummy kvuli PDA
+			if (ticket.isPrinted()) {
+				Button edit = (Button) findViewById(R.id.editTicketButton);
+				edit.setEnabled(false);
+			}
+			
 		}
 	}
 
@@ -79,10 +89,31 @@ public class TicketDetailActivity extends Activity {
 	 * 
 	 * @param button Stisknuté tlaèítko
 	 */
-	public void printTicket(View button) {
-		// TODO: podporu tisku implementovat až ve fázi 2
+	public void printTicket(final View button) {
+		// TODO: podporu tisku implementovat až ve fázi 2 - HLAVNE odstranit tuhle dummy hruzu co jsem tam napsal kvuli PDA :)
 		// Pro print jsem nahore udelal promenou PRINT, pro startActivityForResult jako je u editace nize. :)
+		
+		final ProgressDialog dialog = ProgressDialog.show(this, "Tisk parkovacího lístku", "Tisknu, prosím poèkejte...", true);
+		dialog.show();
+
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+		    public void run() {
+		        dialog.dismiss();
+		        Toaster.toast("Parkovací lístek úspìšnì vytištìn.", Toaster.SHORT);
+		        Ticket ticket = app.getTicketDao().getTicket(ticketIndex);
+		        ticket.setPrinted(true);
+		        Button edit = (Button) findViewById(R.id.editTicketButton);
+				edit.setEnabled(false);
+				button.setEnabled(false);
+		        setTicket(ticket);
+		        
+		    }}, 3000);  // 3000 milliseconds
 	}
+	
+		
+	
+	
 
 	/**
 	 * Posluchaè stisknutí tlaèítka editace PL
@@ -171,4 +202,6 @@ public class TicketDetailActivity extends Activity {
 					
 				}
 	}
+
+	
 }

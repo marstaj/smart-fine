@@ -324,15 +324,22 @@
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:paddingTop="10dp" android:paddingLeft="5dp"
 		android:paddingRight="5dp" android:paddingBottom="5dp">
-
-		<Button android:id="@+id/printTicketButton"
-			android:layout_width="0dp" android:layout_height="wrap_content"
-			android:layout_weight="50" android:onClick="printTicket"
-			android:text="@string/view_ticket_printTicketButton" />
-		<Button android:id="@+id/editTicketButton"
-			android:layout_width="0dp" android:layout_height="wrap_content"
-			android:layout_weight="50" android:onClick="editTicket"
-			android:text="@string/view_ticket_editTicketButton" />
+
+		<Button
+		    android:id="@+id/printTicketButton"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="50"
+		    android:onClick="printTicket"
+		    android:text="@string/view_ticket_printTicketButton" />
+
+		<Button
+		    android:id="@+id/editTicketButton"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="50"
+		    android:onClick="editTicket"
+		    android:text="@string/view_ticket_editTicketButton" />
 
 	</LinearLayout>
 </LinearLayout>

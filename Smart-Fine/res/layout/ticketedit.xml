@@ -40,13 +40,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text" />
-
+
             <ImageButton
                 android:id="@+id/scanSpzButton"
                 android:layout_width="60dp"
                 android:layout_height="fill_parent"
-                android:onClick="photoClick"
+                android:onClick="scanClick"
                 android:src="@android:drawable/ic_menu_camera" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -255,12 +256,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text" />
-
+
             <ImageButton
                 android:id="@+id/scanLocationButton"
                 android:layout_width="60dp"
                 android:layout_height="fill_parent"
+                android:onClick="gpsClick"
                 android:src="@android:drawable/ic_menu_compass" />
+
         </LinearLayout>
 
         <LinearLayout
