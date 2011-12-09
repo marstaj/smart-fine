@@ -11,7 +11,7 @@ import cz.smartfine.R;
  * 
  * @author Pavel Brož, Martin Štajner
  */
-public class TicketSetter {
+public class TicketSetter {	
 
 	/**
 	 * Naplní widgety editovatelnými daty z instance PL pøedané v parametru
@@ -86,4 +86,6 @@ public class TicketSetter {
 		((EditText) activity.findViewById(R.id.badgeNumber)).setText(String.valueOf(ticket.getBadgeNumber()));
 		((CheckBox) activity.findViewById(R.id.printed)).setChecked(ticket.isPrinted());
 	}
+
+
 }

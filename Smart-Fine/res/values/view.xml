@@ -37,6 +37,10 @@
 	<string name="view_ticket_badgeNumber">Služební číslo</string>
 	<string name="view_ticket_printed">Vytištěno</string>
 	
+	<string name="view_ticket_dialogMenu_takeNewPicture">Vyfotit novou fotografii</string>
+	<string name="view_ticket_dialogMenu_browsePicture">Nahrát fotografii</string>
+	<string name="view_ticket_dialogMenu_title">Vyberte</string>
+	
 	
 	<string name="view_ticket_law_ruleOfLaw">Paragraf (§)</string>
 	<string name="view_ticket_law_paragraph">Odstavec</string>

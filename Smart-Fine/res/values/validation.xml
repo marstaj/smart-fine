@@ -13,5 +13,7 @@
 	    
 	<string name="val_ticket_failure">Lístek se nepodařilo uložit!</string>
 	<string name="val_ticket_success">Parkovací lístek úspěšně uložen.</string>
+	
+	<string name="val_ticket_fotoDocumentation_failLoad">Nepodařilo se načíst fotografii</string>
 
 </resources>

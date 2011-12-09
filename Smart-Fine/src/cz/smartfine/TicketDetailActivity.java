@@ -121,53 +121,54 @@ public class TicketDetailActivity extends Activity {
 		}
 		
 		// TODO Nastavovat nejak lepe velikosti, nez pres testParams, to je neohrabane. Ale jako wtf.., kdyz neexistuje "setWidth" a "setHeight" ani u "imagebutton", ani u "imageview" a u "button" ano.. 
-		// Layout Parametry (velikost a marginy) pro tlacitko a obrazky ze xml (xml obsahuje spravne nastavene tlacitko, ktere je skryte)
-		LayoutParams testParams = ((ImageButton) findViewById(R.id.testButton)).getLayoutParams();
-		
-		// Do tohoto layoutu se budou pridavat nove layouty s obrazky a tlacitkem. Pri kazdem zavolani se vyprazdni a naplni znova - refresh
-		LinearLayout photosLayout = (LinearLayout) findViewById(R.id.photoDocumentationLayout);
-		photosLayout.removeAllViews();
-		
-		// Jedotlive layouty do kterych se budou pridavat obrazky a tlacitko
-		LinearLayout actualLayout = new LinearLayout(getApplicationContext());
-		
-		// Podle toho, kolik je ve photos fotek, tolik se vytvori imageView
-		int i;
-		for(i = 0; i < photos.size(); i++) {
-			// Pri 6ti fotografiich se odradkuje
-			if (i % 2 == 0) {
-				actualLayout = new LinearLayout(getApplicationContext());
-				photosLayout.addView(actualLayout);
-			}
-			ImageView imageView = new ImageView(getApplicationContext());
-			imageView.setId(i);
-			imageView.setOnClickListener(new OnClickListener() {
-
-				// Po kliku na nahled pridate aktivity se pusti dialog s vetsim nahledem obrazku
-				public void onClick(View v) {
-					// TODO dodelat dialog tak, aby nebyly kolem obrazku mezery.. custom dialog? 
-					Dialog dialog = new Dialog (TicketDetailActivity.this);
-					dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-					dialog.setContentView(R.layout.ticketphotodialog);					
-					ImageView image = (ImageView) dialog.findViewById(R.id.photoView);
-					BitmapDrawable drawable = (BitmapDrawable) ((ImageView) v).getDrawable();
-					image.setImageDrawable(drawable);
-					// Spusti dialog
-					dialog.show();
-				}
+				// Layout Parametry (velikost a marginy) pro tlacitko a obrazky ze xml (xml obsahuje spravne nastavene tlacitko, ktere je skryte)
+				LayoutParams testParams = ((ImageButton) findViewById(R.id.testButton)).getLayoutParams();
 				
-			});
-			imageView.setLayoutParams(testParams);
-			// Zkusi nastavit obrazek
-			try {
-	            Bitmap bitmap = Image.decodeFile(photos.get(i), 500);
-				imageView.setImageBitmap(bitmap);
-				actualLayout.addView(imageView);
-			} catch (Exception e) {
-				Toaster.toast("Failed to load", Toaster.SHORT);
-				imageView.setImageResource(R.drawable.ic_launcher1);
-				photos.remove(photos.get(i));
-			}
-		}
+				// Do tohoto layoutu se budou pridavat nove layouty s obrazky a tlacitkem. Pri kazdem zavolani se vyprazdni a naplni znova - refresh
+				LinearLayout photosLayout = (LinearLayout) findViewById(R.id.photoDocumentationLayout);
+				photosLayout.removeAllViews();
+				
+				// Jedotlive layouty do kterych se budou pridavat obrazky a tlacitko
+				LinearLayout actualLayout = new LinearLayout(getApplicationContext());
+				
+				// Podle toho, kolik je ve photos fotek, tolik se vytvori imageView
+				int i;
+				for(i = 0; i < photos.size(); i++) {
+					// Pri 6ti fotografiich se odradkuje
+					if (i % 2 == 0) {
+						actualLayout = new LinearLayout(getApplicationContext());
+						photosLayout.addView(actualLayout);
+					}
+					ImageView imageView = new ImageView(getApplicationContext());
+					imageView.setId(i);
+					imageView.setOnClickListener(new OnClickListener() {
+
+						// Po kliku na nahled pridate aktivity se pusti dialog s vetsim nahledem obrazku
+						public void onClick(View v) {
+							// TODO dodelat dialog tak, aby nebyly kolem obrazku mezery.. custom dialog? 
+							Dialog dialog = new Dialog (TicketDetailActivity.this);
+							dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+							dialog.setContentView(R.layout.ticketphotodialog);					
+							ImageView image = (ImageView) dialog.findViewById(R.id.photoView);
+							BitmapDrawable drawable = (BitmapDrawable) ((ImageView) v).getDrawable();
+							image.setImageDrawable(drawable);
+							// Spusti dialog
+							dialog.show();
+						}
+						
+					});
+					imageView.setLayoutParams(testParams);
+					// Zkusi nastavit obrazek
+					try {
+			            Bitmap bitmap = Image.decodeFile(photos.get(i), 500);
+						imageView.setImageBitmap(bitmap);
+						actualLayout.addView(imageView);
+					} catch (Exception e) {
+						Toaster.toast(R.string.val_ticket_fotoDocumentation_failLoad, Toaster.SHORT);
+						imageView.setImageResource(R.drawable.ic_launcher1);
+						photos.remove(photos.get(i));
+					}
+					
+				}
 	}
 }

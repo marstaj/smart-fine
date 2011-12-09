@@ -450,7 +450,7 @@ public class TicketEditActivity extends Activity {
 				imageView.setImageBitmap(bitmap);
 				actualLayout.addView(imageView);
 			} catch (Exception e) {
-				Toaster.toast("Failed to load", Toaster.SHORT);
+				Toaster.toast(R.string.val_ticket_fotoDocumentation_failLoad, Toaster.SHORT);
 				imageView.setImageResource(R.drawable.ic_launcher1);
 				photos.remove(photos.get(i));
 			}
@@ -471,9 +471,9 @@ public class TicketEditActivity extends Activity {
 			
 			// Po kliknuti na tlacitko se objevi dialog s nabidkou
 			public void onClick(View arg0) {
-				final String[] items = {"Vyfotit fotografii", "Nahrát fotografii"};
+				final String[] items = { getText(R.string.view_ticket_dialogMenu_takeNewPicture).toString(), getText(R.string.view_ticket_dialogMenu_browsePicture).toString()};
 				Builder builder = new Builder(TicketEditActivity.this);
-				builder.setTitle("Vyberte");
+				builder.setTitle(getText(R.string.view_ticket_dialogMenu_title).toString());
 				builder.setItems(items, new DialogInterface.OnClickListener() {
 					
 					//Po kliku v dialogu se spusti prislusna aktivita
@@ -485,7 +485,7 @@ public class TicketEditActivity extends Activity {
 				    	    String fileName = df.format(new Date());				    	    
 				    		Intent i = new Intent("android.media.action.IMAGE_CAPTURE");
 				    		// TODO dodelat ukladani do slozky
-				    		photo = new File(Environment.getExternalStorageDirectory(), fileName + ".jpg");
+				    		photo = new File(Environment.getExternalStorageDirectory(), fileName + getText(R.string.fileType_jpg).toString());
 				    		i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
 				    		startActivityForResult(i, TAKE_PICTURE);
 				    	}
@@ -501,6 +501,7 @@ public class TicketEditActivity extends Activity {
 			}	
 			
 		});
+		// Prida tlacitko do layoutu
 		actualLayout.addView(imageButton); 
 	}
 	
@@ -522,6 +523,9 @@ public class TicketEditActivity extends Activity {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onSaveInstanceState(android.os.Bundle)
+	 */
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		savedInstanceState.putSerializable("photos", photos);
