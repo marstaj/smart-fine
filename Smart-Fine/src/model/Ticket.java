@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * Tøída modelu PL
+ * 
  * @author Martin Stajner
  * 
  */
-@SuppressWarnings("serial")
+
 public class Ticket implements Serializable {
 
+	/**
+	 * UID verze serializace
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Služební èíslo - èíslo odznaku policisty
 	 */
@@ -33,7 +39,7 @@ public class Ticket implements Serializable {
 	 */
 	private String eventDescription;
 	/**
-	 * Místo události (napø.: na chodníku)
+	 * Místo události (napø.: èíslo lampy)
 	 */
 	private String location;
 	/**
@@ -49,7 +55,7 @@ public class Ticket implements Serializable {
 	 */
 	private int number;
 	/**
-	 * Fotografie události
+	 * Fotodokumentace události
 	 */
 	private ArrayList<File> photos;
 	/**
@@ -57,7 +63,7 @@ public class Ticket implements Serializable {
 	 */
 	private String spz;
 	/**
-	 * Barva SPZ
+	 * Barva státní poznávací znaèky
 	 */
 	private String spzColor;
 	/**
@@ -65,7 +71,7 @@ public class Ticket implements Serializable {
 	 */
 	private String street;
 	/**
-	 * Zda odtah vozidla
+	 * Zda je vozidlo odtaženo
 	 */
 	private boolean tow;
 	/**
@@ -79,12 +85,11 @@ public class Ticket implements Serializable {
 	/**
 	 * Zákon popisující pøestupek
 	 */
-	private Law law;	
+	private Law law;
 	/**
 	 * Zda byl už lístek vytištìn
 	 */
 	private boolean printed;
-
 
 	public int getBadgeNumber() {
 		return badgeNumber;
@@ -197,6 +202,7 @@ public class Ticket implements Serializable {
 	public void setTow(boolean tow) {
 		this.tow = tow;
 	}
+
 	public String getVehicleBrand() {
 		return vehicleBrand;
 	}
@@ -228,5 +234,5 @@ public class Ticket implements Serializable {
 	public void setPrinted(boolean printed) {
 		this.printed = printed;
 	}
-	
+
 }

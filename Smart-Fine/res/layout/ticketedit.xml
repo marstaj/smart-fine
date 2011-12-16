@@ -617,15 +617,16 @@
             android:visibility="gone"
             android:src="@android:drawable/ic_input_add"
             android:background="@android:drawable/editbox_background_normal" />
-
+
         <Button
             android:id="@+id/saveTicketButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:onClick="saveTicket"
+            android:onClick="saveTicketClick"
             android:text="@string/view_ticket_saveTicketButton" />
+
     </LinearLayout>
 
 </ScrollView>

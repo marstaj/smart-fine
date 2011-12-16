@@ -30,12 +30,9 @@ public class Settings {
 		}
 		return settings;
 	}
-	
-	public void finalize() throws Throwable {
-
-	}
 
 	/**
+	 * Vrací služební èíslo policisty
 	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
 	 * @return Vrací služební èíslo policisty
 	 */
@@ -45,9 +42,10 @@ public class Settings {
 	}
 
 	/**
+	 * Vrací true, pokud vložení nové hodnoty probìhlo v poøádku a false pokud došlo k chybì pøi ukládání
 	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
 	 * @param badgeNumber Reprezentuje služební èíslo policisty
-	 * @return Vrací true, pokud vložení nové hodnoty probìhlo v poøádku a false pokud došlo k chybì pøi ukládání
+	 * @return true/false
 	 */
 	public boolean setBadgeNumber(Context context, String badgeNumber) {
 		//získá pøístup k nastavení aplikace, spustí editaci, vloží hodnotu a commituje
@@ -55,8 +53,9 @@ public class Settings {
 	}
 
 	/**
+	 * Vrací mìsto, ve kterém se udìlují PL
 	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
-	 * @return Vrací mìsto, ve kterém se udìlují PL
+	 * @return mìsto
 	 */
 	public String getCity(Context context) {
 		//získá pøístup k nastavení aplikace a poté získá hodnotu preference
@@ -64,9 +63,10 @@ public class Settings {
 	}
 
 	/**
+	 * Vrací true, pokud vložení nové hodnoty probìhlo v poøádku a false pokud došlo k chybì pøi ukládání
 	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
 	 * @param city Reprezentuje mìsto, ve kterém se udìlují PL
-	 * @return Vrací true, pokud vložení nové hodnoty probìhlo v poøádku a false pokud došlo k chybì pøi ukládání
+	 * @return true/false
 	 */
 	public boolean setCity(Context context, String city) {
 		//získá pøístup k nastavení aplikace, spustí editaci, vloží hodnotu a commituje
@@ -74,8 +74,9 @@ public class Settings {
 	}
 
 	/**
+	 * Vrací adresu serveru pro nahrávání PL
 	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
-	 * @return Vrací adresu serveru pro nahrávání PL
+	 * @return adresa
 	 */
 	public String getSyncUrl(Context context) {
 		//získá pøístup k nastavení aplikace a poté získá hodnotu preference
@@ -83,9 +84,10 @@ public class Settings {
 	}
 
 	/**
+	 * Vrací true, pokud vložení nové hodnoty probìhlo v poøádku a false pokud došlo k chybì pøi ukládání nebo byla nová hodnota URL nevalidní
 	 * @param context Reprezentuje kontext aktivity, ze které je metoda volána
 	 * @param syncUrl Reprezentuje URL adresu serveru pro nahrávání PL
-	 * @return Vrací true, pokud vložení nové hodnoty probìhlo v poøádku a false pokud došlo k chybì pøi ukládání nebo byla nová hodnota URL nevalidní
+	 * @return true/false
 	 */
 	public boolean setSyncUrl(Context context, String syncUrl) {
 		//kontrola validity parametru//

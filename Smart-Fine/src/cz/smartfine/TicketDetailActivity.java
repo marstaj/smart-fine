@@ -27,7 +27,6 @@ import android.widget.LinearLayout;
 
 /**
  * Tøída aktivity pro zobrazení informací z parkovacího lístku
- * 
  * @author Pavel Brož, Martin Štajner
  */
 public class TicketDetailActivity extends Activity {
@@ -37,16 +36,22 @@ public class TicketDetailActivity extends Activity {
 	 */
 	private MyApp app;
 	/**
-	 * Reprezentuje index zobrazeného PL do DAO
+	 * Index zobrazeného PL do DAO
 	 */
 	private int ticketIndex;
-	
+	/**
+	 * Globální hodnota reprezentující Editaci PL
+	 */
 	private static final int EDIT = 0;
 	
-	// TODO requestCode pro PRINT, az bude PRINT implementovan
+	/**
+	 * Globální hodnota reprezentující Tisk PL
+	 */
 	//private static final int PRINT = 1;
 
-	@Override
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ticketdetail);
@@ -83,7 +88,7 @@ public class TicketDetailActivity extends Activity {
 		// naplní formuláø needitovatelnými daty
 		TicketSetter.setTicketExtra(this, ticket);
 		
-		setPhotos(ticket);
+		setPhotoDocumentation(ticket);
 	}
 
 	/**
@@ -129,10 +134,6 @@ public class TicketDetailActivity extends Activity {
 		
 	}
 	
-		
-	
-	
-
 	/**
 	 * Posluchaè stisknutí tlaèítka editace PL
 	 * 
@@ -162,7 +163,11 @@ public class TicketDetailActivity extends Activity {
 		}
 	}	
 	
-	private void setPhotos(Ticket ticket) {
+	/**
+	 * Nastaví fotodokumentaci - zobrazí náhledy fotografií a pøiøadí jim posluchaèe na zobrazení vìtšího náhledu
+	 * @param ticket
+	 */
+	private void setPhotoDocumentation(Ticket ticket) {
 		ArrayList<File> photos = ticket.getPhotos();
 		// Zkontroluje, zda nahodou neni photos null
 		if (photos == null) {

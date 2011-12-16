@@ -5,13 +5,18 @@ import java.io.FileInputStream;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+/**
+ * Pomocná tøída pracující s obrázkem
+ * @author Martin Štajner
+ *
+ */
 public class Image {
 
 	/**
-	 * Dekoduje obrazek z File.
+	 * Dekóduje obrazek z File.
 	 * @param file
 	 * @param imageSize
-	 * @return
+	 * @return bitmapa obrázku
 	 * @throws Exception
 	 */
 	public static Bitmap decodeFile(File file, int imageSize) throws Exception {
@@ -41,4 +46,5 @@ public class Image {
 		fis.close();
 		return b;
 	}
+
 }

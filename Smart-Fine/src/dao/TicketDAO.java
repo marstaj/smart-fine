@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.Ticket;
 
 /**
+ * Interface pro práci s DAO pro PL
  * @author Pavel Brož
  * 
  */
@@ -20,14 +21,14 @@ public interface TicketDAO {
 	public abstract void saveTicket(Ticket ticket) throws Exception;
 
 	/**
-	 * Vrati list ulozenych PL v pameti
+	 * Vrátí list uložených PL v pamìti
 	 * 
-	 * @return List ulozenych PL v pameti
+	 * @return List uložených PL v pamìti
 	 */
 	public abstract ArrayList<Ticket> getAllTickets();
 
 	/**
-	 * Vrati PL dle indexu
+	 * Vrátí PL dle indexu
 	 * 
 	 * @param index Index zadaneho PL
 	 * @return Listek
@@ -35,19 +36,19 @@ public interface TicketDAO {
 	public abstract Ticket getTicket(int index);
 
 	/**
-	 * Smaze vsechny lokalne ulozene PL
+	 * Smaže všechny lokálne uložené  PL
 	 * 
 	 * @throws Exception
 	 */
 	public abstract void deleteAllTickets() throws Exception;
 
 	/**
-	 * Smaze PL
+	 * Smaže daný PL
 	 */
 	public abstract void deleteTicket(Ticket ticket);
 	
 	/**
-	 * Nahraje listky ze souboru
+	 * Nahraje všechny PL ze souboru
 	 * @throws Exception
 	 */
 	public void loadTickets() throws Exception;

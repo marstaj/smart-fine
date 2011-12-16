@@ -6,21 +6,22 @@ import android.content.Context;
 import model.Ticket;
 
 /**
- * @author Martin Stajner
+ * Tøída pro práci s DAO pro PL
+ * @author Martin Štajner
  * 
  */
 public class FileTicketDAO implements TicketDAO {
 
 	/**
-	 * Kontext aplikace - kvuli relativni ceste k ulozenym souborum aplikace
+	 * Kontext aplikace
 	 */
 	Context context;
 	/**
-	 * DAO
+	 * DAO pro ukládání do souboru
 	 */
 	FileDAO dao;
 	/**
-	 * List vsech lokalne ulozenych listku
+	 * List všech lokálnì uložených PL
 	 */
 	ArrayList<Ticket> tickets;
 

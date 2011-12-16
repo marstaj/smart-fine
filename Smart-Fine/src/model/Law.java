@@ -3,17 +3,23 @@ package model;
 import java.io.Serializable;
 
 /**
- * @author Martin Stajner
+ * Tøída modelu zákona
+ * 
+ * @author Martin Štajner
  */
-@SuppressWarnings("serial")
+
 public class Law implements Serializable {
 
 	/**
-	 * Sbírka
+	 * UID verze serializace
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Sbírka zákona
 	 */
 	private int collection;
 	/**
-	 * Popis
+	 * Popis zákona
 	 */
 	private String description;
 	/**
@@ -21,7 +27,7 @@ public class Law implements Serializable {
 	 */
 	private int lawNumber;
 	/**
-	 * Písmeno
+	 * Písmeno odstavce
 	 */
 	private String letter;
 	/**

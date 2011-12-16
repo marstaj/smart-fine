@@ -17,7 +17,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 /**
- * @author Martin Stajner
+ * Tøída aktivity zobrazení listu všech uložených PL
+ * @author Martin Štajner
  * 
  */
 public class TicketListActivity extends Activity {
@@ -27,6 +28,9 @@ public class TicketListActivity extends Activity {
 	 */
 	private MyApp app;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,8 +59,12 @@ public class TicketListActivity extends Activity {
 		
 	}
 	
+	/**
+     * Obsluha tlaèítka - Upload dat na server
+     * @param button
+     */
 	public void uploadToServerClick (View button) {
-		// TODO: odstranit tuhle dummy hruzu co jsem tam napsal kvuli PDA :)// Pro print jsem nahore udelal promenou PRINT, pro startActivityForResult jako je u editace nize. :)
+		// TODO: odstranit tuhle dummy hruzu co jsem tam napsal kvuli PDA :)
 		
 		Builder builder = new Builder(this);
 		builder.setMessage("Oravdu chcete nahrát veškerá data na server?")
@@ -86,8 +94,7 @@ public class TicketListActivity extends Activity {
 		           }
 		       });
 		builder.show();
-		
-		
+				
 	}
 	
 }

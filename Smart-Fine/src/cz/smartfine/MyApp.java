@@ -9,7 +9,8 @@ import dao.FileTicketDAO;
 import android.app.Application;
 
 /**
- * @author Martin Stajner
+ * Tøída reprezentující aplikaci
+ * @author Martin Štajner
  * 
  */
 public class MyApp extends Application {
@@ -19,8 +20,12 @@ public class MyApp extends Application {
 	 */
 	TicketDAO ticketDAO;
 	
+	// TODO presunout nekam na spravne misto
 	private ArrayList<Law> laws;
 
+	/* (non-Javadoc)
+	 * @see android.app.Application#onCreate()
+	 */
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -36,12 +41,22 @@ public class MyApp extends Application {
 		}		
 	}
 
+	/**
+	 * Vrátí pøístup k DAO
+	 * @return pøístup k DAO
+	 */
 	public TicketDAO getTicketDao() {
 		return ticketDAO;
 	}
+	
+	/**
+	 * Nastaví pøístup k DAO
+	 * @param dao
+	 */
 	public void setTicketDao(TicketDAO dao) {
 		this.ticketDAO = dao;
 	}
+	
 	public ArrayList<Law> getLaws() {
 		// TODO Upravit Laws do nejake normalni podoby
 		if (laws == null) {

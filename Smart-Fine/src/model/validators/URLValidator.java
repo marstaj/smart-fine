@@ -2,6 +2,12 @@ package model.validators;
 
 import java.net.URI;
 
+/**
+ * Pomocná tøída pro validaci
+ * 
+ * @author Pavel Brož
+ *
+ */
 public class URLValidator {
 
 	/**

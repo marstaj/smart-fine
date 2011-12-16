@@ -11,17 +11,19 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 /**
- * @author Martin Stajner
+ * Tøída starajicí se o naplnìní listu uložených PL
+ * @author Martin Štajner
  *
  */
 public class TicketAdapter extends ArrayAdapter<Ticket> {
 
 	/**
-	 * List zaznamu k zobrazeni v listu
+	 * List záznamù k zobrazení v listu
 	 */
 	ArrayList<Ticket> items;
+	
 	/**
-	 * 
+	 * Vytváøí instance uživatelských rozhraní
 	 */
 	private LayoutInflater mInflater;
 
@@ -37,6 +39,9 @@ public class TicketAdapter extends ArrayAdapter<Ticket> {
 		this.items = items;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {

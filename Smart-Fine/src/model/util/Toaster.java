@@ -4,26 +4,29 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
- * @author Martin Stajner
+ * Pomocná tøída pro zobrazovaní toast upozornìní
+ * 
+ * @author Martin Štajner
  * 
  */
 public class Toaster {
-	
+
 	/**
 	 * Kontext aplikace
 	 */
 	public static Context context;
 	/**
-	 * Dlouha delka zobrazeni
+	 * Globální hodnota reprezentující Dlouhé zobrazení toastu
 	 */
 	public static final int LONG = 1;
 	/**
-	 * Kratka delka zobrazeni
+	 * Globální hodnota reprezentující Krátké zobrazení toastu
 	 */
 	public static final int SHORT = 0;
 
 	/**
-	 * Vytvoreni a odeslani "toast" upozorneni
+	 * Vytvoøení a odeslání "toast" upozornìní
+	 * 
 	 * @param message
 	 * @param length
 	 */
@@ -34,9 +37,10 @@ public class Toaster {
 			Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 		}
 	}
-	
+
 	/**
-	 * Vytvoreni a odeslani "toast" upozorneni
+	 * Vytvoøení a odeslání "toast" upozornìní
+	 * 
 	 * @param message
 	 * @param length
 	 */

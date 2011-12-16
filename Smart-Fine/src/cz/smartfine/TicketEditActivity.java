@@ -38,36 +38,42 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 /**
- * @author Martin Stajner
+ * Tøída aktivity vytváøení nového PL, nebo editace stávajícího PL
+ * @author Martin Štajner
  * 
  */
 public class TicketEditActivity extends Activity {
 
+	/**
+	 * Globální hodnota reprezentující Vyfocení fotografie
+	 */
 	private static final int TAKE_PICTURE = 0;
 	/**
 	 * Instance aplikace
 	 */
 	private MyApp app;
 	/**
-	 * Tento vyvolany intent
+	 * Tento vyvolaný intent - this
 	 */
 	private Intent intent;
 	/**
-	 * PL urceny k editaci
+	 * PL urèený k editaci
 	 */
 	private Ticket ticketForEdit;	
 	/**
-	 * List obsahujici cesty k fotografiim daneho PL
+	 * List obsahující cesty k fotografiím daného PL
 	 */
 	private ArrayList<File> photos;	
 	/**
-	 * Aktualni fotografie
+	 * Aktuální fotografie
 	 */
 	private File photo;
 	
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ticketedit);
@@ -102,7 +108,7 @@ public class TicketEditActivity extends Activity {
         }
 		
 		// Nastavi fotodokumentaci
-		setPhotos();		
+		setPhotoDocumentation();		
 
 		// Nastavi Listenery na spinnery
 		setAllSpinnersListeners();
@@ -114,12 +120,20 @@ public class TicketEditActivity extends Activity {
 		}
 	}
 	
+	/**
+     * Obsluha tlaèítka - Rozpoznání SPZ
+     * @param button
+     */
 	public void scanClick(View button) {
 		// TODO Dummy!!
 		EditText spz = (EditText) findViewById(R.id.spz);
 		spz.setText("3U1-3491");
 	}
 	
+	/**
+     * Obsluha tlaèítka - Vyplnìní adresy dle GPS
+     * @param button
+     */
 	public void gpsClick(View button) {
 		// TODO Dummy!!
 		EditText city = (EditText) findViewById(R.id.city);
@@ -133,7 +147,7 @@ public class TicketEditActivity extends Activity {
 	// ------------------------------- INICIALIZACE ---------------------------------------//
 
 	/**
-	 * Obsluha nastaveni listeneru pro spinnery
+	 * Obsluha nastaveni posluchaèe pro spinnery
 	 */
 	private void setAllSpinnersListeners() {
 		int ids[][] = { { R.id.mpzSpinner, R.id.mpz },
@@ -150,7 +164,7 @@ public class TicketEditActivity extends Activity {
 	}
 
 	/**
-	 * Nastavi listener na spinner pro zakony
+	 * Nastaví posluchaè na spinner pro zákony
 	 */
 	private void setLawListener() {
 		final Spinner spinner = (Spinner) findViewById(R.id.lawSpinner);
@@ -223,7 +237,7 @@ public class TicketEditActivity extends Activity {
 	}
 	
 	/**
-	 * Nastaveni listeneru na vybrany spinner
+	 * Nastaví posluchaè na vybraný spinner
 	 * 
 	 * @param spin
 	 * @param txt
@@ -267,12 +281,10 @@ public class TicketEditActivity extends Activity {
 	// ------------------------------- PARKOVACI LISTEK -----------------------------------//
 	
 	/**
-	 * Obsluha tlacitka - Ulozit listek
-	 * 
-	 * @param target
-	 * @throws Exception
+	 * Obsluha tlaèítka - Uložit lístek
+	 * @param button
 	 */
-	public void saveTicket(View target) {
+	public void saveTicketClick(View button) {
 		Ticket ticket = setTicketData();
 		String error = checkTicket(ticket);
 		if (error != null) {
@@ -297,10 +309,9 @@ public class TicketEditActivity extends Activity {
 	}
 	
 	/**
-	 * Vytvoreni noveho listku a prirazeni jeho atributu NEBO zmena udaju PL,
-	 * ktery editujeme
+	 * Vytvoøení nového PL a pøiøazení jeho atributù NEBO zmìna údajù PL, který editujeme
 	 * 
-	 * @return
+	 * @return PL
 	 */
 	private Ticket setTicketData() {
 		Ticket ticket;
@@ -368,10 +379,10 @@ public class TicketEditActivity extends Activity {
 	}
 
 	/**
-	 * Kontrola vsech povinnych udaju a vraceni varovani
+	 * Kontrola všech povinných údajù a vrácení varování
 	 * 
 	 * @param ticket
-	 * @return
+	 * @return chybové hlášení
 	 */
 	private String checkTicket(Ticket ticket) {
 		String error = "";
@@ -413,7 +424,11 @@ public class TicketEditActivity extends Activity {
 	
 	// ------------------------------- FOTODOKUMENTACE ------------------------------------//
 
-	private void setPhotos() {
+	/**
+	 * Nastaví fotodokumentaci - zobrazí náhledy fotografií a pøiøadí jim posluchaèe na zobrazení vìtšího náhledu
+	 * Nataví pøidávání nových ftografií
+	 */
+	private void setPhotoDocumentation() {
 		// Zkontroluje, zda nahodou neni photos null
 		if (photos == null) {
 			photos = new ArrayList<File>();
@@ -532,10 +547,9 @@ public class TicketEditActivity extends Activity {
 		}		
 		
 		// Refreshne fotodokumentaci
-		setPhotos();
+		setPhotoDocumentation();
 	}
-	
-	
+		
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onSaveInstanceState(android.os.Bundle)
 	 */

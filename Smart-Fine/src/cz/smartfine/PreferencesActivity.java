@@ -16,6 +16,9 @@ import android.preference.PreferenceActivity;
  */
 public class PreferencesActivity extends PreferenceActivity implements OnPreferenceChangeListener {
 
+	/* (non-Javadoc)
+	 * @see android.preference.PreferenceActivity#onCreate(android.os.Bundle)
+	 */
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         

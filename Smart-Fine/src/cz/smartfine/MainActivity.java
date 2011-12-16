@@ -7,7 +7,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 
 /**
- * @author Martin Stajner
+ * Tøída aktivity hlavní obrazovky aplikace.
+ * @author Martin Štajner
  *
  */
 public class MainActivity extends Activity {
@@ -19,10 +20,13 @@ public class MainActivity extends Activity {
 	private MyApp app;
 	
 	/**
-	 * Priznak, ze se jedna o vytváreni noveho PL
+	 * Globální hodnota reprezentující Vytvoøení nového PL
 	 */
 	private static final int NEW_TICKET = 0;
 	
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,26 +40,26 @@ public class MainActivity extends Activity {
     }
         
     /**
-     * Obsluha tlacitka - Novy listek
-     * @param target
+     * Obsluha tlaèítka - Nový PL
+     * @param button
      */
-    public void newTicketClick(View target) {
+    public void newTicketClick(View button) {
     	this.startActivityForResult(new Intent(this, TicketEditActivity.class), NEW_TICKET);
 	}
     
     /**
-     * Obsluha tlacitka - List listku
-     * @param target
+     * Obsluha tlaèítka - List uložených PL
+     * @param button
      */
-    public void ticketListClick(View target) {
+    public void ticketListClick(View button) {
     	this.startActivity(new Intent(this, TicketListActivity.class));
 	}
     
     /**
-     * Obsluha tlaèítka - nastavení aplikace
-     * @param target
+     * Obsluha tlaèítka - Nastavení aplikace
+     * @param button
      */
-    public void preferencesClick(View target) {
+    public void preferencesClick(View button) {
     	this.startActivity(new Intent(this, PreferencesActivity.class));
 	}
     
