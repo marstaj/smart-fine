@@ -16,7 +16,7 @@ public class FileDAO {
 	/**
 	 * Kontext aplikace
 	 */
-	Context context;
+	private Context context;
 	
 	/**
 	 * Konstruktor FileDAO

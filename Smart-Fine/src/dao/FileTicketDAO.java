@@ -15,15 +15,15 @@ public class FileTicketDAO implements TicketDAO {
 	/**
 	 * Kontext aplikace
 	 */
-	Context context;
+	private Context context;
 	/**
 	 * DAO pro ukládání do souboru
 	 */
-	FileDAO dao;
+	private FileDAO dao;
 	/**
 	 * List všech lokálnì uložených PL
 	 */
-	ArrayList<Ticket> tickets;
+	private ArrayList<Ticket> tickets;
 
 	/**
 	 * Konstruktor
