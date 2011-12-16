@@ -17,7 +17,7 @@ Martin Štajner (stajnmar@fel.cvut.cz, 732 173 025)
 
 [http://smart-fine.googlecode.com Návrh (*.pdf)]
 
-[http://smart-fine.googlecode.com Plán projektu (*.pdf)]
+[http://smart-fine.googlecode.com/files/Smart-Fine_plan_projektu.pdf Plán projektu (*.pdf)]
 
 [http://smart-fine.googlecode.com Testy (*.pdf)]
 
