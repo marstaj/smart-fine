@@ -7,8 +7,10 @@ import model.util.Image;
 import model.util.TicketSetter;
 import model.util.Toaster;
 import android.app.Activity;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -93,22 +95,38 @@ public class TicketDetailActivity extends Activity {
 		// TODO: podporu tisku implementovat až ve fázi 2 - HLAVNE odstranit tuhle dummy hruzu co jsem tam napsal kvuli PDA :)
 		// Pro print jsem nahore udelal promenou PRINT, pro startActivityForResult jako je u editace nize. :)
 		
-		final ProgressDialog dialog = ProgressDialog.show(this, "Tisk parkovacího lístku", "Tisknu, prosím poèkejte...", true);
-		dialog.show();
+		Builder builder = new Builder(this);
+		builder.setMessage("Opravdu chcete parkovací lístek vytisknout?")
+		       .setCancelable(false)
+		       .setPositiveButton("Ano", new DialogInterface.OnClickListener() {
+		    	   
+				public void onClick(DialogInterface dialog, int which) {
+					final ProgressDialog dialog1 = ProgressDialog.show(TicketDetailActivity.this, "Tisk parkovacího lístku", "Tisknu, prosím poèkejte...", true);
+					dialog1.show();
 
-		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
-		    public void run() {
-		        dialog.dismiss();
-		        Toaster.toast("Parkovací lístek úspìšnì vytištìn.", Toaster.SHORT);
-		        Ticket ticket = app.getTicketDao().getTicket(ticketIndex);
-		        ticket.setPrinted(true);
-		        Button edit = (Button) findViewById(R.id.editTicketButton);
-				edit.setEnabled(false);
-				button.setEnabled(false);
-		        setTicket(ticket);
-		        
-		    }}, 3000);  // 3000 milliseconds
+					Handler handler = new Handler();
+					handler.postDelayed(new Runnable() {
+					    public void run() {
+					        dialog1.dismiss();
+					        Toaster.toast("Parkovací lístek úspìšnì vytištìn.", Toaster.SHORT);
+					        Ticket ticket = app.getTicketDao().getTicket(ticketIndex);
+					        ticket.setPrinted(true);
+					        Button edit = (Button) findViewById(R.id.editTicketButton);
+							edit.setEnabled(false);
+							button.setEnabled(false);
+					        setTicket(ticket);
+					        
+					    }}, 3000);  // 3000 milliseconds
+					
+				}
+		       })
+		       .setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		                dialog.cancel();
+		           }
+		       });
+		builder.show();
+		
 	}
 	
 		
