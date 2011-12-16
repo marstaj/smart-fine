@@ -21,7 +21,7 @@ Martin Štajner (stajnmar@fel.cvut.cz, 732 173 025)
 
 [http://smart-fine.googlecode.com/files/Smart-Fine_Testy.pdf Testy (*.pdf)]
 
-[http://smart-fine.googlecode.com Závěrečná zpráva (*.pdf)]
+[http://smart-fine.googlecode.com/files/Smart-Fine_zaverecna_zprava.pdf Závěrečná zpráva (*.pdf)]
 
 = Odkazy =
 == Issue Tracker ==
