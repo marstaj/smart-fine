@@ -31,7 +31,7 @@ public class Ticket implements Serializable {
 	 */
 	private Date date;
 	/**
-	 * Popis DZ
+	 * Popis jednání DZ
 	 */
 	private String descriptionDZ;
 	/**
