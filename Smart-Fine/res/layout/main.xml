@@ -1,49 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rootLayout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo" android:layout_marginTop="30dp"/>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" android:layout_marginTop="20pt">
-
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center">
-
-            <Button
-                android:id="@+id/newTicketButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="newTicketClick"
-                android:text="@string/view_main_newTicketButton" />
-
-            <Button
-                android:id="@+id/ticketListButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="ticketListClick"
-                android:text="@string/view_main_ticketListButton" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/preferencesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="preferencesClick"
-            android:text="@string/view_main_preferencesButton" android:layout_gravity="center" android:layout_marginTop="10dp"/>
-    </LinearLayout>
-
-</LinearLayout>
