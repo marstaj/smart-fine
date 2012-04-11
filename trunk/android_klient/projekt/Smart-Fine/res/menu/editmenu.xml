@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/fotodocumentationMenu"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="Přidat fotodokumentaci"/>
+    <item
+        android:id="@+id/saveTicketMenu"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="Uložit p. lístek"/>
+
+    <item
+        android:id="@+id/scanLocationMenu"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="Najít pozici"/>
+
+</menu>
