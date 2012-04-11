@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/newTicketMenu"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Nový p. lístek"/>
+
+    <item
+        android:id="@+id/ticketListMenu"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Uložené lístky"/>
+    
+    <item
+        android:id="@+id/preferencesMenu"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Nastavení"/>
+
+</menu>

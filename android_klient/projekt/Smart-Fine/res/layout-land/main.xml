@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="40dp"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" android:layout_marginTop="50dp">
+
+        <Button
+            android:id="@+id/newTicketButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="newTicketClick"
+            android:text="@string/view_main_newTicketButton" android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/ticketListButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="ticketListClick"
+            android:text="@string/view_main_ticketListButton" android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/preferencesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="preferencesClick"
+            android:text="@string/view_main_preferencesButton" android:layout_gravity="center" android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
+</LinearLayout>
