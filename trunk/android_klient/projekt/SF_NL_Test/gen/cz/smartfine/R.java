@@ -16,7 +16,7 @@ public final class R {
     public static final class id {
         public static final int butConnect=0x7f060001;
         public static final int butIsCon=0x7f060002;
-        public static final int butSend=0x7f060003;
+        public static final int butLogin=0x7f060003;
         public static final int textpole=0x7f060000;
     }
     public static final class layout {

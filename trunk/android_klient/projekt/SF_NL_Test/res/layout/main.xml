@@ -25,10 +25,10 @@
         android:text="Je připojen" />
 
     <Button
-        android:id="@+id/butSend"
+        android:id="@+id/butLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="butSend"
-        android:text="Pošli data" />
+        android:onClick="butLogin"
+        android:text="Přihlásit" />
     
 </LinearLayout>

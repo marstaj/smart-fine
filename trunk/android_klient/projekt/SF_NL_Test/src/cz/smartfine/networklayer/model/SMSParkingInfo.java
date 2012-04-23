@@ -34,13 +34,13 @@ public class SMSParkingInfo {
 
 	
 	/**
-	 * @param parkingSince
+	 * Konstruktor.
 	 * @param parkingStatus
+	 * @param parkingSince
 	 * @param parkingUntil
 	 * @param vehicleRegistrationPlate
 	 */
-	public SMSParkingInfo(Date parkingSince, ParkingStatus parkingStatus,
-			Date parkingUntil, String vehicleRegistrationPlate) {
+	public SMSParkingInfo(ParkingStatus parkingStatus, Date parkingSince, Date parkingUntil, String vehicleRegistrationPlate) {
 		super();
 		this.parkingSince = parkingSince;
 		this.parkingStatus = parkingStatus;

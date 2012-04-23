@@ -1,11 +1,14 @@
 package cz.smartfine.networklayer;
 import java.io.IOException;
 
+import android.content.Context;
+
 import cz.smartfine.networklayer.business.LoginProvider;
-import cz.smartfine.networklayer.dataprotocols.LoginProtocol;
+import cz.smartfine.networklayer.business.listeners.ILoginProviderListener;
 import cz.smartfine.networklayer.links.ILink;
+import cz.smartfine.networklayer.model.LoginFailReason;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
-import cz.smartfine.networklayer.networkinterface.SimpleNetworkInterface;
+import cz.smartfine.networklayer.util.InterThreadType;
 
 /**
  * Zprostøedkovává pøístup k základním síovım slubám.
@@ -15,12 +18,20 @@ import cz.smartfine.networklayer.networkinterface.SimpleNetworkInterface;
  */
 public class ConnectionProvider {
 
+	/**
+	 * Rozhraní pro NetworkInterface.
+	 */
 	private ILink mLink;
+	/**
+	 * Síové rozhraní pro datové protokoly.
+	 */
 	private INetworkInterface mNetworkInterface;
+	/**
+	 * Aplikaèní kontext.
+	 */
+	private Context appContext;
 	
-	public ConnectionProvider(){
-
-	}
+	//================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
 
 	public void finalize() throws Throwable {
 
@@ -28,13 +39,16 @@ public class ConnectionProvider {
 
 	/**
 	 * Konstruktor.
+	 * @param appContext Kontext aplikace.
 	 * @param link    Objekt implementující ILink pro transfer dat.
 	 * @param networkInterface    Objekt reprezentující rozhraní, se kterım mohou
 	 * komunikovat tøídy datovıch protokolù.
 	 */
-	public ConnectionProvider(ILink link, INetworkInterface networkInterface){
+	public ConnectionProvider(Context appContext, ILink link, INetworkInterface networkInterface){
+		this.appContext = appContext;
 		this.mLink = link;
 		this.mNetworkInterface = networkInterface;
+		this.mNetworkInterface.setLink(link);
 	}
 
 	//================================================== GET/SET ==================================================//
@@ -54,6 +68,13 @@ public class ConnectionProvider {
 	}
 	
 	//================================================== VİKONNÉ METODY ==================================================//
+	
+	/**
+	 * Ukonèí spojení na server.
+	 */
+	public void disconnect(){
+		mLink.disconnect();
+	}
 	
 	/**
 	 * Zjišuje, zda je vytvoøen a pøipojen socket.
@@ -79,11 +100,37 @@ public class ConnectionProvider {
 	 * @return true, pokud se podaøilo pøipojit a zároveò pøihlásit, false pokud se nepodaøilo pøipojit, nebo se nepodaøilo pøihlásit nebo nejsou k dispozici pøihlašovací údaje.
 	 */
 	public boolean connectAndLogin(){
-		if (LoginProvider.isAvaibleLoginInformation()){
+		if (LoginProvider.isAvaibleLoginInformation(this.appContext)){
 			if ( !connect()){
 				return false;
 			}
-			//TODO
+			final InterThreadType<Boolean> loginResult = new InterThreadType<Boolean>(); //promìnná, která pozastaví bìh vlákna, dokud nebude znám vısledek pøihlášení
+			
+			//posluchaè událostí z promìnné lp (LoginProvideru), kterı nastavuje loginResult//
+			ILoginProviderListener lpl = new ILoginProviderListener() {
+				
+				public void onMessageSent() {loginResult.put(false); /*nemìlo by nastat (je zde jen pro jistotu, aby nedošlo k zablokování aplikace)*/}
+				public void onLogout() {loginResult.put(false);/*nemìlo by nastat (je zde jen pro jistotu, aby nedošlo k zablokování aplikace)*/}
+				
+				public void onLoginFailed(LoginFailReason reason) {
+					loginResult.put(false); //pøihlášení neúspìšné
+				}
+				
+				public void onLoginConfirmed() {
+					loginResult.put(true); //pøihlášení úspìšné
+				}
+				
+				public void onConnectionTerminated() {
+					loginResult.put(false); //pøihlášení neúspìšné
+				}
+			};
+			
+			LoginProvider lp = new LoginProvider(this.getNetworkInterface(), this.appContext, lpl); //vytvoøení login provideru
+			//odeslání pøihlašovací zprávy
+			lp.login(LoginProvider.getBadgeNumber(this.appContext), LoginProvider.getPIN(this.appContext), LoginProvider.getIMEI(this.appContext));
+			
+			//zde dojde k pozastavení vlákna, dokud nebude znám vısledek pøihlášení, poté se hodnota vrátí
+			return loginResult.get();
 		}else{
 			return false;
 		}

@@ -5,7 +5,7 @@ import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
 import cz.smartfine.networklayer.links.ILink;
 import cz.smartfine.networklayer.util.Constants;
 import cz.smartfine.networklayer.util.Conventer;
-import cz.smartfine.networklayer.util.InterThreadArray;
+import cz.smartfine.networklayer.util.InterThreadType;
 
 /**
  * Tvoøí rozhraní mezi protokoly pro pøenos specifických dat a sítí.
@@ -44,14 +44,21 @@ public class SimpleNetworkInterface implements INetworkInterface {
 	/**
 	 * Pøíchozí data
 	 */
-	private InterThreadArray in;
+	private InterThreadType<byte[]> in = new InterThreadType<byte[]>();
 	/**
 	 * Odchozí data
 	 */
-	private InterThreadArray out;
+	private InterThreadType<byte[]> out = new InterThreadType<byte[]>();
+	
+	//================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
 	
 	public void finalize() throws Throwable {
-
+		if(senderThread != null && senderThread.isAlive()){
+			senderThread.interrupt();
+		}
+		if(receiverThread != null && receiverThread.isAlive()){
+			receiverThread.interrupt();
+		}
 	}
 
 	/**
@@ -59,15 +66,7 @@ public class SimpleNetworkInterface implements INetworkInterface {
 	 * 
 	 */
 	public SimpleNetworkInterface() {
-		//vytvoøení a nastartování objektu pro pøíjímání dat v novém vláknì//
-		receiver = new Receiver(this.in, this.dataProtocol);
-		receiverThread = new Thread(receiver, "receiverThread");
-		receiverThread.start();
-		
-		//vytvoøení a nastartování objektu pro odesílání dat v novém vláknì//
-		sender = new Sender(this.link, this.out, this.dataProtocol);
-		senderThread = new Thread(sender, "senderThread");
-		senderThread.start();
+		this(null);
 	}
 	
 	/**
@@ -76,10 +75,6 @@ public class SimpleNetworkInterface implements INetworkInterface {
 	 * @param link    Link pro odesílání dat.
 	 */
 	public SimpleNetworkInterface(ILink link) {
-		//kontrola zda link není null//
-		if (link == null){
-			throw new NullPointerException("Reference na objekt typu ILink je null.");
-		}
 		this.link = link;
 		
 		//vytvoøení a nastartování objektu pro pøíjímání dat v novém vláknì//
@@ -87,7 +82,9 @@ public class SimpleNetworkInterface implements INetworkInterface {
 		receiverThread = new Thread(receiver, "receiverThread");
 		receiverThread.start();
 		
-		link.setOnReceivedDataListener(this); //registrace sebe sama jako posluchaèe událostí pøíjmu dat v objektu linku
+		if (link != null){
+			link.setOnReceivedDataListener(this); //registrace sebe sama jako posluchaèe událostí pøíjmu dat v objektu linku
+		}
 		
 		//vytvoøení a nastartování objektu pro odesílání dat v novém vláknì//
 		sender = new Sender(this.link, this.out, this.dataProtocol);
@@ -179,7 +176,7 @@ public class SimpleNetworkInterface implements INetworkInterface {
 	private class Sender implements Runnable{
 
 		private ILink link;
-		private InterThreadArray out;
+		private InterThreadType<byte[]> out;
 		private IDataProtocol dataProtocol;
 		
 		/**
@@ -187,7 +184,7 @@ public class SimpleNetworkInterface implements INetworkInterface {
 		 * @param out Objekt pro pøedávání zpráv.
 		 * @param dataProtocol Datový protokol, který má být informován o odeslání zprávy.
 		 */
-		public Sender(ILink link, InterThreadArray out, IDataProtocol dataProtocol) {
+		public Sender(ILink link, InterThreadType<byte[]> out, IDataProtocol dataProtocol) {
 			super();
 			this.link = link;
 			this.out = out;
@@ -243,7 +240,7 @@ public class SimpleNetworkInterface implements INetworkInterface {
 	 */
 	private class Receiver implements Runnable{
 
-		private InterThreadArray in;
+		private InterThreadType<byte[]> in;
 		private IDataProtocol dataProtocol;
 		
 		
@@ -251,7 +248,7 @@ public class SimpleNetworkInterface implements INetworkInterface {
 		 * @param in Objekt pro pøedávání zpráv
 		 * @param dataProtocol Datový protokol, který má být informován o pøijetí zprávy.
 		 */
-		public Receiver(InterThreadArray in, IDataProtocol dataProtocol) {
+		public Receiver(InterThreadType<byte[]> in, IDataProtocol dataProtocol) {
 			super();
 			this.in = in;
 			this.dataProtocol = dataProtocol;
@@ -280,8 +277,7 @@ public class SimpleNetworkInterface implements INetworkInterface {
 		public synchronized void setDataProtocol(IDataProtocol dataProtocol) {
 			this.dataProtocol = dataProtocol;
 		}
-		
-		
+
 	}
 
 }
