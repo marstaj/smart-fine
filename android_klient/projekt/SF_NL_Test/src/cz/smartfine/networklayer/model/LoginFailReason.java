@@ -25,5 +25,9 @@ public enum LoginFailReason {
 	 * Identifikaèní èíslo mobilního zaøízení (IMEI) není v databázi registrovaných
 	 * mobilních zaøízení.
 	 */
-	UNKNOWN_IMEI
+	UNKNOWN_IMEI,
+	/**
+	 * Pøihlášení bylo neúspìšné, protože došlo k ukonèení spojení ze strany serveru.
+	 */
+	CONNECTION_TERMINATED_FROM_SERVER
 }

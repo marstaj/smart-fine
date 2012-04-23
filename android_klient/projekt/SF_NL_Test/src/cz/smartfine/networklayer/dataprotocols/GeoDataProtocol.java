@@ -1,9 +1,14 @@
 package cz.smartfine.networklayer.dataprotocols;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import cz.smartfine.networklayer.business.listeners.IGeoDataProtocolListener;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.model.LoginFailReason;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
+import cz.smartfine.networklayer.util.MessageBuilder;
 
 /**
  * Pøedstavuje tøídu protokolu pro pøenost geolokaèních dat.
@@ -22,6 +27,8 @@ public class GeoDataProtocol implements IDataProtocol {
 	 */
 	private IGeoDataProtocolListener geoDataProtocolListener;
 	
+	//================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
+	
 	public void finalize() throws Throwable {
 
 	}
@@ -31,7 +38,7 @@ public class GeoDataProtocol implements IDataProtocol {
 	 * @param networkInterface Rozhraní pro pøenost dat.
 	 */
 	public GeoDataProtocol(INetworkInterface networkInterface) {
-		this.networkInterface = networkInterface;
+		this(networkInterface, null);
 	}
 	
 	/**
@@ -43,29 +50,11 @@ public class GeoDataProtocol implements IDataProtocol {
 	public GeoDataProtocol(INetworkInterface networkInterface, IGeoDataProtocolListener geoDataProtocolListener){
 		this.networkInterface = networkInterface;
 		this.geoDataProtocolListener = geoDataProtocolListener;
+		this.networkInterface.setOnReceivedDataListener(this); //zaregistrování se jako posluchaè
 	}
 
-	/**
-	 * Odpojí datový protokol od základního protokolu.
-	 */
-	public void disconnectProtocol(){
-
-	}
-
-	/**
-	 * Handler události ukonèení spojení.
-	 */
-	public void onConnectionTerminated(){
-
-	}
-
-	/**
-	 * Handler na zpracování události odeslání zprávy.
-	 */
-	public void onMessageSent(){
-
-	}
-
+	//================================================== GET/SET ==================================================//
+	
 	/**
 	 * Odebere posluchaèe událostí protokolu pro odesílání geolokaèních dat.
 	 * 
@@ -73,18 +62,9 @@ public class GeoDataProtocol implements IDataProtocol {
 	 * geolokaèních dat.
 	 */
 	public void removeGeoDataProtocolListener(IGeoDataProtocolListener geoDataProtocolListener){
-
+		this.geoDataProtocolListener = null;
 	}
-
-	/**
-	 * Odešle geolokaèní data na server.
-	 * 
-	 * @param geodata    Seznam geolokaèních dat pro poslání na server.
-	 */
-	public void sendGeoData(List geodata){
-
-	}
-
+	
 	/**
 	 * Pøidá posluchaèe událostí protokolu pro odesílání geolokaèních dat.
 	 * 
@@ -92,16 +72,79 @@ public class GeoDataProtocol implements IDataProtocol {
 	 * geolokaèních dat.
 	 */
 	public void setGeoDataProtocolListener(IGeoDataProtocolListener geoDataProtocolListener){
-
+		this.geoDataProtocolListener = geoDataProtocolListener;
+	}
+	
+	//================================================== HANDLERY UDÁLOSTÍ ==================================================//
+	
+	/**
+	 * Handler události ukonèení spojení.
+	 */
+	public void onConnectionTerminated(){
+		if (geoDataProtocolListener != null){
+			geoDataProtocolListener.onConnectionTerminated();
+		}
 	}
 
+	/**
+	 * Handler na zpracování události odeslání zprávy.
+	 */
+	public void onMessageSent(){
+		if (geoDataProtocolListener != null){
+			geoDataProtocolListener.onMessageSent();
+		}
+	}
+	
 	/**
 	 * Handler události pøíjmu dat.
 	 * 
 	 * @param receivedData    Pøijmutá data uložená ve formì bytového pole.
 	 */
 	public void onReceivedData(byte[] receivedData){
-
+		//žádná data nepøijímá
+	}
+	
+	//================================================== VÝKONNÉ METODY ==================================================//
+	
+	/**
+	 * Odpojí datový protokol od základního protokolu.
+	 */
+	public void disconnectProtocol(){
+		if(networkInterface != null){
+			networkInterface.removeOnReceivedDataListener(this);
+		}
 	}
 
+	/**
+	 * Odešle geolokaèní data na server.
+	 * 
+	 * @param geoData    Seznam geolokaèních dat pro poslání na server.
+	 * @throws IOException 
+	 */
+	public void sendGeoData(List geoData) throws IOException{
+		if(networkInterface != null){
+			networkInterface.sendData(createGeoMessage(geoData));
+		}
+	}
+
+	//================================================== PRIVÁTNÍ METODY ==================================================//
+	
+	//TODO FORMÁT GEO DAT
+	protected byte[] createGeoMessage(List geoData) throws IOException{
+		MessageBuilder msg = new MessageBuilder();
+		
+		msg.putByte(MessageIDs.ID_MSG_UPLOAD_GEO); //identifikátor zprávy
+		
+		ByteArrayOutputStream geoBytes = new ByteArrayOutputStream();
+		ObjectOutputStream objOS = new ObjectOutputStream(geoBytes);
+		objOS.writeObject(geoData); //serializuje PL
+		objOS.close();
+		
+		msg.putArrayWithIntLength(geoBytes.toByteArray()); //vložení pole serializované kolekce s geo daty
+		
+		geoBytes.close();
+		
+		return msg.getByteArray();
+	}
+	
 }

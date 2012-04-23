@@ -27,50 +27,60 @@ import cz.smartfine.networklayer.util.Conventer;
  * @version 1.0
  * @created 14-4-2012 18:48:48
  */
-public class SecuredMobileLink implements ILink, Runnable {
+public class SecuredMobileLink implements ILink{
 
 	/**
 	 * SSL kontext pro šifrovanou komunikaci
 	 */
-	SSLContext context;
+	private SSLContext context;
 	/**
 	 * Továrna na ssl sokety
 	 */
-    SSLSocketFactory socketFactory;
+	private SSLSocketFactory socketFactory;
     /**
      * Soket, který je používán pro pøenos dat
      */
-    SSLSocket socket;
+	private SSLSocket socket;
 
     /**
      * Key Store dùvìryhodných certifikaèních autorit pro ovìøení serveru
      */
-    KeyStore trustedKS;
+	private KeyStore trustedKS;
     /**
      * Tøída pro ovìøování certifikátu serveru
      */
-    TrustManagerFactory trstMngrFactory;
+	private TrustManagerFactory trstMngrFactory;
     
     /**
      * Adresa serveru
      */
-    InetSocketAddress address;
+	private InetSocketAddress address;
     
     /**
      * Tøída typu INetworkInterface, která využívá služeb této tøídy
      */
-    INetworkInterface networkInterface;
+	private INetworkInterface networkInterface;
     
     /**
      * Stream vstupních dat
      */
-    InputStream in;
+	private InputStream in;
     /**
      * Stream výstupních dat
      */
-    OutputStream out;
+	private OutputStream out;
     
- 
+    /**
+	 * Interní tøída, která asynchronì pøijímá data
+	 */
+	private Receiver receiver;
+	/**
+	 * Vlákno pro pøíjem dat
+	 */
+	private Thread receiverThread;
+	
+	//================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
+	
 	public void finalize() throws Throwable {
 		if(in != null){
 			in.close();
@@ -80,6 +90,9 @@ public class SecuredMobileLink implements ILink, Runnable {
 		}
 		if(socket != null){
 			socket.close();
+		}
+		if(receiverThread != null && receiverThread.isAlive()){
+			receiverThread.interrupt();
 		}
 	}
 
@@ -121,6 +134,9 @@ public class SecuredMobileLink implements ILink, Runnable {
 	 */
 	public void setOnReceivedDataListener(INetworkInterface networkInterface){
 		this.networkInterface = networkInterface;
+		if(this.receiver != null){
+			this.receiver.setNetworkInterface(networkInterface);
+		}
 	}
 	
 	/**
@@ -130,6 +146,9 @@ public class SecuredMobileLink implements ILink, Runnable {
 	 */
 	public void removeOnReceivedDataListener(INetworkInterface networkInterface){
 		this.networkInterface = null;
+		if(this.receiver != null){
+			this.receiver.setNetworkInterface(null);
+		}
 	}
 
 	//================================================== VÝKONNÉ METODY ==================================================//
@@ -150,69 +169,21 @@ public class SecuredMobileLink implements ILink, Runnable {
 	}
 
 	/**
-	 * Zprostøedkovává pøíjem dat ze serveru
-	 */
-	public void run() {
-			boolean headerReading = true; //probíhá pøíjem hlavièky
-			boolean messageReading = false; //probíhá ppøíjem tìla zprávy
-			byte[] header = new byte[Constants.HEADER_SIZE]; //pole pro uložení hlavièky zprávy
-			byte[] data = new byte[Constants.HEADER_SIZE]; //pole pro uložení pøíchozích dat (první pøichází hlavièka -> velikost pole = velikost hlavièky)
-			int msgSize = 0; //délka tìla zprávy
-			int datalength = 0; //# bytù naètený v posledním ètení
-			int totalBytes = 0; //# bytù celkem naètených
-	
-			try {
-				//ète data dokud není naèteno celé pole data[] nebo dokud není dosaženo konce streamu//
-				while ((datalength = in.read(data, totalBytes, data.length - datalength)) != -1){
-					totalBytes += datalength; //pøiènení právì naètených bytù, k celkovému poètu naètených bytù od zaèátku ètení zprávy (hlavièky nebo tìla)
-					
-					//dokonèení naètení tìla zprávy//
-					if(messageReading && totalBytes == data.length){
-						datalength = 0; //vynulování poètu naètených bytù
-						totalBytes = 0; //vynulování poèítadla naètených bytù
-						//nastavení stavových promìnných --> následuje ètení hlavièky//
-						headerReading = true;
-						messageReading = false;
-						
-						if(networkInterface != null){
-							networkInterface.onReceivedData(data); //odeslání pøijaté zprávy na NetworkInterface
-						}
-						
-						data = new byte[Constants.HEADER_SIZE]; //nastavení ètecího pole na velikost hlavièky
-						continue; //zpráva pøijat, oèekává se další hlavièka
-					}
-					
-					//dokonèení naètení hlavièky zprávy//
-					if (headerReading && totalBytes == Constants.HEADER_SIZE){
-						//nastavení stavových promìnných --> následuje ètení tìla zprávy//
-						headerReading = false;
-						messageReading = true;
-						
-						header = data;
-						msgSize = Conventer.byteArrayToInt(header, Constants.HEADER_LENGTH_OFFSET); //konverze bytù délky zprávy (z hlavièky) na integer
-	
-						data = new byte[Constants.HEADER_SIZE + msgSize]; //nastavení ètecího pole na velikost tìla zprávy
-						System.arraycopy(header, 0, data, 0, Constants.HEADER_SIZE); //pøekopírování hlavièky do nového pole
-						//continue;
-					}
-				} //while
-				
-			} catch (IOException e) {
-				//není potøeba nic dìlat, finally blok vše zaøídí
-			} 
-			finally{
-				closeConnection(); //ukonèení spojení
-				connectionTerminated();//oznámení o ukonèení spojení
-			}
-	}
-
-	/**
 	 * Pøipojí se k serveru.
 	 * @throws IOException Problém pøi vytváøení socketu.
 	 */
 	public void connect() throws IOException{
+		closeConnection();
+		
 		socket = (SSLSocket) socketFactory.createSocket();
 		socket.connect(address);
+		
+		in = socket.getInputStream();
+		out = socket.getOutputStream();
+		
+		receiver = new SecuredMobileLink.Receiver(this.in, this.networkInterface);
+		receiverThread = new Thread(receiver, "linkReceiverThread");
+		receiverThread.start();
 	}
 
 	/**
@@ -220,7 +191,6 @@ public class SecuredMobileLink implements ILink, Runnable {
 	 */
 	public void disconnect(){
 		closeConnection();
-		connectionTerminated();
 	}
 	
 	/**
@@ -263,5 +233,98 @@ public class SecuredMobileLink implements ILink, Runnable {
 				socket.close();
 			}
 		} catch (Exception e){}
+	}
+	
+	//================================================== INTERNÍ TRÍDY ==================================================//
+	
+	/**
+	 * Tøída zajišující pøíjem dat v jiném vláknì
+	 * @author Pavel Brož
+	 *
+	 */
+	private class Receiver implements Runnable{
+
+		private InputStream in;
+		private INetworkInterface networkInterface;
+		
+		
+		/**
+		 * Konstruktor.
+		 * @param in Pøíchozí stream.
+		 * @param networkInterface Síové rozhraní pro pøíjem dat.
+		 */
+		public Receiver(InputStream in, INetworkInterface networkInterface) {
+			super();
+			this.in = in;
+			this.networkInterface = networkInterface;
+		}
+
+
+		/**
+		 * Zprostøedkovává pøíjem dat ze serveru
+		 */
+		public void run() {
+				boolean headerReading = true; //probíhá pøíjem hlavièky
+				boolean messageReading = false; //probíhá ppøíjem tìla zprávy
+				byte[] header = new byte[Constants.HEADER_SIZE]; //pole pro uložení hlavièky zprávy
+				byte[] data = new byte[Constants.HEADER_SIZE]; //pole pro uložení pøíchozích dat (první pøichází hlavièka -> velikost pole = velikost hlavièky)
+				int msgSize = 0; //délka tìla zprávy
+				int datalength = 0; //# bytù naètený v posledním ètení
+				int totalBytes = 0; //# bytù celkem naètených
+		
+				try {
+					//ète data dokud není naèteno celé pole data[] nebo dokud není dosaženo konce streamu//
+					while ((datalength = in.read(data, totalBytes, data.length - totalBytes)) != -1){
+						totalBytes += datalength; //pøiènení právì naètených bytù, k celkovému poètu naètených bytù od zaèátku ètení zprávy (hlavièky nebo tìla)
+						
+						//dokonèení naètení tìla zprávy//
+						if(messageReading && totalBytes == data.length){
+							totalBytes = 0; //vynulování poèítadla naètených bytù
+							//nastavení stavových promìnných --> následuje ètení hlavièky//
+							headerReading = true;
+							messageReading = false;
+							
+							if(networkInterface != null){
+								byte[] copydata = new byte[data.length];
+								System.arraycopy(data, 0, copydata, 0, data.length);
+								networkInterface.onReceivedData(copydata); //odeslání pøijaté zprávy na NetworkInterface
+							}
+							
+							data = new byte[Constants.HEADER_SIZE]; //nastavení ètecího pole na velikost hlavièky
+							continue; //zpráva pøijat, oèekává se další hlavièka
+						}
+						
+						//dokonèení naètení hlavièky zprávy//
+						if (headerReading && totalBytes == Constants.HEADER_SIZE){
+							//nastavení stavových promìnných --> následuje ètení tìla zprávy//
+							headerReading = false;
+							messageReading = true;
+							
+							header = data;
+							msgSize = Conventer.byteArrayToInt(header, Constants.HEADER_LENGTH_OFFSET); //konverze bytù délky zprávy (z hlavièky) na integer
+		
+							data = new byte[Constants.HEADER_SIZE + msgSize]; //nastavení ètecího pole na velikost tìla zprávy
+							System.arraycopy(header, 0, data, 0, Constants.HEADER_SIZE); //pøekopírování hlavièky do nového pole
+							//continue;
+						}
+					} //while
+					
+				} 
+				catch (IOException e) {
+					//není potøeba nic dìlat, finally blok vše zaøídí
+				}finally{
+					connectionTerminated();//oznámení o ukonèení spojení
+					closeConnection(); //ukonèení spojení
+				}
+		}
+
+		public synchronized INetworkInterface getNetworkInterface() {
+			return networkInterface;
+		}
+
+		public synchronized void setNetworkInterface(INetworkInterface networkInterface) {
+			this.networkInterface = networkInterface;
+		}
+
 	}
 }

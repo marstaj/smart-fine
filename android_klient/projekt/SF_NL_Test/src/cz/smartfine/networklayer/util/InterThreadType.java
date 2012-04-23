@@ -4,14 +4,14 @@
 package cz.smartfine.networklayer.util;
 
 /**
- * Tøída pro mezi vláknovou komunikaci s polem bytù
+ * Generická tøída pro mezi vláknovou komunikaci.
  * @author Pavel Brož
  */
-public class InterThreadArray {
-	private byte[] data;
+public class InterThreadType<T> {
+	private T data;
 	private boolean dataSet = false;
 	
-	public synchronized byte[] get() {
+	public synchronized T get() {
 		if(!dataSet){
 			try {
 				wait();
@@ -25,7 +25,7 @@ public class InterThreadArray {
 		return data;
 	}
 	
-	public synchronized void put(byte[] data) {
+	public synchronized void put(T data) {
 		if(dataSet){
 			try {
 				wait();

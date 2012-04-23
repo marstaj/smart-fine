@@ -15,5 +15,10 @@ public enum ParkingStatus {
 	/**
 	 * Parkování vozidla není povolené.
 	 */
-	NOT_ALLOWED
+	NOT_ALLOWED,
+	/**
+	 * Stav parkování se nepodaøilo urèit.
+	 */
+	UNKNOWN_PARKING_STATUS
+	
 }

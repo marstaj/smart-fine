@@ -1,6 +1,7 @@
 package cz.smartfine.networklayer.networkinterface;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IDataReceiverListener;
+import cz.smartfine.networklayer.links.ILink;
 
 /**
  * Pøedstavuje rozhraní základního protokolu pro pøenost dat.
@@ -36,4 +37,10 @@ public interface INetworkInterface extends IDataReceiverListener {
 	 */
 	public void setOnReceivedDataListener(IDataProtocol dataProtocol);
 
+	/**
+	 * Nastaví link pro pøipojení na sí.
+	 * 
+	 * @param link    Síové rozhraní.
+	 */
+	public void setLink(ILink link);
 }
