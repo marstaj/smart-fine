@@ -209,6 +209,7 @@ public class SimpleNetworkInterface implements INetworkInterface {
 						dataProtocol.onMessageSent(); //informování datového protokolu o odeslání dat
 					}
 				} catch (IOException e) {
+					System.out.println("ANDROID: NET INTERFACE SENDER CONNECTION TERMINATED");
 					onConnectionTerminated();
 				}
 			}
