@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="menu_main_newTicket">Nový p. lístek</string>
+    <string name="menu_main_ticketList">Uložené p. lístky</string>
+    <string name="menu_main_blueCard">Kontrola p. karty</string>
+    <string name="menu_main_smsParking">SMS parkování</string>
+    <string name="menu_main_preferences">Nastavení</string>
+    
+    <string name="menu_ticketList_uploadTickets">Nahrát záznamy na server</string>
+    
+    <string name="menu_editTicket_fotodocumentation">Přidat fotodokumentaci</string>
+    <string name="menu_editTicket_saveTicket">Uložit</string>
+    <string name="menu_editTicket_scanLocation">Najít pozici</string>
+    
+	<string name="menu_detailTicket_printTicketButton">Vytisknout</string>
+	<string name="menu_detailTicket_editTicketButton">Upravit</string>
+	<string name="menu_detailTicket_removeTicketButton">Smazat</string>
+
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="0"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/logoContentDescription"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/newTicketButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="newTicketClick"
+            android:text="@string/view_main_newTicketButton" />
+
+        <Button
+            android:id="@+id/ticketListButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ticketListClick"
+            android:text="@string/view_main_ticketListButton" />
+
+        <Button
+            android:id="@+id/checkCardButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="checkCardClick"
+            android:text="@string/view_main_checkCardButton" />
+
+        <Button
+            android:id="@+id/checkSMSParkingButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="checkSMSParkingClick"
+            android:text="@string/view_main_checkSMSParkingButton" />
+
+        <Button
+            android:id="@+id/preferencesButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="preferencesClick"
+            android:text="@string/view_main_preferencesButton" />
+    </LinearLayout>
+
+</LinearLayout>

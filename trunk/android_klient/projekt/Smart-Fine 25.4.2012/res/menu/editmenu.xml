@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/fotodocumentationMenu"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="@+string/menu_editTicket_fotodocumentation"/>
+    <item
+        android:id="@+id/saveTicketMenu"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="@+string/menu_editTicket_saveTicket"/>
+    <item
+        android:id="@+id/scanLocationMenu"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="@+string/menu_editTicket_scanLocation"/>
+
+</menu>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:padding="5dp">
+
+        <EditText
+            android:id="@+id/addValueText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:lines="1" android:paddingRight="45dp"/>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="right"
+            android:padding="5dp"
+            android:src="@android:drawable/ic_menu_search" />
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/frequentValuesList"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="?android:attr/listDivider"
+        android:fastScrollEnabled="true"
+        android:scrollbars="vertical" >
+    </ListView>
+
+</LinearLayout>
