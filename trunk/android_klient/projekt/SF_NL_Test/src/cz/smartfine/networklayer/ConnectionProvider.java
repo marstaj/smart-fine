@@ -102,36 +102,39 @@ public class ConnectionProvider {
 	public boolean connectAndLogin(){
 		if (LoginProvider.isAvaibleLoginInformation(this.appContext)){
 			if ( !connect()){
+				System.out.println("ANDROID: CP CAN CANT CONNECT");
 				return false;
 			}
 			final InterThreadType<Boolean> loginResult = new InterThreadType<Boolean>(); //promìnná, která pozastaví bìh vlákna, dokud nebude znám výsledek pøihlášení
-			
+			System.out.println("ANDROID: CP CAN LOGIN START");
 			//posluchaè událostí z promìnné lp (LoginProvideru), který nastavuje loginResult//
 			ILoginProviderListener lpl = new ILoginProviderListener() {
 				
 				public void onMessageSent() {loginResult.put(false); /*nemìlo by nastat (je zde jen pro jistotu, aby nedošlo k zablokování aplikace)*/}
 				public void onLogout() {loginResult.put(false);/*nemìlo by nastat (je zde jen pro jistotu, aby nedošlo k zablokování aplikace)*/}
 				
-				public void onLoginFailed(LoginFailReason reason) {
+				public void onLoginFailed(LoginFailReason reason) {System.out.println("ANDROID: CP CAN LOGIN LISTENER FAILED");
 					loginResult.put(false); //pøihlášení neúspìšné
 				}
 				
-				public void onLoginConfirmed() {
+				public void onLoginConfirmed() {System.out.println("ANDROID: CP CAN LOGIN LISTENER CONFIRMED");
 					loginResult.put(true); //pøihlášení úspìšné
 				}
 				
-				public void onConnectionTerminated() {
+				public void onConnectionTerminated() {System.out.println("ANDROID: CP CAN LOGIN LISTENER TERMINATED");
 					loginResult.put(false); //pøihlášení neúspìšné
 				}
 			};
 			
 			LoginProvider lp = new LoginProvider(this.getNetworkInterface(), this.appContext, lpl); //vytvoøení login provideru
+			System.out.println("ANDROID: CP CAN LOGIN SEND");
 			//odeslání pøihlašovací zprávy
 			lp.login(LoginProvider.getBadgeNumber(this.appContext), LoginProvider.getPIN(this.appContext), LoginProvider.getIMEI(this.appContext));
 			
 			//zde dojde k pozastavení vlákna, dokud nebude znám výsledek pøihlášení, poté se hodnota vrátí
 			return loginResult.get();
 		}else{
+			System.out.println("ANDROID: CP CAN NO LOGIN INFO");
 			return false;
 		}
 	}

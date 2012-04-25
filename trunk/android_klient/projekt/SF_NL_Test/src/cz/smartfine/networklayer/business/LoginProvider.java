@@ -128,7 +128,7 @@ public class LoginProvider implements ILoginProtocolListener{
 	/**
 	 * Odhlašuje mobilního klienta ze serveru
 	 */
-	public void logout(INetworkInterface networkInterface){
+	public void logout(){
 		if (this.loginProtocol == null){
 			this.loginProtocol = new LoginProtocol(this.networkInterface, this);
 		}else{
@@ -203,12 +203,12 @@ public class LoginProvider implements ILoginProtocolListener{
 	 */
 	public void onLoginConfirmed(){
 		//po potvrzení pøihlášení ze serveru, je možné pøihlašovací údaje uložit//
-		/*if (this.lastBadgeNumber != -1 && this.lastPin != -1){
+		if (this.lastBadgeNumber != -1 && this.lastPin != -1){
 			saveLoginInformation(this.appContext, this.lastBadgeNumber, this.lastPin); //uložení pøihlašovacích údajù
 			this.lastBadgeNumber = -1;
 			this.lastPin = -1;
 		}
-		*/
+		
 		if(loginProviderListener != null){
 			loginProviderListener.onLoginConfirmed();
 		}
@@ -255,13 +255,13 @@ public class LoginProvider implements ILoginProtocolListener{
 	
 	private void saveLoginInformation(Context appContext, int badgeNumber, int pin){
 		//vloží do nastavení služební èíslo a PIN//
-		//PreferenceManager.getDefaultSharedPreferences(appContext).edit().putInt(LoginProvider.PREF_BADGENUMBER_KEY_NAME, badgeNumber).commit();
-		//PreferenceManager.getDefaultSharedPreferences(appContext).edit().putInt(LoginProvider.PREF_PIN_KEY_NAME, pin).commit();
+		PreferenceManager.getDefaultSharedPreferences(appContext).edit().putInt(LoginProvider.PREF_BADGENUMBER_KEY_NAME, badgeNumber).commit();
+		PreferenceManager.getDefaultSharedPreferences(appContext).edit().putInt(LoginProvider.PREF_PIN_KEY_NAME, pin).commit();
 	}
 
 	private void deleteLoginInformation(Context appContext){
 		//odebere služební èíslo a PIN z nastavení//
-		//PreferenceManager.getDefaultSharedPreferences(appContext).edit().remove(LoginProvider.PREF_BADGENUMBER_KEY_NAME).commit();
-		//PreferenceManager.getDefaultSharedPreferences(appContext).edit().remove(LoginProvider.PREF_PIN_KEY_NAME).commit();
+		PreferenceManager.getDefaultSharedPreferences(appContext).edit().remove(LoginProvider.PREF_BADGENUMBER_KEY_NAME).commit();
+		PreferenceManager.getDefaultSharedPreferences(appContext).edit().remove(LoginProvider.PREF_PIN_KEY_NAME).commit();
 	}
 }

@@ -17,6 +17,11 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
+import android.os.Debug;
+import android.util.DebugUtils;
+
+import junit.framework.Assert;
+
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.networklayer.util.Constants;
 import cz.smartfine.networklayer.util.Conventer;
@@ -112,7 +117,7 @@ public class SecuredMobileLink implements ILink{
 		
 		try {
 				context = SSLContext.getInstance("TLSv1");
-				
+
 				trustedKS = KeyStore.getInstance("bks");
 	            trustedKS.load(keyStoreStream, keyStorePassword.toCharArray());
 	            
@@ -160,9 +165,11 @@ public class SecuredMobileLink implements ILink{
 	 */
 	public void sendData(byte[] dataToSend) throws IOException{
 		try{
+			System.out.println("ANDROID: link.sendData()");
 			out.write(dataToSend);
 			out.flush();
 		} catch (IOException e){
+			System.out.println("ANDROID:  link.sendData() EXCEPTION: " + e.getMessage());
 			closeConnection();
 			throw e;
 		}
@@ -210,6 +217,7 @@ public class SecuredMobileLink implements ILink{
 	 */
 	private void connectionTerminated(){
 		if (networkInterface != null){
+			System.out.println("ANDROID: LINK EVENT: CONECTION TERMINATED");
 			networkInterface.onConnectionTerminated();
 		}
 	}
@@ -312,10 +320,12 @@ public class SecuredMobileLink implements ILink{
 				} 
 				catch (IOException e) {
 					//není potøeba nic dìlat, finally blok vše zaøídí
+					System.out.println("ANDROID: LINK RECEIVER READ EXCEPTION: " + e.getMessage());
 				}finally{
 					connectionTerminated();//oznámení o ukonèení spojení
 					closeConnection(); //ukonèení spojení
 				}
+				System.out.println("ANDROID: LINK RECEIVER THREAD END");
 		}
 
 		public synchronized INetworkInterface getNetworkInterface() {

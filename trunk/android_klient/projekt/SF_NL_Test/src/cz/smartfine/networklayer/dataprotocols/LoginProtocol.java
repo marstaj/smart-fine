@@ -161,6 +161,7 @@ public class LoginProtocol implements IDataProtocol {
 	 */
 	public void loginToServer(int badgeNumber, int pin, String imei){
 		if(networkInterface != null){
+			System.out.println("ANDROID: LOGIN PROTOCOL SEND LOGIN");
 			networkInterface.sendData(createLoginMessage(badgeNumber, pin, imei));
 		}
 	}
@@ -170,6 +171,7 @@ public class LoginProtocol implements IDataProtocol {
 	 */
 	public void logoutFromServer(){
 		if(networkInterface != null){
+			System.out.println("ANDROID: LOGIN PROTOCOL SEND LOGOUT");
 			networkInterface.sendData(createLogoutMessage());
 		}
 	}
