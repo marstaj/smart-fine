@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cz.smartfine"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="9"
+        android:maxSdkVersion="15" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".MyApp"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"        
+        android:theme="@style/CustomTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="standard" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TicketEditActivity"
+            android:label="@string/ticket_edit_title" android:theme="@style/CustomTheme.NoTitleBar">
+        </activity>
+        <activity
+            android:name=".TicketListActivity"
+            android:label="@string/ticket_list_title" android:theme="@style/CustomTheme.NoTitleBar">
+        </activity>
+        <activity
+            android:name=".TicketDetailActivity"
+            android:label="@string/ticket_detail_title" android:theme="@style/CustomTheme.NoTitleBar">
+        </activity>
+        <activity
+            android:name=".PreferencesActivity"
+            android:label="@string/preferences_title" >
+        </activity>
+        <activity
+            android:name=".BlueCardActivity"
+            android:label="@string/blue_card_title" >
+        </activity>
+        <activity
+            android:name=".SMSParkingActivity"
+            android:label="@string/sms_parking_title" >
+        </activity>
+        <activity
+            android:name=".FrequentValuesEditActivity"
+            android:label="@string/frequent_values_title" >
+        </activity>
+    </application>
+
+</manifest>

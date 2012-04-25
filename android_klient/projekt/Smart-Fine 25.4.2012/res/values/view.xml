@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Smart-Fine</string>
+	<string name="ticket_edit_title">Vytvoření / úprava parkovacího lístku</string>
+	<string name="ticket_list_title">Uložené parkovací lístky</string>
+	<string name="ticket_detail_title">Detail parkovacího lístku</string>
+	<string name="preferences_title">Nastavení</string>
+	<string name="blue_card_title">Kontrola parkovací karty</string>
+	<string name="sms_parking_title">Kontrola SMS parkování</string>
+	<string name="frequent_values_title">Úprava nejčastějších hodnot</string>
+
+	<string name="view_main_preferencesButton">Nastavení</string>
+	<string name="view_main_newTicketButton">Nový parkovací lístek</string>
+	<string name="view_main_ticketListButton">Uložené lístky</string>
+	<string name="view_main_checkCardButton">Kontrola parkovací karty</string>
+	<string name="view_main_checkSMSParkingButton">Kontrola SMS parkování</string>
+	    
+	<string name="view_ticketList_uploadButton">Nahrát záznamy na server</string>
+	<string name="view_ticket_spz">Vozidlo RZ/SPZ</string>
+	<string name="view_ticket_mpz">MPZ</string>
+	<string name="view_ticket_mpz1">Mezinárodní poznávací značka</string>
+	<string name="view_ticket_spzColor">Barva RZ/SPZ</string>
+	<string name="view_ticket_vehicleType">Druh vozidla</string>
+	<string name="view_ticket_vehicleBrand">Tovární značka</string>
+	<string name="view_ticket_address">Adresa</string>
+	<string name="view_ticket_location">Místo</string>
+	<string name="view_ticket_descriptionDZ">Popis jednání (DZ)</string>
+	<string name="view_ticket_tow">Odtah</string>
+	<string name="view_ticket_moveableDZ">Přenosné DZ</string>
+	<string name="view_ticket_id">Identifikační číslo</string>
+	<string name="view_ticket_law">Druh přestupku</string>
+	<string name="view_ticket_description">Popis situace</string>
+	<string name="view_ticket_city">Město</string>
+	<string name="view_ticket_street">Ulice</string>
+	<string name="view_ticket_number">Číslo</string>
+	<string name="view_ticket_photoDocumentation">Fotodokumentace</string>
+	
+	<string name="view_required"> *</string>
+	<string name="view_ticket_saveTicketButton">Uložit záznam</string>
+	<string name="view_ticket_dateTime">Datum a čas</string>
+	<string name="view_ticket_badgeNumber">Služební číslo</string>
+	<string name="view_ticket_printed">Vytištěno</string>
+	
+	<string name="view_ticket_dialogMenu_takeNewPicture">Vyfotit novou fotografii</string>
+	<string name="view_ticket_dialogMenu_browsePicture">Vybrat z galerie</string>
+	<string name="view_ticket_dialogMenu_title">Vyberte</string>
+	
+	<string name="view_ticket_law_ruleOfLaw">Paragraf (§)</string>
+	<string name="view_ticket_law_paragraph">Odstavec</string>
+	<string name="view_ticket_law_letter">Písmeno</string>
+	<string name="view_ticket_law_lawNumber">Číslo zákona</string>
+	<string name="view_ticket_law_collection">Sbírka</string>
+	
+	<string name="view_card_checkCardButton">Zkontrolovat kartu</string>
+	<string name="view_card_cardNumber">Číslo parkovací karty</string>
+	
+	<string name="view_sms_checkParkingButton">Zkontrolovat parkování</string>
+	<string name="view_sms_spz">SPZ vozidla</string>
+</resources>

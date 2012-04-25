@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/newTicketMenu"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@+string/menu_main_newTicket"/>
+
+    <item
+        android:id="@+id/ticketListMenu"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="@+string/menu_main_ticketList"/>
+
+    <item
+        android:id="@+id/blueCardMenu"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="@+string/menu_main_blueCard"/>
+
+    <item
+        android:id="@+id/smsMenu"
+        android:icon="@android:drawable/ic_menu_send"
+        android:title="@+string/menu_main_smsParking"/>
+
+    <item
+        android:id="@+id/preferencesMenu"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@+string/menu_main_preferences"/>
+
+</menu>
