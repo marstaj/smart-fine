@@ -143,7 +143,9 @@ public class SimpleNetworkInterface implements INetworkInterface {
 	 * @param receivedData    Pøijmutá data uložená ve formì bytového pole.
 	 */
 	public void onReceivedData(byte[] receivedData){
-		in.put(receivedData); //vloží data do inter thread objektu, aby si je mohlo vyzvednout vlákno receiveru
+		try {
+			in.put(receivedData); //vloží data do inter thread objektu, aby si je mohlo vyzvednout vlákno receiveru
+		} catch (InterruptedException e) {} 
 	}
 	
 	/**
@@ -163,7 +165,9 @@ public class SimpleNetworkInterface implements INetworkInterface {
 	 * @param dataToSend    Data k odeslání.
 	 */
 	public void sendData(byte[] dataToSend) {
-		out.put(dataToSend); //vloží data do inter thread objektu, aby si je mohlo vyzvednout vlákno senderu
+		try {
+			out.put(dataToSend); //vloží data do inter thread objektu, aby si je mohlo vyzvednout vlákno senderu
+		} catch (InterruptedException e) {} 
 	}
 	
 	//================================================== INTERNÍ TRÍDY ==================================================//
@@ -193,27 +197,30 @@ public class SimpleNetworkInterface implements INetworkInterface {
 
 
 		public void run() {
-			while(true){
-				byte[] protocolData = out.get(); //naètení dat
-				byte[] dataToSend = new byte[Constants.HEADER_SIZE + protocolData.length]; //vytvoøení pole pro hlavièku a data (pole, které se bude odesílat)
-				
-				dataToSend[0] = Constants.PROTOCOL_VERSION; //nastavení verze protokolu
-				System.arraycopy(Conventer.intToByteArray(protocolData.length), 0, dataToSend, Constants.HEADER_LENGTH_OFFSET, 4); //pøevod délky dat na pole 4 bytù a zkopírování do pole pro odeslání
-				System.arraycopy(protocolData, 0, dataToSend, Constants.HEADER_SIZE, protocolData.length); //zkopírování odesílaných dat do pole pro odeslání
-				
-				try {
-					if(link != null){
-						link.sendData(dataToSend); //odeslání dat
+			try {
+				while(true){
+					byte[] protocolData = out.get(); //naètení dat
+					byte[] dataToSend = new byte[Constants.HEADER_SIZE + protocolData.length]; //vytvoøení pole pro hlavièku a data (pole, které se bude odesílat)
+					
+					dataToSend[0] = Constants.PROTOCOL_VERSION; //nastavení verze protokolu
+					System.arraycopy(Conventer.intToByteArray(protocolData.length), 0, dataToSend, Constants.HEADER_LENGTH_OFFSET, 4); //pøevod délky dat na pole 4 bytù a zkopírování do pole pro odeslání
+					System.arraycopy(protocolData, 0, dataToSend, Constants.HEADER_SIZE, protocolData.length); //zkopírování odesílaných dat do pole pro odeslání
+					
+					try {
+						if(link != null){
+							link.sendData(dataToSend); //odeslání dat
+						}
+						if (dataProtocol != null){
+							dataProtocol.onMessageSent(); //informování datového protokolu o odeslání dat
+						}
+					} catch (IOException e) {
+						System.out.println("ANDROID: NET INTERFACE SENDER CONNECTION TERMINATED");
+						onConnectionTerminated();
 					}
-					if (dataProtocol != null){
-						dataProtocol.onMessageSent(); //informování datového protokolu o odeslání dat
-					}
-				} catch (IOException e) {
-					System.out.println("ANDROID: NET INTERFACE SENDER CONNECTION TERMINATED");
-					onConnectionTerminated();
 				}
+			} catch (InterruptedException e){
+				//není potøeba dìlat nic
 			}
-			
 		}
 
 		public synchronized ILink getLink() {
@@ -257,18 +264,21 @@ public class SimpleNetworkInterface implements INetworkInterface {
 
 
 		public void run() {
-			while(true){
-				byte[] receivedData = in.get(); //naète pøijatá data
-				byte[] protocolData = new byte[receivedData.length - Constants.HEADER_SIZE]; //vytvoøí pole na tìlo pøijaté zprávy
-				
-				//z pøijatých dat zkopíruje tìlo zprávy (hlavièku vynechá)
-				System.arraycopy(receivedData, Constants.HEADER_SIZE, protocolData, 0, receivedData.length - Constants.HEADER_SIZE);
-				
-				if (dataProtocol != null){
-					dataProtocol.onReceivedData(protocolData); //pošle pøijatá data datovému protokolu
+			try {
+				while(true){
+					byte[] receivedData = in.get(); //naète pøijatá data
+					byte[] protocolData = new byte[receivedData.length - Constants.HEADER_SIZE]; //vytvoøí pole na tìlo pøijaté zprávy
+					
+					//z pøijatých dat zkopíruje tìlo zprávy (hlavièku vynechá)
+					System.arraycopy(receivedData, Constants.HEADER_SIZE, protocolData, 0, receivedData.length - Constants.HEADER_SIZE);
+					
+					if (dataProtocol != null){
+						dataProtocol.onReceivedData(protocolData); //pošle pøijatá data datovému protokolu
+					}
 				}
+			} catch (InterruptedException e){
+				//není potøeba dìlat nic
 			}
-			
 		}
 
 		public synchronized IDataProtocol getDataProtocol() {

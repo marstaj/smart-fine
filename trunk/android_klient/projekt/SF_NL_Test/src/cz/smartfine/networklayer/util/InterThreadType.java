@@ -11,13 +11,9 @@ public class InterThreadType<T> {
 	private T data;
 	private boolean dataSet = false;
 	
-	public synchronized T get() {
+	public synchronized T get() throws InterruptedException {
 		if(!dataSet){
-			try {
-				wait();
-			} catch(InterruptedException e) {
-				//TODO
-			}
+			wait();
 		}
 		
 		dataSet = false;
@@ -25,13 +21,9 @@ public class InterThreadType<T> {
 		return data;
 	}
 	
-	public synchronized void put(T data) {
+	public synchronized void put(T data) throws InterruptedException {
 		if(dataSet){
-			try {
-				wait();
-			} catch(InterruptedException e) {
-				//TODO
-			}
+			wait();
 		}
 		
 		this.data = data;
