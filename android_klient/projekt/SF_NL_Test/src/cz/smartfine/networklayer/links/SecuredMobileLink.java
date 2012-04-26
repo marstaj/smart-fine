@@ -181,7 +181,7 @@ public class SecuredMobileLink implements ILink{
 	 */
 	public void connect() throws IOException{
 		closeConnection();
-		
+
 		socket = (SSLSocket) socketFactory.createSocket();
 		socket.connect(address);
 		

@@ -110,19 +110,25 @@ public class ConnectionProvider {
 			//posluchaè událostí z promìnné lp (LoginProvideru), který nastavuje loginResult//
 			ILoginProviderListener lpl = new ILoginProviderListener() {
 				
-				public void onMessageSent() {loginResult.put(false); /*nemìlo by nastat (je zde jen pro jistotu, aby nedošlo k zablokování aplikace)*/}
-				public void onLogout() {loginResult.put(false);/*nemìlo by nastat (je zde jen pro jistotu, aby nedošlo k zablokování aplikace)*/}
+				public void onMessageSent() {try {loginResult.put(false);} catch (InterruptedException e) {}/*nemìlo by nastat (je zde jen pro jistotu, aby nedošlo k zablokování aplikace)*/}
+				public void onLogout() {try {loginResult.put(false);} catch (InterruptedException e) {}/*nemìlo by nastat (je zde jen pro jistotu, aby nedošlo k zablokování aplikace)*/}
 				
 				public void onLoginFailed(LoginFailReason reason) {System.out.println("ANDROID: CP CAN LOGIN LISTENER FAILED");
-					loginResult.put(false); //pøihlášení neúspìšné
+					try {
+						loginResult.put(false); //pøihlášení neúspìšné
+					} catch (InterruptedException e) {} 
 				}
 				
 				public void onLoginConfirmed() {System.out.println("ANDROID: CP CAN LOGIN LISTENER CONFIRMED");
-					loginResult.put(true); //pøihlášení úspìšné
+					try {
+						loginResult.put(true); //pøihlášení úspìšné
+					} catch (InterruptedException e) {}
 				}
 				
 				public void onConnectionTerminated() {System.out.println("ANDROID: CP CAN LOGIN LISTENER TERMINATED");
-					loginResult.put(false); //pøihlášení neúspìšné
+					try {
+						loginResult.put(false); //pøihlášení neúspìšné
+					} catch (InterruptedException e) {}
 				}
 			};
 			
@@ -132,7 +138,11 @@ public class ConnectionProvider {
 			lp.login(LoginProvider.getBadgeNumber(this.appContext), LoginProvider.getPIN(this.appContext), LoginProvider.getIMEI(this.appContext));
 			
 			//zde dojde k pozastavení vlákna, dokud nebude znám výsledek pøihlášení, poté se hodnota vrátí
-			return loginResult.get();
+			try {
+				return loginResult.get();
+			} catch (InterruptedException e) {
+				return false;
+			}
 		}else{
 			System.out.println("ANDROID: CP CAN NO LOGIN INFO");
 			return false;
