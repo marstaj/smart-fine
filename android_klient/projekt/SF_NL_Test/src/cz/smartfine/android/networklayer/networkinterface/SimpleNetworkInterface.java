@@ -1,17 +1,17 @@
 package cz.smartfine.android.networklayer.networkinterface;
-import java.io.IOException;
-
-import cz.smartfine.android.networklayer.dataprotocols.interfaces.IDataProtocol;
-import cz.smartfine.android.networklayer.links.ILink;
-import cz.smartfine.android.networklayer.util.Constants;
-import cz.smartfine.android.networklayer.util.Conventer;
-import cz.smartfine.android.networklayer.util.InterThreadType;
+import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.links.ILink;
+import cz.smartfine.networklayer.networkinterface.BaseProtocolConstants;
+import cz.smartfine.networklayer.networkinterface.INetworkInterface;
+import cz.smartfine.networklayer.networkinterface.Sender;
+import cz.smartfine.networklayer.util.DataPackage;
+import cz.smartfine.networklayer.util.InterThreadType;
 
 /**
- * Tvoøí rozhraní mezi protokoly pro pøenos specifickıch dat a sítí.
- * @author Pavel Bro
+ * TvoÅ™Ã­ rozhranÃ­ mezi protokoly pro pÅ™enos specifickÃ½ch dat a sÃ­tÃ­.
+ * @author Pavel BroÅ¾
  * @version 1.0
- * @created 14-4-2012 18:48:48
+ * @updated 27-4-2012 18:18:46
  */
 public class SimpleNetworkInterface implements INetworkInterface {
 
@@ -20,35 +20,35 @@ public class SimpleNetworkInterface implements INetworkInterface {
 	 */
 	private ILink link;
 	/**
-	 * Datovı protokol, kterı vyuívá sluby této tøídy
+	 * DatovÃ½ protokol, kterÃ½ vyuÅ¾Ã­vÃ¡ sluÅ¾by tÃ©to tÅ™Ã­dy
 	 */
 	private IDataProtocol dataProtocol;
 	
 	/**
-	 * Interní tøída, která asynchronì odesílá data
+	 * InternÃ­ tÅ™Ã­da, kterÃ¡ asynchronÄ› odesÃ­lÃ¡ data
 	 */
 	private Sender sender;
 	/**
-	 * Interní tøída, která asynchronì zpracovává pøijatá data
+	 * InternÃ­ tÅ™Ã­da, kterÃ¡ asynchronÄ› zpracovÃ¡vÃ¡ pÅ™ijatÃ¡ data
 	 */
 	private Receiver receiver;
 	/**
-	 * Vlákno pro odesílání dat
+	 * VlÃ¡kno pro odesÃ­lÃ¡nÃ­ dat
 	 */
 	private Thread senderThread;
 	/**
-	 * Vlákno pro pøíjem dat
+	 * VlÃ¡kno pro pÅ™Ã­jem dat
 	 */
 	private Thread receiverThread;
 	
 	/**
-	 * Pøíchozí data
+	 * PÅ™Ã­chozÃ­ data
 	 */
 	private InterThreadType<byte[]> in = new InterThreadType<byte[]>();
 	/**
-	 * Odchozí data
+	 * OdchozÃ­ data
 	 */
-	private InterThreadType<byte[]> out = new InterThreadType<byte[]>();
+	private InterThreadType<DataPackage> out = new InterThreadType<DataPackage>();
 	
 	//================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
 	
@@ -72,22 +72,22 @@ public class SimpleNetworkInterface implements INetworkInterface {
 	/**
 	 * Konstruktor.
 	 * 
-	 * @param link    Link pro odesílání dat.
+	 * @param link    Link pro odesÃ­lÃ¡nÃ­ dat.
 	 */
 	public SimpleNetworkInterface(ILink link) {
 		this.link = link;
 		
-		//vytvoøení a nastartování objektu pro pøíjímání dat v novém vláknì//
+		//vytvoÅ™enÃ­ a nastartovÃ¡nÃ­ objektu pro pÅ™Ã­jÃ­mÃ¡nÃ­ dat v novÃ©m vlÃ¡knÄ›//
 		receiver = new Receiver(this.in, this.dataProtocol);
 		receiverThread = new Thread(receiver, "receiverThread");
 		receiverThread.start();
 		
 		if (link != null){
-			link.setOnReceivedDataListener(this); //registrace sebe sama jako posluchaèe událostí pøíjmu dat v objektu linku
+			link.setOnReceivedDataListener(this); //registrace sebe sama jako posluchaÄe udÃ¡lostÃ­ pÅ™Ã­jmu dat v objektu linku
 		}
 		
-		//vytvoøení a nastartování objektu pro odesílání dat v novém vláknì//
-		sender = new Sender(this.link, this.out, this.dataProtocol);
+		//vytvoÅ™enÃ­ a nastartovÃ¡nÃ­ objektu pro odesÃ­lÃ¡nÃ­ dat v novÃ©m vlÃ¡knÄ›//
+		sender = new Sender(this.link, this.out, this);
 		senderThread = new Thread(sender, "senderThread");
 		senderThread.start();
 	}
@@ -95,61 +95,59 @@ public class SimpleNetworkInterface implements INetworkInterface {
 	//================================================== GET/SET ==================================================//
 
 	/**
-	 * Odebere posluchaèe události pøíjmu dat.
+	 * Odebere posluchaÄe udÃ¡losti pÅ™Ã­jmu dat.
 	 * 
-	 * @param dataProtocol    Datovı protokol poslouchající událost pøíjmu dat.
+	 * @param dataProtocol    DatovÃ½ protokol poslouchajÃ­cÃ­ udÃ¡lost pÅ™Ã­jmu dat.
 	 */
 	public void removeOnReceivedDataListener(IDataProtocol dataProtocol){
 		this.dataProtocol = null;
-		this.sender.setDataProtocol(null);
 		this.receiver.setDataProtocol(null);
 	}
 
 	/**
-	 * Pøidá posluchaèe události pøíjmu dat.
+	 * PÅ™idÃ¡ posluchaÄe udÃ¡losti pÅ™Ã­jmu dat.
 	 * 
-	 * @param dataProtocol    Datovı protokol poslouchající událost pøíjmu dat.
+	 * @param dataProtocol    DatovÃ½ protokol poslouchajÃ­cÃ­ udÃ¡lost pÅ™Ã­jmu dat.
 	 */
 	public void setOnReceivedDataListener(IDataProtocol dataProtocol){
 		this.dataProtocol = dataProtocol;
-		this.sender.setDataProtocol(dataProtocol);
 		this.receiver.setDataProtocol(dataProtocol);
 	}
 	
 	/**
-	 * Nastaví link pro pøipojení na sí.
+	 * NastavÃ­ link pro pÅ™ipojenÃ­ na sÃ­Å¥.
 	 * 
-	 * @param link    Síové rozhraní.
+	 * @param link    SÃ­Å¥ovÃ© rozhranÃ­.
 	 */
 	public void setLink(ILink link){
 		if (this.link != null){
-			this.link.removeOnReceivedDataListener(this); //odregistrování se v souèasném linku
+			this.link.removeOnReceivedDataListener(this); //odregistrovÃ¡nÃ­ se v souÄasnÃ©m linku
 		}
 		
 		this.link = link;
 		
 		if (this.link != null){
-			link.setOnReceivedDataListener(this); //zaregistrování se v novém linku
+			link.setOnReceivedDataListener(this); //zaregistrovÃ¡nÃ­ se v novÃ©m linku
 		}
 
-		sender.setLink(link); //zmìna linku u senderu
+		sender.setLink(link); //zmÄ›na linku u senderu
 	}
 
-	//================================================== HANDLERY UDÁLOSTÍ ==================================================//
+	//================================================== HANDLERY UDÃLOSTÃ ==================================================//
 
 	/**
-	 * Handler události pøíjmu dat.
+	 * Handler udÃ¡losti pÅ™Ã­jmu dat.
 	 * 
-	 * @param receivedData    Pøijmutá data uloená ve formì bytového pole.
+	 * @param receivedData    PÅ™ijmutÃ¡ data uloÅ¾enÃ¡ ve formÄ› bytovÃ©ho pole.
 	 */
 	public void onReceivedData(byte[] receivedData){
 		try {
-			in.put(receivedData); //vloí data do inter thread objektu, aby si je mohlo vyzvednout vlákno receiveru
+			in.put(receivedData); //vloÅ¾Ã­ data do inter thread objektu, aby si je mohlo vyzvednout vlÃ¡kno receiveru
 		} catch (InterruptedException e) {} 
 	}
 	
 	/**
-	 * Handler pro zpracování události ukonèení spojení.
+	 * Handler pro zpracovÃ¡nÃ­ udÃ¡losti ukonÄenÃ­ spojenÃ­.
 	 */
 	public void onConnectionTerminated(){
 		if (dataProtocol != null){
@@ -157,104 +155,38 @@ public class SimpleNetworkInterface implements INetworkInterface {
 		}
 	}
 	
-	//================================================== VİKONNÉ METODY ==================================================//
+	//================================================== VÃKONNÃ‰ METODY ==================================================//
 	
 	/**
-	 * Posílá data na server.
+	 * PosÃ­lÃ¡ data na server.
 	 * 
-	 * @param dataToSend    Data k odeslání.
+	 * @param dataToSend    Data k odeslÃ¡nÃ­.
+	 * @param sender	DatovÃ½ protokol, kterÃ½ odesÃ­lÃ¡ data.
 	 */
-	public void sendData(byte[] dataToSend) {
+	public void sendData(byte[] dataToSend, IDataProtocol sender) {
 		try {
-			out.put(dataToSend); //vloí data do inter thread objektu, aby si je mohlo vyzvednout vlákno senderu
+			out.put(new DataPackage(dataToSend, sender)); //vloÅ¾Ã­ data do inter thread objektu, aby si je mohlo vyzvednout vlÃ¡kno senderu
 		} catch (InterruptedException e) {} 
 	}
 	
-	//================================================== INTERNÍ TRÍDY ==================================================//
+	//================================================== INTERNÃ TÅ˜ÃDY ==================================================//
 	
 	/**
-	 * Tøída zajišující odesílání dat v jiném vláknì
-	 * @author Pavel Bro
-	 *
-	 */
-	private class Sender implements Runnable{
-
-		private ILink link;
-		private InterThreadType<byte[]> out;
-		private IDataProtocol dataProtocol;
-		
-		/**
-		 * @param link Instance ILink pro odesílání dat.
-		 * @param out Objekt pro pøedávání zpráv.
-		 * @param dataProtocol Datovı protokol, kterı má bıt informován o odeslání zprávy.
-		 */
-		public Sender(ILink link, InterThreadType<byte[]> out, IDataProtocol dataProtocol) {
-			super();
-			this.link = link;
-			this.out = out;
-			this.dataProtocol = dataProtocol;
-		}
-
-
-		public void run() {
-			try {
-				while(true){
-					byte[] protocolData = out.get(); //naètení dat
-					byte[] dataToSend = new byte[Constants.HEADER_SIZE + protocolData.length]; //vytvoøení pole pro hlavièku a data (pole, které se bude odesílat)
-					
-					dataToSend[0] = Constants.PROTOCOL_VERSION; //nastavení verze protokolu
-					System.arraycopy(Conventer.intToByteArray(protocolData.length), 0, dataToSend, Constants.HEADER_LENGTH_OFFSET, 4); //pøevod délky dat na pole 4 bytù a zkopírování do pole pro odeslání
-					System.arraycopy(protocolData, 0, dataToSend, Constants.HEADER_SIZE, protocolData.length); //zkopírování odesílanıch dat do pole pro odeslání
-					
-					try {
-						if(link != null){
-							link.sendData(dataToSend); //odeslání dat
-						}
-						if (dataProtocol != null){
-							dataProtocol.onMessageSent(); //informování datového protokolu o odeslání dat
-						}
-					} catch (IOException e) {
-						System.out.println("ANDROID: NET INTERFACE SENDER CONNECTION TERMINATED");
-						onConnectionTerminated();
-					}
-				}
-			} catch (InterruptedException e){
-				//není potøeba dìlat nic
-			}
-		}
-
-		public synchronized ILink getLink() {
-			return link;
-		}
-		
-		public synchronized void setLink(ILink link) {
-			this.link = link;
-		}
-
-		public synchronized IDataProtocol getDataProtocol() {
-			return dataProtocol;
-		}
-
-		public synchronized void setDataProtocol(IDataProtocol dataProtocol) {
-			this.dataProtocol = dataProtocol;
-		}
-
-	}
-	
-	/**
-	 * Tøída zajišující pøíjem dat v jiném vláknì
-	 * @author Pavel Bro
-	 *
+	 * TÅ™Ã­da zajiÅ¡Å¥ujÃ­cÃ­ pÅ™Ã­jem dat v jinÃ©m vlÃ¡knÄ›
+	 * @author Pavel BroÅ¾
+	 * @version 1.0
+	 * @updated 27-4-2012 18:18:46
 	 */
 	private class Receiver implements Runnable{
 
 		private InterThreadType<byte[]> in;
 		private IDataProtocol dataProtocol;
 		
-		
 		/**
-		 * @param in Objekt pro pøedávání zpráv
-		 * @param dataProtocol Datovı protokol, kterı má bıt informován o pøijetí zprávy.
+		 * 
+		 * @param in    Objekt pro pÅ™edÃ¡vÃ¡nÃ­ zprÃ¡v
+		 * @param dataProtocol    DatovÃ½ protokol, kterÃ½ mÃ¡ bÃ½t informovÃ¡n o pÅ™ijetÃ­
+		 * zprÃ¡vy.
 		 */
 		public Receiver(InterThreadType<byte[]> in, IDataProtocol dataProtocol) {
 			super();
@@ -262,22 +194,21 @@ public class SimpleNetworkInterface implements INetworkInterface {
 			this.dataProtocol = dataProtocol;
 		}
 
-
 		public void run() {
 			try {
 				while(true){
-					byte[] receivedData = in.get(); //naète pøijatá data
-					byte[] protocolData = new byte[receivedData.length - Constants.HEADER_SIZE]; //vytvoøí pole na tìlo pøijaté zprávy
+					byte[] receivedData = in.get(); //naÄte pÅ™ijatÃ¡ data
+					byte[] protocolData = new byte[receivedData.length - BaseProtocolConstants.HEADER_SIZE]; //vytvoÅ™Ã­ pole na tÄ›lo pÅ™ijatÃ© zprÃ¡vy
 					
-					//z pøijatıch dat zkopíruje tìlo zprávy (hlavièku vynechá)
-					System.arraycopy(receivedData, Constants.HEADER_SIZE, protocolData, 0, receivedData.length - Constants.HEADER_SIZE);
+					//z pÅ™ijatÃ½ch dat zkopÃ­ruje tÄ›lo zprÃ¡vy (hlaviÄku vynechÃ¡)
+					System.arraycopy(receivedData, BaseProtocolConstants.HEADER_SIZE, protocolData, 0, receivedData.length - BaseProtocolConstants.HEADER_SIZE);
 					
 					if (dataProtocol != null){
-						dataProtocol.onReceivedData(protocolData); //pošle pøijatá data datovému protokolu
+						dataProtocol.onReceivedData(protocolData); //poÅ¡le pÅ™ijatÃ¡ data datovÃ©mu protokolu
 					}
 				}
 			} catch (InterruptedException e){
-				//není potøeba dìlat nic
+				//nenÃ­ potÅ™eba dÄ›lat nic
 			}
 		}
 

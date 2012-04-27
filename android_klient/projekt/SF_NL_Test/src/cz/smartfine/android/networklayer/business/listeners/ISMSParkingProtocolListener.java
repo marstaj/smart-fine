@@ -1,30 +1,30 @@
 package cz.smartfine.android.networklayer.business.listeners;
-import cz.smartfine.android.networklayer.dataprotocols.interfaces.IProtocolListener;
 import cz.smartfine.android.networklayer.model.SMSParkingInfo;
+import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
 
 /**
- * Interface posluchaèe událostí protokolu zpracovávajícího zjištìní stavu
- * parkování vozidla v zónách placeného stání.
- * @author Pavel Bro
+ * Interface posluchaÄe udÃ¡lostÃ­ protokolu zpracovÃ¡vajÃ­cÃ­ho zjiÅ¡tÄ›nÃ­ stavu
+ * parkovÃ¡nÃ­ vozidla v zÃ³nÃ¡ch placenÃ©ho stÃ¡nÃ­.
+ * @author Pavel BroÅ¾
  * @version 1.0
- * @created 14-4-2012 18:48:47
+ * @updated 27-4-2012 18:18:42
  */
 public interface ISMSParkingProtocolListener extends IProtocolListener {
 
 	/**
-	 * Handler zpracovávající událost ztráty spojení.
+	 * Handler zpracovÃ¡vajÃ­cÃ­ udÃ¡lost ztrÃ¡ty spojenÃ­.
 	 */
 	public void onConnectionTerminated();
 
 	/**
-	 * Handler, reagující na událost odeslání zprávy na server.
+	 * Handler, reagujÃ­cÃ­ na udÃ¡lost odeslÃ¡nÃ­ zprÃ¡vy na server.
 	 */
 	public void onMessageSent();
 
 	/**
-	 * Handler zpracovávající událost pøíchodu odpovìdi o stavu parkování vozidla.
+	 * Handler zpracovÃ¡vajÃ­cÃ­ udÃ¡lost pÅ™Ã­chodu odpovÄ›di o stavu parkovÃ¡nÃ­ vozidla.
 	 * 
-	 * @param parkingInfo    Informace o parkování vozidla pøijaté ze serveru.
+	 * @param parkingInfo    Informace o parkovÃ¡nÃ­ vozidla pÅ™ijatÃ© ze serveru.
 	 */
 	public void onReceivedSMSParkingInfo(SMSParkingInfo parkingInfo);
 

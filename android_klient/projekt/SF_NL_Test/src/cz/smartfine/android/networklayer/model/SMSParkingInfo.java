@@ -3,28 +3,28 @@ package cz.smartfine.android.networklayer.model;
 import java.util.Date;
 
 /**
- * Obsahuje informace o parkování vozidlav zónì placeného stání.
- * @author Pavel Bro
+ * Obsahuje informace o parkovÃ¡nÃ­ vozidlav zÃ³nÄ› placenÃ©ho stÃ¡nÃ­.
+ * @author Pavel BroÅ¾
  * @version 1.0
- * @created 14-4-2012 18:48:48
+ * @updated 27-4-2012 18:18:45
  */
 public class SMSParkingInfo {
 
 	/**
-	 * Datum a èas, od kterého mùe vozidlo parkovat v zónì placeného stání.
+	 * Datum a Äas, od kterÃ©ho mÅ¯Å¾e vozidlo parkovat v zÃ³nÄ› placenÃ©ho stÃ¡nÃ­.
 	 */
 	private Date parkingSince;
 	/**
-	 * Udává, jakı je stav parkování vozidla tj. zda vozidlo smí v daném èase parkovat
-	 * v zónì placeného stání èi ne.
+	 * UdÃ¡vÃ¡, jakÃ½ je stav parkovÃ¡nÃ­ vozidla tj. zda vozidlo smÃ­ v danÃ©m Äase parkovat
+	 * v zÃ³nÄ› placenÃ©ho stÃ¡nÃ­ Äi ne.
 	 */
 	private ParkingStatus parkingStatus;
 	/**
-	 * Datum a èas, do kterého mùe vozidlo parkovat v zónì placeného stání.
+	 * Datum a Äas, do kterÃ©ho mÅ¯Å¾e vozidlo parkovat v zÃ³nÄ› placenÃ©ho stÃ¡nÃ­.
 	 */
 	private Date parkingUntil;
 	/**
-	 * SPZ vozidla, na které se vztahují informace.
+	 * SPZ vozidla, na kterÃ© se vztahujÃ­ informace.
 	 */
 	private String vehicleRegistrationPlate;
 

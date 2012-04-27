@@ -1,30 +1,30 @@
 package cz.smartfine.android.networklayer.business.listeners;
-import cz.smartfine.android.networklayer.dataprotocols.interfaces.IProtocolListener;
 import cz.smartfine.android.networklayer.model.SPCInfo;
+import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
 
 /**
- * Interface posluchaèe událostí protokolu zpracovávajícího ovìøování odcizení PPK
+ * Interface posluchaÄe udÃ¡lostÃ­ protokolu zpracovÃ¡vajÃ­cÃ­ho ovÄ›Å™ovÃ¡nÃ­ odcizenÃ­ PPK
  * (SPC).
- * @author Pavel Bro
+ * @author Pavel BroÅ¾
  * @version 1.0
- * @created 14-4-2012 18:48:47
+ * @updated 27-4-2012 18:18:42
  */
 public interface ISPCCheckProtocolListener extends IProtocolListener {
 
 	/**
-	 * Handler zpracovávající událost ztráty spojení.
+	 * Handler zpracovÃ¡vajÃ­cÃ­ udÃ¡lost ztrÃ¡ty spojenÃ­.
 	 */
 	public void onConnectionTerminated();
 
 	/**
-	 * Handler, reagující na událost odeslání zprávy na server.
+	 * Handler, reagujÃ­cÃ­ na udÃ¡lost odeslÃ¡nÃ­ zprÃ¡vy na server.
 	 */
 	public void onMessageSent();
 
 	/**
-	 * Handler reagující na událost pøíchodu odpovìdi na zjištìní odcizení PPK (SPC).
+	 * Handler reagujÃ­cÃ­ na udÃ¡lost pÅ™Ã­chodu odpovÄ›di na zjiÅ¡tÄ›nÃ­ odcizenÃ­ PPK (SPC).
 	 * 
-	 * @param spcInfo    Informace o stavu pøenosné parkovací karty pøijaté ze serveru.
+	 * @param spcInfo    Informace o stavu pÅ™enosnÃ© parkovacÃ­ karty pÅ™ijatÃ© ze serveru.
 	 */
 	public void onReceivedSPCInfo(SPCInfo spcInfo);
 

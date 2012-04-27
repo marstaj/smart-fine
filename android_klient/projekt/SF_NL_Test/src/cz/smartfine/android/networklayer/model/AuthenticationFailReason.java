@@ -1,17 +1,20 @@
 package cz.smartfine.android.networklayer.model;
 
 /**
- * Vıèet, udávající monosti, proè došlo k neúspìšnému ovìøení identity.
- * @author Pavel Bro
+ * VÃ½Äet, udÃ¡vajÃ­cÃ­ moÅ¾nosti, proÄ doÅ¡lo k neÃºspÄ›Å¡nÃ©mu ovÄ›Å™enÃ­ identity.
+ * @author Pavel BroÅ¾
  * @version 1.0
+ * @updated 27-4-2012 18:18:45
  */
 public enum AuthenticationFailReason {
+
 	/**
-	 * Neznámı dùvod neúspìšného ovìøení identity.
+	 * NeznÃ¡mÃ½ dÅ¯vod neÃºspÄ›Å¡nÃ©ho ovÄ›Å™enÃ­ identity.
 	 */
 	UNKNOWN_REASON,
 	/**
-	 * Chybné sluební èíslo nebo PIN.
+	 * ChybnÃ© sluÅ¾ebnÃ­ ÄÃ­slo nebo PIN.
 	 */
-	WRONG_BADGE_NUMBER_OR_PIN,
+	WRONG_BADGE_NUMBER_OR_PIN
+
 }

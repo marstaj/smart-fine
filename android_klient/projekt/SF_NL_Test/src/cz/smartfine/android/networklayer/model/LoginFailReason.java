@@ -1,33 +1,35 @@
 package cz.smartfine.android.networklayer.model;
 
 /**
- * Vıèet, udávající monosti, proè došlo k neúspìšnému pøihlášení.
- * @author Pavel Bro
+ * VÃ½Äet, udÃ¡vajÃ­cÃ­ moÅ¾nosti, proÄ doÅ¡lo k neÃºspÄ›Å¡nÃ©mu pÅ™ihlÃ¡Å¡enÃ­.
+ * @author Pavel BroÅ¾
  * @version 1.0
- * @created 14-4-2012 18:48:47
+ * @updated 27-4-2012 18:18:45
  */
 public enum LoginFailReason {
+
 	/**
-	 * Neznámı dùvod neúspìšného pøihlášení.
+	 * NeznÃ¡mÃ½ dÅ¯vod neÃºspÄ›Å¡nÃ©ho pÅ™ihlÃ¡Å¡enÃ­.
 	 */
 	UNKNOWN_REASON,
 	/**
-	 * Chybné sluební èíslo nebo PIN.
+	 * ChybnÃ© sluÅ¾ebnÃ­ ÄÃ­slo nebo PIN.
 	 */
 	WRONG_BADGE_NUMBER_OR_PIN,
 	/**
-	 * Identifikaèní èíslo mobilního zaøízení (IMEI) neodpovídá sluebnímu èíslu tj.
-	 * policista nemùe pouívat mobilní zaøízení s pøíslušnım IMEI (není s ním
-	 * spárován).
+	 * IdentifikaÄnÃ­ ÄÃ­slo mobilnÃ­ho zaÅ™Ã­zenÃ­ (IMEI) neodpovÃ­dÃ¡ sluÅ¾ebnÃ­mu ÄÃ­slu tj.
+	 * policista nemÅ¯Å¾e pouÅ¾Ã­vat mobilnÃ­ zaÅ™Ã­zenÃ­ s pÅ™Ã­sluÅ¡nÃ½m IMEI (nenÃ­ s nÃ­m
+	 * spÃ¡rovÃ¡n).
 	 */
 	IMEI_AND_BADGE_NUMBER_DONT_MATCH,
 	/**
-	 * Identifikaèní èíslo mobilního zaøízení (IMEI) není v databázi registrovanıch
-	 * mobilních zaøízení.
+	 * IdentifikaÄnÃ­ ÄÃ­slo mobilnÃ­ho zaÅ™Ã­zenÃ­ (IMEI) nenÃ­ v databÃ¡zi registrovanÃ½ch
+	 * mobilnÃ­ch zaÅ™Ã­zenÃ­.
 	 */
 	UNKNOWN_IMEI,
 	/**
-	 * Pøihlášení bylo neúspìšné, protoe došlo k ukonèení spojení ze strany serveru.
+	 * PÅ™ihlÃ¡Å¡enÃ­ bylo neÃºspÄ›Å¡nÃ©, protoÅ¾e doÅ¡lo k ukonÄenÃ­ spojenÃ­ ze strany serveru.
 	 */
 	CONNECTION_TERMINATED_FROM_SERVER
+
 }

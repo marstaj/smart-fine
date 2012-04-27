@@ -1,22 +1,24 @@
 package cz.smartfine.android.networklayer.model;
 
 /**
- * Vıèet stavù pøenosné parkovací karty tj. zda je nahlášena jako odcizená èi ne.
- * @author Pavel Bro
+ * VÃ½Äet stavÅ¯ pÅ™enosnÃ© parkovacÃ­ karty tj. zda je nahlÃ¡Å¡ena jako odcizenÃ¡ Äi ne.
+ * @author Pavel BroÅ¾
  * @version 1.0
- * @created 14-4-2012 18:48:49
+ * @updated 27-4-2012 18:18:46
  */
 public enum SPCStatus {
+
 	/**
-	 * Pøenosná parkovací karta (SPC) je hlášena jako odcizená.
+	 * PÅ™enosnÃ¡ parkovacÃ­ karta (SPC) je hlÃ¡Å¡ena jako odcizenÃ¡.
 	 */
 	STOLEN_SPC,
 	/**
-	 * Pøenosná parkovací karta (SPC) není hlášena jako odcizená.
+	 * PÅ™enosnÃ¡ parkovacÃ­ karta (SPC) nenÃ­ hlÃ¡Å¡ena jako odcizenÃ¡.
 	 */
 	OK_SPC,
 	/**
-	 * Stav pøenosné parkovací karty (SPC) není znám.
+	 * Stav pÅ™enosnÃ© parkovacÃ­ karty (SPC) nenÃ­ znÃ¡m.
 	 */
 	UKNOWN_SPC_STATUS
+
 }

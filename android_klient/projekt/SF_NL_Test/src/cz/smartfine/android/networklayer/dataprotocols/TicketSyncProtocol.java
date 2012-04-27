@@ -5,24 +5,24 @@ import java.io.ObjectOutputStream;
 
 import model.Ticket;
 import cz.smartfine.android.networklayer.business.listeners.ITicketProtocolListener;
-import cz.smartfine.android.networklayer.dataprotocols.interfaces.IDataProtocol;
-import cz.smartfine.android.networklayer.networkinterface.INetworkInterface;
-import cz.smartfine.android.networklayer.util.MessageBuilder;
-
+import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
+import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.networkinterface.INetworkInterface;
+import cz.smartfine.networklayer.util.MessageBuilder;
 /**
- * Pøedstavuje tøídu protokolu pro pøenost PL na server.
- * @author Pavel Bro
+ * PÅ™edstavuje tÅ™Ã­du protokolu pro pÅ™enost PL na server.
+ * @author Pavel BroÅ¾
  * @version 1.0
  * @created 14-4-2012 18:48:49
  */
 public class TicketSyncProtocol implements IDataProtocol {
 
 	/**
-	 * Rozhraní pro pøístup k odesílání a pøíjímání dat.
+	 * RozhranÃ­ pro pÅ™Ã­stup k odesÃ­lÃ¡nÃ­ a pÅ™Ã­jÃ­mÃ¡nÃ­ dat.
 	 */
 	private INetworkInterface networkInterface;
 	/**
-	 * Posluchaè událostí z této tøídy.
+	 * PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	private ITicketProtocolListener ticketProtocolListener;
 	
@@ -34,7 +34,7 @@ public class TicketSyncProtocol implements IDataProtocol {
 	
 	/**
 	 * Konstruktor.
-	 * @param networkInterface Rozhraní pro pøenost dat.
+	 * @param networkInterface RozhranÃ­ pro pÅ™enost dat.
 	 */
 	public TicketSyncProtocol(INetworkInterface networkInterface) {
 		this(networkInterface, null);
@@ -43,39 +43,39 @@ public class TicketSyncProtocol implements IDataProtocol {
 	/**
 	 * Konstruktor.
 	 * 
-	 * @param networkInterface    Rozhraní pro pøenost dat.
-	 * @param ticketProtocolListener Posluchaè událostí z této tøídy.
+	 * @param networkInterface    RozhranÃ­ pro pÅ™enost dat.
+	 * @param ticketProtocolListener PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	public TicketSyncProtocol(INetworkInterface networkInterface, ITicketProtocolListener ticketProtocolListener){
 		this.networkInterface = networkInterface;
 		this.ticketProtocolListener = ticketProtocolListener;
-		this.networkInterface.setOnReceivedDataListener(this); //zaregistrování se jako posluchaè
+		this.networkInterface.setOnReceivedDataListener(this); //zaregistrovÃ¡nÃ­ se jako posluchaÄ
 	}
 
 	//================================================== GET/SET ==================================================//
 	
 	/**
-	 * Odebere posluchaèe událostí protokolu pro odesílání PL.
+	 * Odebere posluchaÄe udÃ¡lostÃ­ protokolu pro odesÃ­lÃ¡nÃ­ PL.
 	 * 
-	 * @param ticketProtocolListener    Posluchaè událostí protokolu pro odesílání PL.
+	 * @param ticketProtocolListener    PosluchaÄ udÃ¡lostÃ­ protokolu pro odesÃ­lÃ¡nÃ­ PL.
 	 */
 	public void removeTicketProtocolListener(ITicketProtocolListener ticketProtocolListener){
 		this.ticketProtocolListener = null;
 	}
 	
 	/**
-	 * Pøidá posluchaèe událostí protokolu pro odesílání PL.
+	 * PÅ™idÃ¡ posluchaÄe udÃ¡lostÃ­ protokolu pro odesÃ­lÃ¡nÃ­ PL.
 	 * 
-	 * @param ticketProtocolListener    Posluchaè událostí protokolu pro odesílání PL.
+	 * @param ticketProtocolListener    PosluchaÄ udÃ¡lostÃ­ protokolu pro odesÃ­lÃ¡nÃ­ PL.
 	 */
 	public void setTicketProtocolListener(ITicketProtocolListener ticketProtocolListener){
 		this.ticketProtocolListener = ticketProtocolListener;
 	}
 	
-	//================================================== HANDLERY UDÁLOSTÍ ==================================================//
+	//================================================== HANDLERY UDÃLOSTÃ ==================================================//
 
 	/**
-	 * Handler události ukonèení spojení.
+	 * Handler udÃ¡losti ukonÄenÃ­ spojenÃ­.
 	 */
 	public void onConnectionTerminated(){
 		if (ticketProtocolListener != null){
@@ -84,27 +84,28 @@ public class TicketSyncProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Handler na zpracování události odeslání zprávy.
+	 * Handler na zpracovÃ¡nÃ­ udÃ¡losti odeslÃ¡nÃ­ zprÃ¡vy.
+	 * @param sentData OdeslanÃ¡ data.   
 	 */
-	public void onMessageSent(){
+	public void onMessageSent(byte[] sentData){
 		if (ticketProtocolListener != null){
 			ticketProtocolListener.onMessageSent();
 		}
 	}
 
 	/**
-	 * Handler události pøíjmu dat.
+	 * Handler udÃ¡losti pÅ™Ã­jmu dat.
 	 * 
-	 * @param receivedData    Pøijmutá data uloená ve formì bytového pole.
+	 * @param receivedData    PÅ™ijmutÃ¡ data uloÅ¾enÃ¡ ve formÄ› bytovÃ©ho pole.
 	 */
 	public void onReceivedData(byte[] receivedData){
-		//ádná data nepøijímá
+		//Å¾Ã¡dnÃ¡ data nepÅ™ijÃ­mÃ¡
 	}
 	
-	//================================================== VİKONNÉ METODY ==================================================//
+	//================================================== VÃKONNÃ‰ METODY ==================================================//
 	
 	/**
-	 * Odpojí datovı protokol od základního protokolu.
+	 * OdpojÃ­ datovÃ½ protokol od zÃ¡kladnÃ­ho protokolu.
 	 */
 	public void disconnectProtocol(){
 		if(networkInterface != null){
@@ -113,40 +114,40 @@ public class TicketSyncProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Odesílá pøedanı PL na server.
+	 * OdesÃ­lÃ¡ pÅ™edanÃ½ PL na server.
 	 * 
-	 * @param ticket    PL, kterı se má odeslat na server.
-	 * @param badgeNumber    Sluební èíslo policisty, kterı PL odesílá. Pozn.: nemusí
-	 * se shodovat s èíslem policisty, kterı je pøihlášen.
-	 * @throws IOException Problém pøi serializaci PL.
+	 * @param ticket    PL, kterÃ½ se mÃ¡ odeslat na server.
+	 * @param badgeNumber    SluÅ¾ebnÃ­ ÄÃ­slo policisty, kterÃ½ PL odesÃ­lÃ¡. Pozn.: nemusÃ­
+	 * se shodovat s ÄÃ­slem policisty, kterÃ½ je pÅ™ihlÃ¡Å¡en.
+	 * @throws IOException ProblÃ©m pÅ™i serializaci PL.
 	 */
 	public void sendTicket(Ticket ticket, int badgeNumber) throws IOException{
 		if(networkInterface != null){
-			networkInterface.sendData(createTicketMessage(ticket, badgeNumber));
+			networkInterface.sendData(createTicketMessage(ticket, badgeNumber), this);
 		}
 	}
 
-	//================================================== PRIVÁTNÍ METODY ==================================================//
+	//================================================== PRIVÃTNÃ METODY ==================================================//
 	
 	/**
-	 * Vytváøí zprávu pro nahrání PL na server.
-	 * @param ticket Parkovací lístek.
-	 * @param badgeNumber Sluební èíslo policisty, kterı nahrává PL na server.
-	 * @return Zpráva pro odeslání na server.
-	 * @throws IOException Problém pøi serializaci PL.
+	 * VytvÃ¡Å™Ã­ zprÃ¡vu pro nahrÃ¡nÃ­ PL na server.
+	 * @param ticket ParkovacÃ­ lÃ­stek.
+	 * @param badgeNumber SluÅ¾ebnÃ­ ÄÃ­slo policisty, kterÃ½ nahrÃ¡vÃ¡ PL na server.
+	 * @return ZprÃ¡va pro odeslÃ¡nÃ­ na server.
+	 * @throws IOException ProblÃ©m pÅ™i serializaci PL.
 	 */
 	protected byte[] createTicketMessage(Ticket ticket, int badgeNumber) throws IOException{
 		MessageBuilder msg = new MessageBuilder();
 		
-		msg.putByte(MessageIDs.ID_MSG_UPLOAD_TICKET); //identifikátor zprávy
-		msg.putInt(badgeNumber); //sluební èíslo policisty
+		msg.putByte(MobileMessageIDs.ID_MSG_UPLOAD_TICKET); //identifikÃ¡tor zprÃ¡vy
+		msg.putInt(badgeNumber); //sluÅ¾ebnÃ­ ÄÃ­slo policisty
 		
 		ByteArrayOutputStream ticketBytes = new ByteArrayOutputStream();
 		ObjectOutputStream objOS = new ObjectOutputStream(ticketBytes);
 		objOS.writeObject(ticket); //serializuje PL
 		objOS.close();
 		
-		msg.putArrayWithIntLength(ticketBytes.toByteArray()); //vloení pole objektu PL
+		msg.putArrayWithIntLength(ticketBytes.toByteArray()); //vloÅ¾enÃ­ pole objektu PL
 		
 		ticketBytes.close();
 		

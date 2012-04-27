@@ -28,7 +28,7 @@ public class SF_NL_TestActivity extends Activity implements ILoginProviderListen
 	
 	TextView t;
 	ConnectionProvider cp;
-	InetSocketAddress address = new InetSocketAddress("147.32.82.141", 25000);
+	InetSocketAddress address = new InetSocketAddress("192.168.0.10", 25000);
 	
 	int login = 123456;
 	int pin = 54321;

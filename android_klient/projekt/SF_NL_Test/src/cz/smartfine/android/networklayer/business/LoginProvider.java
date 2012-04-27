@@ -6,61 +6,62 @@ import cz.smartfine.android.networklayer.business.listeners.ILoginProtocolListen
 import cz.smartfine.android.networklayer.business.listeners.ILoginProviderListener;
 import cz.smartfine.android.networklayer.dataprotocols.LoginProtocol;
 import cz.smartfine.android.networklayer.model.LoginFailReason;
-import cz.smartfine.android.networklayer.networkinterface.INetworkInterface;
+import cz.smartfine.networklayer.networkinterface.INetworkInterface;
+
 
 /**
- * Tøída zajišující ovìøení identity.
- * @author Pavel Bro
+ * TÅ™Ã­da zajiÅ¡Å¥ujÃ­cÃ­ ovÄ›Å™enÃ­ identity.
+ * @author Pavel BroÅ¾
  * @version 1.0
  * @created 14-4-2012 18:48:47
  */
 public class LoginProvider implements ILoginProtocolListener{
 
 	/**
-	 * Název klíèe v preferencích, pro pøístup ke sluebnímu èíslu pøihlášeného policisty.
+	 * NÃ¡zev klÃ­Äe v preferencÃ­ch, pro pÅ™Ã­stup ke sluÅ¾ebnÃ­mu ÄÃ­slu pÅ™ihlÃ¡Å¡enÃ©ho policisty.
 	 */
 	protected static final String PREF_BADGENUMBER_KEY_NAME = "login_badgenumber";
 	/**
-	 * Název klíèe v preferencích, pro pøístup k PINu pøihlášeného policisty.
+	 * NÃ¡zev klÃ­Äe v preferencÃ­ch, pro pÅ™Ã­stup k PINu pÅ™ihlÃ¡Å¡enÃ©ho policisty.
 	 */
 	protected static final String PREF_PIN_KEY_NAME = "login_pin";
 	
 	/**
-	 * Aplikaèní kontext.
+	 * AplikaÄnÃ­ kontext.
 	 */
 	private Context appContext;
 	
 	/**
-	 * Pøihlašovací protokol.
+	 * PÅ™ihlaÅ¡ovacÃ­ protokol.
 	 */
 	private LoginProtocol loginProtocol;
 	/**
-	 * Síové rozhraní pro pøihlašovací protokol.
+	 * SÃ­Å¥ovÃ© rozhranÃ­ pro pÅ™ihlaÅ¡ovacÃ­ protokol.
 	 */
 	private INetworkInterface networkInterface;
 	/**
-	 * Posluchaè událostí LoginProideru.
+	 * PosluchaÄ udÃ¡lostÃ­ LoginProideru.
 	 */
 	private ILoginProviderListener loginProviderListener;
 	
 	/**
-	 * Naposledy zadané sluební èíslo.
+	 * Naposledy zadanÃ© sluÅ¾ebnÃ­ ÄÃ­slo.
 	 */
 	private int lastBadgeNumber = -1;
 	/**
-	 * Naposledy zadanı PIN.
+	 * Naposledy zadanÃ½ PIN.
 	 */
 	private int lastPin = -1;
 	
 	/**
-	 * Stavová promìnná urèující zda právì probíhá odhlašování.
+	 * StavovÃ¡ promÄ›nnÃ¡ urÄujÃ­cÃ­ zda prÃ¡vÄ› probÃ­hÃ¡ odhlaÅ¡ovÃ¡nÃ­.
 	 */
 	private boolean logoutInProgress = false;
 	//================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
 	
 	/**
 	 * Konstruktor
-	 * @param networkInterface Síové rozhraní pro komunikaci datového protokolu.
+	 * @param networkInterface SÃ­Å¥ovÃ© rozhranÃ­ pro komunikaci datovÃ©ho protokolu.
 	 * @param appContext Kontext aplikace.
 	 */
 	public LoginProvider(INetworkInterface networkInterface, Context appContext){
@@ -70,9 +71,9 @@ public class LoginProvider implements ILoginProtocolListener{
 
 	/**
 	 * Konstruktor.
-	 * @param networkInterface Síové rozhraní pro komunikaci datového protokolu.
+	 * @param networkInterface SÃ­Å¥ovÃ© rozhranÃ­ pro komunikaci datovÃ©ho protokolu.
 	 * @param appContext Kontext aplikace.
-	 * @param loginProviderListener Posluchaè událostí LoginProideru.
+	 * @param loginProviderListener PosluchaÄ udÃ¡lostÃ­ LoginProideru.
 	 */
 	public LoginProvider(INetworkInterface networkInterface, Context appContext, ILoginProviderListener loginProviderListener){
 		this.networkInterface = networkInterface;
@@ -87,28 +88,28 @@ public class LoginProvider implements ILoginProtocolListener{
 	//================================================== GET/SET ==================================================//
 	
 	/**
-	 * @return Posluchaè událostí LoginProideru.
+	 * @return PosluchaÄ udÃ¡lostÃ­ LoginProideru.
 	 */
 	public ILoginProviderListener getLoginProviderListener() {
 		return loginProviderListener;
 	}
 
 	/**
-	 * @param loginProviderListener Posluchaè událostí LoginProideru.
+	 * @param loginProviderListener PosluchaÄ udÃ¡lostÃ­ LoginProideru.
 	 */
 	public void setLoginProviderListener(ILoginProviderListener loginProviderListener) {
 		this.loginProviderListener = loginProviderListener;
 	}
 	
-	//================================================== VİKONNÉ METODY ==================================================//
+	//================================================== VÃKONNÃ‰ METODY ==================================================//
 	
 	/**
-	 * Pøihlašuje mobilního klienta k serveru.
+	 * PÅ™ihlaÅ¡uje mobilnÃ­ho klienta k serveru.
 	 * 
-	 * @param badgeNumber    Sluební èíslo pøihlašovaného policisty.
-	 * @param pin    PIN pøihlašovaného policisty.
-	 * @param imei    Identifikaèní èíslo mobilního zaøízení (IMEI), ze kterého se
-	 * pøihlašuje.
+	 * @param badgeNumber    SluÅ¾ebnÃ­ ÄÃ­slo pÅ™ihlaÅ¡ovanÃ©ho policisty.
+	 * @param pin    PIN pÅ™ihlaÅ¡ovanÃ©ho policisty.
+	 * @param imei    IdentifikaÄnÃ­ ÄÃ­slo mobilnÃ­ho zaÅ™Ã­zenÃ­ (IMEI), ze kterÃ©ho se
+	 * pÅ™ihlaÅ¡uje.
 	 */
 	public void login(int badgeNumber, int pin, String imei){
 		if (this.loginProtocol == null){
@@ -117,16 +118,16 @@ public class LoginProvider implements ILoginProtocolListener{
 			this.loginProtocol.setLoginProtocolListener(this);
 		}
 		
-		//nastavení vnitøních promìnnıch pro následné zapamatování sluebního èísla a pinu//
+		//nastavenÃ­ vnitÅ™nÃ­ch promÄ›nnÃ½ch pro nÃ¡slednÃ© zapamatovÃ¡nÃ­ sluÅ¾ebnÃ­ho ÄÃ­sla a pinu//
 		this.lastBadgeNumber = badgeNumber;
 		this.lastPin = pin;
 		
-		this.loginProtocol.loginToServer(badgeNumber, pin, imei); //odeslání pøihlašovací zprávy
+		this.loginProtocol.loginToServer(badgeNumber, pin, imei); //odeslÃ¡nÃ­ pÅ™ihlaÅ¡ovacÃ­ zprÃ¡vy
 	}
 	
 
 	/**
-	 * Odhlašuje mobilního klienta ze serveru
+	 * OdhlaÅ¡uje mobilnÃ­ho klienta ze serveru
 	 */
 	public void logout(){
 		if (this.loginProtocol == null){
@@ -135,24 +136,24 @@ public class LoginProvider implements ILoginProtocolListener{
 			this.loginProtocol.setLoginProtocolListener(this);
 		}
 		
-		logoutInProgress = true; //nastavení stavové promìnné urèující, e probíhá odhlašování
-		this.loginProtocol.logoutFromServer(); //poslání odhlašovací zprávy
-		deleteLoginInformation(this.appContext); //odstranìní pøihlašovacích údajù z preferencí
+		logoutInProgress = true; //nastavenÃ­ stavovÃ© promÄ›nnÃ© urÄujÃ­cÃ­, Å¾e probÃ­hÃ¡ odhlaÅ¡ovÃ¡nÃ­
+		this.loginProtocol.logoutFromServer(); //poslÃ¡nÃ­ odhlaÅ¡ovacÃ­ zprÃ¡vy
+		deleteLoginInformation(this.appContext); //odstranÄ›nÃ­ pÅ™ihlaÅ¡ovacÃ­ch ÃºdajÅ¯ z preferencÃ­
 	}
 	
-	//================================================== STATICKÉ METODY ==================================================//
+	//================================================== STATICKÃ‰ METODY ==================================================//
 	
 	/**
-	 * Zjišuje, zda jsou v preferencích uloeny pøihlašovací údaje.
-	 * @param appContext Kontext aplikace pro pøístup k preferencím.
-	 * @return true, pøihlašovací údaje jsou k dispozici, false pøihlašovací údaje nejsou k dispozici
+	 * ZjiÅ¡Å¥uje, zda jsou v preferencÃ­ch uloÅ¾eny pÅ™ihlaÅ¡ovacÃ­ Ãºdaje.
+	 * @param appContext Kontext aplikace pro pÅ™Ã­stup k preferencÃ­m.
+	 * @return true, pÅ™ihlaÅ¡ovacÃ­ Ãºdaje jsou k dispozici, false pÅ™ihlaÅ¡ovacÃ­ Ãºdaje nejsou k dispozici
 	 */
 	public static boolean isAvaibleLoginInformation(Context appContext){
-		//získá pøístup k nastavení aplikace a poté získá hodnoty preferencí//
+		//zÃ­skÃ¡ pÅ™Ã­stup k nastavenÃ­ aplikace a potÃ© zÃ­skÃ¡ hodnoty preferencÃ­//
 		int bn = PreferenceManager.getDefaultSharedPreferences(appContext).getInt(LoginProvider.PREF_BADGENUMBER_KEY_NAME, -1);
 		int pin = PreferenceManager.getDefaultSharedPreferences(appContext).getInt(LoginProvider.PREF_PIN_KEY_NAME, -1);
 		
-		//zjištìní, zda jsou dostupné pøihlašovací údaje//
+		//zjiÅ¡tÄ›nÃ­, zda jsou dostupnÃ© pÅ™ihlaÅ¡ovacÃ­ Ãºdaje//
 		if (bn == -1 || pin == -1){
 			return false;
 		}else{
@@ -161,34 +162,34 @@ public class LoginProvider implements ILoginProtocolListener{
 	}
 	
 	/**
-	 * Vrací sluební èíslo z preferencí.
-	 * @param appContext Kontext aplikace pro pøístup k preferencím.
-	 * @return Sluební èíslo policisty nebo -1 pokud není uloeno.
+	 * VracÃ­ sluÅ¾ebnÃ­ ÄÃ­slo z preferencÃ­.
+	 * @param appContext Kontext aplikace pro pÅ™Ã­stup k preferencÃ­m.
+	 * @return SluÅ¾ebnÃ­ ÄÃ­slo policisty nebo -1 pokud nenÃ­ uloÅ¾eno.
 	 */
 	public static int getBadgeNumber(Context appContext){
-		//získá pøístup k nastavení aplikace a poté získá hodnotu sluebního èísla//
+		//zÃ­skÃ¡ pÅ™Ã­stup k nastavenÃ­ aplikace a potÃ© zÃ­skÃ¡ hodnotu sluÅ¾ebnÃ­ho ÄÃ­sla//
 		return PreferenceManager.getDefaultSharedPreferences(appContext).getInt(LoginProvider.PREF_BADGENUMBER_KEY_NAME, -1);
 	}
 	
 	/**
-	 * Vrací PIN z preferencí.
-	 * @param appContext Kontext aplikace pro pøístup k preferencím.
-	 * @return PIN policisty nebo -1 pokud není uloen.
+	 * VracÃ­ PIN z preferencÃ­.
+	 * @param appContext Kontext aplikace pro pÅ™Ã­stup k preferencÃ­m.
+	 * @return PIN policisty nebo -1 pokud nenÃ­ uloÅ¾en.
 	 */
 	public static int getPIN(Context appContext){
-		//získá pøístup k nastavení aplikace a poté získá hodnotu sluebního èísla//
+		//zÃ­skÃ¡ pÅ™Ã­stup k nastavenÃ­ aplikace a potÃ© zÃ­skÃ¡ hodnotu sluÅ¾ebnÃ­ho ÄÃ­sla//
 		return PreferenceManager.getDefaultSharedPreferences(appContext).getInt(LoginProvider.PREF_PIN_KEY_NAME, -1);
 	}
 	
 	/**
-	 * Vrací èíslo IMEI mobilního zaøízení.
+	 * VracÃ­ ÄÃ­slo IMEI mobilnÃ­ho zaÅ™Ã­zenÃ­.
 	 * @param appContext Kontext aplikace.
-	 * @return IMEI èíslo.
+	 * @return IMEI ÄÃ­slo.
 	 */
 	public static String getIMEI(Context appContext){
 		TelephonyManager telManager = (TelephonyManager)appContext.getSystemService(Context.TELEPHONY_SERVICE);
 		String imei = telManager.getDeviceId();
-		//zjistí, jestli bylo nìjaké èíslo vráceno a pøípadnì vrátí nulové IMEI//
+		//zjistÃ­, jestli bylo nÄ›jakÃ© ÄÃ­slo vrÃ¡ceno a pÅ™Ã­padnÄ› vrÃ¡tÃ­ nulovÃ© IMEI//
 		if (imei != null){
 			return imei;
 		}else{
@@ -196,15 +197,15 @@ public class LoginProvider implements ILoginProtocolListener{
 		}
 	}
 	
-	//================================================== HANDLERY UDÁLOSTÍ ==================================================//
+	//================================================== HANDLERY UDÃLOSTÃ ==================================================//
 	
 	/**
-	 * Handler události správného pøihlášení.
+	 * Handler udÃ¡losti sprÃ¡vnÃ©ho pÅ™ihlÃ¡Å¡enÃ­.
 	 */
 	public void onLoginConfirmed(){
-		//po potvrzení pøihlášení ze serveru, je moné pøihlašovací údaje uloit//
+		//po potvrzenÃ­ pÅ™ihlÃ¡Å¡enÃ­ ze serveru, je moÅ¾nÃ© pÅ™ihlaÅ¡ovacÃ­ Ãºdaje uloÅ¾it//
 		if (this.lastBadgeNumber != -1 && this.lastPin != -1){
-			saveLoginInformation(this.appContext, this.lastBadgeNumber, this.lastPin); //uloení pøihlašovacích údajù
+			saveLoginInformation(this.appContext, this.lastBadgeNumber, this.lastPin); //uloÅ¾enÃ­ pÅ™ihlaÅ¡ovacÃ­ch ÃºdajÅ¯
 			this.lastBadgeNumber = -1;
 			this.lastPin = -1;
 		}
@@ -215,9 +216,9 @@ public class LoginProvider implements ILoginProtocolListener{
 	}
 
 	/**
-	 * Handler události chybného pøihlášení.
+	 * Handler udÃ¡losti chybnÃ©ho pÅ™ihlÃ¡Å¡enÃ­.
 	 * 
-	 * @param reason    Dùvod selhání pøihlášení.
+	 * @param reason    DÅ¯vod selhÃ¡nÃ­ pÅ™ihlÃ¡Å¡enÃ­.
 	 */
 	public void onLoginFailed(LoginFailReason reason){
 		this.lastBadgeNumber = -1;
@@ -229,7 +230,7 @@ public class LoginProvider implements ILoginProtocolListener{
 	}
 
 	/**
-	 * Handler zpracovávající událost ztráty spojení.
+	 * Handler zpracovÃ¡vajÃ­cÃ­ udÃ¡lost ztrÃ¡ty spojenÃ­.
 	 */
 	public void onConnectionTerminated(){
 		if(loginProviderListener != null){
@@ -238,29 +239,29 @@ public class LoginProvider implements ILoginProtocolListener{
 	}
 
 	/**
-	 * Handler, reagující na událost odeslání zprávy na server.
+	 * Handler, reagujÃ­cÃ­ na udÃ¡lost odeslÃ¡nÃ­ zprÃ¡vy na server.
 	 */
 	public void onMessageSent(){
 		if(loginProviderListener != null){
 			loginProviderListener.onMessageSent();
 		}
 		
-		//informování posluchaèe o odhlášení//
+		//informovÃ¡nÃ­ posluchaÄe o odhlÃ¡Å¡enÃ­//
 		if(logoutInProgress && loginProviderListener != null){
 			loginProviderListener.onLogout();
 		}
 	}
 	
-	//================================================== PRIVÁTNÍ METODY ==================================================//
+	//================================================== PRIVÃTNÃ METODY ==================================================//
 	
 	private void saveLoginInformation(Context appContext, int badgeNumber, int pin){
-		//vloí do nastavení sluební èíslo a PIN//
+		//vloÅ¾Ã­ do nastavenÃ­ sluÅ¾ebnÃ­ ÄÃ­slo a PIN//
 		PreferenceManager.getDefaultSharedPreferences(appContext).edit().putInt(LoginProvider.PREF_BADGENUMBER_KEY_NAME, badgeNumber).commit();
 		PreferenceManager.getDefaultSharedPreferences(appContext).edit().putInt(LoginProvider.PREF_PIN_KEY_NAME, pin).commit();
 	}
 
 	private void deleteLoginInformation(Context appContext){
-		//odebere sluební èíslo a PIN z nastavení//
+		//odebere sluÅ¾ebnÃ­ ÄÃ­slo a PIN z nastavenÃ­//
 		PreferenceManager.getDefaultSharedPreferences(appContext).edit().remove(LoginProvider.PREF_BADGENUMBER_KEY_NAME).commit();
 		PreferenceManager.getDefaultSharedPreferences(appContext).edit().remove(LoginProvider.PREF_PIN_KEY_NAME).commit();
 	}

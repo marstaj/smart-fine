@@ -5,10 +5,10 @@ import cz.smartfine.android.networklayer.dataprotocols.SPCCheckProtocol;
 import cz.smartfine.android.networklayer.model.SMSParkingInfo;
 
 /**
- * Tøída zajišující zjištìní stavu parkování vozidla.
- * @author Pavel Bro
+ * TÅ™Ã­da zajiÅ¡Å¥ujÃ­cÃ­ zjiÅ¡tÄ›nÃ­ stavu parkovÃ¡nÃ­ vozidla.
+ * @author Pavel BroÅ¾
  * @version 1.0
- * @created 14-4-2012 18:48:48
+ * @updated 27-4-2012 18:18:40
  */
 public class SMSParking implements ISMSParkingProtocolListener {
 
@@ -21,23 +21,23 @@ public class SMSParking implements ISMSParkingProtocolListener {
 	}
 
 	/**
-	 * Handler zpracovávající událost pøíchodu odpovìdi o stavu parkování vozidla.
+	 * Handler zpracovÃ¡vajÃ­cÃ­ udÃ¡lost pÅ™Ã­chodu odpovÄ›di o stavu parkovÃ¡nÃ­ vozidla.
 	 * 
-	 * @param parkingInfo    Informace o parkování vozidla pøijaté ze serveru.
+	 * @param parkingInfo    Informace o parkovÃ¡nÃ­ vozidla pÅ™ijatÃ© ze serveru.
 	 */
 	public void onReceivedSMSParkingInfo(SMSParkingInfo parkingInfo){
 
 	}
 
 	/**
-	 * Handler zpracovávající událost ztráty spojení.
+	 * Handler zpracovÃ¡vajÃ­cÃ­ udÃ¡lost ztrÃ¡ty spojenÃ­.
 	 */
 	public void onConnectionTerminated(){
 
 	}
 
 	/**
-	 * Handler, reagující na událost odeslání zprávy na server.
+	 * Handler, reagujÃ­cÃ­ na udÃ¡lost odeslÃ¡nÃ­ zprÃ¡vy na server.
 	 */
 	public void onMessageSent(){
 
