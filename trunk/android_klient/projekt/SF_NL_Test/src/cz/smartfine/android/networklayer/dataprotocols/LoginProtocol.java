@@ -2,25 +2,26 @@ package cz.smartfine.android.networklayer.dataprotocols;
 import java.io.UnsupportedEncodingException;
 
 import cz.smartfine.android.networklayer.business.listeners.ILoginProtocolListener;
-import cz.smartfine.android.networklayer.dataprotocols.interfaces.IDataProtocol;
 import cz.smartfine.android.networklayer.model.LoginFailReason;
-import cz.smartfine.android.networklayer.networkinterface.INetworkInterface;
-import cz.smartfine.android.networklayer.util.MessageBuilder;
-
+import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
+import cz.smartfine.networklayer.dataprotocols.MobileProtocolConstants;
+import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.networkinterface.INetworkInterface;
+import cz.smartfine.networklayer.util.MessageBuilder;
 /**
- * Pøedstavuje tøídu protokolu pro pøihlášení na server.
- * @author Pavel Bro
+ * PÅ™edstavuje tÅ™Ã­du protokolu pro pÅ™ihlÃ¡Å¡enÃ­ na server.
+ * @author Pavel BroÅ¾
  * @version 1.0
  * @created 14-4-2012 18:48:48
  */
 public class LoginProtocol implements IDataProtocol {
 
 	/**
-	 * Rozhraní pro pøístup k odesílání a pøíjímání dat.
+	 * RozhranÃ­ pro pÅ™Ã­stup k odesÃ­lÃ¡nÃ­ a pÅ™Ã­jÃ­mÃ¡nÃ­ dat.
 	 */
 	private INetworkInterface networkInterface;
 	/**
-	 * Posluchaè událostí z této tøídy.
+	 * PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	private ILoginProtocolListener loginProtocolListener;
 	
@@ -32,7 +33,7 @@ public class LoginProtocol implements IDataProtocol {
 	
 	/**
 	 * Konstruktor.
-	 * @param networkInterface Rozhraní pro pøenost dat.
+	 * @param networkInterface RozhranÃ­ pro pÅ™enost dat.
 	 */
 	public LoginProtocol(INetworkInterface networkInterface) {
 		this(networkInterface, null);
@@ -41,39 +42,39 @@ public class LoginProtocol implements IDataProtocol {
 	/**
 	 * Konstruktor.
 	 * 
-	 * @param networkInterface    Rozhraní pro pøenost dat.
-	 * @param loginProtocolListener Posluchaè událostí z této tøídy.
+	 * @param networkInterface    RozhranÃ­ pro pÅ™enost dat.
+	 * @param loginProtocolListener PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	public LoginProtocol(INetworkInterface networkInterface, ILoginProtocolListener loginProtocolListener){
 		this.networkInterface = networkInterface;
 		this.loginProtocolListener = loginProtocolListener;
-		this.networkInterface.setOnReceivedDataListener(this); //zaregistrování se jako posluchaè
+		this.networkInterface.setOnReceivedDataListener(this); //zaregistrovÃ¡nÃ­ se jako posluchaÄ
 	}
 
 	//================================================== GET/SET ==================================================//
 	
 	/**
-	 * Odebere posluchaèe událostí protokolu pro pøihlášení na server.
+	 * Odebere posluchaÄe udÃ¡lostÃ­ protokolu pro pÅ™ihlÃ¡Å¡enÃ­ na server.
 	 * 
-	 * @param loginProtocolListener    Posluchaè událostí z pøihlašovacího protokolu.
+	 * @param loginProtocolListener    PosluchaÄ udÃ¡lostÃ­ z pÅ™ihlaÅ¡ovacÃ­ho protokolu.
 	 */
 	public void removeLoginProtocolListener(ILoginProtocolListener loginProtocolListener){
 		this.loginProtocolListener = null;
 	}
 
 	/**
-	 * Pøidá posluchaèe událostí protokolu pro pøihlášení na server.
+	 * PÅ™idÃ¡ posluchaÄe udÃ¡lostÃ­ protokolu pro pÅ™ihlÃ¡Å¡enÃ­ na server.
 	 * 
-	 * @param loginProtocolListener    Posluchaè událostí z pøihlašovacího protokolu.
+	 * @param loginProtocolListener    PosluchaÄ udÃ¡lostÃ­ z pÅ™ihlaÅ¡ovacÃ­ho protokolu.
 	 */
 	public void setLoginProtocolListener(ILoginProtocolListener loginProtocolListener){
 		this.loginProtocolListener = loginProtocolListener;
 	}
 	
-	//================================================== HANDLERY UDÁLOSTÍ ==================================================//
+	//================================================== HANDLERY UDÃLOSTÃ ==================================================//
 	
 	/**
-	 * Handler události ukonèení spojení.
+	 * Handler udÃ¡losti ukonÄenÃ­ spojenÃ­.
 	 */
 	public void onConnectionTerminated(){
 		if (loginProtocolListener != null){
@@ -82,68 +83,69 @@ public class LoginProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Handler na zpracování události odeslání zprávy.
+	 * Handler na zpracovÃ¡nÃ­ udÃ¡losti odeslÃ¡nÃ­ zprÃ¡vy.
+	 * @param sentData OdeslanÃ¡ data.   
 	 */
-	public void onMessageSent(){
+	public void onMessageSent(byte[] sentData){
 		if (loginProtocolListener != null){
 			loginProtocolListener.onMessageSent();
 		}
 	}
 
 	/**
-	 * Handler události pøíjmu dat.
+	 * Handler udÃ¡losti pÅ™Ã­jmu dat.
 	 * 
-	 * @param receivedData    Pøijmutá data uloená ve formì bytového pole.
+	 * @param receivedData    PÅ™ijmutÃ¡ data uloÅ¾enÃ¡ ve formÄ› bytovÃ©ho pole.
 	 */
 	public void onReceivedData(byte[] receivedData){
-		//pokud není ádnı posluchaè není nutné zprávy zpracovávat//
+		//pokud nenÃ­ Å¾Ã¡dnÃ½ posluchaÄ nenÃ­ nutnÃ© zprÃ¡vy zpracovÃ¡vat//
 		if (loginProtocolListener != null){
 			
-			//kontrola typu zprávy//
+			//kontrola typu zprÃ¡vy//
 			switch(receivedData[0]){
-				case MessageIDs.ID_MSG_SUC_AUTH: //úspìšné pøihlášení//
-					loginProtocolListener.onLoginConfirmed(); //zavolání handleru události
+				case MobileMessageIDs.ID_MSG_SUC_AUTH: //ÃºspÄ›Å¡nÃ© pÅ™ihlÃ¡Å¡enÃ­//
+					loginProtocolListener.onLoginConfirmed(); //zavolÃ¡nÃ­ handleru udÃ¡losti
 					break;
-				case MessageIDs.ID_MSG_FAIL_AUTH: //neúspìšná autentizace//
-					LoginFailReason reason; //dùvod neúspìšné autentizace
+				case MobileMessageIDs.ID_MSG_FAIL_AUTH: //neÃºspÄ›Å¡nÃ¡ autentizace//
+					LoginFailReason reason; //dÅ¯vod neÃºspÄ›Å¡nÃ© autentizace
 					
-					//zjištìní dùvodu neúspìšné autentizace//
+					//zjiÅ¡tÄ›nÃ­ dÅ¯vodu neÃºspÄ›Å¡nÃ© autentizace//
 					switch (receivedData[1]){
-						//neznámá chyba//
-						case ProtocolConstants.MSG_FAIL_AUTH_ERR_UNKNOWN:
+						//neznÃ¡mÃ¡ chyba//
+						case MobileProtocolConstants.MSG_FAIL_AUTH_ERR_UNKNOWN:
 							reason = LoginFailReason.UNKNOWN_REASON;
 							break;
-						//chybné sluební èíslo nebo PIN//
-						case ProtocolConstants.MSG_FAIL_AUTH_ERR_WRONG_BN_OR_PIN:
+						//chybnÃ© sluÅ¾ebnÃ­ ÄÃ­slo nebo PIN//
+						case MobileProtocolConstants.MSG_FAIL_AUTH_ERR_WRONG_BN_OR_PIN:
 							reason = LoginFailReason.WRONG_BADGE_NUMBER_OR_PIN;
 							break;
-						//sluební èíslo se nepáruje s IMEI//
-						case ProtocolConstants.MSG_FAIL_AUTH_ERR_IMEI_AND_BN_DONT_MATCH:
+						//sluÅ¾ebnÃ­ ÄÃ­slo se nepÃ¡ruje s IMEI//
+						case MobileProtocolConstants.MSG_FAIL_AUTH_ERR_IMEI_AND_BN_DONT_MATCH:
 							reason = LoginFailReason.IMEI_AND_BADGE_NUMBER_DONT_MATCH;
 							break;
-						//Neznámé IMEI//
-						case ProtocolConstants.MSG_FAIL_AUTH_ERR_UNKNOWN_IMEI:
+						//NeznÃ¡mÃ© IMEI//
+						case MobileProtocolConstants.MSG_FAIL_AUTH_ERR_UNKNOWN_IMEI:
 							reason = LoginFailReason.UNKNOWN_IMEI;
 							break;
-						//neznámá chyba//
+						//neznÃ¡mÃ¡ chyba//
 						default:
 							reason = LoginFailReason.UNKNOWN_REASON;
 					}
 
-					loginProtocolListener.onLoginFailed(reason); //zavolání handleru události
+					loginProtocolListener.onLoginFailed(reason); //zavolÃ¡nÃ­ handleru udÃ¡losti
 					break;
-				case MessageIDs.ID_MSG_TERM_CON: //ukonèení spojení ze strany serveru//
-					loginProtocolListener.onLoginFailed(LoginFailReason.CONNECTION_TERMINATED_FROM_SERVER); //zavolání handleru události
+				case MobileMessageIDs.ID_MSG_TERM_CON: //ukonÄenÃ­ spojenÃ­ ze strany serveru//
+					loginProtocolListener.onLoginFailed(LoginFailReason.CONNECTION_TERMINATED_FROM_SERVER); //zavolÃ¡nÃ­ handleru udÃ¡losti
 					break;
 			}
 			
 		}
 	}
 	
-	//================================================== VİKONNÉ METODY ==================================================//
+	//================================================== VÃKONNÃ‰ METODY ==================================================//
 	
 	/**
-	 * Odpojí datovı protokol od základního protokolu.
+	 * OdpojÃ­ datovÃ½ protokol od zÃ¡kladnÃ­ho protokolu.
 	 */
 	public void disconnectProtocol(){
 		if(networkInterface != null){
@@ -152,69 +154,69 @@ public class LoginProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Pøihlašuje mobilního klienta k serveru.
+	 * PÅ™ihlaÅ¡uje mobilnÃ­ho klienta k serveru.
 	 * 
-	 * @param badgeNumber    Sluební èíslo pøihlašovaného policisty.
-	 * @param pin    PIN pøihlašovaného policisty.
-	 * @param imei    Identifikaèní èíslo mobilního zaøízení (IMEI), ze kterého se
-	 * pøihlašuje.
+	 * @param badgeNumber    SluÅ¾ebnÃ­ ÄÃ­slo pÅ™ihlaÅ¡ovanÃ©ho policisty.
+	 * @param pin    PIN pÅ™ihlaÅ¡ovanÃ©ho policisty.
+	 * @param imei    IdentifikaÄnÃ­ ÄÃ­slo mobilnÃ­ho zaÅ™Ã­zenÃ­ (IMEI), ze kterÃ©ho se
+	 * pÅ™ihlaÅ¡uje.
 	 */
 	public void loginToServer(int badgeNumber, int pin, String imei){
 		if(networkInterface != null){
 			System.out.println("ANDROID: LOGIN PROTOCOL SEND LOGIN");
-			networkInterface.sendData(createLoginMessage(badgeNumber, pin, imei));
+			networkInterface.sendData(createLoginMessage(badgeNumber, pin, imei), this);
 		}
 	}
 
 	/**
-	 * Odhlašuje mobilního klienta ze serveru.
+	 * OdhlaÅ¡uje mobilnÃ­ho klienta ze serveru.
 	 */
 	public void logoutFromServer(){
 		if(networkInterface != null){
 			System.out.println("ANDROID: LOGIN PROTOCOL SEND LOGOUT");
-			networkInterface.sendData(createLogoutMessage());
+			networkInterface.sendData(createLogoutMessage(), this);
 		}
 	}
 
-	//================================================== PRIVÁTNÍ METODY ==================================================//
+	//================================================== PRIVÃTNÃ METODY ==================================================//
 
 	/**
-	 * Vytváøí pøihlašovací zprávu.
+	 * VytvÃ¡Å™Ã­ pÅ™ihlaÅ¡ovacÃ­ zprÃ¡vu.
 	 * 
-	 * @param badgeNumber    Sluební èíslo pøihlašovaného policisty.
-	 * @param pin    PIN pøihlašovaného policisty.
-	 * @param imei    Identifikaèní èíslo mobilního zaøízení (IMEI), ze kterého se pøihlašuje.
-	 * @return Zpráva pro odeslání na server.
+	 * @param badgeNumber    SluÅ¾ebnÃ­ ÄÃ­slo pÅ™ihlaÅ¡ovanÃ©ho policisty.
+	 * @param pin    PIN pÅ™ihlaÅ¡ovanÃ©ho policisty.
+	 * @param imei    IdentifikaÄnÃ­ ÄÃ­slo mobilnÃ­ho zaÅ™Ã­zenÃ­ (IMEI), ze kterÃ©ho se pÅ™ihlaÅ¡uje.
+	 * @return ZprÃ¡va pro odeslÃ¡nÃ­ na server.
 	 */
 	protected byte[] createLoginMessage(int badgeNumber, int pin, String imei){
 		MessageBuilder msg = new MessageBuilder();
 		
-		msg.putByte(MessageIDs.ID_MSG_AUTHENTICATE); //identifikátor zprávy
-		msg.putByte(ProtocolConstants.MSG_AUTHENTICATE_REASON_LOGIN); //dùvod autentizace - pøihášení
-		msg.putInt(badgeNumber); //sluební èíslo
+		msg.putByte(MobileMessageIDs.ID_MSG_AUTHENTICATE); //identifikÃ¡tor zprÃ¡vy
+		msg.putByte(MobileProtocolConstants.MSG_AUTHENTICATE_REASON_LOGIN); //dÅ¯vod autentizace - pÅ™ihÃ¡Å¡enÃ­
+		msg.putInt(badgeNumber); //sluÅ¾ebnÃ­ ÄÃ­slo
 		msg.putInt(pin); //PIN
-		msg.putArray(imeiToByteArray(imei)); //IMEI pøevedené na pole bytù s ASCI hodnotami
+		msg.putArray(imeiToByteArray(imei)); //IMEI pÅ™evedenÃ© na pole bytÅ¯ s ASCI hodnotami
 		
 		return msg.getByteArray();
 	}
 	
 	/**
-	 * Vytváøí odhlašovací zprávu.
-	 * @return Zpráva pro odeslání na server.
+	 * VytvÃ¡Å™Ã­ odhlaÅ¡ovacÃ­ zprÃ¡vu.
+	 * @return ZprÃ¡va pro odeslÃ¡nÃ­ na server.
 	 */
 	protected byte[] createLogoutMessage(){
 		MessageBuilder msg = new MessageBuilder();
 		
-		msg.putByte(MessageIDs.ID_MSG_LOGOUT); //identifikátor zprávy
-		msg.putByte(ProtocolConstants.DUMMY_FIELD);
+		msg.putByte(MobileMessageIDs.ID_MSG_LOGOUT); //identifikÃ¡tor zprÃ¡vy
+		msg.putByte(MobileProtocolConstants.DUMMY_FIELD);
 		
 		return msg.getByteArray();
 	}
 
 	/**
-	 * Pøevádí IMEI na pole ASCI znakù.
-	 * @param imei Èíslo IMEI.
-	 * @return Bytové pole o patnácti prvcích ve kterıch jsou zakódovány ASCI znaky èísla IMEI.
+	 * PÅ™evÃ¡dÃ­ IMEI na pole ASCI znakÅ¯.
+	 * @param imei ÄŒÃ­slo IMEI.
+	 * @return BytovÃ© pole o patnÃ¡cti prvcÃ­ch ve kterÃ½ch jsou zakÃ³dovÃ¡ny ASCI znaky ÄÃ­sla IMEI.
 	 */
 	private byte[] imeiToByteArray(String imei){
 		try {

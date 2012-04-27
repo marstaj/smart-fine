@@ -5,25 +5,25 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 
 import cz.smartfine.android.networklayer.business.listeners.IGeoDataProtocolListener;
-import cz.smartfine.android.networklayer.dataprotocols.interfaces.IDataProtocol;
 import cz.smartfine.android.networklayer.model.LoginFailReason;
-import cz.smartfine.android.networklayer.networkinterface.INetworkInterface;
-import cz.smartfine.android.networklayer.util.MessageBuilder;
-
+import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
+import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.networkinterface.INetworkInterface;
+import cz.smartfine.networklayer.util.MessageBuilder;
 /**
- * Pøedstavuje tøídu protokolu pro pøenost geolokaèních dat.
- * @author Pavel Bro
+ * PÅ™edstavuje tÅ™Ã­du protokolu pro pÅ™enost geolokaÄnÃ­ch dat.
+ * @author Pavel BroÅ¾
  * @version 1.0
  * @created 14-4-2012 18:48:46
  */
 public class GeoDataProtocol implements IDataProtocol {
 
 	/**
-	 * Rozhraní pro pøístup k odesílání a pøíjímání dat.
+	 * RozhranÃ­ pro pÅ™Ã­stup k odesÃ­lÃ¡nÃ­ a pÅ™Ã­jÃ­mÃ¡nÃ­ dat.
 	 */
 	private INetworkInterface networkInterface;
 	/**
-	 * Posluchaè událostí z této tøídy.
+	 * PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	private IGeoDataProtocolListener geoDataProtocolListener;
 	
@@ -35,7 +35,7 @@ public class GeoDataProtocol implements IDataProtocol {
 	
 	/**
 	 * Konstruktor.
-	 * @param networkInterface Rozhraní pro pøenost dat.
+	 * @param networkInterface RozhranÃ­ pro pÅ™enost dat.
 	 */
 	public GeoDataProtocol(INetworkInterface networkInterface) {
 		this(networkInterface, null);
@@ -44,41 +44,41 @@ public class GeoDataProtocol implements IDataProtocol {
 	/**
 	 * Konstruktor.
 	 * 
-	 * @param networkInterface    Rozhraní pro pøenos dat.
-	 * @param geoDataProtocolListener Posluchaè událostí z této tøídy.
+	 * @param networkInterface    RozhranÃ­ pro pÅ™enos dat.
+	 * @param geoDataProtocolListener PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	public GeoDataProtocol(INetworkInterface networkInterface, IGeoDataProtocolListener geoDataProtocolListener){
 		this.networkInterface = networkInterface;
 		this.geoDataProtocolListener = geoDataProtocolListener;
-		this.networkInterface.setOnReceivedDataListener(this); //zaregistrování se jako posluchaè
+		this.networkInterface.setOnReceivedDataListener(this); //zaregistrovÃ¡nÃ­ se jako posluchaÄ
 	}
 
 	//================================================== GET/SET ==================================================//
 	
 	/**
-	 * Odebere posluchaèe událostí protokolu pro odesílání geolokaèních dat.
+	 * Odebere posluchaÄe udÃ¡lostÃ­ protokolu pro odesÃ­lÃ¡nÃ­ geolokaÄnÃ­ch dat.
 	 * 
-	 * @param geoDataProtocolListener    Posluchaè událostí z protokolu pro odesílání
-	 * geolokaèních dat.
+	 * @param geoDataProtocolListener    PosluchaÄ udÃ¡lostÃ­ z protokolu pro odesÃ­lÃ¡nÃ­
+	 * geolokaÄnÃ­ch dat.
 	 */
 	public void removeGeoDataProtocolListener(IGeoDataProtocolListener geoDataProtocolListener){
 		this.geoDataProtocolListener = null;
 	}
 	
 	/**
-	 * Pøidá posluchaèe událostí protokolu pro odesílání geolokaèních dat.
+	 * PÅ™idÃ¡ posluchaÄe udÃ¡lostÃ­ protokolu pro odesÃ­lÃ¡nÃ­ geolokaÄnÃ­ch dat.
 	 * 
-	 * @param geoDataProtocolListener    Posluchaè událostí z protokolu pro odesílání
-	 * geolokaèních dat.
+	 * @param geoDataProtocolListener    PosluchaÄ udÃ¡lostÃ­ z protokolu pro odesÃ­lÃ¡nÃ­
+	 * geolokaÄnÃ­ch dat.
 	 */
 	public void setGeoDataProtocolListener(IGeoDataProtocolListener geoDataProtocolListener){
 		this.geoDataProtocolListener = geoDataProtocolListener;
 	}
 	
-	//================================================== HANDLERY UDÁLOSTÍ ==================================================//
+	//================================================== HANDLERY UDÃLOSTÃ ==================================================//
 	
 	/**
-	 * Handler události ukonèení spojení.
+	 * Handler udÃ¡losti ukonÄenÃ­ spojenÃ­.
 	 */
 	public void onConnectionTerminated(){
 		if (geoDataProtocolListener != null){
@@ -87,27 +87,28 @@ public class GeoDataProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Handler na zpracování události odeslání zprávy.
+	 * Handler na zpracovÃ¡nÃ­ udÃ¡losti odeslÃ¡nÃ­ zprÃ¡vy.
+	 * @param sentData OdeslanÃ¡ data.   
 	 */
-	public void onMessageSent(){
+	public void onMessageSent(byte[] sentData){
 		if (geoDataProtocolListener != null){
 			geoDataProtocolListener.onMessageSent();
 		}
 	}
 	
 	/**
-	 * Handler události pøíjmu dat.
+	 * Handler udÃ¡losti pÅ™Ã­jmu dat.
 	 * 
-	 * @param receivedData    Pøijmutá data uloená ve formì bytového pole.
+	 * @param receivedData    PÅ™ijmutÃ¡ data uloÅ¾enÃ¡ ve formÄ› bytovÃ©ho pole.
 	 */
 	public void onReceivedData(byte[] receivedData){
-		//ádná data nepøijímá
+		//Å¾Ã¡dnÃ¡ data nepÅ™ijÃ­mÃ¡
 	}
 	
-	//================================================== VİKONNÉ METODY ==================================================//
+	//================================================== VÃKONNÃ‰ METODY ==================================================//
 	
 	/**
-	 * Odpojí datovı protokol od základního protokolu.
+	 * OdpojÃ­ datovÃ½ protokol od zÃ¡kladnÃ­ho protokolu.
 	 */
 	public void disconnectProtocol(){
 		if(networkInterface != null){
@@ -116,31 +117,31 @@ public class GeoDataProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Odešle geolokaèní data na server.
+	 * OdeÅ¡le geolokaÄnÃ­ data na server.
 	 * 
-	 * @param geoData    Seznam geolokaèních dat pro poslání na server.
+	 * @param geoData    Seznam geolokaÄnÃ­ch dat pro poslÃ¡nÃ­ na server.
 	 * @throws IOException 
 	 */
 	public void sendGeoData(List geoData) throws IOException{
 		if(networkInterface != null){
-			networkInterface.sendData(createGeoMessage(geoData));
+			networkInterface.sendData(createGeoMessage(geoData), this);
 		}
 	}
 
-	//================================================== PRIVÁTNÍ METODY ==================================================//
+	//================================================== PRIVÃTNÃ METODY ==================================================//
 	
-	//TODO FORMÁT GEO DAT
+	//TODO FORMÃT GEO DAT
 	protected byte[] createGeoMessage(List geoData) throws IOException{
 		MessageBuilder msg = new MessageBuilder();
 		
-		msg.putByte(MessageIDs.ID_MSG_UPLOAD_GEO); //identifikátor zprávy
+		msg.putByte(MobileMessageIDs.ID_MSG_UPLOAD_GEO); //identifikÃ¡tor zprÃ¡vy
 		
 		ByteArrayOutputStream geoBytes = new ByteArrayOutputStream();
 		ObjectOutputStream objOS = new ObjectOutputStream(geoBytes);
 		objOS.writeObject(geoData); //serializuje PL
 		objOS.close();
 		
-		msg.putArrayWithIntLength(geoBytes.toByteArray()); //vloení pole serializované kolekce s geo daty
+		msg.putArrayWithIntLength(geoBytes.toByteArray()); //vloÅ¾enÃ­ pole serializovanÃ© kolekce s geo daty
 		
 		geoBytes.close();
 		

@@ -1,23 +1,24 @@
 package cz.smartfine.android.networklayer.dataprotocols;
 import cz.smartfine.android.networklayer.business.listeners.IAuthenticationProtocolListener;
-import cz.smartfine.android.networklayer.dataprotocols.interfaces.IDataProtocol;
 import cz.smartfine.android.networklayer.model.AuthenticationFailReason;
-import cz.smartfine.android.networklayer.networkinterface.INetworkInterface;
-import cz.smartfine.android.networklayer.util.MessageBuilder;
-
+import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
+import cz.smartfine.networklayer.dataprotocols.MobileProtocolConstants;
+import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.networkinterface.INetworkInterface;
+import cz.smartfine.networklayer.util.MessageBuilder;
 /**
- * Pøedstavuje tøídu protokolu pro ovìøení identity.
- * @author Pavel Bro
+ * PÅ™edstavuje tÅ™Ã­du protokolu pro ovÄ›Å™enÃ­ identity.
+ * @author Pavel BroÅ¾
  * @version 1.0
  */
 public class AuthenticationProtocol implements IDataProtocol {
 
 	/**
-	 * Rozhraní pro pøístup k odesílání a pøíjímání dat.
+	 * RozhranÃ­ pro pÅ™Ã­stup k odesÃ­lÃ¡nÃ­ a pÅ™Ã­jÃ­mÃ¡nÃ­ dat.
 	 */
 	private INetworkInterface networkInterface;
 	/**
-	 * Posluchaè událostí z této tøídy.
+	 * PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	private IAuthenticationProtocolListener authenticationProtocolListener;
 	
@@ -29,7 +30,7 @@ public class AuthenticationProtocol implements IDataProtocol {
 	
 	/**
 	 * Konstruktor.
-	 * @param networkInterface Rozhraní pro pøenost dat.
+	 * @param networkInterface RozhranÃ­ pro pÅ™enost dat.
 	 */
 	public AuthenticationProtocol(INetworkInterface networkInterface) {
 		this(networkInterface, null);
@@ -38,39 +39,39 @@ public class AuthenticationProtocol implements IDataProtocol {
 	/**
 	 * Konstruktor.
 	 * 
-	 * @param networkInterface    Rozhraní pro pøenost dat.
-	 * @param authenticationProtocolListener Posluchaè událostí z této tøídy.
+	 * @param networkInterface    RozhranÃ­ pro pÅ™enost dat.
+	 * @param authenticationProtocolListener PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	public AuthenticationProtocol(INetworkInterface networkInterface, IAuthenticationProtocolListener authenticationProtocolListener){
 		this.networkInterface = networkInterface;
 		this.authenticationProtocolListener = authenticationProtocolListener;
-		this.networkInterface.setOnReceivedDataListener(this); //zaregistrování se jako posluchaè
+		this.networkInterface.setOnReceivedDataListener(this); //zaregistrovÃ¡nÃ­ se jako posluchaÄ
 	}
 	
 	//================================================== GET/SET ==================================================//
 
 	/**
-	 * Odebere posluchaèe událostí protokolu pro ovìøení identity.
+	 * Odebere posluchaÄe udÃ¡lostÃ­ protokolu pro ovÄ›Å™enÃ­ identity.
 	 * 
-	 * @param authenticationProtocolListener    Posluchaè událostí z autentizaèního protokolu.
+	 * @param authenticationProtocolListener    PosluchaÄ udÃ¡lostÃ­ z autentizaÄnÃ­ho protokolu.
 	 */
 	public void removeAuthenticationProtocolListener(IAuthenticationProtocolListener authenticationProtocolListener){
 		this.authenticationProtocolListener = null;
 	}
 
 	/**
-	 * Pøidá posluchaèe událostí protokolu pro ovìøení identity.
+	 * PÅ™idÃ¡ posluchaÄe udÃ¡lostÃ­ protokolu pro ovÄ›Å™enÃ­ identity.
 	 * 
-	 * @param authenticationProtocolListener    Posluchaè událostí z autentizaèního protokolu.
+	 * @param authenticationProtocolListener    PosluchaÄ udÃ¡lostÃ­ z autentizaÄnÃ­ho protokolu.
 	 */
 	public void setAuthenticationProtocolListener(IAuthenticationProtocolListener authenticationProtocolListener){
 		this.authenticationProtocolListener = authenticationProtocolListener;
 	}
 	
-	//================================================== HANDLERY UDÁLOSTÍ ==================================================//
+	//================================================== HANDLERY UDÃLOSTÃ ==================================================//
 	
 	/**
-	 * Handler události ukonèení spojení.
+	 * Handler udÃ¡losti ukonÄenÃ­ spojenÃ­.
 	 */
 	public void onConnectionTerminated(){
 		if (authenticationProtocolListener != null){
@@ -79,54 +80,55 @@ public class AuthenticationProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Handler na zpracování události odeslání zprávy.
+	 * Handler na zpracovÃ¡nÃ­ udÃ¡losti odeslÃ¡nÃ­ zprÃ¡vy.
+	 * @param sentData OdeslanÃ¡ data.   
 	 */
-	public void onMessageSent(){
+	public void onMessageSent(byte[] sentData){
 		if (authenticationProtocolListener != null){
 			authenticationProtocolListener.onMessageSent();
 		}
 	}
 
 	/**
-	 * Handler události pøíjmu dat.
+	 * Handler udÃ¡losti pÅ™Ã­jmu dat.
 	 * 
-	 * @param receivedData    Pøijmutá data uloená ve formì bytového pole.
+	 * @param receivedData    PÅ™ijmutÃ¡ data uloÅ¾enÃ¡ ve formÄ› bytovÃ©ho pole.
 	 */
 	public void onReceivedData(byte[] receivedData){
-		//pokud není ádnı posluchaè není nutné zprávy zpracovávat//
+		//pokud nenÃ­ Å¾Ã¡dnÃ½ posluchaÄ nenÃ­ nutnÃ© zprÃ¡vy zpracovÃ¡vat//
 		if (authenticationProtocolListener != null){
 			
-			//kontrola typu zprávy//
+			//kontrola typu zprÃ¡vy//
 			switch (receivedData[0]){
-				case MessageIDs.ID_MSG_SUC_AUTH: //úspìšná autentizace//
-					authenticationProtocolListener.onAuthenticationConfirmed(); //zavolání handleru události
+				case MobileMessageIDs.ID_MSG_SUC_AUTH: //ÃºspÄ›Å¡nÃ¡ autentizace//
+					authenticationProtocolListener.onAuthenticationConfirmed(); //zavolÃ¡nÃ­ handleru udÃ¡losti
 					break;
-				case MessageIDs.ID_MSG_FAIL_AUTH: //neúspìšná autentizace//
-					AuthenticationFailReason reason; //dùvod neúspìšné autentizace
+				case MobileMessageIDs.ID_MSG_FAIL_AUTH: //neÃºspÄ›Å¡nÃ¡ autentizace//
+					AuthenticationFailReason reason; //dÅ¯vod neÃºspÄ›Å¡nÃ© autentizace
 					
-					//zjištìní dùvodu neúspìšné autentizace//
+					//zjiÅ¡tÄ›nÃ­ dÅ¯vodu neÃºspÄ›Å¡nÃ© autentizace//
 					switch (receivedData[1]){
-						//neznámá chyba//
-						case ProtocolConstants.MSG_FAIL_AUTH_ERR_UNKNOWN:
+						//neznÃ¡mÃ¡ chyba//
+						case MobileProtocolConstants.MSG_FAIL_AUTH_ERR_UNKNOWN:
 							reason = AuthenticationFailReason.UNKNOWN_REASON;
-						//chybné sluební èíslo nebo PIN//
-						case ProtocolConstants.MSG_FAIL_AUTH_ERR_WRONG_BN_OR_PIN:
+						//chybnÃ© sluÅ¾ebnÃ­ ÄÃ­slo nebo PIN//
+						case MobileProtocolConstants.MSG_FAIL_AUTH_ERR_WRONG_BN_OR_PIN:
 							reason = AuthenticationFailReason.WRONG_BADGE_NUMBER_OR_PIN;
-						//neznámá chyba//
+						//neznÃ¡mÃ¡ chyba//
 						default:
 							reason = AuthenticationFailReason.UNKNOWN_REASON;
 					}
 		
-					authenticationProtocolListener.onAuthenticationFailed(reason); //zavolání handleru události
+					authenticationProtocolListener.onAuthenticationFailed(reason); //zavolÃ¡nÃ­ handleru udÃ¡losti
 					break;
 			}
 		}
 	}
 
-	//================================================== VİKONNÉ METODY ==================================================//
+	//================================================== VÃKONNÃ‰ METODY ==================================================//
 	
 	/**
-	 * Odpojí datovı protokol od základního protokolu.
+	 * OdpojÃ­ datovÃ½ protokol od zÃ¡kladnÃ­ho protokolu.
 	 */
 	public void disconnectProtocol(){
 		if(networkInterface != null){
@@ -135,33 +137,33 @@ public class AuthenticationProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Ovìøuje identitu policisty.
+	 * OvÄ›Å™uje identitu policisty.
 	 * 
-	 * @param badgeNumber    Sluební èíslo policisty.
+	 * @param badgeNumber    SluÅ¾ebnÃ­ ÄÃ­slo policisty.
 	 * @param pin    PIN policisty.
 	 */
 	public void authenticate(int badgeNumber, int pin){
 		if(networkInterface != null){
-			networkInterface.sendData(createAuthenticationMessage(badgeNumber, pin));
+			networkInterface.sendData(createAuthenticationMessage(badgeNumber, pin), this);
 		}
 	}
 	
-	//================================================== PRIVÁTNÍ METODY ==================================================//
+	//================================================== PRIVÃTNÃ METODY ==================================================//
 	
 	/**
-	 * Vytváøí autentizaèní zprávu.
-	 * @param badgeNumber Sluební èíslo policisty.
+	 * VytvÃ¡Å™Ã­ autentizaÄnÃ­ zprÃ¡vu.
+	 * @param badgeNumber SluÅ¾ebnÃ­ ÄÃ­slo policisty.
 	 * @param pin PIN policisty.
-	 * @return Zpráva pro odeslání na server
+	 * @return ZprÃ¡va pro odeslÃ¡nÃ­ na server
 	 */
 	private byte[] createAuthenticationMessage(int badgeNumber, int pin){
 		MessageBuilder msg = new MessageBuilder();
 		
-		msg.putByte(MessageIDs.ID_MSG_AUTHENTICATE); //identifikátor zprávy
-		msg.putByte(ProtocolConstants.MSG_AUTHENTICATE_REASON_AUTHENTICATION); //dùvod autentizace - autentizace policisty
-		msg.putInt(badgeNumber); //sluební èíslo
+		msg.putByte(MobileMessageIDs.ID_MSG_AUTHENTICATE); //identifikÃ¡tor zprÃ¡vy
+		msg.putByte(MobileProtocolConstants.MSG_AUTHENTICATE_REASON_AUTHENTICATION); //dÅ¯vod autentizace - autentizace policisty
+		msg.putInt(badgeNumber); //sluÅ¾ebnÃ­ ÄÃ­slo
 		msg.putInt(pin); //PIN
-		msg.putArray(new byte[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}); //pole nahrazující IMEI
+		msg.putArray(new byte[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}); //pole nahrazujÃ­cÃ­ IMEI
 		
 		return msg.getByteArray();
 	}

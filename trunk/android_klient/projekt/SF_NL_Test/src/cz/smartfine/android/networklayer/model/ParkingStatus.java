@@ -1,24 +1,25 @@
 package cz.smartfine.android.networklayer.model;
 
 /**
- * Vıèet stavù parkování vozidla tj. za vozilo smí v zónì placeného stání parkovat
- * èi ne.
- * @author Pavel Bro
+ * VÃ½Äet stavÅ¯ parkovÃ¡nÃ­ vozidla tj. za vozilo smÃ­ v zÃ³nÄ› placenÃ©ho stÃ¡nÃ­ parkovat
+ * Äi ne.
+ * @author Pavel BroÅ¾
  * @version 1.0
- * @created 14-4-2012 18:48:48
+ * @updated 27-4-2012 18:18:45
  */
 public enum ParkingStatus {
+
 	/**
-	 * Parkování vozidla je povolené.
+	 * ParkovÃ¡nÃ­ vozidla je povolenÃ©.
 	 */
 	ALLOWED,
 	/**
-	 * Parkování vozidla není povolené.
+	 * ParkovÃ¡nÃ­ vozidla nenÃ­ povolenÃ©.
 	 */
 	NOT_ALLOWED,
 	/**
-	 * Stav parkování se nepodaøilo urèit.
+	 * Stav parkovÃ¡nÃ­ se nepodaÅ™ilo urÄit.
 	 */
 	UNKNOWN_PARKING_STATUS
-	
+
 }

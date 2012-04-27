@@ -1,19 +1,19 @@
 package cz.smartfine.android.networklayer.model;
 
 /**
- * Obsahuje informace o stavu pøenosné parkovací karty (PPK, angl. SPC).
- * @author Pavel Bro
+ * Obsahuje informace o stavu pÅ™enosnÃ© parkovacÃ­ karty (PPK, angl. SPC).
+ * @author Pavel BroÅ¾
  * @version 1.0
- * @created 14-4-2012 18:48:49
+ * @updated 27-4-2012 18:18:45
  */
 public class SPCInfo {
 
 	/**
-	 * Èíslo pøenosné parkovací karty, ke které se vztahuje informace o stavu.
+	 * ÄŒÃ­slo pÅ™enosnÃ© parkovacÃ­ karty, ke kterÃ© se vztahuje informace o stavu.
 	 */
 	private String spcNumber;
 	/**
-	 * Stav pøenosné parkovací karty tj. zda je hlášena jako kradená èi nikoliv.
+	 * Stav pÅ™enosnÃ© parkovacÃ­ karty tj. zda je hlÃ¡Å¡ena jako kradenÃ¡ Äi nikoliv.
 	 */
 	private SPCStatus spcStatus;
 

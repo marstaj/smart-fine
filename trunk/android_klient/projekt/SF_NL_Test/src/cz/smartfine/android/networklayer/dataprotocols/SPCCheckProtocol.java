@@ -1,27 +1,28 @@
 package cz.smartfine.android.networklayer.dataprotocols;
 import cz.smartfine.android.networklayer.business.listeners.ISPCCheckProtocolListener;
-import cz.smartfine.android.networklayer.dataprotocols.interfaces.IDataProtocol;
 import cz.smartfine.android.networklayer.model.SPCInfo;
 import cz.smartfine.android.networklayer.model.SPCStatus;
-import cz.smartfine.android.networklayer.networkinterface.INetworkInterface;
-import cz.smartfine.android.networklayer.util.Conventer;
-import cz.smartfine.android.networklayer.util.MessageBuilder;
-
+import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
+import cz.smartfine.networklayer.dataprotocols.MobileProtocolConstants;
+import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.networkinterface.INetworkInterface;
+import cz.smartfine.networklayer.util.Conventer;
+import cz.smartfine.networklayer.util.MessageBuilder;
 /**
- * Pøedstavuje tøídu pro kontrolu odcizení pøenosné parkovací karty (PPK angl. SPC
+ * PÅ™edstavuje tÅ™Ã­du pro kontrolu odcizenÃ­ pÅ™enosnÃ© parkovacÃ­ karty (PPK angl. SPC
  * - SUBSCRIBER PARKING CARD).
- * @author Pavel Bro
+ * @author Pavel BroÅ¾
  * @version 1.0
  * @created 14-4-2012 18:48:48
  */
 public class SPCCheckProtocol implements IDataProtocol {
 
 	/**
-	 * Rozhraní pro pøístup k odesílání a pøíjímání dat.
+	 * RozhranÃ­ pro pÅ™Ã­stup k odesÃ­lÃ¡nÃ­ a pÅ™Ã­jÃ­mÃ¡nÃ­ dat.
 	 */
 	private INetworkInterface networkInterface;
 	/**
-	 * Posluchaè událostí z této tøídy.
+	 * PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	private ISPCCheckProtocolListener spcCheckProtocolListener;
 	
@@ -33,7 +34,7 @@ public class SPCCheckProtocol implements IDataProtocol {
 	
 	/**
 	 * Konstruktor.
-	 * @param networkInterface Rozhraní pro pøenost dat.
+	 * @param networkInterface RozhranÃ­ pro pÅ™enost dat.
 	 */
 	public SPCCheckProtocol(INetworkInterface networkInterface) {
 		this(networkInterface, null);
@@ -42,41 +43,41 @@ public class SPCCheckProtocol implements IDataProtocol {
 	/**
 	 * Konstruktor.
 	 * 
-	 * @param networkInterface    Rozhraní pro pøenos dat.
-	 * @param spcCheckProtocolListener Posluchaè událostí z této tøídy.
+	 * @param networkInterface    RozhranÃ­ pro pÅ™enos dat.
+	 * @param spcCheckProtocolListener PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	public SPCCheckProtocol(INetworkInterface networkInterface, ISPCCheckProtocolListener spcCheckProtocolListener){
 		this.networkInterface = networkInterface;
 		this.spcCheckProtocolListener = spcCheckProtocolListener;
-		this.networkInterface.setOnReceivedDataListener(this); //zaregistrování se jako posluchaè
+		this.networkInterface.setOnReceivedDataListener(this); //zaregistrovÃ¡nÃ­ se jako posluchaÄ
 	}
 
 	//================================================== GET/SET ==================================================//
 
 	/**
-	 * Odebere posluchaèe událostí protokolu pro kontrolu odcizení PPK.
+	 * Odebere posluchaÄe udÃ¡lostÃ­ protokolu pro kontrolu odcizenÃ­ PPK.
 	 * 
-	 * @param spcCheckProtocolListener    Posluchaè událostí protokolu pro kontrolu
-	 * odcizení PPK.
+	 * @param spcCheckProtocolListener    PosluchaÄ udÃ¡lostÃ­ protokolu pro kontrolu
+	 * odcizenÃ­ PPK.
 	 */
 	public void removeSPCCheckProtocolListener(ISPCCheckProtocolListener spcCheckProtocolListener){
 		this.spcCheckProtocolListener = null;
 	}
 
 	/**
-	 * Pøidá posluchaèe událostí protokolu pro kontrolu odcizení PPK.
+	 * PÅ™idÃ¡ posluchaÄe udÃ¡lostÃ­ protokolu pro kontrolu odcizenÃ­ PPK.
 	 * 
-	 * @param spcCheckProtocolListener    Posluchaè událostí protokolu pro kontrolu
-	 * odcizení PPK.
+	 * @param spcCheckProtocolListener    PosluchaÄ udÃ¡lostÃ­ protokolu pro kontrolu
+	 * odcizenÃ­ PPK.
 	 */
 	public void setSPCCheckProtocolListener(ISPCCheckProtocolListener spcCheckProtocolListener){
 		this.spcCheckProtocolListener = spcCheckProtocolListener;
 	}
 	
-	//================================================== HANDLERY UDÁLOSTÍ ==================================================//
+	//================================================== HANDLERY UDÃLOSTÃ ==================================================//
 	
 	/**
-	 * Handler události ukonèení spojení.
+	 * Handler udÃ¡losti ukonÄenÃ­ spojenÃ­.
 	 */
 	public void onConnectionTerminated(){
 		if (spcCheckProtocolListener != null){
@@ -85,50 +86,51 @@ public class SPCCheckProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Handler na zpracování události odeslání zprávy.
+	 * Handler na zpracovÃ¡nÃ­ udÃ¡losti odeslÃ¡nÃ­ zprÃ¡vy.
+	 * @param sentData OdeslanÃ¡ data.   
 	 */
-	public void onMessageSent(){
+	public void onMessageSent(byte[] sentData){
 		if (spcCheckProtocolListener != null){
 			spcCheckProtocolListener.onMessageSent();
 		}
 	}
 
 	/**
-	 * Handler události pøíjmu dat.
+	 * Handler udÃ¡losti pÅ™Ã­jmu dat.
 	 * 
-	 * @param receivedData    Pøijmutá data uloená ve formì bytového pole.
+	 * @param receivedData    PÅ™ijmutÃ¡ data uloÅ¾enÃ¡ ve formÄ› bytovÃ©ho pole.
 	 */
 	public void onReceivedData(byte[] receivedData){
-		//pokud není ádnı posluchaè není nutné zprávy zpracovávat//
+		//pokud nenÃ­ Å¾Ã¡dnÃ½ posluchaÄ nenÃ­ nutnÃ© zprÃ¡vy zpracovÃ¡vat//
 		if (spcCheckProtocolListener != null){
 			
-			//kontrola typu zprávy//
+			//kontrola typu zprÃ¡vy//
 			switch(receivedData[0]){
-				case MessageIDs.ID_MSG_STATUS_SPC: //úspìšné pøihlášení//
+				case MobileMessageIDs.ID_MSG_STATUS_SPC: //ÃºspÄ›Å¡nÃ© pÅ™ihlÃ¡Å¡enÃ­//
 					SPCStatus spcStatus; //stav PPK
-					String spcNumber; //èíslo PPK
+					String spcNumber; //ÄÃ­slo PPK
 					
-					//zjištìní stavu PPK//
+					//zjiÅ¡tÄ›nÃ­ stavu PPK//
 					switch (receivedData[1]){
-						//PPK není hlášena jako odcizená//
-						case ProtocolConstants.MSG_STATUS_SPC_STATUS_OK:
+						//PPK nenÃ­ hlÃ¡Å¡ena jako odcizenÃ¡//
+						case MobileProtocolConstants.MSG_STATUS_SPC_STATUS_OK:
 							spcStatus = SPCStatus.OK_SPC;
 							break;
-						//PPK je hlášena jako odcizená//
-						case ProtocolConstants.MSG_STATUS_SPC_STATUS_STOLEN:
+						//PPK je hlÃ¡Å¡ena jako odcizenÃ¡//
+						case MobileProtocolConstants.MSG_STATUS_SPC_STATUS_STOLEN:
 							spcStatus = SPCStatus.STOLEN_SPC;
 							break;
-						//nepodaøilo se zjistit stav PPK//
-						case ProtocolConstants.MSG_STATUS_SPC_STATUS_UKNOWN:
+						//nepodaÅ™ilo se zjistit stav PPK//
+						case MobileProtocolConstants.MSG_STATUS_SPC_STATUS_UKNOWN:
 							spcStatus = SPCStatus.UKNOWN_SPC_STATUS;
 							break;
-						//neznámá hodnota//
+						//neznÃ¡mÃ¡ hodnota//
 						default:
 							spcStatus = SPCStatus.UKNOWN_SPC_STATUS;
 					}
 					
-					int spcNumLength = Conventer.byteArrayToInt(receivedData, 2); //zjištìní délky pole s èíslem PPK
-					spcNumber = new String(receivedData, 6, spcNumLength); //pøevedení pole bytù na string
+					int spcNumLength = Conventer.byteArrayToInt(receivedData, 2); //zjiÅ¡tÄ›nÃ­ dÃ©lky pole s ÄÃ­slem PPK
+					spcNumber = new String(receivedData, 6, spcNumLength); //pÅ™evedenÃ­ pole bytÅ¯ na string
 					
 					spcCheckProtocolListener.onReceivedSPCInfo(new SPCInfo(spcNumber, spcStatus));
 					break;
@@ -136,10 +138,10 @@ public class SPCCheckProtocol implements IDataProtocol {
 		}
 	}
 	
-	//================================================== VİKONNÉ METODY ==================================================//
+	//================================================== VÃKONNÃ‰ METODY ==================================================//
 	
 	/**
-	 * Odpojí datovı protokol od základního protokolu.
+	 * OdpojÃ­ datovÃ½ protokol od zÃ¡kladnÃ­ho protokolu.
 	 */
 	public void disconnectProtocol(){
 		if(networkInterface != null){
@@ -148,29 +150,29 @@ public class SPCCheckProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Zjistí stav pøenosné parkovací karty tj. jestli je hášena jako odcizená èi
+	 * ZjistÃ­ stav pÅ™enosnÃ© parkovacÃ­ karty tj. jestli je hÃ¡Å¡ena jako odcizenÃ¡ Äi
 	 * nikoliv.
 	 * 
-	 * @param spcNumber    Èíslo pøenosné parkovací karty.
+	 * @param spcNumber    ÄŒÃ­slo pÅ™enosnÃ© parkovacÃ­ karty.
 	 */
 	public void checkSPC(String spcNumber){
 		if(networkInterface != null){
-			networkInterface.sendData(createSPCMessage(spcNumber));
+			networkInterface.sendData(createSPCMessage(spcNumber), this);
 		}
 	}
 
-	//================================================== PRIVÁTNÍ METODY ==================================================//
+	//================================================== PRIVÃTNÃ METODY ==================================================//
 	
 	/**
-	 * Vytváøí zprávu pro kontrolu odcizení PPK.
-	 * @param spcNumber Èíslo pøenosné parkovací karty.
-	 * @return Zpráva pro odeslání na server.
+	 * VytvÃ¡Å™Ã­ zprÃ¡vu pro kontrolu odcizenÃ­ PPK.
+	 * @param spcNumber ÄŒÃ­slo pÅ™enosnÃ© parkovacÃ­ karty.
+	 * @return ZprÃ¡va pro odeslÃ¡nÃ­ na server.
 	 */
 	protected byte[] createSPCMessage(String spcNumber){
 		MessageBuilder msg = new MessageBuilder();
 		
-		msg.putByte(MessageIDs.ID_MSG_CHECK_SPC); //identifikátor zprávy
-		msg.putArrayWithIntLength(spcNumber.getBytes()); //vloí délku pole a pole se znaky èísla PPK
+		msg.putByte(MobileMessageIDs.ID_MSG_CHECK_SPC); //identifikÃ¡tor zprÃ¡vy
+		msg.putArrayWithIntLength(spcNumber.getBytes()); //vloÅ¾Ã­ dÃ©lku pole a pole se znaky ÄÃ­sla PPK
 		
 		return msg.getByteArray();
 	}

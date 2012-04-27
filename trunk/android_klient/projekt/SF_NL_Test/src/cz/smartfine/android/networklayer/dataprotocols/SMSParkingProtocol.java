@@ -2,27 +2,28 @@ package cz.smartfine.android.networklayer.dataprotocols;
 import java.util.Date;
 
 import cz.smartfine.android.networklayer.business.listeners.ISMSParkingProtocolListener;
-import cz.smartfine.android.networklayer.dataprotocols.interfaces.IDataProtocol;
 import cz.smartfine.android.networklayer.model.ParkingStatus;
 import cz.smartfine.android.networklayer.model.SMSParkingInfo;
-import cz.smartfine.android.networklayer.networkinterface.INetworkInterface;
-import cz.smartfine.android.networklayer.util.Conventer;
-import cz.smartfine.android.networklayer.util.MessageBuilder;
-
+import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
+import cz.smartfine.networklayer.dataprotocols.MobileProtocolConstants;
+import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.networkinterface.INetworkInterface;
+import cz.smartfine.networklayer.util.Conventer;
+import cz.smartfine.networklayer.util.MessageBuilder;
 /**
- * Pøedstavuje protokol pro kontrolu èasu parkování pomocí SMS.
- * @author Pavel Bro
+ * PÅ™edstavuje protokol pro kontrolu Äasu parkovÃ¡nÃ­ pomocÃ­ SMS.
+ * @author Pavel BroÅ¾
  * @version 1.0
  * @created 14-4-2012 18:48:48
  */
 public class SMSParkingProtocol implements IDataProtocol {
 
 	/**
-	 * Rozhraní pro pøístup k odesílání a pøíjímání dat.
+	 * RozhranÃ­ pro pÅ™Ã­stup k odesÃ­lÃ¡nÃ­ a pÅ™Ã­jÃ­mÃ¡nÃ­ dat.
 	 */
 	private INetworkInterface networkInterface;
 	/**
-	 * Posluchaè událostí z této tøídy.
+	 * PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	private ISMSParkingProtocolListener smsParkingProtocolListener;
 	
@@ -34,7 +35,7 @@ public class SMSParkingProtocol implements IDataProtocol {
 	
 	/**
 	 * Konstruktor.
-	 * @param networkInterface Rozhraní pro pøenost dat.
+	 * @param networkInterface RozhranÃ­ pro pÅ™enost dat.
 	 */
 	public SMSParkingProtocol(INetworkInterface networkInterface) {
 		this(networkInterface, null);
@@ -43,41 +44,41 @@ public class SMSParkingProtocol implements IDataProtocol {
 	/**
 	 * Konstruktor.
 	 * 
-	 * @param networkInterface    Rozhraní pro pøenos dat.
-	 * @param smsParkingProtocolListener Posluchaè událostí z této tøídy.
+	 * @param networkInterface    RozhranÃ­ pro pÅ™enos dat.
+	 * @param smsParkingProtocolListener PosluchaÄ udÃ¡lostÃ­ z tÃ©to tÅ™Ã­dy.
 	 */
 	public SMSParkingProtocol(INetworkInterface networkInterface, ISMSParkingProtocolListener smsParkingProtocolListener){
 		this.networkInterface = networkInterface;
 		this.smsParkingProtocolListener = smsParkingProtocolListener;
-		this.networkInterface.setOnReceivedDataListener(this); //zaregistrování se jako posluchaè
+		this.networkInterface.setOnReceivedDataListener(this); //zaregistrovÃ¡nÃ­ se jako posluchaÄ
 	}
 
 	//================================================== GET/SET ==================================================//
 	
 	/**
-	 * Odebere posluchaèe událostí protokolu pro kontrolu èasu parkování vozidel.
+	 * Odebere posluchaÄe udÃ¡lostÃ­ protokolu pro kontrolu Äasu parkovÃ¡nÃ­ vozidel.
 	 * 
-	 * @param smsParkingProtocolListener    Posluchaè událostí protokolu pro kontrolu
-	 * parkování.
+	 * @param smsParkingProtocolListener    PosluchaÄ udÃ¡lostÃ­ protokolu pro kontrolu
+	 * parkovÃ¡nÃ­.
 	 */
 	public void removeSMSParkingProtocolListener(ISMSParkingProtocolListener smsParkingProtocolListener){
 		this.smsParkingProtocolListener = null;
 	}
 
 	/**
-	 * Pøidá posluchaèe událostí protokolu pro kontrolu èasu parkování vozidel.
+	 * PÅ™idÃ¡ posluchaÄe udÃ¡lostÃ­ protokolu pro kontrolu Äasu parkovÃ¡nÃ­ vozidel.
 	 * 
-	 * @param smsParkingProtocolListener    Posluchaè událostí protokolu pro kontrolu
-	 * parkování.
+	 * @param smsParkingProtocolListener    PosluchaÄ udÃ¡lostÃ­ protokolu pro kontrolu
+	 * parkovÃ¡nÃ­.
 	 */
 	public void setSMSParkingProtocolListener(ISMSParkingProtocolListener smsParkingProtocolListener){
 		this.smsParkingProtocolListener = smsParkingProtocolListener;
 	}
 	
-	//================================================== HANDLERY UDÁLOSTÍ ==================================================//
+	//================================================== HANDLERY UDÃLOSTÃ ==================================================//
 	
 	/**
-	 * Handler události ukonèení spojení.
+	 * Handler udÃ¡losti ukonÄenÃ­ spojenÃ­.
 	 */
 	public void onConnectionTerminated(){
 		if (smsParkingProtocolListener != null){
@@ -86,55 +87,56 @@ public class SMSParkingProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Handler na zpracování události odeslání zprávy.
+	 * Handler na zpracovÃ¡nÃ­ udÃ¡losti odeslÃ¡nÃ­ zprÃ¡vy.
+	 * @param sentData OdeslanÃ¡ data.   
 	 */
-	public void onMessageSent(){
+	public void onMessageSent(byte[] sentData){
 		if (smsParkingProtocolListener != null){
 			smsParkingProtocolListener.onMessageSent();
 		}
 	}
 
 	/**
-	 * Handler události pøíjmu dat.
+	 * Handler udÃ¡losti pÅ™Ã­jmu dat.
 	 * 
-	 * @param receivedData    Pøijmutá data uloená ve formì bytového pole.
+	 * @param receivedData    PÅ™ijmutÃ¡ data uloÅ¾enÃ¡ ve formÄ› bytovÃ©ho pole.
 	 */
 	public void onReceivedData(byte[] receivedData){
-		//pokud není ádnı posluchaè není nutné zprávy zpracovávat//
+		//pokud nenÃ­ Å¾Ã¡dnÃ½ posluchaÄ nenÃ­ nutnÃ© zprÃ¡vy zpracovÃ¡vat//
 		if (smsParkingProtocolListener != null){
 			
-			//kontrola typu zprávy//
+			//kontrola typu zprÃ¡vy//
 			switch(receivedData[0]){
-				case MessageIDs.ID_MSG_STATUS_PSMS: //úspìšné pøihlášení//
+				case MobileMessageIDs.ID_MSG_STATUS_PSMS: //ÃºspÄ›Å¡nÃ© pÅ™ihlÃ¡Å¡enÃ­//
 					Date parkingSince;
 					Date parkingUntil;
 					ParkingStatus parkingStatus;
 					String vehicleRegistrationPlate;
 					
-					//zjištìní stavu parkování//
+					//zjiÅ¡tÄ›nÃ­ stavu parkovÃ¡nÃ­//
 					switch (receivedData[1]){
-						//parkování je povoleno//
-						case ProtocolConstants.MSG_STATUS_PSMS_STATUS_ALLOWED:
+						//parkovÃ¡nÃ­ je povoleno//
+						case MobileProtocolConstants.MSG_STATUS_PSMS_STATUS_ALLOWED:
 							parkingStatus = ParkingStatus.ALLOWED;
 							break;
-						//parkování není povoleno//
-						case ProtocolConstants.MSG_STATUS_PSMS_STATUS_NOT_ALLOWED:
+						//parkovÃ¡nÃ­ nenÃ­ povoleno//
+						case MobileProtocolConstants.MSG_STATUS_PSMS_STATUS_NOT_ALLOWED:
 							parkingStatus = ParkingStatus.NOT_ALLOWED;
 							break;
-						//stav se nepodaøilo urèit//
-						case ProtocolConstants.MSG_STATUS_SPC_STATUS_UKNOWN:
+						//stav se nepodaÅ™ilo urÄit//
+						case MobileProtocolConstants.MSG_STATUS_SPC_STATUS_UKNOWN:
 							parkingStatus = ParkingStatus.UNKNOWN_PARKING_STATUS;
 							break;
-						//neznámá hodnota//
+						//neznÃ¡mÃ¡ hodnota//
 						default:
 							parkingStatus = ParkingStatus.UNKNOWN_PARKING_STATUS;
 					}
 					
-					parkingSince = new Date(Conventer.byteArrayToLong(receivedData, 2)); //naètení èasu od kdy smí vozidlo  parkovat
-					parkingUntil = new Date(Conventer.byteArrayToLong(receivedData, 10)); //naètení èasu do kdy smí vozidlo  parkovat
+					parkingSince = new Date(Conventer.byteArrayToLong(receivedData, 2)); //naÄtenÃ­ Äasu od kdy smÃ­ vozidlo  parkovat
+					parkingUntil = new Date(Conventer.byteArrayToLong(receivedData, 10)); //naÄtenÃ­ Äasu do kdy smÃ­ vozidlo  parkovat
 					
-					int rvpLength = Conventer.byteArrayToInt(receivedData, 18); //zjištìní délky pole s SPZ
-					vehicleRegistrationPlate = new String(receivedData, 22, rvpLength); //pøevedení pole bytù na string
+					int rvpLength = Conventer.byteArrayToInt(receivedData, 18); //zjiÅ¡tÄ›nÃ­ dÃ©lky pole s SPZ
+					vehicleRegistrationPlate = new String(receivedData, 22, rvpLength); //pÅ™evedenÃ­ pole bytÅ¯ na string
 					
 					smsParkingProtocolListener.onReceivedSMSParkingInfo(new SMSParkingInfo(parkingStatus, parkingSince, parkingUntil, vehicleRegistrationPlate));
 					break;
@@ -142,10 +144,10 @@ public class SMSParkingProtocol implements IDataProtocol {
 		}
 	}
 	
-	//================================================== VİKONNÉ METODY ==================================================//
+	//================================================== VÃKONNÃ‰ METODY ==================================================//
 	
 	/**
-	 * Odpojí datovı protokol od základního protokolu.
+	 * OdpojÃ­ datovÃ½ protokol od zÃ¡kladnÃ­ho protokolu.
 	 */
 	public void disconnectProtocol(){
 		if(networkInterface != null){
@@ -154,29 +156,29 @@ public class SMSParkingProtocol implements IDataProtocol {
 	}
 
 	/**
-	 * Zjištìní stavu parkování vozidla podle SPZ.
+	 * ZjiÅ¡tÄ›nÃ­ stavu parkovÃ¡nÃ­ vozidla podle SPZ.
 	 * 
-	 * @param vehicleRegistrationPlate    SPZ vozidla, u kterého je poadováno
-	 * zjištìní stavu parkování.
+	 * @param vehicleRegistrationPlate    SPZ vozidla, u kterÃ©ho je poÅ¾adovÃ¡no
+	 * zjiÅ¡tÄ›nÃ­ stavu parkovÃ¡nÃ­.
 	 */
 	public void checkParking(String vehicleRegistrationPlate){
 		if(networkInterface != null){
-			networkInterface.sendData(createPSMSMessage(vehicleRegistrationPlate));
+			networkInterface.sendData(createPSMSMessage(vehicleRegistrationPlate), this);
 		}
 	}
 
-	//================================================== PRIVÁTNÍ METODY ==================================================//
+	//================================================== PRIVÃTNÃ METODY ==================================================//
 	
 	/**
-	 * Vytváøí zprávu pro kontrolu èasu parkování.
-	 * @param vehicleRegistrationPlate SPZ kontrolovaného vozidla.
-	 * @return Zpráva pro odeslání na server.
+	 * VytvÃ¡Å™Ã­ zprÃ¡vu pro kontrolu Äasu parkovÃ¡nÃ­.
+	 * @param vehicleRegistrationPlate SPZ kontrolovanÃ©ho vozidla.
+	 * @return ZprÃ¡va pro odeslÃ¡nÃ­ na server.
 	 */
 	protected byte[] createPSMSMessage(String vehicleRegistrationPlate){
 		MessageBuilder msg = new MessageBuilder();
 		
-		msg.putByte(MessageIDs.ID_MSG_CHECK_PSMS); //identifikátor zprávy
-		msg.putArrayWithIntLength(vehicleRegistrationPlate.getBytes()); //vloí délku pole a pole se znaky spz
+		msg.putByte(MobileMessageIDs.ID_MSG_CHECK_PSMS); //identifikÃ¡tor zprÃ¡vy
+		msg.putArrayWithIntLength(vehicleRegistrationPlate.getBytes()); //vloÅ¾Ã­ dÃ©lku pole a pole se znaky spz
 		
 		return msg.getByteArray();
 	}

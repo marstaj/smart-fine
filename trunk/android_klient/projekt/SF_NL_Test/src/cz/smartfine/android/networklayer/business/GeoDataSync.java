@@ -4,10 +4,10 @@ import cz.smartfine.android.networklayer.business.listeners.IGeoDataProtocolList
 import cz.smartfine.android.networklayer.dataprotocols.GeoDataProtocol;
 
 /**
- * Tøída zajišující nahrání geolokaèních dat na server.
- * @author Pavel Bro
+ * TÅ™Ã­da zajiÅ¡Å¥ujÃ­cÃ­ nahrÃ¡nÃ­ geolokaÄnÃ­ch dat na server.
+ * @author Pavel BroÅ¾
  * @version 1.0
- * @created 14-4-2012 18:48:46
+ * @updated 27-4-2012 18:18:40
  */
 public class GeoDataSync implements IGeoDataProtocolListener {
 
@@ -20,14 +20,14 @@ public class GeoDataSync implements IGeoDataProtocolListener {
 	}
 
 	/**
-	 * Handler zpracovávající událost ztráty spojení.
+	 * Handler zpracovÃ¡vajÃ­cÃ­ udÃ¡lost ztrÃ¡ty spojenÃ­.
 	 */
 	public void onConnectionTerminated(){
 
 	}
 
 	/**
-	 * Handler, reagující na událost odeslání zprávy na server.
+	 * Handler, reagujÃ­cÃ­ na udÃ¡lost odeslÃ¡nÃ­ zprÃ¡vy na server.
 	 */
 	public void onMessageSent(){
 

@@ -5,29 +5,29 @@ import android.content.Context;
 
 import cz.smartfine.android.networklayer.business.LoginProvider;
 import cz.smartfine.android.networklayer.business.listeners.ILoginProviderListener;
-import cz.smartfine.android.networklayer.links.ILink;
 import cz.smartfine.android.networklayer.model.LoginFailReason;
-import cz.smartfine.android.networklayer.networkinterface.INetworkInterface;
-import cz.smartfine.android.networklayer.util.InterThreadType;
+import cz.smartfine.networklayer.links.ILink;
+import cz.smartfine.networklayer.networkinterface.INetworkInterface;
+import cz.smartfine.networklayer.util.InterThreadType;
 
 /**
- * Zprostøedkovává pøístup k základním síovım slubám.
- * @author Pavel Bro
+ * ZprostÅ™edkovÃ¡vÃ¡ pÅ™Ã­stup k zÃ¡kladnÃ­m sÃ­Å¥ovÃ½m sluÅ¾bÃ¡m.
+ * @author Pavel BroÅ¾
  * @version 1.0
  * @created 14-4-2012 18:48:46
  */
 public class ConnectionProvider {
 
 	/**
-	 * Rozhraní pro NetworkInterface.
+	 * RozhranÃ­ pro NetworkInterface.
 	 */
 	private ILink mLink;
 	/**
-	 * Síové rozhraní pro datové protokoly.
+	 * SÃ­Å¥ovÃ© rozhranÃ­ pro datovÃ© protokoly.
 	 */
 	private INetworkInterface mNetworkInterface;
 	/**
-	 * Aplikaèní kontext.
+	 * AplikaÄnÃ­ kontext.
 	 */
 	private Context appContext;
 	
@@ -40,9 +40,9 @@ public class ConnectionProvider {
 	/**
 	 * Konstruktor.
 	 * @param appContext Kontext aplikace.
-	 * @param link    Objekt implementující ILink pro transfer dat.
-	 * @param networkInterface    Objekt reprezentující rozhraní, se kterım mohou
-	 * komunikovat tøídy datovıch protokolù.
+	 * @param link    Objekt implementujÃ­cÃ­ ILink pro transfer dat.
+	 * @param networkInterface    Objekt reprezentujÃ­cÃ­ rozhranÃ­, se kterÃ½m mohou
+	 * komunikovat tÅ™Ã­dy datovÃ½ch protokolÅ¯.
 	 */
 	public ConnectionProvider(Context appContext, ILink link, INetworkInterface networkInterface){
 		this.appContext = appContext;
@@ -54,37 +54,37 @@ public class ConnectionProvider {
 	//================================================== GET/SET ==================================================//
 	
 	/**
-	 * Vrací rozhraní pro transfer dat pøes sí.
+	 * VracÃ­ rozhranÃ­ pro transfer dat pÅ™es sÃ­Å¥.
 	 */
 	public ILink getLink(){
 		return mLink;
 	}
 
 	/**
-	 * Vrací základní rozhraní pro komunikaci datovıch protokolù se serverem.
+	 * VracÃ­ zÃ¡kladnÃ­ rozhranÃ­ pro komunikaci datovÃ½ch protokolÅ¯ se serverem.
 	 */
 	public INetworkInterface getNetworkInterface(){
 		return mNetworkInterface;
 	}
 	
-	//================================================== VİKONNÉ METODY ==================================================//
+	//================================================== VÃKONNÃ‰ METODY ==================================================//
 	
 	/**
-	 * Ukonèí spojení na server.
+	 * UkonÄÃ­ spojenÃ­ na server.
 	 */
 	public void disconnect(){
 		mLink.disconnect();
 	}
 	
 	/**
-	 * Zjišuje, zda je vytvoøen a pøipojen socket.
+	 * ZjiÅ¡Å¥uje, zda je vytvoÅ™en a pÅ™ipojen socket.
 	 */
 	public boolean isConnected(){
 		return mLink.isConnected();
 	}
 
 	/**
-	 * Vytvoøí spojení na server.
+	 * VytvoÅ™Ã­ spojenÃ­ na server.
 	 */
 	public boolean connect(){
 		try {
@@ -96,8 +96,8 @@ public class ConnectionProvider {
 	}
 
 	/**
-	 * Vytvoøí spojení na server a pøihlásí klienta.
-	 * @return true, pokud se podaøilo pøipojit a zároveò pøihlásit, false pokud se nepodaøilo pøipojit, nebo se nepodaøilo pøihlásit nebo nejsou k dispozici pøihlašovací údaje.
+	 * VytvoÅ™Ã­ spojenÃ­ na server a pÅ™ihlÃ¡sÃ­ klienta.
+	 * @return true, pokud se podaÅ™ilo pÅ™ipojit a zÃ¡roveÅˆ pÅ™ihlÃ¡sit, false pokud se nepodaÅ™ilo pÅ™ipojit, nebo se nepodaÅ™ilo pÅ™ihlÃ¡sit nebo nejsou k dispozici pÅ™ihlaÅ¡ovacÃ­ Ãºdaje.
 	 */
 	public boolean connectAndLogin(){
 		if (LoginProvider.isAvaibleLoginInformation(this.appContext)){
@@ -105,9 +105,9 @@ public class ConnectionProvider {
 				System.out.println("ANDROID: CP CAN CANT CONNECT");
 				return false;
 			}
-			final InterThreadType<Boolean> loginResult = new InterThreadType<Boolean>(); //promìnná, která pozastaví bìh vlákna, dokud nebude znám vısledek pøihlášení
+			final InterThreadType<Boolean> loginResult = new InterThreadType<Boolean>(); //promÄ›nnÃ¡, kterÃ¡ pozastavÃ­ bÄ›h vlÃ¡kna, dokud nebude znÃ¡m vÃ½sledek pÅ™ihlÃ¡Å¡enÃ­
 			System.out.println("ANDROID: CP CAN LOGIN START");
-			//posluchaè událostí z promìnné lp (LoginProvideru), kterı nastavuje loginResult//
+			//posluchaÄ udÃ¡lostÃ­ z promÄ›nnÃ© lp (LoginProvideru), kterÃ½ nastavuje loginResult//
 			ILoginProviderListener lpl = new ILoginProviderListener() {
 				
 				public void onMessageSent() {}
@@ -115,29 +115,29 @@ public class ConnectionProvider {
 				
 				public void onLoginFailed(LoginFailReason reason) {System.out.println("ANDROID: CP CAN LOGIN LISTENER FAILED");
 					try {
-						loginResult.put(false); //pøihlášení neúspìšné
+						loginResult.put(false); //pÅ™ihlÃ¡Å¡enÃ­ neÃºspÄ›Å¡nÃ©
 					} catch (InterruptedException e) {} 
 				}
 				
 				public void onLoginConfirmed() {System.out.println("ANDROID: CP CAN LOGIN LISTENER CONFIRMED");
 					try {
-						loginResult.put(true); //pøihlášení úspìšné
+						loginResult.put(true); //pÅ™ihlÃ¡Å¡enÃ­ ÃºspÄ›Å¡nÃ©
 					} catch (InterruptedException e) {}
 				}
 				
 				public void onConnectionTerminated() {System.out.println("ANDROID: CP CAN LOGIN LISTENER TERMINATED");
 					try {
-						loginResult.put(false); //pøihlášení neúspìšné
+						loginResult.put(false); //pÅ™ihlÃ¡Å¡enÃ­ neÃºspÄ›Å¡nÃ©
 					} catch (InterruptedException e) {}
 				}
 			};
 			
-			LoginProvider lp = new LoginProvider(this.getNetworkInterface(), this.appContext, lpl); //vytvoøení login provideru
+			LoginProvider lp = new LoginProvider(this.getNetworkInterface(), this.appContext, lpl); //vytvoÅ™enÃ­ login provideru
 			System.out.println("ANDROID: CP CAN LOGIN SEND");
-			//odeslání pøihlašovací zprávy
+			//odeslÃ¡nÃ­ pÅ™ihlaÅ¡ovacÃ­ zprÃ¡vy
 			lp.login(LoginProvider.getBadgeNumber(this.appContext), LoginProvider.getPIN(this.appContext), LoginProvider.getIMEI(this.appContext));
 			
-			//zde dojde k pozastavení vlákna, dokud nebude znám vısledek pøihlášení, poté se hodnota vrátí
+			//zde dojde k pozastavenÃ­ vlÃ¡kna, dokud nebude znÃ¡m vÃ½sledek pÅ™ihlÃ¡Å¡enÃ­, potÃ© se hodnota vrÃ¡tÃ­
 			try {
 				return loginResult.get();
 			} catch (InterruptedException e) {
