@@ -39,4 +39,9 @@ public class PCClientServer implements IClientServer {
 		return 0;
 	}
 
+    @Override
+    public void start() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }
