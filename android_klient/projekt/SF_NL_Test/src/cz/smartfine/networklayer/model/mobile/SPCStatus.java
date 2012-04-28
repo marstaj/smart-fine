@@ -1,4 +1,4 @@
-package cz.smartfine.android.networklayer.model;
+package cz.smartfine.networklayer.model.mobile;
 
 /**
  * Výčet stavů přenosné parkovací karty tj. zda je nahlášena jako odcizená či ne.

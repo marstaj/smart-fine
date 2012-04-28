@@ -5,9 +5,9 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 
 import cz.smartfine.android.networklayer.business.listeners.IGeoDataProtocolListener;
-import cz.smartfine.android.networklayer.model.LoginFailReason;
 import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.model.mobile.LoginFailReason;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.networklayer.util.MessageBuilder;
 /**

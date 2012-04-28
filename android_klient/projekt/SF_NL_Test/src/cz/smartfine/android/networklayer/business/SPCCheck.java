@@ -2,7 +2,7 @@ package cz.smartfine.android.networklayer.business;
 import cz.smartfine.android.networklayer.ConnectionProvider;
 import cz.smartfine.android.networklayer.business.listeners.ISPCCheckProtocolListener;
 import cz.smartfine.android.networklayer.dataprotocols.SMSParkingProtocol;
-import cz.smartfine.android.networklayer.model.SPCInfo;
+import cz.smartfine.networklayer.model.mobile.SPCInfo;
 
 /**
  * Třída zajišťující kontrolu odcizení přenosné parkovací karty.

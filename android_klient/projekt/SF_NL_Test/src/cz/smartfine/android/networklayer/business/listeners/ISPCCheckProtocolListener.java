@@ -1,6 +1,6 @@
 package cz.smartfine.android.networklayer.business.listeners;
-import cz.smartfine.android.networklayer.model.SPCInfo;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
+import cz.smartfine.networklayer.model.mobile.SPCInfo;
 
 /**
  * Interface posluchače událostí protokolu zpracovávajícího ověřování odcizení PPK

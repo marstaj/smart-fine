@@ -1,7 +1,7 @@
 package cz.smartfine.android.networklayer.business.listeners;
 
-import cz.smartfine.android.networklayer.model.LoginFailReason;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
+import cz.smartfine.networklayer.model.mobile.LoginFailReason;
 
 /**
  * Interface posluchače událostí přihlašovací třídy.

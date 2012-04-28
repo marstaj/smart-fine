@@ -2,7 +2,7 @@ package cz.smartfine.android.networklayer.business;
 import cz.smartfine.android.networklayer.ConnectionProvider;
 import cz.smartfine.android.networklayer.business.listeners.ISMSParkingProtocolListener;
 import cz.smartfine.android.networklayer.dataprotocols.SPCCheckProtocol;
-import cz.smartfine.android.networklayer.model.SMSParkingInfo;
+import cz.smartfine.networklayer.model.mobile.SMSParkingInfo;
 
 /**
  * Třída zajišťující zjištění stavu parkování vozidla.

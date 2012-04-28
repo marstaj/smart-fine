@@ -1,4 +1,4 @@
-package cz.smartfine.android.networklayer.model;
+package cz.smartfine.networklayer.model.mobile;
 
 /**
  * Výčet stavů parkování vozidla tj. za vozilo smí v zóně placeného stání parkovat
