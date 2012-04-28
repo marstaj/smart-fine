@@ -5,7 +5,7 @@ import android.telephony.TelephonyManager;
 import cz.smartfine.android.networklayer.business.listeners.ILoginProtocolListener;
 import cz.smartfine.android.networklayer.business.listeners.ILoginProviderListener;
 import cz.smartfine.android.networklayer.dataprotocols.LoginProtocol;
-import cz.smartfine.android.networklayer.model.LoginFailReason;
+import cz.smartfine.networklayer.model.mobile.LoginFailReason;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 
 

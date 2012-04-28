@@ -12,8 +12,8 @@ import cz.smartfine.android.networklayer.ConnectionProvider;
 import cz.smartfine.android.networklayer.business.LoginProvider;
 import cz.smartfine.android.networklayer.business.listeners.ILoginProviderListener;
 import cz.smartfine.android.networklayer.links.SecuredMobileLink;
-import cz.smartfine.android.networklayer.model.LoginFailReason;
 import cz.smartfine.android.networklayer.networkinterface.SimpleNetworkInterface;
+import cz.smartfine.networklayer.model.mobile.LoginFailReason;
 
 import android.app.Activity;
 import android.os.Bundle;

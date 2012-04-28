@@ -2,11 +2,11 @@ package cz.smartfine.android.networklayer.dataprotocols;
 import java.util.Date;
 
 import cz.smartfine.android.networklayer.business.listeners.ISMSParkingProtocolListener;
-import cz.smartfine.android.networklayer.model.ParkingStatus;
-import cz.smartfine.android.networklayer.model.SMSParkingInfo;
 import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
 import cz.smartfine.networklayer.dataprotocols.MobileProtocolConstants;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.model.mobile.ParkingStatus;
+import cz.smartfine.networklayer.model.mobile.SMSParkingInfo;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.networklayer.util.Conventer;
 import cz.smartfine.networklayer.util.MessageBuilder;

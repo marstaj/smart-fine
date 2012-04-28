@@ -1,6 +1,6 @@
 package cz.smartfine.android.networklayer.business;
 import cz.smartfine.android.networklayer.business.listeners.IAuthenticationProtocolListener;
-import cz.smartfine.android.networklayer.model.AuthenticationFailReason;
+import cz.smartfine.networklayer.model.mobile.AuthenticationFailReason;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 
 

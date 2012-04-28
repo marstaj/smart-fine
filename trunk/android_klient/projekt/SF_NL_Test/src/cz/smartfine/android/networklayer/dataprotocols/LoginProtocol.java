@@ -2,10 +2,10 @@ package cz.smartfine.android.networklayer.dataprotocols;
 import java.io.UnsupportedEncodingException;
 
 import cz.smartfine.android.networklayer.business.listeners.ILoginProtocolListener;
-import cz.smartfine.android.networklayer.model.LoginFailReason;
 import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
 import cz.smartfine.networklayer.dataprotocols.MobileProtocolConstants;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.model.mobile.LoginFailReason;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.networklayer.util.MessageBuilder;
 /**

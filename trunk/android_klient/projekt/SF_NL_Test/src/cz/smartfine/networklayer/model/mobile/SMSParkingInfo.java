@@ -1,4 +1,4 @@
-package cz.smartfine.android.networklayer.model;
+package cz.smartfine.networklayer.model.mobile;
 
 import java.util.Date;
 

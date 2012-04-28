@@ -1,4 +1,4 @@
-package cz.smartfine.android.networklayer.model;
+package cz.smartfine.networklayer.model.mobile;
 
 /**
  * Výčet, udávající možnosti, proč došlo k neúspěšnému ověření identity.

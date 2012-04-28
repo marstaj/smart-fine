@@ -1,4 +1,4 @@
-package cz.smartfine.android.networklayer.model;
+package cz.smartfine.networklayer.model.mobile;
 
 /**
  * Obsahuje informace o stavu přenosné parkovací karty (PPK, angl. SPC).

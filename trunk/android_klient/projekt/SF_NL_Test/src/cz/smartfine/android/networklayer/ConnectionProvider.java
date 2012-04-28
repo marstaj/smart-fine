@@ -5,8 +5,8 @@ import android.content.Context;
 
 import cz.smartfine.android.networklayer.business.LoginProvider;
 import cz.smartfine.android.networklayer.business.listeners.ILoginProviderListener;
-import cz.smartfine.android.networklayer.model.LoginFailReason;
 import cz.smartfine.networklayer.links.ILink;
+import cz.smartfine.networklayer.model.mobile.LoginFailReason;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.networklayer.util.InterThreadType;
 

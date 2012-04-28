@@ -1,6 +1,6 @@
 package cz.smartfine.android.networklayer.business.listeners;
-import cz.smartfine.android.networklayer.model.SMSParkingInfo;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
+import cz.smartfine.networklayer.model.mobile.SMSParkingInfo;
 
 /**
  * Interface posluchače událostí protokolu zpracovávajícího zjištění stavu
