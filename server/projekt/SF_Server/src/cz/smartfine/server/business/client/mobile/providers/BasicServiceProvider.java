@@ -53,6 +53,7 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
 
     @Override
     public void onLoginRequest(int badgeNumber, int pin, String imei) {
+        System.out.println("SERVER: LOGIN->BG: " + badgeNumber + " PIN: " + pin + " IMEI: " + imei);
         AuthenticationStatus loginStatus = authenticate(badgeNumber, pin, imei);
         if (loginStatus.authenticated){
             //nastaví serveru služební číslo a imei//
@@ -69,7 +70,6 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
             clientServer.setSpcCheckProvider(new SPCCheckProvider(networkInterface));
             clientServer.setTicketProvider(new TicketSyncProvider(networkInterface));
             
-            System.out.println("SERVER: LOGIN->BG: " + badgeNumber + " PIN: " + pin + " IMEI: " + imei);
             protocol.authenticationSuccessful(); //odeslání zprávy o úspěšném přihlášení
         }else{ //nepřihlášen
             protocol.authenticationFail(loginStatus.failReason); //odeslání zprávy o neúspěšném přihlášení
@@ -78,9 +78,9 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
 
     @Override
     public void onAuthenticationRequest(int badgeNumber, int pin) {
+        System.out.println("SERVER: AUTHENTICATION->BG: " + badgeNumber + " PIN: " + pin);
         AuthenticationStatus aStatus = authenticate(badgeNumber, pin);
         if (aStatus.authenticated){
-            System.out.println("SERVER: AUTHENTICATION->BG: " + badgeNumber + " PIN: " + pin);
             protocol.authenticationSuccessful(); //odeslání zprávy o úspěšné autentizaci
         }else{ //nepřihlášen
             protocol.authenticationFail(aStatus.failReason); //odeslání zprávy o neúspěšné autentizaci
@@ -120,12 +120,21 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
     
     
     private AuthenticationStatus authenticate(int badgeNumber, int pin, String imei){
-        return new AuthenticationStatus(true);
+        if (badgeNumber == 123456){
+            return new AuthenticationStatus(true);
+        }else{
+            return new AuthenticationStatus(false, LoginFailReason.WRONG_BADGE_NUMBER_OR_PIN);
+        }
+        
         //TODO: DODĚLAT
     }
     
     private AuthenticationStatus authenticate(int badgeNumber, int pin){
-        return new AuthenticationStatus(true);
+        if (badgeNumber == 123456 || badgeNumber == 654321 ){
+            return new AuthenticationStatus(true);
+        }else{
+            return new AuthenticationStatus(false, LoginFailReason.WRONG_BADGE_NUMBER_OR_PIN);
+        }
         //TODO: DODĚLAT
     }
 }
