@@ -221,7 +221,7 @@ public class BasicServiceProtocol implements IDataProtocol {
     protected byte[] createAuthenticationFailMessage(LoginFailReason failReason) {
         MessageBuilder msg = new MessageBuilder();
         
-        msg.putByte(MobileMessageIDs.ID_MSG_SUC_AUTH); //identifikátor zprávy
+        msg.putByte(MobileMessageIDs.ID_MSG_FAIL_AUTH); //identifikátor zprávy
         switch (failReason){
             case UNKNOWN_REASON:
                 msg.putByte(MobileProtocolConstants.MSG_FAIL_AUTH_ERR_UNKNOWN);
