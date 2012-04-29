@@ -106,6 +106,9 @@ public class ServerSPCCheckProtocol implements IDataProtocol {
         if (spcCheckProtocolListener != null) {
             spcCheckProtocolListener.onConnectionTerminated();
         }
+        if (processorThread != null) {
+            processorThread.interrupt();
+        }
     }
 
     /**
@@ -178,7 +181,7 @@ public class ServerSPCCheckProtocol implements IDataProtocol {
     protected byte[] createSPCMessage(SPCInfo spcInfo) {
         MessageBuilder msg = new MessageBuilder();
 
-        msg.putByte(MobileMessageIDs.ID_MSG_STATUS_PSMS); //identifikátor zprávy
+        msg.putByte(MobileMessageIDs.ID_MSG_STATUS_SPC); //identifikátor zprávy
 
         //vložení stavu PPK//
         switch (spcInfo.getSpcStatus()) {

@@ -107,6 +107,9 @@ public class ServerSMSParkingProtocol implements IDataProtocol {
         if (smsParkingProtocolListener != null) {
             smsParkingProtocolListener.onConnectionTerminated();
         }
+        if (processorThread != null) {
+            processorThread.interrupt();
+        }
     }
 
     /**

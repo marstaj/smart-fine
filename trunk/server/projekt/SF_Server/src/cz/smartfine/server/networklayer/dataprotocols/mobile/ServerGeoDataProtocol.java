@@ -110,6 +110,9 @@ public class ServerGeoDataProtocol implements IDataProtocol {
         if (geoDataProtocolListener != null) {
             geoDataProtocolListener.onConnectionTerminated();
         }
+        if (processorThread != null) {
+            processorThread.interrupt();
+        }
     }
 
     /**

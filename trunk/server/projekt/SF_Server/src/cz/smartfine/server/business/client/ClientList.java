@@ -1,54 +1,69 @@
 package cz.smartfine.server.business.client;
 
+import java.util.ArrayList;
+
 /**
- * Třída pro práci s připojenými klienty.
+ * Třída pro správu všech připojených serverů.
+ *
  * @author Pavel Brož
- * @version 1.0
- * @created 27-4-2012 17:00:25
+ * @version 1.0 @created 27-4-2012 17:00:25
  */
 public class ClientList {
 
-	public ClientList(){
+    protected ArrayList<IClientServer> servers = new ArrayList<IClientServer>();
 
-	}
+    /**
+     * Ukončí všechna spojení s klienty.
+     */
+    public void closeAll() {
+        for (IClientServer server : servers) {
+            server.close();
+        }
+    }
 
-	public void finalize() throws Throwable {
+    /**
+     * Zjistí zda, je připojen policista s daným služebním číslem a vrátí objekt serveru.
+     *
+     * @param badgeNumber Služební číslo policisty připojeného k serveru.
+     */
+    public IClientServer containBadgeNumber(int badgeNumber) {
+        for (IClientServer server : servers) {
+            if (server.getBadgeNumber() == badgeNumber){
+                return server;
+            }
+        }
+        return null;
+    }
 
-	}
+    /**
+     * Vloží server pro klienta mezi připojené servery.
+     *
+     * @param clientServer Objekt serveru, který tvoří protistranu klientovy.
+     */
+    public synchronized void put(IClientServer clientServer) {
+        if (!servers.contains(clientServer)){
+            servers.add(clientServer);
+        }
+    }
 
-	/**
-	 * Ukončí všechna spojení s klienty.
-	 */
-	public void closeAll(){
+    /**
+     * Odebere server pro klienta ze seznamu připojených serverů.
+     *
+     * @param clientServer Objekt serveru, který tvoří protistranu klientovy.
+     */
+    public synchronized void remove(IClientServer clientServer) {
+        if(clientServer != null){
+            servers.remove(clientServer);
+        }
+    }
 
-	}
-
-	/**
-	 * Zjistí zda, je připojen policista s daným služebním číslem a vrátí objekt
-	 * serveru.
-	 * 
-	 * @param badgeNumber    Služební číslo policisty připojeného k serveru.
-	 */
-	public IClientServer containBadgeNumber(int badgeNumber){
-		return null;
-	}
-
-	/**
-	 * Vloží server pro klienta mezi připojené servery.
-	 * 
-	 * @param clientServer    Objekt serveru, který tvoří protistranu klientovy.
-	 */
-	public synchronized void put(IClientServer clientServer){
-
-	}
-
-	/**
-	 * Odebere server pro klienta ze seznamu připojených serverů.
-	 * 
-	 * @param clientServer    Objekt serveru, který tvoří protistranu klientovy.
-	 */
-	public synchronized void remove(IClientServer clientServer){
-
-	}
-
+    /**
+     * Získá seznam serverů.
+     * @return Seznam serverů.
+     */
+    public ArrayList<IClientServer> getServers() {
+        return servers;
+    }
+    
+    
 }

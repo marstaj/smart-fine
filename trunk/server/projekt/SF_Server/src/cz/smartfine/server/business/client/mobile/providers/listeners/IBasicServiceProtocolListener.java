@@ -8,7 +8,7 @@ import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
  * @author Pavel Brož
  * @version 1.0 @created 27-4-2012 17:00:25
  */
-public interface IServerMainProtocolListener extends IProtocolListener {
+public interface IBasicServiceProtocolListener extends IProtocolListener {
 
     /**
      * Handler události příjmu požadavku na přihlášení.
@@ -36,6 +36,11 @@ public interface IServerMainProtocolListener extends IProtocolListener {
      * Handler události příjmu odhlašovací zprávy.
      */
     public void onLogoutMessageReceived();
+    
+    /**
+     * Handler události příjmu jakékoliv zprávy.
+     */
+    public void onMessageReceived();
     
     /**
      * Handler zpracovávající událost ztráty spojení.

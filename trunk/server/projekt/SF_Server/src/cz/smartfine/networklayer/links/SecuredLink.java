@@ -4,6 +4,8 @@ import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.net.ssl.SSLSocket;
 
 /**
@@ -70,7 +72,11 @@ abstract public class SecuredLink implements ILink {
      * Konstruktor.
      */
     public SecuredLink(SSLSocket socket) {
-        this.socket = socket;
+        try {
+            this.socket = socket;
+            in = socket.getInputStream();
+            out = socket.getOutputStream();
+        } catch (IOException ex) { }
     }
     
     //================================================== GET/SET ==================================================//
@@ -79,6 +85,7 @@ abstract public class SecuredLink implements ILink {
      *
      * @param networkInterface Základní rozhraní pro přenos dat.
      */
+    @Override
     public void setOnReceivedDataListener(INetworkInterface networkInterface) {
         this.networkInterface = networkInterface;
         if (this.receiver != null) {
@@ -91,6 +98,7 @@ abstract public class SecuredLink implements ILink {
      *
      * @param networkInterface Základní rozhraní pro přenos dat.
      */
+    @Override
     public void removeOnReceivedDataListener(INetworkInterface networkInterface) {
         this.networkInterface = null;
         if (this.receiver != null) {
@@ -105,6 +113,7 @@ abstract public class SecuredLink implements ILink {
      * @param dataToSend Data určená pro odeslání.
      * @exception IOException Selhání spojení během odesílání dat.
      */
+    @Override
     public void sendData(byte[] dataToSend) throws IOException {
         try {
             System.out.println("ANDROID: link.sendData()");
@@ -122,16 +131,19 @@ abstract public class SecuredLink implements ILink {
      *
      * @exception IOException Problém při vytváření socketu.
      */
+    @Override
     abstract public void connect() throws IOException;
 
     /**
      * Začne naslouchat na soketu.
      */
+    @Override
     abstract public void listen();
 
     /**
      * Odpojí se od serveru.
      */
+    @Override
     public void disconnect() {
         closeConnection();
     }
@@ -139,6 +151,7 @@ abstract public class SecuredLink implements ILink {
     /**
      * Zjišťuje, zda existuje spojení se serverem.
      */
+    @Override
     public boolean isConnected() {
         if (socket != null) {
             return socket.isConnected();

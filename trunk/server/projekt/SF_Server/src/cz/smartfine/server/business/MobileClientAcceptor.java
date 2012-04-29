@@ -1,6 +1,5 @@
 package cz.smartfine.server.business;
 
-import cz.smartfine.server.business.client.ClientList;
 import cz.smartfine.server.business.client.mobile.MobileClientList;
 import cz.smartfine.server.business.client.mobile.MobileClientServer;
 import java.io.IOException;
@@ -18,7 +17,7 @@ import javax.net.ssl.SSLSocket;
 public class MobileClientAcceptor implements Runnable {
 
     private MobileClientList mobileClientList;
-    private SSLContext context;
+    //private SSLContext context;
     private SSLServerSocketFactory sslServerSocketFactory;
     private SSLServerSocket sslServerSocket = null;
     private final int port;
@@ -26,9 +25,6 @@ public class MobileClientAcceptor implements Runnable {
     public MobileClientAcceptor(int port, MobileClientList mobileClientList) {
         this.mobileClientList = mobileClientList;
         this.port = port;
-    }
-
-    public void finalize() throws Throwable {
     }
 
     @Override

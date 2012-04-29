@@ -8,7 +8,7 @@ import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.networklayer.util.Conventer;
 import cz.smartfine.networklayer.util.InterThreadType;
 import cz.smartfine.networklayer.util.MessageBuilder;
-import cz.smartfine.server.business.client.mobile.providers.listeners.IServerMainProtocolListener;
+import cz.smartfine.server.business.client.mobile.providers.listeners.IBasicServiceProtocolListener;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -18,12 +18,12 @@ import java.io.UnsupportedEncodingException;
  * @version 1.0 
  * @created 27-4-2012 17:00:24
  */
-public class ServerMainProtocol implements IDataProtocol {
+public class BasicServiceProtocol implements IDataProtocol {
 
     /**
      * Posluchač událostí z této třídy.
      */
-    private IServerMainProtocolListener authenticationProtocolListener;
+    private IBasicServiceProtocolListener authenticationProtocolListener;
     /**
      * Rozhraní pro přístup k odesílání a příjímání dat.
      */
@@ -55,7 +55,7 @@ public class ServerMainProtocol implements IDataProtocol {
      *
      * @param networkInterface Rozhraní pro přenost dat.
      */
-    public ServerMainProtocol(INetworkInterface networkInterface) {
+    public BasicServiceProtocol(INetworkInterface networkInterface) {
         this(networkInterface, null);
     }
 
@@ -65,14 +65,14 @@ public class ServerMainProtocol implements IDataProtocol {
      * @param networkInterface Rozhraní pro přenost dat.
      * @param authenticationProtocolListener Posluchač událostí z této třídy.
      */
-    public ServerMainProtocol(INetworkInterface networkInterface, IServerMainProtocolListener authenticationProtocolListener) {
+    public BasicServiceProtocol(INetworkInterface networkInterface, IBasicServiceProtocolListener authenticationProtocolListener) {
         this.networkInterface = networkInterface;
         this.authenticationProtocolListener = authenticationProtocolListener;
         this.networkInterface.setOnReceivedDataListener(this); //zaregistrování se jako posluchač
         
         //vytvoření a nastartování objektu pro zpracování dat v novém vlákně//
         processor = new MessageProcessor(this.in, this.authenticationProtocolListener);
-        processorThread = new Thread(processor, "authenticationProcessorThread");
+        processorThread = new Thread(processor, "basicServiceProcessorThread");
         processorThread.start();
     }
 
@@ -94,7 +94,7 @@ public class ServerMainProtocol implements IDataProtocol {
      * Odebere posluchače událostí protokolu pro ověření identity.
      * @param authenticationProtocolListener Posluchač událostí z autentizačního protokolu.
      */
-    public void removeServerAuthenticationProtocolListener(IServerMainProtocolListener authenticationProtocolListener) {
+    public void removeServerAuthenticationProtocolListener(IBasicServiceProtocolListener authenticationProtocolListener) {
         this.authenticationProtocolListener = null;
         this.processor.setProtocolListener(null);
     }
@@ -103,7 +103,7 @@ public class ServerMainProtocol implements IDataProtocol {
      * Přidá posluchače událostí protokolu pro ověření identity.
      * @param authenticationProtocolListener Posluchač událostí z autentizačního protokolu.
      */
-    public void setServerAuthenticationProtocolListener(IServerMainProtocolListener authenticationProtocolListener) {
+    public void setServerAuthenticationProtocolListener(IBasicServiceProtocolListener authenticationProtocolListener) {
         this.authenticationProtocolListener = authenticationProtocolListener;
         this.processor.setProtocolListener(authenticationProtocolListener);
     }
@@ -118,6 +118,9 @@ public class ServerMainProtocol implements IDataProtocol {
         if (authenticationProtocolListener != null) {
             authenticationProtocolListener.onConnectionTerminated();
         }
+        if (processorThread != null) {
+            processorThread.interrupt();
+        }
     }
 
     /**
@@ -126,6 +129,9 @@ public class ServerMainProtocol implements IDataProtocol {
      */
     @Override
     public void onReceivedData(byte[] receivedData) {
+        if (authenticationProtocolListener != null){
+            authenticationProtocolListener.onMessageReceived(); //událost příchodu dat.
+        }
         try {
             boolean receiving; //zda přijme zprávu nebo ne
             if (notLoggedIn) {
@@ -242,14 +248,14 @@ public class ServerMainProtocol implements IDataProtocol {
     private class MessageProcessor implements Runnable {
 
         private InterThreadType<byte[]> in;
-        private IServerMainProtocolListener protocolListener;
+        private IBasicServiceProtocolListener protocolListener;
 
         /**
          * Konstruktor.
          * @param in Objekt pro předávání zpráv.
          * @param protocolListener Posluchač událostí z datového protokolu.
          */
-        public MessageProcessor(InterThreadType<byte[]> in, IServerMainProtocolListener protocolListener) {
+        public MessageProcessor(InterThreadType<byte[]> in, IBasicServiceProtocolListener protocolListener) {
             super();
             this.in = in;
             this.protocolListener = protocolListener;
@@ -268,7 +274,8 @@ public class ServerMainProtocol implements IDataProtocol {
                     if (protocolListener != null) {
                         //kontrola typu zprávy//
                         switch (receivedData[0]) {
-                            case MobileMessageIDs.ID_MSG_AUTHENTICATE: //autentizační zpráva//
+                             //autentizační zpráva//
+                            case MobileMessageIDs.ID_MSG_AUTHENTICATE:
                                 if (receivedData[1] == MobileProtocolConstants.MSG_AUTHENTICATE_REASON_LOGIN){ //přihlášení//
                                     int bn = Conventer.byteArrayToInt(receivedData, 2);
                                     int pin = Conventer.byteArrayToInt(receivedData, 6);
@@ -288,7 +295,9 @@ public class ServerMainProtocol implements IDataProtocol {
                                     protocolListener.onNonLoginMessageReceived();
                                 }
                                 break;
-                            case MobileMessageIDs.ID_MSG_LOGOUT: //odhlašovací zpráva//
+                                
+                            //odhlašovací zpráva//
+                            case MobileMessageIDs.ID_MSG_LOGOUT: 
                                 if (notLoggedIn){
                                     protocolListener.onNonLoginMessageReceived();
                                 }else{
@@ -305,11 +314,11 @@ public class ServerMainProtocol implements IDataProtocol {
             }
         }
 
-        public synchronized IServerMainProtocolListener getProtocolListener() {
+        public synchronized IBasicServiceProtocolListener getProtocolListener() {
             return protocolListener;
         }
 
-        public synchronized void setProtocolListener(IServerMainProtocolListener protocolListener) {
+        public synchronized void setProtocolListener(IBasicServiceProtocolListener protocolListener) {
             this.protocolListener = protocolListener;
         }
 

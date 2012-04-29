@@ -108,6 +108,9 @@ public class ServerTicketSyncProtocol implements IDataProtocol {
         if (ticketProtocolListener != null) {
             ticketProtocolListener.onConnectionTerminated();
         }
+        if (processorThread != null) {
+            processorThread.interrupt();
+        }
     }
 
     /**
