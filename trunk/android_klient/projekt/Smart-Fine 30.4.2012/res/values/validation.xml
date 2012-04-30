@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="val_ticket_err_spz">SPZ musí být vyplněna</string>
+	<string name="val_ticket_err_mpz">MPZ musí být vyplněna.</string>
+	<string name="val_ticket_err_vehicleType">Druh vozidla musý být vyplněn.</string>
+	<string name="val_ticket_err_vehicleBrand">Tovární značku vozidla musí být vyplněna.</string>
+	<string name="val_ticket_err_city">Město musí být vyplněno.</string>
+	<string name="val_ticket_err_street">Ulice musí být vyplněna.</string>
+	<string name="val_ticket_err_number">Číslo ulice musí být vyplněno.</string>
+	
+	<string name="val_ticket_err_lawNumber">Číslo zákona musí být vyplněno.</string>
+	<string name="val_ticket_err_collection">Sbírka zákona musí být vyplněna.</string>	
+	    
+	<string name="val_ticket_failure">Lístek se nepodařilo uložit!</string>
+	<string name="val_ticket_success">Parkovací lístek úspěšně uložen.</string>
+	
+	<string name="val_ticket_fotoDocumentation_failLoad">Nepodařilo se získat fotografii</string>
+
+</resources>
