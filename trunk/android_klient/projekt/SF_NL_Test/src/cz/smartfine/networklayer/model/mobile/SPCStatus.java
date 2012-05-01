@@ -1,12 +1,16 @@
 package cz.smartfine.networklayer.model.mobile;
 
+import java.io.Serializable;
+
 /**
- * Výčet stavů přenosné parkovací karty tj. zda je nahlášena jako odcizená či ne.
+ * Výčet stavů přenosné parkovací karty tj. zda je nahlášena jako odcizená či
+ * ne.
+ * 
  * @author Pavel Brož
  * @version 1.0
  * @updated 27-4-2012 18:18:46
  */
-public enum SPCStatus {
+public enum SPCStatus implements Serializable {
 
 	/**
 	 * Přenosná parkovací karta (SPC) je hlášena jako odcizená.

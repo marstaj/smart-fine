@@ -6,7 +6,7 @@ import java.util.List;
 public class MessageBuilder {
 
 	private List<byte[]> msg;
-	
+
 	/**
 	 * Konstruktor.
 	 */
@@ -15,77 +15,141 @@ public class MessageBuilder {
 		msg = new ArrayList<byte[]>();
 	}
 
-	public MessageBuilder putInt(int intField){
+	/**
+	 * Vloží číslo int.
+	 * 
+	 * @param intField
+	 * @return
+	 */
+	public MessageBuilder putInt(int intField) {
 		msg.add(Conventer.intToByteArray(intField));
 		return this;
 	}
-	
-	public MessageBuilder putByte(byte byteField){
+
+	/**
+	 * Vloží číslo byte.
+	 * 
+	 * @param byteField
+	 * @return
+	 */
+	public MessageBuilder putByte(byte byteField) {
 		msg.add(new byte[] { byteField });
 		return this;
 	}
-	
-	public MessageBuilder putArray(byte[] arrayField){
+
+	/**
+	 * Vloží pole bytů.
+	 * 
+	 * @param arrayField
+	 * @return
+	 */
+	public MessageBuilder putArray(byte[] arrayField) {
 		msg.add(arrayField);
 		return this;
 	}
-	
-	public MessageBuilder putArrayWithIntLength(byte[] arrayField){
+
+	/**
+	 * Vloží délku předaného pole jako int a pole bytů samotné.
+	 * 
+	 * @param arrayField
+	 * @return
+	 */
+	public MessageBuilder putArrayWithIntLength(byte[] arrayField) {
 		msg.add(Conventer.intToByteArray(arrayField.length));
 		msg.add(arrayField);
 		return this;
 	}
-	
-	public byte[] getByteArray(){
+
+	/**
+	 * Získá pole bytů celé zprávy.
+	 * 
+	 * @return
+	 */
+	public byte[] getByteArray() {
 		byte[] retArray = new byte[this.getMessageLength()];
 		int offset = 0;
-		
-		for (byte[] field : msg){
-			java.lang.System.arraycopy(field, 0, retArray, offset, field.length);
+
+		for (byte[] field : msg) {
+			java.lang.System
+					.arraycopy(field, 0, retArray, offset, field.length);
 			offset += field.length;
 		}
-		
+
 		return retArray;
 	}
-	
-	public void deleteLastField(){
-		if (msg.size() > 0){
+
+	/**
+	 * Odstraní poslední vloženou položku.
+	 */
+	public void deleteLastField() {
+		if (msg.size() > 0) {
 			deleteFieldAt(msg.size() - 1);
 		}
 	}
-	
-	public void deleteFieldAt(int position){
+
+	/**
+	 * Odstraní položku na dané pozici.
+	 * 
+	 * @param position
+	 */
+	public void deleteFieldAt(int position) {
 		msg.remove(position);
 	}
-	
-	public byte[] getFirstField(){
-		if (msg.size() > 0){
+
+	/**
+	 * Získá první vloženou položku.
+	 * 
+	 * @return
+	 */
+	public byte[] getFirstField() {
+		if (msg.size() > 0) {
 			return msg.get(0);
 		}
 		return null;
 	}
-	
-	public byte[] getLastField(){
-		if (msg.size() > 0){
+
+	/**
+	 * Získá poslední vloženou položku.
+	 * 
+	 * @return
+	 */
+	public byte[] getLastField() {
+		if (msg.size() > 0) {
 			return msg.get(msg.size() - 1);
 		}
 		return null;
 	}
-	
-	public byte[] getFieldAt(int position){
-		if (msg.size() > 0){
+
+	/**
+	 * Získá první položku na zadné pozici.
+	 * 
+	 * @param position
+	 * @return
+	 */
+	public byte[] getFieldAt(int position) {
+		if (msg.size() > 0) {
 			return msg.get(position);
 		}
 		return null;
 	}
-	
-	public int getFieldCount(){
+
+	/**
+	 * Získá počet vložených položek.
+	 * 
+	 * @return
+	 */
+	public int getFieldCount() {
 		return msg.size();
 	}
-	
-	public int getMessageLength(){
+
+	/**
+	 * Získá celkou délku v bytech.
+	 * 
+	 * @return
+	 */
+	public int getMessageLength() {
 		int totalLength = 0;
-		for (byte[] field : msg){
+		for (byte[] field : msg) {
 			totalLength += field.length;
 		}
 		return totalLength;

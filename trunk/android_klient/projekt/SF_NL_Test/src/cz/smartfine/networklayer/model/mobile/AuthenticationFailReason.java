@@ -2,6 +2,7 @@ package cz.smartfine.networklayer.model.mobile;
 
 /**
  * Výčet, udávající možnosti, proč došlo k neúspěšnému ověření identity.
+ * 
  * @author Pavel Brož
  * @version 1.0
  * @updated 27-4-2012 18:18:45

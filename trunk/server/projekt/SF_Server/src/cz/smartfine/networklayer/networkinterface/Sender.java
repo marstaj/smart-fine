@@ -23,8 +23,7 @@ public class Sender implements Runnable {
      *
      * @param link Instance ILink pro odesílání dat.
      * @param out Objekt pro předávání zpráv.
-     * @param networkInterface	Síťové rozhraní, které přes tuto třídu odesílá
-     * data.
+     * @param networkInterface	Síťové rozhraní, které přes tuto třídu odesílá data.
      */
     public Sender(ILink link, InterThreadType<DataPackage> out, INetworkInterface networkInterface) {
         super();
@@ -33,6 +32,7 @@ public class Sender implements Runnable {
         this.networkInterface = networkInterface;
     }
 
+    @Override
     public void run() {
         try {
             while (true) {

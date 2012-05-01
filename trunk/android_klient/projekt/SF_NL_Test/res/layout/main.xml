@@ -44,4 +44,36 @@
         android:onClick="butConAndLog"
         android:text="Připojit a Přihlásit" />
     
+    <Button
+        android:id="@+id/butSendTicket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="butSendTicket"
+        android:text="Odeslat PL" />
+    
+    <Button
+        android:id="@+id/butSendPSMS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="butSendPSMS"
+        android:text="Odeslat SMS parking" />
+    <Button
+        android:id="@+id/butSendPPK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="butSendPPK"
+        android:text="Odeslat kontrolu PPK" />
+    <Button
+        android:id="@+id/butSendGeo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="butSendGeo"
+        android:text="Odeslat geo data" />
+    
+    <Button
+        android:id="@+id/butSendAuth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="butSendAuth"
+        android:text="Odeslat autentizaci" />
 </LinearLayout>

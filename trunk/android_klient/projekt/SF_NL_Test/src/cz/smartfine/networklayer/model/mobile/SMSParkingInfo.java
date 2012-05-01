@@ -1,22 +1,28 @@
 package cz.smartfine.networklayer.model.mobile;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Obsahuje informace o parkování vozidlav zóně placeného stání.
+ * 
  * @author Pavel Brož
  * @version 1.0
  * @updated 27-4-2012 18:18:45
  */
-public class SMSParkingInfo {
+public class SMSParkingInfo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Datum a čas, od kterého může vozidlo parkovat v zóně placeného stání.
 	 */
 	private Date parkingSince;
 	/**
-	 * Udává, jaký je stav parkování vozidla tj. zda vozidlo smí v daném čase parkovat
-	 * v zóně placeného stání či ne.
+	 * Udává, jaký je stav parkování vozidla tj. zda vozidlo smí v daném čase
+	 * parkovat v zóně placeného stání či ne.
 	 */
 	private ParkingStatus parkingStatus;
 	/**
@@ -28,19 +34,20 @@ public class SMSParkingInfo {
 	 */
 	private String vehicleRegistrationPlate;
 
-	public SMSParkingInfo(){
+	public SMSParkingInfo() {
 
 	}
 
-	
 	/**
 	 * Konstruktor.
+	 * 
 	 * @param parkingStatus
 	 * @param parkingSince
 	 * @param parkingUntil
 	 * @param vehicleRegistrationPlate
 	 */
-	public SMSParkingInfo(ParkingStatus parkingStatus, Date parkingSince, Date parkingUntil, String vehicleRegistrationPlate) {
+	public SMSParkingInfo(ParkingStatus parkingStatus, Date parkingSince,
+			Date parkingUntil, String vehicleRegistrationPlate) {
 		super();
 		this.parkingSince = parkingSince;
 		this.parkingStatus = parkingStatus;
@@ -56,7 +63,8 @@ public class SMSParkingInfo {
 	}
 
 	/**
-	 * @param parkingSince the parkingSince to set
+	 * @param parkingSince
+	 *            the parkingSince to set
 	 */
 	public void setParkingSince(Date parkingSince) {
 		this.parkingSince = parkingSince;
@@ -70,7 +78,8 @@ public class SMSParkingInfo {
 	}
 
 	/**
-	 * @param parkingStatus the parkingStatus to set
+	 * @param parkingStatus
+	 *            the parkingStatus to set
 	 */
 	public void setParkingStatus(ParkingStatus parkingStatus) {
 		this.parkingStatus = parkingStatus;
@@ -84,7 +93,8 @@ public class SMSParkingInfo {
 	}
 
 	/**
-	 * @param parkingUntil the parkingUntil to set
+	 * @param parkingUntil
+	 *            the parkingUntil to set
 	 */
 	public void setParkingUntil(Date parkingUntil) {
 		this.parkingUntil = parkingUntil;
@@ -98,11 +108,11 @@ public class SMSParkingInfo {
 	}
 
 	/**
-	 * @param vehicleRegistrationPlate the vehicleRegistrationPlate to set
+	 * @param vehicleRegistrationPlate
+	 *            the vehicleRegistrationPlate to set
 	 */
 	public void setVehicleRegistrationPlate(String vehicleRegistrationPlate) {
 		this.vehicleRegistrationPlate = vehicleRegistrationPlate;
 	}
 
-	
 }

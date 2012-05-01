@@ -23,7 +23,8 @@ public class MobileMessageIDs {
 	public static final byte ID_MSG_UPLOAD_TICKET = 0x4;
 
 	/**
-	 * ID zprávy pro kontrolu odcizení přenosné parkovací karty (PPK, angl. SPC).
+	 * ID zprávy pro kontrolu odcizení přenosné parkovací karty (PPK, angl.
+	 * SPC).
 	 */
 	public static final byte ID_MSG_CHECK_SPC = 0x6;
 
@@ -52,9 +53,4 @@ public class MobileMessageIDs {
 	 */
 	public static final byte ID_MSG_LOGOUT = 0xB;
 
-	/**
-	 * ID zprávy informující o ukončení spojení.
-	 */
-	public static final byte ID_MSG_TERM_CON = 0xC;
-	
 }

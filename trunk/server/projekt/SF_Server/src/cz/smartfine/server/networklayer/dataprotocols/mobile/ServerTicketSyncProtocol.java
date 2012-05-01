@@ -1,8 +1,8 @@
 package cz.smartfine.server.networklayer.dataprotocols.mobile;
 
-import cz.smartfine.android.model.Ticket;
 import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
+import cz.smartfine.networklayer.model.NetworkTicket;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.networklayer.util.Conventer;
 import cz.smartfine.networklayer.util.InterThreadType;
@@ -204,8 +204,10 @@ public class ServerTicketSyncProtocol implements IDataProtocol {
                             byte[] dataField = new byte[ticketLength];
                             System.arraycopy(receivedData, 9, dataField, 0, ticketLength);
 
-                            Ticket ticket = deserializeTicketData(dataField);
-                            protocolListener.onTicketReceived(ticket, badgeNumber);
+                            NetworkTicket ticket = deserializeTicketData(dataField);
+                            ticket.setUploaderBadgeNumber(badgeNumber);
+                            
+                            protocolListener.onTicketReceived(ticket);
                         }
                     }
                 }
@@ -220,13 +222,13 @@ public class ServerTicketSyncProtocol implements IDataProtocol {
          * @param data
          * @return
          */
-        private Ticket deserializeTicketData(byte[] data) {
+        private NetworkTicket deserializeTicketData(byte[] data) {
             ObjectInputStream objIS = null;
             try {
                 ByteArrayInputStream ticketBytes = new ByteArrayInputStream(data);
                 objIS = new ObjectInputStream(ticketBytes);
 
-                Ticket ticket = (Ticket) objIS.readObject();
+                NetworkTicket ticket = (NetworkTicket) objIS.readObject();
 
                 objIS.close();
                 ticketBytes.close();
