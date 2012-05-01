@@ -1,9 +1,11 @@
 package cz.smartfine.android.networklayer.business.listeners;
+
 import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
 import cz.smartfine.networklayer.model.mobile.AuthenticationFailReason;
 
 /**
- * Interface posluchače událostí protokolu zpracovávajícího autentizaci policisty.
+ * Interface posluchače událostí protokolu zpracovávajícího autentizaci
+ * policisty.
  * 
  * @author Pavel Brož
  * @version 1.0
@@ -24,7 +26,8 @@ public interface IAuthenticationProtocolListener extends IProtocolListener {
 	/**
 	 * Handler události neúspěšného ověření identity..
 	 * 
-	 * @param reason    Důvod selhání autentizace.
+	 * @param reason
+	 *            Důvod selhání autentizace.
 	 */
 	public void onAuthenticationFailed(AuthenticationFailReason reason);
 

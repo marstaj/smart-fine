@@ -1,13 +1,20 @@
 package cz.smartfine.networklayer.model.mobile;
 
+import java.io.Serializable;
+
 /**
  * Obsahuje informace o stavu přenosné parkovací karty (PPK, angl. SPC).
+ * 
  * @author Pavel Brož
  * @version 1.0
  * @updated 27-4-2012 18:18:45
  */
-public class SPCInfo {
+public class SPCInfo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Číslo přenosné parkovací karty, ke které se vztahuje informace o stavu.
 	 */
@@ -17,11 +24,10 @@ public class SPCInfo {
 	 */
 	private SPCStatus spcStatus;
 
-	public SPCInfo(){
+	public SPCInfo() {
 
 	}
 
-	
 	/**
 	 * @param spcNumber
 	 * @param spcStatus
@@ -31,7 +37,6 @@ public class SPCInfo {
 		this.spcNumber = spcNumber;
 		this.spcStatus = spcStatus;
 	}
-
 
 	public void finalize() throws Throwable {
 
@@ -45,7 +50,8 @@ public class SPCInfo {
 	}
 
 	/**
-	 * @param spcNumber the spcNumber to set
+	 * @param spcNumber
+	 *            the spcNumber to set
 	 */
 	public void setSpcNumber(String spcNumber) {
 		this.spcNumber = spcNumber;
@@ -59,11 +65,11 @@ public class SPCInfo {
 	}
 
 	/**
-	 * @param spcStatus the spcStatus to set
+	 * @param spcStatus
+	 *            the spcStatus to set
 	 */
 	public void setSpcStatus(SPCStatus spcStatus) {
 		this.spcStatus = spcStatus;
 	}
 
-	
 }

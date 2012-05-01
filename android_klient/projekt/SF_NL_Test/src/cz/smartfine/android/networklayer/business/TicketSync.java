@@ -1,15 +1,17 @@
 package cz.smartfine.android.networklayer.business;
+
 import cz.smartfine.android.networklayer.business.listeners.ITicketProtocolListener;
 
 /**
  * Třída zajišťující nahrání PL na server.
+ * 
  * @author Pavel Brož
  * @version 1.0
  * @updated 27-4-2012 18:18:41
  */
 public class TicketSync implements ITicketProtocolListener {
 
-	public TicketSync(){
+	public TicketSync() {
 
 	}
 
@@ -20,14 +22,14 @@ public class TicketSync implements ITicketProtocolListener {
 	/**
 	 * Handler zpracovávající událost ztráty spojení.
 	 */
-	public void onConnectionTerminated(){
+	public void onConnectionTerminated() {
 
 	}
 
 	/**
 	 * Handler, reagující na událost odeslání zprávy na server.
 	 */
-	public void onMessageSent(){
+	public void onMessageSent() {
 
 	}
 

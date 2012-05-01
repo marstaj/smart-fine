@@ -1,10 +1,12 @@
 package cz.smartfine.android.networklayer.business.listeners;
+
 import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
 import cz.smartfine.networklayer.model.mobile.SMSParkingInfo;
 
 /**
  * Interface posluchače událostí protokolu zpracovávajícího zjištění stavu
  * parkování vozidla v zónách placeného stání.
+ * 
  * @author Pavel Brož
  * @version 1.0
  * @updated 27-4-2012 18:18:42
@@ -22,9 +24,11 @@ public interface ISMSParkingProtocolListener extends IProtocolListener {
 	public void onMessageSent();
 
 	/**
-	 * Handler zpracovávající událost příchodu odpovědi o stavu parkování vozidla.
+	 * Handler zpracovávající událost příchodu odpovědi o stavu parkování
+	 * vozidla.
 	 * 
-	 * @param parkingInfo    Informace o parkování vozidla přijaté ze serveru.
+	 * @param parkingInfo
+	 *            Informace o parkování vozidla přijaté ze serveru.
 	 */
 	public void onReceivedSMSParkingInfo(SMSParkingInfo parkingInfo);
 

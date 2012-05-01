@@ -1,5 +1,6 @@
 package cz.smartfine.networklayer.model.mobile;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,8 +9,12 @@ import java.util.Date;
  * @version 1.0
  * @updated 27-4-2012 18:18:45
  */
-public class SMSParkingInfo {
+public class SMSParkingInfo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Datum a čas, od kterého může vozidlo parkovat v zóně placeného stání.
 	 */

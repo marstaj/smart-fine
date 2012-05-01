@@ -1,7 +1,7 @@
 package cz.smartfine.server.business.client.mobile.providers.listeners;
 
-import cz.smartfine.android.model.Ticket;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
+import cz.smartfine.networklayer.model.NetworkTicket;
 
 /**
  * Interface posluchače událostí protokolu zpracovávajícího přenos parkovacích lístků.
@@ -26,7 +26,6 @@ public interface IServerTicketProtocolListener extends IProtocolListener {
     /**
      * Handler reagující na událost příchodu parkovacího lístku.
      * @param ticket Parkovací lístek.
-     * @param badgeNumber Služební číslo policisty, který nahrává PL.
      */
-    public void onTicketReceived(Ticket ticket, int badgeNumber);
+    public void onTicketReceived(NetworkTicket ticket);
 }

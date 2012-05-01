@@ -15,6 +15,8 @@ import cz.smartfine.server.business.client.mobile.MobileClientList;
  */
 public class SFServer {
 
+    private static SFServer server;
+    
     public static final int MOBILE_CLIENT_SERVER_PORT = 25000;
     public static final int PC_CLIENT_SERVER_PORT = 25100;
     public static final int ADMIN_SERVER_PORT = 25200;
@@ -22,7 +24,11 @@ public class SFServer {
     /**
      * Timeout, po kterém se ukončují neaktivní servery.
      */
-    public static final long SERVER_TIMEOUT = 36000000; // 36 000 000 ms = 10 h
+    public static final long SERVER_TIMEOUT = 36000000; // 36 000 000 ms = 10 h TODO: ČAS
+    /**
+     * Po jaké době se má spouštět ukončování serverů.
+     */
+    public static final long EXECUTE_TIMEOUT = 36000000; // 36 000 000 ms = 10 h TODO: ČAS
     /**
      * Třída přijímající síťová připojení na server od mobilních klientů.
      */
@@ -51,8 +57,14 @@ public class SFServer {
      */
     private static InterThreadType<Boolean> run = new InterThreadType<Boolean>();
 
-    public static void main(String[] args) {
+    private SFServer() {
+        
+    }
 
+    /**
+     * Spustí server
+     */
+    public void start(){
         mobileClientAcceptor = new MobileClientAcceptor(MOBILE_CLIENT_SERVER_PORT, mobileClientList);
         mobileClientAcceptorThread = new Thread(mobileClientAcceptor, "mobileClientAcceptor");
         mobileClientAcceptorThread.start();
@@ -60,7 +72,7 @@ public class SFServer {
         /*
          * pcClientAcceptor = new PCClientAcceptor(); pcClientAcceptorThread = new Thread(pcClientAcceptor, "pcClientAcceptor"); pcClientAcceptorThread.start();
          */
-        timeoutCloser = new TimeoutServerCloser(new ClientList[] {mobileClientList, pcClientList}, SERVER_TIMEOUT);
+        timeoutCloser = new TimeoutServerCloser(new ClientList[] {mobileClientList, pcClientList}, SERVER_TIMEOUT, EXECUTE_TIMEOUT);
         timeoutCloserThread = new Thread(timeoutCloser, "timeoutCloser");
         timeoutCloserThread.start();
 
@@ -69,5 +81,13 @@ public class SFServer {
             //TODO: UKONČIT VLÁKNA
         } catch (InterruptedException ex) {
         }
+    }
+    
+    public static SFServer getServer(){
+        return server;
+    }
+    
+    public static void main(String[] args) {
+        new SFServer().start();
     }
 }

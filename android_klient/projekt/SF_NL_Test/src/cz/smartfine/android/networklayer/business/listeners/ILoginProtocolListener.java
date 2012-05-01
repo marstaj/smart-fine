@@ -1,9 +1,11 @@
 package cz.smartfine.android.networklayer.business.listeners;
+
 import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
 import cz.smartfine.networklayer.model.mobile.LoginFailReason;
 
 /**
- * Interface posluchače událostí protokolu zpracovávajícího přihlašování na server.
+ * Interface posluchače událostí protokolu zpracovávajícího přihlašování na
+ * server.
  * 
  * @author Pavel Brož
  * @version 1.0
@@ -24,7 +26,8 @@ public interface ILoginProtocolListener extends IProtocolListener {
 	/**
 	 * Handler události chybného přihlášení.
 	 * 
-	 * @param reason    Důvod selhání přihlášení.
+	 * @param reason
+	 *            Důvod selhání přihlášení.
 	 */
 	public void onLoginFailed(LoginFailReason reason);
 
