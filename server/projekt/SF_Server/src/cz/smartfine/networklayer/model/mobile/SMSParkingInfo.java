@@ -34,7 +34,7 @@ public class SMSParkingInfo implements Serializable {
 	private String vehicleRegistrationPlate;
 
 	public SMSParkingInfo(){
-
+            super();
 	}
 
 	

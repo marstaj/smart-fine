@@ -142,6 +142,22 @@ CREATE TABLE `tickets` (
   KEY `FKTICKETSBADGENUMBER` (`BADGENUMBER`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabulka s parkovacími lístky.' AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `geolocation`
+--
+
+CREATE TABLE `geolocation` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `TIME` datetime NOT NULL,
+  `LONGTITUDE` double NOT NULL,
+  `LATITUDE` double NOT NULL,
+  `BADGENUMBER` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FKGEOLOCATIONBADGENUMBER` (`BADGENUMBER`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
 --
 -- Omezení pro exportované tabulky
 --
@@ -184,3 +200,10 @@ ALTER TABLE `tickets`
   ADD CONSTRAINT `FKTICKETSBADGENUMBER` FOREIGN KEY (`BADGENUMBER`) REFERENCES `policemen` (`BADGENUMBER`),
   ADD CONSTRAINT `FKTICKETSUPLOADEDBY` FOREIGN KEY (`UPLOADEDBY`) REFERENCES `policemen` (`BADGENUMBER`);
 
+--
+-- Omezení pro tabulku `geolocation`
+--
+ALTER TABLE `geolocation`
+  ADD CONSTRAINT `FKGEOLOCATIONBADGENUMBER` FOREIGN KEY (`BADGENUMBER`) REFERENCES `policemen` (`BADGENUMBER`);
+  
+  

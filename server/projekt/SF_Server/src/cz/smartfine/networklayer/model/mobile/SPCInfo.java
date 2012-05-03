@@ -27,7 +27,6 @@ public class SPCInfo implements Serializable {
 
 	}
 
-	
 	/**
 	 * @param spcNumber
 	 * @param spcStatus
@@ -36,11 +35,6 @@ public class SPCInfo implements Serializable {
 		super();
 		this.spcNumber = spcNumber;
 		this.spcStatus = spcStatus;
-	}
-
-
-	public void finalize() throws Throwable {
-
 	}
 
 	/**
