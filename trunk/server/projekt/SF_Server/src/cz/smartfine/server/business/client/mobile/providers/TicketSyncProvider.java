@@ -44,18 +44,19 @@ public class TicketSyncProvider implements IServerTicketProtocolListener {
         System.out.println("SERVER: TICKET RECEIVED FROM: " + ticket.getUploaderBadgeNumber());
         System.out.println("SERVER: TICKET MPZ: " + ticket.getMpz());
         System.out.println("SERVER: TICKET BG: " + ticket.getBadgeNumber());
-        System.out.println("SERVER: TICKET photo: " + ticket.getPhotos().size());
+        System.out.println("SERVER: TICKET PHOTO: " + ticket.getPhotos().size());
         System.out.println("SERVER: TICKET RECEIVED SPZ:" + ticket.getSpz() + " CITY: " +  ticket.getCity() + " STREET: " + ticket.getStreet()  + " TIME: " + ticket.getDate().toString()  );
-ticket.setMpz("AG");
-ticket.setBadgeNumber(123456);
-
+        
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.save(ticket);
-            session.getTransaction().commit();
-        } catch (HibernateException he) {
-            he.printStackTrace();
+            
+            session.save(ticket); //uloží PL do DB
+        } catch (HibernateException e) {
+            e.printStackTrace(); //TODO: NĚCO S TÍM UDĚLAT
+        } finally{
+            session.getTransaction().commit(); //potvrzení změn v DB
         }
     }
 }
