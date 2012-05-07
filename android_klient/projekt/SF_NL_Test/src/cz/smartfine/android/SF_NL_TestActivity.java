@@ -27,7 +27,7 @@ import cz.smartfine.android.networklayer.dataprotocols.GeoDataProtocol;
 import cz.smartfine.android.networklayer.dataprotocols.SMSParkingProtocol;
 import cz.smartfine.android.networklayer.dataprotocols.SPCCheckProtocol;
 import cz.smartfine.android.networklayer.dataprotocols.TicketSyncProtocol;
-import cz.smartfine.android.networklayer.links.SecuredMobileLink;
+import cz.smartfine.android.networklayer.links.SecuredMobileClientLink;
 import cz.smartfine.android.networklayer.networkinterface.SimpleNetworkInterface;
 import cz.smartfine.networklayer.model.mobile.AuthenticationFailReason;
 import cz.smartfine.networklayer.model.mobile.LoginFailReason;
@@ -78,9 +78,9 @@ public class SF_NL_TestActivity extends Activity implements
 	public void butConnectClick(View theButton) {
 		InputStream in = this.getResources().openRawResource(R.raw.ssltestcert);
 
-		SecuredMobileLink link;
+		SecuredMobileClientLink link;
 		try {
-			link = new SecuredMobileLink(address, in, "ssltest");
+			link = new SecuredMobileClientLink(address, in, "ssltest");
 			SimpleNetworkInterface ni = new SimpleNetworkInterface();
 			cp = new ConnectionProvider(this.getBaseContext(), link, ni);
 
@@ -141,16 +141,14 @@ public class SF_NL_TestActivity extends Activity implements
 
 	public void butSendPSMS(View theButton) {
 		t.setText("psms send");
-		SMSParkingProtocol p = new SMSParkingProtocol(cp.getNetworkInterface(),
-				this);
-		p.checkParking("ABCDEF");
+		SMSParkingProtocol p = new SMSParkingProtocol(cp.getNetworkInterface(),	this);
+		p.checkParking("abcdef");
 	}
 
 	public void butSendPPK(View theButton) {
 		t.setText("ppk send");
-		SPCCheckProtocol p = new SPCCheckProtocol(cp.getNetworkInterface(),
-				this);
-		p.checkSPC("0123456789");
+		SPCCheckProtocol p = new SPCCheckProtocol(cp.getNetworkInterface(), this);
+		p.checkSPC("987654321"); //"0123456789"
 	}
 
 	public void butSendGeo(View theButton) {
@@ -158,8 +156,16 @@ public class SF_NL_TestActivity extends Activity implements
 		GeoDataProtocol p = new GeoDataProtocol(cp.getNetworkInterface());
 
 		ArrayList<Waypoint> wps = new ArrayList<Waypoint>();
-		for (int i = 0; i < 10; i++) {
-			wps.add(new Waypoint());
+		
+		long now = (new Date()).getTime();
+		Waypoint wp;
+		
+		for (int i = 0; i < 2500; i++) {
+			wp = new Waypoint();
+			wp.setLongtitude(i);
+			wp.setLatitude(i*2);
+			wp.setTime(now + (i*10000));
+			wps.add(wp);
 		}
 		try {
 			p.sendGeoData(wps);
@@ -187,7 +193,7 @@ public class SF_NL_TestActivity extends Activity implements
 
 	public void onLoginFailed(LoginFailReason reason) {
 		// t.setText("EVENT: LOGIN FAILED");
-		System.out.println("ANDROID: ACTIVITA EVENT: LOGIN FAILED");
+		System.out.println("ANDROID: ACTIVITA EVENT: LOGIN FAILED + REASON: " + reason.toString());
 	}
 
 	public void onLogout() {

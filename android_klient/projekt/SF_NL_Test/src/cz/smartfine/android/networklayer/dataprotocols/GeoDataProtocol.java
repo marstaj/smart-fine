@@ -152,8 +152,7 @@ public class GeoDataProtocol implements IDataProtocol {
 	// ================================================== PRIVÁTNÍ METODY
 	// ==================================================//
 
-	protected byte[] createGeoMessage(List<Waypoint> geoData)
-			throws IOException {
+	protected byte[] createGeoMessage(List<Waypoint> geoData) throws IOException {
 		MessageBuilder msg = new MessageBuilder();
 
 		msg.putByte(MobileMessageIDs.ID_MSG_UPLOAD_GEO); // identifikátor zprávy
@@ -163,13 +162,9 @@ public class GeoDataProtocol implements IDataProtocol {
 		objOS.writeObject(geoData); // serializuje geo data
 		objOS.close();
 
-		msg.putArrayWithIntLength(geoBytes.toByteArray()); // vložení pole
-															// serializované
-															// kolekce s geo
-															// daty
-
+		msg.putArrayWithIntLength(geoBytes.toByteArray()); // vložení pole serializované kolekce s geo daty
+		
 		geoBytes.close();
-
 		return msg.getByteArray();
 	}
 

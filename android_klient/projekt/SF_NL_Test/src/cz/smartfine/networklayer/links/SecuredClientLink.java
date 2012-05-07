@@ -1,4 +1,4 @@
-package cz.smartfine.android.networklayer.links;
+package cz.smartfine.networklayer.links;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,39 +20,38 @@ import cz.smartfine.networklayer.links.Receiver;
 import cz.smartfine.networklayer.links.SecuredLink;
 
 /**
- * Třída pro zabezpečenou komunikaci přes WiFi nebo mobilní síť.
+ * Třída pro zabezpečenou komunikaci klienta.
  * 
  * @author Pavel Brož
  * @version 1.0
  * @updated 27-4-2012 18:18:44
  */
-public class SecuredMobileLink extends SecuredLink {
+public class SecuredClientLink extends SecuredLink {
 
 	/**
 	 * SSL kontext pro šifrovanou komunikaci
 	 */
-	private SSLContext context;
+	protected SSLContext context;
 	/**
 	 * Továrna na ssl sokety
 	 */
-	private SSLSocketFactory socketFactory;
+	protected SSLSocketFactory socketFactory;
 
 	/**
 	 * Key Store důvěryhodných certifikačních autorit pro ověření serveru
 	 */
-	private KeyStore trustedKS;
+	protected KeyStore trustedKS;
 	/**
 	 * Třída pro ověřování certifikátu serveru
 	 */
-	private TrustManagerFactory trstMngrFactory;
+	protected TrustManagerFactory trstMngrFactory;
 
 	/**
 	 * Adresa serveru
 	 */
-	private InetSocketAddress address;
+	protected InetSocketAddress address;
 
-	// ================================================== KONSTRUKTORY &
-	// DESTRUKTORY ==================================================//
+	// ================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
 
 	public void finalize() throws Throwable {
 		super.finalize();
@@ -61,48 +60,37 @@ public class SecuredMobileLink extends SecuredLink {
 	/**
 	 * Konstruktor.
 	 * 
-	 * @param address
-	 *            Adresa serveru.
-	 * @param keyStoreStream
-	 *            InputStream obsahující KS.
-	 * @param keyStorePassword
-	 *            Heslo do KS.
-	 * @exception KeyManagementException
-	 *                Problém při inicializaci kontextu SSL.
-	 * @exception CertificateException
-	 *                Problém při načítání KS ze streamu.
-	 * @exception IOException
-	 *                Problém při načítání KS ze streamu.
-	 * @exception KeyStoreException
-	 *                Problém při vytváření KS.
+	 * @param sslProtocol Protokol na jakém se bude komunikovat.
+	 * @param keyStoreType Typ key storu.
+	 * @param address Adresa serveru.
+	 * @param keyStoreStream InputStream obsahující KS.
+	 * @param keyStorePassword Heslo do KS.
+	 * @exception KeyManagementException Problém při inicializaci kontextu SSL.
+	 * @exception CertificateException Problém při načítání KS ze streamu.
+	 * @exception IOException Problém při načítání KS ze streamu.
+	 * @exception KeyStoreException Problém při vytváření KS.
 	 */
-	public SecuredMobileLink(InetSocketAddress address,
-			InputStream keyStoreStream, String keyStorePassword)
-			throws KeyStoreException, CertificateException, IOException,
-			KeyManagementException {
+	public SecuredClientLink(String sslProtocol, String keyStoreType, InetSocketAddress address,InputStream keyStoreStream, String keyStorePassword) throws KeyStoreException, CertificateException, IOException, KeyManagementException {
 		super();
 
 		this.address = address;
 		try {
-			context = SSLContext.getInstance("TLSv1");
+			context = SSLContext.getInstance(sslProtocol);
 
-			trustedKS = KeyStore.getInstance("bks");
+			trustedKS = KeyStore.getInstance(keyStoreType);
 			trustedKS.load(keyStoreStream, keyStorePassword.toCharArray());
 
-			trstMngrFactory = TrustManagerFactory.getInstance(KeyManagerFactory
-					.getDefaultAlgorithm());
+			trstMngrFactory = TrustManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
 			trstMngrFactory.init(trustedKS);
 
-			context.init(null, trstMngrFactory.getTrustManagers(),
-					new SecureRandom());
+			context.init(null, trstMngrFactory.getTrustManagers(), new SecureRandom());
 			socketFactory = context.getSocketFactory();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 	}
 
-	// ================================================== VÝKONNÉ METODY
-	// ==================================================//
+	// ================================================== VÝKONNÉ METODY ==================================================//
 
 	/**
 	 * Připojí se k serveru.
@@ -133,4 +121,21 @@ public class SecuredMobileLink extends SecuredLink {
 		receiverThread.start();
 	}
 
+	/**
+	 * Vrátí adresu pro soket.
+	 * @return Adresa serveru.
+	 */
+	public InetSocketAddress getAddress() {
+		return address;
+	}
+
+	/**
+	 * Nastaví adresu pro soket.
+	 * @param address Nová adresa serveru.
+	 */
+	public void setAddress(InetSocketAddress address) {
+		this.address = address;
+	}
+
+	
 }

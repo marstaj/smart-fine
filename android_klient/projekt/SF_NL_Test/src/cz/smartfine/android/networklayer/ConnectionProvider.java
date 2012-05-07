@@ -1,12 +1,14 @@
 package cz.smartfine.android.networklayer;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 
 import android.content.Context;
 
 import cz.smartfine.android.networklayer.business.LoginProvider;
 import cz.smartfine.android.networklayer.business.listeners.ILoginProviderListener;
 import cz.smartfine.networklayer.links.ILink;
+import cz.smartfine.networklayer.links.SecuredClientLink;
 import cz.smartfine.networklayer.model.mobile.LoginFailReason;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.networklayer.util.InterThreadType;
@@ -23,7 +25,7 @@ public class ConnectionProvider {
 	/**
 	 * Rozhraní pro NetworkInterface.
 	 */
-	private ILink mLink;
+	private SecuredClientLink mLink;
 	/**
 	 * Síťové rozhraní pro datové protokoly.
 	 */
@@ -33,8 +35,7 @@ public class ConnectionProvider {
 	 */
 	private Context appContext;
 
-	// ================================================== KONSTRUKTORY &
-	// DESTRUKTORY ==================================================//
+	// ================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
 
 	public void finalize() throws Throwable {
 
@@ -43,24 +44,18 @@ public class ConnectionProvider {
 	/**
 	 * Konstruktor.
 	 * 
-	 * @param appContext
-	 *            Kontext aplikace.
-	 * @param link
-	 *            Objekt implementující ILink pro transfer dat.
-	 * @param networkInterface
-	 *            Objekt reprezentující rozhraní, se kterým mohou komunikovat
-	 *            třídy datových protokolů.
+	 * @param appContext Kontext aplikace.
+	 * @param link Objekt implementující ILink pro transfer dat.
+	 * @param networkInterface Objekt reprezentující rozhraní, se kterým mohou komunikovat třídy datových protokolů.
 	 */
-	public ConnectionProvider(Context appContext, ILink link,
-			INetworkInterface networkInterface) {
+	public ConnectionProvider(Context appContext, SecuredClientLink link, INetworkInterface networkInterface) {
 		this.appContext = appContext;
 		this.mLink = link;
 		this.mNetworkInterface = networkInterface;
 		this.mNetworkInterface.setLink(link);
 	}
 
-	// ================================================== GET/SET
-	// ==================================================//
+	// ================================================== GET/SET ==================================================//
 
 	/**
 	 * Vrací rozhraní pro transfer dat přes síť.
@@ -76,8 +71,7 @@ public class ConnectionProvider {
 		return mNetworkInterface;
 	}
 
-	// ================================================== VÝKONNÉ METODY
-	// ==================================================//
+	// ================================================== VÝKONNÉ METODY ==================================================//
 
 	/**
 	 * Ukončí spojení na server.
@@ -118,16 +112,7 @@ public class ConnectionProvider {
 				System.out.println("ANDROID: CP CAN CANT CONNECT");
 				return false;
 			}
-			final InterThreadType<Boolean> loginResult = new InterThreadType<Boolean>(); // proměnná,
-																							// která
-																							// pozastaví
-																							// běh
-																							// vlákna,
-																							// dokud
-																							// nebude
-																							// znám
-																							// výsledek
-																							// přihlášení
+			final InterThreadType<Boolean> loginResult = new InterThreadType<Boolean>(); // proměnná, která pozastaví běh vlákna, dokud nebude znám výsledek přihlášení
 			System.out.println("ANDROID: CP CAN LOGIN START");
 			// posluchač událostí z proměnné lp (LoginProvideru), který
 			// nastavuje loginResult//
@@ -148,8 +133,7 @@ public class ConnectionProvider {
 				}
 
 				public void onLoginConfirmed() {
-					System.out
-							.println("ANDROID: CP CAN LOGIN LISTENER CONFIRMED");
+					System.out.println("ANDROID: CP CAN LOGIN LISTENER CONFIRMED");
 					try {
 						loginResult.put(true); // přihlášení úspěšné
 					} catch (InterruptedException e) {
@@ -157,8 +141,7 @@ public class ConnectionProvider {
 				}
 
 				public void onConnectionTerminated() {
-					System.out
-							.println("ANDROID: CP CAN LOGIN LISTENER TERMINATED");
+					System.out.println("ANDROID: CP CAN LOGIN LISTENER TERMINATED");
 					try {
 						loginResult.put(false); // přihlášení neúspěšné
 					} catch (InterruptedException e) {
@@ -166,16 +149,12 @@ public class ConnectionProvider {
 				}
 			};
 
-			LoginProvider lp = new LoginProvider(this.getNetworkInterface(),
-					this.appContext, lpl); // vytvoření login provideru
+			LoginProvider lp = new LoginProvider(this.getNetworkInterface(), this.appContext, lpl); // vytvoření login provideru
 			System.out.println("ANDROID: CP CAN LOGIN SEND");
 			// odeslání přihlašovací zprávy
-			lp.login(LoginProvider.getBadgeNumber(this.appContext),
-					LoginProvider.getPIN(this.appContext),
-					LoginProvider.getIMEI(this.appContext));
+			lp.login(LoginProvider.getBadgeNumber(this.appContext),	LoginProvider.getPIN(this.appContext), LoginProvider.getIMEI(this.appContext));
 
-			// zde dojde k pozastavení vlákna, dokud nebude znám výsledek
-			// přihlášení, poté se hodnota vrátí
+			// zde dojde k pozastavení vlákna, dokud nebude znám výsledek přihlášení, poté se hodnota vrátí
 			try {
 				return loginResult.get();
 			} catch (InterruptedException e) {
@@ -184,6 +163,16 @@ public class ConnectionProvider {
 		} else {
 			System.out.println("ANDROID: CP CAN NO LOGIN INFO");
 			return false;
+		}
+	}
+	
+	/**
+	 * Nastaví novou adresu serveru.
+	 * @param address Nová adresa.
+	 */
+	public void setNewAddress(InetSocketAddress address){
+		if (mLink != null){
+			mLink.setAddress(address);
 		}
 	}
 }
