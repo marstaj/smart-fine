@@ -167,8 +167,7 @@ public class TicketSyncProtocol implements IDataProtocol {
 	 * @throws IOException
 	 *             Problém při serializaci PL.
 	 */
-	protected byte[] createTicketMessage(Ticket ticket, int badgeNumber)
-			throws IOException {
+	protected byte[] createTicketMessage(Ticket ticket, int badgeNumber) throws IOException {
 		MessageBuilder msg = new MessageBuilder();
 
 		msg.putByte(MobileMessageIDs.ID_MSG_UPLOAD_TICKET); // identifikátor
@@ -178,12 +177,7 @@ public class TicketSyncProtocol implements IDataProtocol {
 		ByteArrayOutputStream ticketBytes = new ByteArrayOutputStream();
 		ObjectOutputStream objOS = new ObjectOutputStream(ticketBytes);
 
-		// TODO: ODSTRANIT
-		// byte[] photo1 = new byte[]{0,1,2,3,4,5,6,7,8,9};
-		NetworkTicket nt = new NetworkTicket(ticket);
-		// nt.getPhotos().add(photo1);
-
-		objOS.writeObject(nt); // serializuje PL
+		objOS.writeObject(new NetworkTicket(ticket)); // serializuje PL
 		objOS.close();
 
 		msg.putArrayWithIntLength(ticketBytes.toByteArray()); // vložení pole
