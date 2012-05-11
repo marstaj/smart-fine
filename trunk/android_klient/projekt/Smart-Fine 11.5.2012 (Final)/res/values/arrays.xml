@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="ticket_spzColor">
+        <item>Bílá</item>
+        <item>Oranžová</item>
+        <item>Žlutomodrá</item>
+    </string-array>
+    
+    <string-array name="ticket_vehicleType">
+        <item>M - Motocykl</item>
+        <item>OA - Osobní automobil</item>
+        <item>AB - Autobus</item>
+        <item>NA - Nákladní automobil</item>
+        <item>SA - Speciální automobil</item>
+        <item>PV - Přípojné vozidlo</item>
+        <item>OV - Ostatní silniční vozidlo</item>
+    </string-array>
+
+</resources>

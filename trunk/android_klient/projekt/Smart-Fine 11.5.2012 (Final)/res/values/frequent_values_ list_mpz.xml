@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ticket_mpz_array">
+        <item>A - Rakousko</item>
+        <item>AFG - Afghánistán</item>
+        <item>AG - Antigua a Barbuda</item>
+        <item>AL - Albánie</item>
+        <item>AND - Andorra</item>
+        <item>ANG - Angola</item>
+        <item>ARM - Arménie</item>
+        <item>AUS - Austrálie</item>
+        <item>AZ - Ázerbájdžán</item>
+        <item>B - Belgie</item>
+        <item>BD - Bangladéš</item>
+        <item>BDS - Barbados</item>
+        <item>BF - Burkina Faso</item>
+        <item>BG - Bulharsko</item>
+        <item>BH - Belize</item>
+        <item>BHT - Bhútán</item>
+        <item>BIH - Bosna a Hercegovina</item>
+        <item>BOL - Bolívie</item>
+        <item>BW - Botswana</item>
+        <item>BR - Brazílie</item>
+        <item>BRN - Bahrajn</item>
+        <item>BRU - Brunej</item>
+        <item>BS - Bahamy</item>
+        <item>BU - Burundi</item>
+        <item>BVI - Britské Panenské ostrovy</item>
+        <item>BY - Bělorusko</item>
+        <item>BZ - Belize</item>
+        <item>C - Kuba</item>
+        <item>CAM - Kamerun</item>
+        <item>CD - Demokratická republika Kongo</item>
+        <item>CDN - Kanada</item>
+        <item>CH - Švýcarsko</item>
+        <item>CI - Pobřeží slonoviny</item>
+        <item>CL - Srí Lanka</item>
+        <item>CO - Kolumbie</item>
+        <item>CR - Kostarika</item>
+        <item>CV - Kapverdy</item>
+        <item>CY - Kypr</item>
+        <item>CZ - Česká republika</item>
+        <item>D - Německo</item>
+        <item>DARS - Západní Sahara</item>
+        <item>DJI - Džibutsko</item>
+        <item>DK - Dánsko</item>
+        <item>DOM - Dominikánská republika</item>
+        <item>DVRK - Severní Korea</item>
+        <item>DZ - Alžírsko</item>
+        <item>E - Španělsko</item>
+        <item>EAK - Keňa</item>
+        <item>EAT - Tanzanie</item>
+        <item>EAU - Uganda</item>
+        <item>EC - Ekvádor</item>
+        <item>ER - Eritrea</item>
+        <item>ES - Salvador</item>
+        <item>EST - Estonsko</item>
+        <item>ET - Egypt</item>
+        <item>ETH - Etiopie</item>
+        <item>F - Francie</item>
+        <item>FIN - Finsko</item>
+        <item>FJI - Fidži</item>
+        <item>FL - Lichtenštejnsko</item>
+        <item>FO - Faerské ostrovy</item>
+        <item>FSM - Mikronésie</item>
+        <item>G - Gabon</item>
+        <item>GB - Velká Británie</item>
+        <item>GBA - Alderney</item>
+        <item>GBG - Guernsey</item>
+        <item>GBJ - Jersey</item>
+        <item>GBM - Ostrov Man</item>
+        <item>GBZ - Gibraltar</item>
+        <item>GCA - Guatemala</item>
+        <item>GE - Gruzie</item>
+        <item>GH - Ghana</item>
+        <item>GQ - Rovníková Guinea</item>
+        <item>GR - Řecko</item>
+        <item>GUY - Guyana</item>
+        <item>GW - Guinea-Bissau</item>
+        <item>H - Maďarsko</item>
+        <item>HK - Hongkong</item>
+        <item>HN - Honduras</item>
+        <item>HR - Chorvatsko</item>
+        <item>I - Itálie</item>
+        <item>IL - Izrael</item>
+        <item>IND - Indie</item>
+        <item>IR - Írán</item>
+        <item>IRL - Irsko</item>
+        <item>IRQ - Irák</item>
+        <item>IS - Island</item>
+        <item>J - Japonsko</item>
+        <item>JA - Jamajka</item>
+        <item>JOR - Jordánsko</item>
+        <item>K - Kambodža</item>
+        <item>KIR - Kiribati</item>
+        <item>KS - Kyrgyzstán</item>
+        <item>KSA - Saúdská Arábie</item>
+        <item>KWT - Kuvajt</item>
+        <item>KZ - Kazachstán</item>
+        <item>L - Lucembursko</item>
+        <item>LAO - Laos</item>
+        <item>LAR - Libye</item>
+        <item>LB - Libérie</item>
+        <item>LS - Lesotho</item>
+        <item>LT - Litva</item>
+        <item>LV - Lotyšsko</item>
+        <item>M - Malta</item>
+        <item>MA - Maroko</item>
+        <item>MAL - Malajsie</item>
+        <item>MC - Monako</item>
+        <item>MD - Moldavsko</item>
+        <item>MEX - Mexiko</item>
+        <item>MGL - Mongolsko</item>
+        <item>MH - Marshallovy ostrovy</item>
+        <item>MK - Makedonie</item>
+        <item>MNE - Černá Hora</item>
+        <item>MOC - Mosambik</item>
+        <item>MS - Mauricius</item>
+        <item>MV - Maledivy</item>
+        <item>MW - Malawi</item>
+        <item>MYA - Myanmar</item>
+        <item>N - Norsko</item>
+        <item>NA - Nizozemské Antily</item>
+        <item>NAM - Namibie</item>
+        <item>NAU - Nauru</item>
+        <item>NEP - Nepál</item>
+        <item>NIC - Nikaragua</item>
+        <item>NL - Nizozemsko</item>
+        <item>NZ - Nový Zéland</item>
+        <item>OM - Omán</item>
+        <item>P - Portugalsko</item>
+        <item>PA - Panama</item>
+        <item>PAL - Palau</item>
+        <item>PE - Peru</item>
+        <item>PK - Pákistán</item>
+        <item>PL - Polsko</item>
+        <item>PNG - Papua-Nová Guinea</item>
+        <item>PRC - Čína</item>
+        <item>PS - Palestinská autonomie</item>
+        <item>PY - Paraguay</item>
+        <item>Q - Katar</item>
+        <item>RA - Argentina</item>
+        <item>RB - Botswana</item>
+        <item>RC - Tchaj-wan</item>
+        <item>RCA - Středoafrická republika</item>
+        <item>RCB - Kongo</item>
+        <item>RCH - Chile</item>
+        <item>RE - Réunion</item>
+        <item>RG - Guinea</item>
+        <item>RGB - Guinea-Bissau</item>
+        <item>RH - Haiti</item>
+        <item>RI - Indonésie</item>
+        <item>RIM - Mauritánie</item>
+        <item>RKS - Kosovo</item>
+        <item>RL - Libanon</item>
+        <item>RM - Madagaskar</item>
+        <item>RMM - Mali</item>
+        <item>RN - Niger</item>
+        <item>RO - Rumunsko</item>
+        <item>ROK - Jižní Korea</item>
+        <item>ROU - Uruguay</item>
+        <item>RP - Filipíny</item>
+        <item>RSM - San Marino</item>
+        <item>RT - Togo</item>
+        <item>RUS - Rusko</item>
+        <item>RWA - Rwanda</item>
+        <item>S - Švédsko</item>
+        <item>SCN - Svatý Kryštof a Nevis</item>
+        <item>SD - Svazijsko</item>
+        <item>SGP - Singapur</item>
+        <item>SK - Slovensko</item>
+        <item>SLO - Slovinsko</item>
+        <item>SME - Surinam</item>
+        <item>SMOM - Maltézský řád</item>
+        <item>SN - Senegal</item>
+        <item>SOL - Šalamounovy ostrovy</item>
+        <item>SP - Somálsko</item>
+        <item>SRB - Srbsko</item>
+        <item>STP - Svatý Tomáš a Princův ostrov</item>
+        <item>SUD - Súdán</item>
+        <item>SY - Seychely</item>
+        <item>SYR - Sýrie</item>
+        <item>TCH - Čad</item>
+        <item>THA - Thajsko</item>
+        <item>TJ - Tádžikistán</item>
+        <item>TL - Východní Timor</item>
+        <item>TM - Turkmenistán</item>
+        <item>TN - Tunisko</item>
+        <item>TO - Tonga</item>
+        <item>TR - Turecko</item>
+        <item>TT - Trinidad a Tobago</item>
+        <item>TUV - Tuvalu</item>
+        <item>UA - Ukrajina</item>
+        <item>UAE - Spojené arabské emiráty</item>
+        <item>USA - Spojené státy americké</item>
+        <item>UZ - Uzbekistán</item>
+        <item>V - Vatikán</item>
+        <item>VN - Vietnam</item>
+        <item>VU - Vanuatu</item>
+        <item>WAG - Gambie</item>
+        <item>WAL - Sierra Leone</item>
+        <item>WAN - Nigérie</item>
+        <item>WD - Dominika</item>
+        <item>WG - Grenada</item>
+        <item>WL - Svatá Lucie</item>
+        <item>WS - Samoa</item>
+        <item>WV - Svatý Vincenc a Grenadiny</item>
+        <item>YAR - Jemen</item>
+        <item>YU - Jugoslávie</item>
+        <item>YV - Venezuela</item>
+        <item>Z - Zambie</item>
+        <item>ZA - Jihoafrická republika</item>
+        <item>ZW - Zimbabwe</item>
+    </string-array>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="file_tickets">tickets.smf</string>
+     <string name="file_waypoints">waypoints.smf</string>
+    <string name="file_laws">laws.smf</string>
+    <string name="photoDirectory">smartfine</string>
+    <string name="fileType_jpg">.jpg</string>
+    
+    <string name="file_mpz">mpz.smf</string>
+    <string name="file_vehicleBrand">vehicle_brand.smf</string>
+
+</resources>
