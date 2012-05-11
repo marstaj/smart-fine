@@ -1,7 +1,7 @@
 package cz.smartfine.server.business.client.mobile.providers;
 
 import cz.smartfine.android.model.Waypoint;
-import cz.smartfine.networklayer.model.WaypointDB;
+import cz.smartfine.model.WaypointDB;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.server.HibernateUtil;
 import cz.smartfine.server.business.client.mobile.providers.listeners.IServerGeoDataProtocolListener;
@@ -27,7 +27,7 @@ public class GeoDataProvider implements IServerGeoDataProtocolListener {
      * Udává, po kolika uložených objektech se má zavolat flush a clear na session.
      */
     private final int BATCH_SIZE_FLUSH = 30;
-    
+
     public GeoDataProvider(INetworkInterface networkInterface, int badgeNumber) {
         this.badgeNumber = badgeNumber;
         protocol = new ServerGeoDataProtocol(networkInterface, this);
@@ -49,13 +49,13 @@ public class GeoDataProvider implements IServerGeoDataProtocolListener {
 
     @Override
     public void geoDataReceived(List<Waypoint> geoData) {
-        System.out.println("SERVER: GEO DATA RECEIVED POČET: " + geoData.size());
-        
+        //System.out.println("SERVER: GEO DATA RECEIVED POČET: " + geoData.size());
+
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            
+
             //projde geo data a uloží je do databáze//
             for (int i = 0; i < geoData.size(); i++) {
                 session.save(new WaypointDB(geoData.get(i), badgeNumber)); //uloží waypoint do DB
@@ -66,7 +66,7 @@ public class GeoDataProvider implements IServerGeoDataProtocolListener {
                 }
             }
         } catch (HibernateException e) {
-            e.printStackTrace(); //TODO: NĚCO S TÍM UDĚLAT
+            //e.printStackTrace();
         } finally {
             session.getTransaction().commit(); //potvrzení změn v DB
         }

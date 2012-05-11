@@ -75,7 +75,6 @@ public class ServerSPCCheckProtocol implements IDataProtocol {
     }
 
     //================================================== GET/SET ==================================================//
-    
     /**
      * Odebere posluchače událostí protokolu pro kontrolu odcizení PPK.
      *
@@ -97,7 +96,6 @@ public class ServerSPCCheckProtocol implements IDataProtocol {
     }
 
     //================================================== HANDLERY UDÁLOSTÍ ==================================================//
-    
     /**
      * Handler události ukončení spojení.
      */
@@ -148,7 +146,6 @@ public class ServerSPCCheckProtocol implements IDataProtocol {
     }
 
     //================================================== VÝKONNÉ METODY ==================================================//
-    
     /**
      * Odpojí datový protokol od základního protokolu.
      */
@@ -171,7 +168,6 @@ public class ServerSPCCheckProtocol implements IDataProtocol {
     }
 
     //================================================== PRIVÁTNÍ METODY ==================================================//
-    
     /**
      * Vytváří zprávu se stavem odcizení PPK.
      *
@@ -205,7 +201,6 @@ public class ServerSPCCheckProtocol implements IDataProtocol {
     }
 
     //================================================== INTERNÍ TŘÍDY ==================================================//
-    
     /**
      * Třída zajišťující příjem dat v jiném vlákně.
      *

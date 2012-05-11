@@ -23,9 +23,10 @@ public interface IServerGeoDataProtocolListener extends IProtocolListener {
      */
     @Override
     public void onMessageSent();
-    
+
     /**
      * Handler události příchodu geolokačních dat.
+     *
      * @param geoData Geolokační data.
      */
     public void geoDataReceived(List<Waypoint> geoData);

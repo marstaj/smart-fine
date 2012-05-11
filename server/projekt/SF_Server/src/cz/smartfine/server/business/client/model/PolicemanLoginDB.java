@@ -1,14 +1,20 @@
 package cz.smartfine.server.business.client.model;
 
-import cz.smartfine.networklayer.model.PolicemanDB;
+import cz.smartfine.model.PolicemanDB;
 
 /**
- *
+ * Třída sloužící k načtení přihlašovacích údajů z DB.
  * @author Pavel Brož
  */
 public class PolicemanLoginDB extends PolicemanDB{
 
+    /**
+     * PIN.
+     */
     private int pin;
+    /**
+     * Oprávnění pro PC klienta.
+     */
     private int permissions;
 
     public PolicemanLoginDB() {

@@ -1,7 +1,7 @@
 package cz.smartfine.server.business.client.mobile.providers.listeners;
 
+import cz.smartfine.model.NetworkTicket;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
-import cz.smartfine.networklayer.model.NetworkTicket;
 
 /**
  * Interface posluchače událostí protokolu zpracovávajícího přenos parkovacích lístků.
@@ -22,9 +22,10 @@ public interface IServerTicketProtocolListener extends IProtocolListener {
      */
     @Override
     public void onMessageSent();
-    
+
     /**
      * Handler reagující na událost příchodu parkovacího lístku.
+     *
      * @param ticket Parkovací lístek.
      */
     public void onTicketReceived(NetworkTicket ticket);

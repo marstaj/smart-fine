@@ -14,6 +14,7 @@ public interface IClientServer {
      * Spustí server.
      */
     public void start();
+
     /**
      * Ukončí spojení s klientem.
      */
@@ -28,13 +29,19 @@ public interface IClientServer {
      * Nastavuje služební číslo policisty, který je připojen k serveru.
      */
     public void setBadgeNumber(int badgeNumber);
-    
+
     /**
      * Vrací čas posledního kontaktu s klientem.
      */
     public Date getLastContactTime();
+
     /**
      * Nastavuje čas posledního kontaktu s klientem.
      */
     public void setLastContactTime(Date lastContactTime);
+
+    /**
+     * Zaregistruje server v seznamu serverů.
+     */
+    public void registerThisServer();
 }

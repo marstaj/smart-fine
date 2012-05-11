@@ -14,7 +14,7 @@ public class InterThreadType<T> {
     /**
      * Získá zde uložený objekt. Pokud není, tak se vlákno pozastaví.
      *
-     * @return
+     * @return Uložená data.
      * @throws InterruptedException
      */
     public synchronized T get() throws InterruptedException {
@@ -30,7 +30,7 @@ public class InterThreadType<T> {
     /**
      * Vloží objekt pro předání jinému vláknu.
      *
-     * @param data
+     * @param data Data pro vložení.
      * @throws InterruptedException
      */
     public synchronized void put(T data) throws InterruptedException {

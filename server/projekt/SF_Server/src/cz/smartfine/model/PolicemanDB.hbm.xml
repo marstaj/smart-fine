@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="cz.smartfine.model.PolicemanDB" polymorphism="explicit" table="policemen">
+    <id name="id" type="integer">
+      <column name="ID"/>
+      <generator class="identity"/>
+    </id>
+    <property name="firstName" type="string">
+      <column length="20" name="FIRSTNAME" not-null="true"/>
+    </property>
+    <property name="lastName" type="string">
+      <column length="20" name="LASTNAME" not-null="true"/>
+    </property>
+    <property name="badgeNumber" type="integer">
+      <column name="BADGENUMBER" not-null="true"/>
+    </property>
+    <property name="office" type="integer">
+      <column name="OFFICE"/>
+    </property>
+    <set inverse="true" name="associations" table="associations">
+      <key column="POLICEMAN"/>
+      <many-to-many class="cz.smartfine.model.MobileDeviceDB" column="DEVICE"/>
+    </set>
+  </class>
+</hibernate-mapping>

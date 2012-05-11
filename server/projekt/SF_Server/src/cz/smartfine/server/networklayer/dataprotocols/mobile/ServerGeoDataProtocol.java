@@ -43,7 +43,6 @@ public class ServerGeoDataProtocol implements IDataProtocol {
     private InterThreadType<byte[]> in = new InterThreadType<byte[]>();
 
     //================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
-    
     /**
      * Konstruktor.
      *
@@ -79,7 +78,6 @@ public class ServerGeoDataProtocol implements IDataProtocol {
     }
 
     //================================================== GET/SET ==================================================//
-    
     /**
      * Odebere posluchače událostí protokolu pro odesílání geolokačních dat.
      *
@@ -101,7 +99,6 @@ public class ServerGeoDataProtocol implements IDataProtocol {
     }
 
     //================================================== HANDLERY UDÁLOSTÍ ==================================================//
-    
     /**
      * Handler události ukončení spojení.
      */
@@ -214,8 +211,9 @@ public class ServerGeoDataProtocol implements IDataProtocol {
 
         /**
          * Deserializuje geo data.
+         *
          * @param data
-         * @return 
+         * @return
          */
         private List<Waypoint> deserializeGeoData(byte[] data) {
             ObjectInputStream objIS = null;

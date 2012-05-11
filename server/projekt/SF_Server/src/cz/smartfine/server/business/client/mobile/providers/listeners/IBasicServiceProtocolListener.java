@@ -31,17 +31,17 @@ public interface IBasicServiceProtocolListener extends IProtocolListener {
      * Handler události příjmu zprávy která není přihlašovací.
      */
     public void onNonLoginMessageReceived();
-    
+
     /**
      * Handler události příjmu odhlašovací zprávy.
      */
     public void onLogoutMessageReceived();
-    
+
     /**
      * Handler události příjmu jakékoliv zprávy.
      */
     public void onMessageReceived();
-    
+
     /**
      * Handler zpracovávající událost ztráty spojení.
      */

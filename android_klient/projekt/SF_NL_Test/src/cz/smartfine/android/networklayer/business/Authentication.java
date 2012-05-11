@@ -2,49 +2,44 @@ package cz.smartfine.android.networklayer.business;
 
 import cz.smartfine.android.networklayer.business.listeners.IAuthenticationProtocolListener;
 import cz.smartfine.networklayer.model.mobile.AuthenticationFailReason;
-import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 
 /**
  * Třída zajišťující ověření identity.
- * 
+ *
  * @author Pavel Brož
- * @version 1.0
- * @updated 27-4-2012 18:18:40
+ * @version 1.0 @updated 27-4-2012 18:18:40
  */
 public class Authentication implements IAuthenticationProtocolListener {
 
-	public Authentication() {
+    public Authentication() {
+    }
 
-	}
+    @Override
+    public void finalize() throws Throwable {
+    }
 
-	public void finalize() throws Throwable {
+    /**
+     * Handler zpracovávající událost ztráty spojení.
+     */
+    @Override
+    public void onConnectionTerminated() {
+    }
 
-	}
+    /**
+     * Handler, reagující na událost odeslání zprávy na server.
+     */
+    @Override
+    public void onMessageSent() {
+    }
 
-	/**
-	 * Handler zpracovávající událost ztráty spojení.
-	 */
-	public void onConnectionTerminated() {
+    public void onLogout() {
+    }
 
-	}
+    @Override
+    public void onAuthenticationConfirmed() {
+    }
 
-	/**
-	 * Handler, reagující na událost odeslání zprávy na server.
-	 */
-	public void onMessageSent() {
-
-	}
-
-	public void onLogout() {
-
-	}
-
-	public void onAuthenticationConfirmed() {
-
-	}
-
-	public void onAuthenticationFailed(AuthenticationFailReason reason) {
-
-	}
-
+    @Override
+    public void onAuthenticationFailed(AuthenticationFailReason reason) {
+    }
 }

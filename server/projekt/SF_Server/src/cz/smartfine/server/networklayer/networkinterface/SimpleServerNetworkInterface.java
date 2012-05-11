@@ -4,7 +4,7 @@ import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
 import cz.smartfine.networklayer.links.ILink;
 import cz.smartfine.networklayer.networkinterface.BaseProtocolConstants;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
-import cz.smartfine.networklayer.networkinterface.Sender;
+import cz.smartfine.networklayer.networkinterface.NetworkInterfaceSender;
 import cz.smartfine.networklayer.util.DataPackage;
 import cz.smartfine.networklayer.util.InterThreadType;
 import java.util.ArrayList;
@@ -24,24 +24,21 @@ public class SimpleServerNetworkInterface implements INetworkInterface {
     /**
      * Datový protokol, který využívá služby této třídy
      */
-    private ArrayList<IDataProtocol> dataProtocols =  new ArrayList<IDataProtocol>();
+    private ArrayList<IDataProtocol> dataProtocols = new ArrayList<IDataProtocol>();
     /**
      * Interní třída, která asynchroně odesílá data
      */
-    private Sender sender;
-
+    private NetworkInterfaceSender sender;
     /**
      * Vlákno pro odesílání dat
      */
     private Thread senderThread;
-
     /**
      * Odchozí data
      */
     private InterThreadType<DataPackage> out = new InterThreadType<DataPackage>();
 
     //================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
-    
     @Override
     public void finalize() throws Throwable {
         super.finalize();
@@ -70,7 +67,7 @@ public class SimpleServerNetworkInterface implements INetworkInterface {
         }
 
         //vytvoření a nastartování objektu pro odesílání dat v novém vlákně//
-        sender = new Sender(this.link, this.out, this);
+        sender = new NetworkInterfaceSender(this.link, this.out, this);
         senderThread = new Thread(sender, "senderThread");
         senderThread.start();
     }
@@ -83,7 +80,7 @@ public class SimpleServerNetworkInterface implements INetworkInterface {
      */
     @Override
     public void removeOnReceivedDataListener(IDataProtocol dataProtocol) {
-        if (dataProtocol != null){
+        if (dataProtocol != null) {
             this.dataProtocols.remove(dataProtocol);
         }
     }
@@ -95,7 +92,7 @@ public class SimpleServerNetworkInterface implements INetworkInterface {
      */
     @Override
     public void setOnReceivedDataListener(IDataProtocol dataProtocol) {
-        if (dataProtocol != null && !this.dataProtocols.contains(dataProtocol)){
+        if (dataProtocol != null && !this.dataProtocols.contains(dataProtocol)) {
             this.dataProtocols.add(dataProtocol);
         }
     }
@@ -121,7 +118,6 @@ public class SimpleServerNetworkInterface implements INetworkInterface {
     }
 
     //================================================== HANDLERY UDÁLOSTÍ ==================================================//
-    
     /**
      * Handler události příjmu dat.
      *
@@ -134,7 +130,7 @@ public class SimpleServerNetworkInterface implements INetworkInterface {
         //z přijatých dat zkopíruje tělo zprávy (hlavičku vynechá)
         System.arraycopy(receivedData, BaseProtocolConstants.HEADER_SIZE, protocolData, 0, receivedData.length - BaseProtocolConstants.HEADER_SIZE);
 
-        for (IDataProtocol dataProtocol : this.dataProtocols){
+        for (IDataProtocol dataProtocol : this.dataProtocols) {
             dataProtocol.onReceivedData(protocolData); //pošle přijatá data datovému protokolu
         }
     }
@@ -144,7 +140,7 @@ public class SimpleServerNetworkInterface implements INetworkInterface {
      */
     @Override
     public void onConnectionTerminated() {
-        for (IDataProtocol dataProtocol : this.dataProtocols){
+        for (IDataProtocol dataProtocol : this.dataProtocols) {
             dataProtocol.onConnectionTerminated();
         }
     }
@@ -163,5 +159,4 @@ public class SimpleServerNetworkInterface implements INetworkInterface {
         } catch (InterruptedException e) {
         }
     }
-
 }
