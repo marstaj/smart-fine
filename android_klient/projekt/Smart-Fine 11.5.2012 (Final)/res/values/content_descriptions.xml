@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="search">Hledat</string>
+    <string name="edit">Upravit</string>
+    <string name="delete">Smazat</string>
+    <string name="print">Vytisknout</string>    
+    
+    <string name="logo">Smart-Fine logo</string>
+    
+    <string name="photodocumentation">Přidat fotodokumentaci</string>
+    <string name="scanlocation">Najít adresu</string>
+    <string name="saveticket">Uložit</string>
+    
+    <string name="upload">Nahrát na server</string>
+    
+    <string name="testbutton">Testovací tlačítko</string>
+
+</resources>
