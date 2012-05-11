@@ -3,8 +3,7 @@ package cz.smartfine.server.business.client.mobile.providers.listeners;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IProtocolListener;
 
 /**
- * Interface posluchače událostí protokolu zpracovávajícího ověřování odcizení
- * PPK (SPC).
+ * Interface posluchače událostí protokolu zpracovávajícího ověřování odcizení PPK (SPC).
  *
  * @author Pavel Brož
  * @version 1.0 @created 27-4-2012 17:00:25

@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class SPCInfoDB implements Serializable {
 
     /**
-     *
+     * UID
      */
     private static final long serialVersionUID = 1L;
     /**

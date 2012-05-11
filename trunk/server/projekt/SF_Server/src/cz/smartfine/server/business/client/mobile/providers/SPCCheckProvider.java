@@ -5,8 +5,8 @@ import cz.smartfine.networklayer.model.mobile.SPCStatus;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.server.HibernateUtil;
 import cz.smartfine.server.business.client.mobile.providers.listeners.IServerSPCCheckProtocolListener;
-import cz.smartfine.server.networklayer.dataprotocols.mobile.ServerSPCCheckProtocol;
 import cz.smartfine.server.business.client.model.SPCInfoDB;
+import cz.smartfine.server.networklayer.dataprotocols.mobile.ServerSPCCheckProtocol;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -45,14 +45,14 @@ public class SPCCheckProvider implements IServerSPCCheckProtocolListener {
 
     @Override
     public void onSPCCheckRequest(String spcNumber) {
-        System.out.println("SERVER: PPK CHECK RECEIVED  NUMBER:" + spcNumber);
+        //System.out.println("SERVER: PPK CHECK RECEIVED NUMBER:" + spcNumber);
         
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
             //vybere záznamy o PPK, které mají identifikační číslo na jaké se klient dotazuje//
-            Query query = session.createQuery("FROM SPCInfoDB spci WHERE spci.spcNumber = :spcn");
+            Query query = session.getNamedQuery("cz.smartfine.getspcinfo.by.spcnum");
             query.setParameter("spcn", spcNumber); //nastaví číslo PPK
 
             List spciList = query.list(); //spustí dotaz na DB
@@ -66,7 +66,7 @@ public class SPCCheckProvider implements IServerSPCCheckProtocolListener {
                 protocol.sendSPCInfo(new SPCInfo(spcNumber, SPCStatus.OK_SPC));
             }
         } catch (HibernateException e) {
-            e.printStackTrace(); //TODO: NĚCO S TÍM UDĚLAT
+            //e.printStackTrace();
             protocol.sendSPCInfo(new SPCInfo(spcNumber, SPCStatus.UKNOWN_SPC_STATUS));
         }
     }

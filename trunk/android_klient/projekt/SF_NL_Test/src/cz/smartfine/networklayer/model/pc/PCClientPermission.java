@@ -3,126 +3,155 @@ package cz.smartfine.networklayer.model.pc;
 import cz.smartfine.networklayer.dataprotocols.PCProtocolConstants;
 
 /**
- * 
+ * Ukládá oprávnění policisty pro práci s PC klientem.
+ *
  * @author Pavel Brož
  */
 public class PCClientPermission {
-	/**
-	 * Oprávnění pro prohlížení vlastních PL.
-	 */
-	private boolean permShowOwnTickets = false;
 
-	/**
-	 * Oprávnění pro změnu PINu.
-	 */
-	private boolean permChngPin = false;
+    /**
+     * Oprávnění pro prohlížení vlastních PL.
+     */
+    private boolean permShowOwnTickets = false;
+    /**
+     * Oprávnění pro změnu PINu.
+     */
+    private boolean permChngPin = false;
+    /**
+     * Oprávnění pro správu mobilních zařízení.
+     */
+    private boolean permAdminDevices = false;
+    /**
+     * Oprávnění pro správu asociací mezi policisty a mobilnímy zařízeními.
+     */
+    private boolean permAdminAssoc = false;
+    /**
+     * Oprávnění pro prohlížení geolokačních záznamů podřízených.
+     */
+    private boolean permShowGeodata = false;
+    /**
+     * Oprávnění pro prohlížení PL podřízených.
+     */
+    private boolean permShowTickets = false;
+    /**
+     * Oprávnění pro mazání PL.
+     */
+    private boolean permDeleteTickets = false;
 
-	/**
-	 * Oprávnění pro správu mobilních zařízení.
-	 */
-	private boolean permAdminDevices = false;
+    public PCClientPermission() {
+    }
 
-	/**
-	 * Oprávnění pro správu asociací mezi policisty a mobilnímy zařízeními.
-	 */
-	private boolean permAdminAssoc = false;
+    public PCClientPermission(int permissions) {
+        if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_SHOW_OWN_TICKETS) != 0) {
+            this.permShowOwnTickets = true;
+        }
+        if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_CHNG_PIN) != 0) {
+            this.permChngPin = true;
+        }
+        if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_ADMIN_DEVICES) != 0) {
+            this.permAdminDevices = true;
+        }
+        if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_ADMIN_ASSOC) != 0) {
+            this.permAdminAssoc = true;
+        }
+        if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_SHOW_GEODATA) != 0) {
+            this.permShowGeodata = true;
+        }
+        if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_SHOW_TICKETS) != 0) {
+            this.permShowTickets = true;
+        }
+        if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_DELETE_TICKETS) != 0) {
+            this.permDeleteTickets = true;
+        }
+    }
 
-	/**
-	 * Oprávnění pro prohlížení geolokačních záznamů podřízených.
-	 */
-	private boolean permShowGeodata = false;
+    public boolean isPermAdminAssoc() {
+        return permAdminAssoc;
+    }
 
-	/**
-	 * Oprávnění pro prohlížení PL podřízených.
-	 */
-	private boolean permShowTickets = false;
+    public void setPermAdminAssoc(boolean permAdminAssoc) {
+        this.permAdminAssoc = permAdminAssoc;
+    }
 
-	/**
-	 * Oprávnění pro mazání PL.
-	 */
-	private boolean permDeleteTickets = false;
+    public boolean isPermAdminDevices() {
+        return permAdminDevices;
+    }
 
-	public PCClientPermission() {
-	}
+    public void setPermAdminDevices(boolean permAdminDevices) {
+        this.permAdminDevices = permAdminDevices;
+    }
 
-	public PCClientPermission(int permissions) {
-		if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_SHOW_OWN_TICKETS) != 0) {
-			this.permShowOwnTickets = true;
-		}
-		if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_CHNG_PIN) != 0) {
-			this.permChngPin = true;
-		}
-		if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_ADMIN_DEVICES) != 0) {
-			this.permAdminDevices = true;
-		}
-		if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_ADMIN_ASSOC) != 0) {
-			this.permAdminAssoc = true;
-		}
-		if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_SHOW_GEODATA) != 0) {
-			this.permShowGeodata = true;
-		}
-		if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_SHOW_TICKETS) != 0) {
-			this.permShowTickets = true;
-		}
-		if ((permissions & PCProtocolConstants.MSG_SUC_AUTH_PERM_DELETE_TICKETS) != 0) {
-			this.permDeleteTickets = true;
-		}
-	}
+    public boolean isPermChngPin() {
+        return permChngPin;
+    }
 
-	public boolean isPermAdminAssoc() {
-		return permAdminAssoc;
-	}
+    public void setPermChngPin(boolean permChngPin) {
+        this.permChngPin = permChngPin;
+    }
 
-	public void setPermAdminAssoc(boolean permAdminAssoc) {
-		this.permAdminAssoc = permAdminAssoc;
-	}
+    public boolean isPermDeleteTickets() {
+        return permDeleteTickets;
+    }
 
-	public boolean isPermAdminDevices() {
-		return permAdminDevices;
-	}
+    public void setPermDeleteTickets(boolean permDeleteTickets) {
+        this.permDeleteTickets = permDeleteTickets;
+    }
 
-	public void setPermAdminDevices(boolean permAdminDevices) {
-		this.permAdminDevices = permAdminDevices;
-	}
+    public boolean isPermShowGeodata() {
+        return permShowGeodata;
+    }
 
-	public boolean isPermChngPin() {
-		return permChngPin;
-	}
+    public void setPermShowGeodata(boolean permShowGeodata) {
+        this.permShowGeodata = permShowGeodata;
+    }
 
-	public void setPermChngPin(boolean permChngPin) {
-		this.permChngPin = permChngPin;
-	}
+    public boolean isPermShowOwnTickets() {
+        return permShowOwnTickets;
+    }
 
-	public boolean isPermDeleteTickets() {
-		return permDeleteTickets;
-	}
+    public void setPermShowOwnTickets(boolean permShowOwnTickets) {
+        this.permShowOwnTickets = permShowOwnTickets;
+    }
 
-	public void setPermDeleteTickets(boolean permDeleteTickets) {
-		this.permDeleteTickets = permDeleteTickets;
-	}
+    public boolean isPermShowTickets() {
+        return permShowTickets;
+    }
 
-	public boolean isPermShowGeodata() {
-		return permShowGeodata;
-	}
+    public void setPermShowTickets(boolean permShowTickets) {
+        this.permShowTickets = permShowTickets;
+    }
 
-	public void setPermShowGeodata(boolean permShowGeodata) {
-		this.permShowGeodata = permShowGeodata;
-	}
+    /**
+     * Spočítá oprávnění do podoby čísla int.
+     *
+     * @return Oprávnění.
+     */
+    public int getPermissions() {
 
-	public boolean isPermShowOwnTickets() {
-		return permShowOwnTickets;
-	}
+        int permissions = 0; //žádná oprávnění
 
-	public void setPermShowOwnTickets(boolean permShowOwnTickets) {
-		this.permShowOwnTickets = permShowOwnTickets;
-	}
+        if (permShowOwnTickets) {
+            permissions = permissions | PCProtocolConstants.MSG_SUC_AUTH_PERM_SHOW_OWN_TICKETS;
+        }
+        if (permChngPin) {
+            permissions = permissions | PCProtocolConstants.MSG_SUC_AUTH_PERM_CHNG_PIN;
+        }
+        if (permAdminDevices) {
+            permissions = permissions | PCProtocolConstants.MSG_SUC_AUTH_PERM_ADMIN_DEVICES;
+        }
+        if (permAdminAssoc) {
+            permissions = permissions | PCProtocolConstants.MSG_SUC_AUTH_PERM_ADMIN_ASSOC;
+        }
+        if (permShowGeodata) {
+            permissions = permissions | PCProtocolConstants.MSG_SUC_AUTH_PERM_SHOW_GEODATA;
+        }
+        if (permShowTickets) {
+            permissions = permissions | PCProtocolConstants.MSG_SUC_AUTH_PERM_SHOW_TICKETS;
+        }
+        if (permDeleteTickets) {
+            permissions = permissions | PCProtocolConstants.MSG_SUC_AUTH_PERM_DELETE_TICKETS;
+        }
 
-	public boolean isPermShowTickets() {
-		return permShowTickets;
-	}
-
-	public void setPermShowTickets(boolean permShowTickets) {
-		this.permShowTickets = permShowTickets;
-	}
-
+        return permissions;
+    }
 }

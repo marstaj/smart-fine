@@ -2,7 +2,7 @@ package cz.smartfine.server.networklayer.dataprotocols.mobile;
 
 import cz.smartfine.networklayer.dataprotocols.MobileMessageIDs;
 import cz.smartfine.networklayer.dataprotocols.interfaces.IDataProtocol;
-import cz.smartfine.networklayer.model.NetworkTicket;
+import cz.smartfine.model.NetworkTicket;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.networklayer.util.Conventer;
 import cz.smartfine.networklayer.util.InterThreadType;
@@ -41,7 +41,6 @@ public class ServerTicketSyncProtocol implements IDataProtocol {
     private InterThreadType<byte[]> in = new InterThreadType<byte[]>();
 
     //================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
-    
     /**
      * Konstruktor.
      *
@@ -77,7 +76,6 @@ public class ServerTicketSyncProtocol implements IDataProtocol {
     }
 
     //================================================== GET/SET ==================================================//
-    
     /**
      * Odebere posluchače událostí protokolu pro příjem PL.
      *
@@ -99,7 +97,6 @@ public class ServerTicketSyncProtocol implements IDataProtocol {
     }
 
     //================================================== HANDLERY UDÁLOSTÍ ==================================================//
-    
     /**
      * Handler události ukončení spojení.
      */
@@ -150,7 +147,6 @@ public class ServerTicketSyncProtocol implements IDataProtocol {
     }
 
     //================================================== VÝKONNÉ METODY ==================================================//
-    
     /**
      * Odpojí datový protokol od základního protokolu.
      */
@@ -162,7 +158,6 @@ public class ServerTicketSyncProtocol implements IDataProtocol {
     }
 
     //================================================== INTERNÍ TŘÍDY ==================================================//
-    
     /**
      * Třída zajišťující příjem dat v jiném vlákně.
      *
@@ -206,7 +201,7 @@ public class ServerTicketSyncProtocol implements IDataProtocol {
 
                             NetworkTicket ticket = deserializeTicketData(dataField);
                             ticket.setUploaderBadgeNumber(badgeNumber);
-                            
+
                             protocolListener.onTicketReceived(ticket);
                         }
                     }

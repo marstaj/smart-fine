@@ -46,14 +46,13 @@ public class SMSParkingProvider implements IServerSMSParkingProtocolListener {
 
     @Override
     public void onSMSParkingCheckRequest(String vehicleRegistrationPlate) {
-        
-        System.out.println("SERVER: SMS PARKING RECEIVED  SPZ:" + vehicleRegistrationPlate);
+        //System.out.println("SERVER: SMS PARKING RECEIVED SPZ:" + vehicleRegistrationPlate);
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
             //vybere záznamy SMS parkování, které mají SPZ na jakou se klient dotazuje a seřadí tyto záznamy sestupně (tj. nejnovější záznam bude první)//
-            Query query = session.createQuery("FROM SMSParkingInfoDB smsp WHERE smsp.vehicleRegistrationPlate = :vrp ORDER BY smsp.parkingUntil DESC");
+            Query query = session.getNamedQuery("cz.smartfine.getsmsparkinginfo.by.vrp");
             query.setParameter("vrp", vehicleRegistrationPlate); //nastaví SPZ
 
             List smspList = query.list(); //spustí dotaz na DB
@@ -77,7 +76,7 @@ public class SMSParkingProvider implements IServerSMSParkingProtocolListener {
             }
             
         } catch (HibernateException e) {
-            e.printStackTrace(); //TODO: NĚCO S TÍM UDĚLAT
+            //e.printStackTrace();
             Date date = new Date();
             protocol.sendSMSParkingInfo(new SMSParkingInfo(ParkingStatus.UNKNOWN_PARKING_STATUS, date, date, vehicleRegistrationPlate));
         }

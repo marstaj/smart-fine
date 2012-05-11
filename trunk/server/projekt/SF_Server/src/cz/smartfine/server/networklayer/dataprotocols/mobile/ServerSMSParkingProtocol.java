@@ -40,7 +40,6 @@ public class ServerSMSParkingProtocol implements IDataProtocol {
     private InterThreadType<byte[]> in = new InterThreadType<byte[]>();
 
     //================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
-    
     /**
      * Konstruktor.
      *
@@ -76,7 +75,6 @@ public class ServerSMSParkingProtocol implements IDataProtocol {
     }
 
     //================================================== GET/SET ==================================================//
-    
     /**
      * Odebere posluchače událostí protokolu pro kontrolu času parkování vozidel.
      *
@@ -98,7 +96,6 @@ public class ServerSMSParkingProtocol implements IDataProtocol {
     }
 
     //================================================== HANDLERY UDÁLOSTÍ ==================================================//
-    
     /**
      * Handler události ukončení spojení.
      */
@@ -149,7 +146,6 @@ public class ServerSMSParkingProtocol implements IDataProtocol {
     }
 
     //================================================== VÝKONNÉ METODY ==================================================//
-    
     /**
      * Odpojí datový protokol od základního protokolu.
      */
@@ -172,7 +168,6 @@ public class ServerSMSParkingProtocol implements IDataProtocol {
     }
 
     //================================================== PRIVÁTNÍ METODY ==================================================//
-    
     /**
      * Vytváří zprávu se stavem parkování vozidla.
      *
@@ -208,7 +203,6 @@ public class ServerSMSParkingProtocol implements IDataProtocol {
     }
 
     //================================================== INTERNÍ TŘÍDY ==================================================//
-    
     /**
      * Třída zajišťující příjem dat v jiném vlákně.
      *

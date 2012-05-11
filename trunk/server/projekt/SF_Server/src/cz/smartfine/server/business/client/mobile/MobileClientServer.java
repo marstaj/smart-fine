@@ -2,11 +2,7 @@ package cz.smartfine.server.business.client.mobile;
 
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.server.business.client.IClientServer;
-import cz.smartfine.server.business.client.mobile.providers.BasicServiceProvider;
-import cz.smartfine.server.business.client.mobile.providers.GeoDataProvider;
-import cz.smartfine.server.business.client.mobile.providers.SMSParkingProvider;
-import cz.smartfine.server.business.client.mobile.providers.SPCCheckProvider;
-import cz.smartfine.server.business.client.mobile.providers.TicketSyncProvider;
+import cz.smartfine.server.business.client.mobile.providers.*;
 import cz.smartfine.server.networklayer.links.SecuredServerLink;
 import cz.smartfine.server.networklayer.networkinterface.SimpleServerNetworkInterface;
 import java.util.Date;
@@ -37,6 +33,7 @@ public class MobileClientServer implements IClientServer {
 
     /**
      * Konstruktor.
+     *
      * @param socket Soket na klienta.
      * @param mobileClientList Seznam všech připojených serverů.
      */
@@ -49,8 +46,8 @@ public class MobileClientServer implements IClientServer {
      * Ukončí spojení s klientem.
      */
     @Override
-    public void close() {
-        if (link != null){
+    public synchronized void close() {
+        if (link != null) {
             link.disconnect();
         }
         mobileClientList.remove(this);
@@ -64,7 +61,6 @@ public class MobileClientServer implements IClientServer {
         return this.lastContactTime;
     }
 
-    
     @Override
     public synchronized void setLastContactTime(Date lastContactTime) {
         this.lastContactTime = lastContactTime;
@@ -85,6 +81,7 @@ public class MobileClientServer implements IClientServer {
 
     /**
      * Získá IMEI připojeného zařízení.
+     *
      * @return IMEI připojeného zařízení.
      */
     public synchronized String getImei() {
@@ -93,13 +90,13 @@ public class MobileClientServer implements IClientServer {
 
     /**
      * Nastaví IMEI připojeného zařízení.
+     *
      * @param imei IMEI připojeného zařízení.
      */
     public synchronized void setImei(String imei) {
         this.imei = imei;
     }
 
-    
     @Override
     public void start() {
         link = new SecuredServerLink(socket); //vytvoří link
@@ -107,54 +104,56 @@ public class MobileClientServer implements IClientServer {
         mainProvider = new BasicServiceProvider(networkInterface, this); //vytvoří základní službu
         link.listen(); //spustí příjem dat z klienta
     }
-    
-    public void closePreviousServer(){
+
+    /**
+     * Ukončí předchozí server, pokud takový existuje.
+     */
+    public void closePreviousServer() {
         mobileClientList.remove(mobileClientList.containIMEI(this.getImei())); //odebere předchozí instanci serveru, která zpracovávala stejného klienta (pokud existuje)
     }
-    
-    public void registerThisServer(){
+
+    @Override
+    public void registerThisServer() {
         mobileClientList.put(this);
     }
 
-    public GeoDataProvider getGeoProvider() {
+    public synchronized GeoDataProvider getGeoProvider() {
         return geoProvider;
     }
 
-    public void setGeoProvider(GeoDataProvider geoProvider) {
+    public synchronized void setGeoProvider(GeoDataProvider geoProvider) {
         this.geoProvider = geoProvider;
     }
 
-    public BasicServiceProvider getMainProvider() {
+    public synchronized BasicServiceProvider getMainProvider() {
         return mainProvider;
     }
 
-    public void setMainProvider(BasicServiceProvider mainProvider) {
+    public synchronized void setMainProvider(BasicServiceProvider mainProvider) {
         this.mainProvider = mainProvider;
     }
 
-    public SMSParkingProvider getSmsParkingProvider() {
+    public synchronized SMSParkingProvider getSmsParkingProvider() {
         return smsParkingProvider;
     }
 
-    public void setSmsParkingProvider(SMSParkingProvider smsParkingProvider) {
+    public synchronized void setSmsParkingProvider(SMSParkingProvider smsParkingProvider) {
         this.smsParkingProvider = smsParkingProvider;
     }
 
-    public SPCCheckProvider getSpcCheckProvider() {
+    public synchronized SPCCheckProvider getSpcCheckProvider() {
         return spcCheckProvider;
     }
 
-    public void setSpcCheckProvider(SPCCheckProvider spcCheckProvider) {
+    public synchronized void setSpcCheckProvider(SPCCheckProvider spcCheckProvider) {
         this.spcCheckProvider = spcCheckProvider;
     }
 
-    public TicketSyncProvider getTicketProvider() {
+    public synchronized TicketSyncProvider getTicketProvider() {
         return ticketProvider;
     }
 
-    public void setTicketProvider(TicketSyncProvider ticketProvider) {
+    public synchronized void setTicketProvider(TicketSyncProvider ticketProvider) {
         this.ticketProvider = ticketProvider;
     }
-    
-    
 }

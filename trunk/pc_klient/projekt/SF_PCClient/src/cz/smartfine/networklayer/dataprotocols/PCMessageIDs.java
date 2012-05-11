@@ -34,6 +34,4 @@ public class PCMessageIDs {
      * ID zprávy s novým PINem.
      */
     public static final byte ID_MSG_NEW_PIN = -120;
-
-    
 }

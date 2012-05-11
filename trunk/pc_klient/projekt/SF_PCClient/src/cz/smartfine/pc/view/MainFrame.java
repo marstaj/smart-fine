@@ -1,26 +1,73 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.smartfine.pc.view;
 
 import cz.smartfine.networklayer.model.pc.PCClientPermission;
+import cz.smartfine.pc.SFPCClient;
+import cz.smartfine.pc.networklayer.ConnectionProvider;
+import cz.smartfine.pc.networklayer.dataprotocols.LoginProtocol;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import javax.swing.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 
 /**
  *
  * @author Pavel Brož
  */
-public class MainFrame extends JFrame implements ILoginPanelListener{
+public class MainFrame extends JFrame implements ILoginPanelListener, ILogoutListener {
 
+    /**
+     * Záložkový panel.
+     */
     JTabbedPane workingPane;
+    /**
+     * Logovací obrazovka.
+     */
     LoginPanel pnlLogin;
-    
+
+    //================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
+    /**
+     * Konstruktor okna.
+     */
     public MainFrame() {
-        super("Smart-Fine - PC klient");
+        super(SFPCClient.getApplication().getLocalization().getString("app.mainform.title"));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        this.addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                ConnectionProvider conProvider = SFPCClient.getApplication().getConnectionProvider();
+                if (conProvider != null && conProvider.isConnected()) {
+                    LoginProtocol lp = new LoginProtocol(conProvider.getNetworkInterface());
+                    lp.logoutFromServer();
+                }
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = 800;
@@ -30,56 +77,83 @@ public class MainFrame extends JFrame implements ILoginPanelListener{
 
         setBounds(x, y, width, height);
 
-/*
-        JTabbedPane tabbedPane = new JTabbedPane();
-
-        JComponent panel1 = makeTextPanel("Panel #1");
-        tabbedPane.addTab("tab 1", panel1);
-        tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-
-        JComponent panel2 = makeTextPanel("Panel #2");
-        tabbedPane.addTab("Tab 2", panel2);
-        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-
-        JComponent panel3 = makeTextPanel("Panel #3");
-        tabbedPane.addTab("Tab 3", panel3);
-        tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-
-        JComponent panel4 = makeTextPanel("Panel #4 (has a preferred size of 410 x 50).");
-        panel4.setPreferredSize(new Dimension(410, 50));
-        tabbedPane.addTab("Tab 4", panel4);
-        tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
-
-        //this.setJMenuBar(createMenuBar()); //vytvoří menu
-        this.setLayout(new BorderLayout()); //nastavý layout
-        //this.add(createToolBar(), BorderLayout.NORTH); //vytvoří toolbar
-        this.getContentPane().add(tabbedPane); //vloží desktop pane
-*/
-        this.setLayout(new BorderLayout()); //nastavý layout
+        this.setLayout(new GridBagLayout()); //nastavý layout
         pnlLogin = new LoginPanel(this);
-        this.add(pnlLogin, BorderLayout.CENTER);
-        
+        this.getContentPane().add(pnlLogin, new GridBagConstraints());
+
         this.setVisible(true); //zobrazí
     }
 
-    protected JComponent makeTextPanel(String text) {
-        JPanel panel = new JPanel(false);
-        JLabel filler = new JLabel(text);
-        filler.setHorizontalAlignment(JLabel.CENTER);
-        panel.setLayout(new GridLayout(1, 1));
-        panel.add(filler);
-        return panel;
-    }
-
-
+    //================================================== HANDLERY ==================================================//
     /**
      * Handler události úspěšného přihlášení na server.
      *
      * @param permissions
      */
     @Override
-    public void onLoggedIn(PCClientPermission permissions){
-        
+    public void onLoggedIn(PCClientPermission permissions) {
+        workingPane = new JTabbedPane();
+
+        if (permissions.isPermShowOwnTickets()) {
+            TicketPanel panel = new TicketPanel(true, false);
+            workingPane.addTab(SFPCClient.getApplication().getLocalization().getString("tabs.showownticket.title"), panel);
+        }
+
+        if (permissions.isPermShowTickets()) {
+            TicketPanel panel;
+            if (permissions.isPermDeleteTickets()) {
+                panel = new TicketPanel(false, true);
+            } else {
+                panel = new TicketPanel(false, false);
+            }
+
+            workingPane.addTab(SFPCClient.getApplication().getLocalization().getString("tabs.showticket.title"), panel);
+        }
+
+        if (permissions.isPermShowGeodata()) {
+            GeoDataPanel panel = new GeoDataPanel();
+            workingPane.addTab(SFPCClient.getApplication().getLocalization().getString("tabs.geodata.title"), panel);
+        }
+
+        if (permissions.isPermAdminAssoc()) {
+            AdminAssocPanel panel = new AdminAssocPanel();
+            workingPane.addTab(SFPCClient.getApplication().getLocalization().getString("tabs.adminassoc.title"), panel);
+        }
+
+        if (permissions.isPermAdminDevices()) {
+            RegisterDevicePanel panel = new RegisterDevicePanel();
+            workingPane.addTab(SFPCClient.getApplication().getLocalization().getString("tabs.registerdev.title"), panel);
+
+            DeleteDevicePanel panel1 = new DeleteDevicePanel();
+            workingPane.addTab(SFPCClient.getApplication().getLocalization().getString("tabs.deletedev.title"), panel1);
+        }
+
+        if (permissions.isPermChngPin()) {
+            ChangePinPanel panel = new ChangePinPanel();
+            workingPane.addTab(SFPCClient.getApplication().getLocalization().getString("tabs.changepin.title"), panel);
+        }
+        LogoutPanel logoutPanel = new LogoutPanel(this);
+        workingPane.addTab(SFPCClient.getApplication().getLocalization().getString("tabs.logout.title"), logoutPanel);
+
+        this.getContentPane().remove(pnlLogin);
+        this.setLayout(new BorderLayout()); //nastavý layout
+        this.getContentPane().add(workingPane);
+
+        validate();
+        repaint();
     }
-    
+
+    /**
+     * Handler události odhlášení.
+     */
+    @Override
+    public void onLogout() {
+        this.getContentPane().remove(workingPane);
+        this.setLayout(new GridBagLayout()); //nastavý layout
+        pnlLogin = new LoginPanel(this);
+        this.getContentPane().add(pnlLogin, new GridBagConstraints());
+
+        validate();
+        repaint();
+    }
 }

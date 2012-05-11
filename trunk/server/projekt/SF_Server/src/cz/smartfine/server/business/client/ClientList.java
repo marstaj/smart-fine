@@ -15,7 +15,7 @@ public class ClientList {
     /**
      * Ukončí všechna spojení s klienty.
      */
-    public void closeAll() {
+    public synchronized void closeAll() {
         for (IClientServer server : servers) {
             server.close();
         }
@@ -26,9 +26,9 @@ public class ClientList {
      *
      * @param badgeNumber Služební číslo policisty připojeného k serveru.
      */
-    public IClientServer containBadgeNumber(int badgeNumber) {
+    public synchronized IClientServer containBadgeNumber(int badgeNumber) {
         for (IClientServer server : servers) {
-            if (server.getBadgeNumber() == badgeNumber){
+            if (server.getBadgeNumber() == badgeNumber) {
                 return server;
             }
         }
@@ -41,7 +41,7 @@ public class ClientList {
      * @param clientServer Objekt serveru, který tvoří protistranu klientovy.
      */
     public synchronized void put(IClientServer clientServer) {
-        if (!servers.contains(clientServer)){
+        if (!servers.contains(clientServer)) {
             servers.add(clientServer);
         }
     }
@@ -52,18 +52,17 @@ public class ClientList {
      * @param clientServer Objekt serveru, který tvoří protistranu klientovy.
      */
     public synchronized void remove(IClientServer clientServer) {
-        if(clientServer != null){
+        if (clientServer != null) {
             servers.remove(clientServer);
         }
     }
 
     /**
      * Získá seznam serverů.
+     *
      * @return Seznam serverů.
      */
-    public ArrayList<IClientServer> getServers() {
+    public synchronized ArrayList<IClientServer> getServers() {
         return servers;
     }
-    
-    
 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <query name="cz.smartfine.getalltickets.by.bn">
+        <![CDATA[ FROM NetworkTicket ticket WHERE ticket.badgeNumber = :bn AND (ticket.date >= :since AND ticket.date <= :until) ORDER BY ticket.date DESC, ticket.id DESC ]]>
+    </query>
+  
+    <sql-query name="cz.smartfine.getpolicemanlist.by.bn">
+        <return class="cz.smartfine.model.PolicemanDB"/>
+        <![CDATA[ SELECT * FROM policemen AS p JOIN (SELECT o.ID FROM policemen AS po JOIN offices AS o ON po.ID=o.CHIEF WHERE po.BADGENUMBER=:bn ) AS cho ON p.OFFICE=cho.ID ]]>
+    </sql-query>
+    
+    <query name="cz.smartfine.getwaypoints.by.bn">
+        <![CDATA[ FROM WaypointDB wp WHERE wp.badgeNumber = :bn AND (wp.time >= :since AND wp.time <= :until) ORDER BY wp.time ASC ]]>
+    </query>
+    
+    <query name="cz.smartfine.getpoliceman.by.bn">
+        <![CDATA[ FROM PolicemanDB pol WHERE pol.badgeNumber = :bn ]]>
+    </query>
+    
+    <query name="cz.smartfine.getdevice.by.devid">
+        <![CDATA[ FROM MobileDeviceDB dev WHERE dev.id=:devid ]]>
+    </query>
+    
+    <query name="cz.smartfine.getdevice.by.office">
+        <![CDATA[ FROM MobileDeviceDB dev WHERE dev.office=:of ]]>
+    </query>
+    
+    <query name="cz.smartfine.getallpolicemen.by.ids">
+        <![CDATA[ FROM PolicemanDB pol WHERE pol.id IN (:polids) ]]>
+    </query>
+    
+    <query name="cz.smartfine.getticket.by.id">
+        <![CDATA[ FROM NetworkTicket ticket WHERE ticket.id=:ticid ]]>
+    </query>
+    
+    <query name="cz.smartfine.getdevice.by.imei">
+        <![CDATA[ FROM MobileDeviceDB dev WHERE dev.imei = :imei ]]>
+    </query>
+    
+    <query name="cz.smartfine.getpolicemanlogin.by.bn.pin">
+        <![CDATA[ FROM PolicemanLoginDB pol WHERE pol.badgeNumber = :bn AND pol.pin = :pin ]]>
+    </query>
+    
+    <query name="cz.smartfine.getsmsparkinginfo.by.vrp">
+        <![CDATA[ FROM SMSParkingInfoDB smsp WHERE smsp.vehicleRegistrationPlate = :vrp ORDER BY smsp.parkingUntil DESC ]]>
+    </query>
+    
+    <query name="cz.smartfine.getspcinfo.by.spcnum">
+        <![CDATA[ FROM SPCInfoDB spci WHERE spci.spcNumber = :spcn ]]>
+    </query>
+</hibernate-mapping>

@@ -10,8 +10,7 @@ import javax.net.ssl.SSLSocket;
  * Třída pro zabezpečenou komunikacimezi serverem a klientem.
  *
  * @author Pavel Brož
- * @version 1.0 
- * @updated 27-4-2012 18:18:44
+ * @version 1.0 @updated 27-4-2012 18:18:44
  */
 abstract public class SecuredLink implements ILink {
 
@@ -34,14 +33,13 @@ abstract public class SecuredLink implements ILink {
     /**
      * Třída, která asynchroně přijímá data.
      */
-    protected Receiver receiver;
+    protected LinkReceiver receiver;
     /**
      * Vlákno pro příjem dat
      */
     protected Thread receiverThread;
 
     //================================================== KONSTRUKTORY & DESTRUKTORY ==================================================//
-    
     @Override
     public void finalize() throws Throwable {
         super.finalize();
@@ -74,9 +72,10 @@ abstract public class SecuredLink implements ILink {
             this.socket = socket;
             in = socket.getInputStream();
             out = socket.getOutputStream();
-        } catch (IOException ex) { }
+        } catch (IOException ex) {
+        }
     }
-    
+
     //================================================== GET/SET ==================================================//
     /**
      * Nastavuje posluchače příjmu dat.
@@ -114,11 +113,9 @@ abstract public class SecuredLink implements ILink {
     @Override
     public void sendData(byte[] dataToSend) throws IOException {
         try {
-            System.out.println("ANDROID: link.sendData()");
             out.write(dataToSend);
             out.flush();
         } catch (IOException e) {
-            System.out.println("ANDROID:  link.sendData() EXCEPTION: " + e.getMessage());
             closeConnection();
             throw e;
         }
@@ -152,7 +149,7 @@ abstract public class SecuredLink implements ILink {
     @Override
     public boolean isConnected() {
         if (socket != null) {
-            return socket.isConnected();
+            return (socket.isConnected() && !socket.isClosed());
         }
         return false;
     }

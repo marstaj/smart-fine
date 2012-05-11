@@ -2,7 +2,6 @@ package cz.smartfine.server.business;
 
 import cz.smartfine.server.business.client.ClientList;
 import cz.smartfine.server.business.client.IClientServer;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +17,7 @@ public class TimeoutServerCloser implements Runnable {
     private ClientList[] clientLists;
     private long timeout;
     private long executeTime;
-    
+
     public TimeoutServerCloser(ClientList[] clientLists, long timeout, long executeTime) {
         this.clientLists = clientLists;
         this.timeout = timeout;
@@ -34,10 +33,9 @@ public class TimeoutServerCloser implements Runnable {
                 for (ClientList clientList : clientLists) {
                     List<IClientServer> servers = clientList.getServers();
                     List<IClientServer> serversToKill = new ArrayList<IClientServer>();
-                    
+
                     long now = (new Date()).getTime();
                     for (IClientServer server : servers) {
-                        System.out.println("SERVER: TIMEOUT SERVER: BG: " + server.getBadgeNumber() + " LAST_CONTACT: " + server.getLastContactTime().toString());
                         //pokud je rozdíl mezi současným časem a časem posledního kontaktu větší než timeout, server se ukončí//
                         if (now - server.getLastContactTime().getTime() > timeout) {
                             serversToKill.add(server);
@@ -46,11 +44,10 @@ public class TimeoutServerCloser implements Runnable {
                     for (IClientServer server : serversToKill) {
                         //pokud je rozdíl mezi současným časem a časem posledního kontaktu větší než timeout, server se ukončí//
                         if (now - server.getLastContactTime().getTime() > timeout) {
-                            System.out.println("SERVER: TIMEOUTED: BG: " + server.getBadgeNumber() + " LAST_CONTACT: " + server.getLastContactTime().toString());
                             server.close();
                         }
                     }
-                    
+
                 }
             } catch (InterruptedException ex) {
             }

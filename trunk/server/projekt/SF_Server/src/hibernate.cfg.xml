@@ -10,12 +10,13 @@
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
     <property name="hibernate.jdbc.batch_size">30</property>
-    <mapping class="" file="" jar="" package="" resource="cz/smartfine/networklayer/model/NetworkTicket.hbm.xml"/>
-    <mapping resource="cz/smartfine/networklayer/model/WaypointDB.hbm.xml"/>
+    <mapping resource="cz/smartfine/model/NetworkTicket.hbm.xml"/>
+    <mapping resource="cz/smartfine/model/WaypointDB.hbm.xml"/>
     <mapping resource="cz/smartfine/server/business/client/model/SMSParkingInfoDB.hbm.xml"/>
     <mapping resource="cz/smartfine/server/business/client/model/SPCInfoDB.hbm.xml"/>
-    <mapping resource="cz/smartfine/networklayer/model/MobileDeviceDB.hbm.xml"/>
-    <mapping resource="cz/smartfine/networklayer/model/PolicemanDB.hbm.xml"/>
+    <mapping resource="cz/smartfine/model/MobileDeviceDB.hbm.xml"/>
+    <mapping resource="cz/smartfine/model/PolicemanDB.hbm.xml"/>
     <mapping resource="cz/smartfine/server/business/client/model/PolicemanLoginDB.hbm.xml"/>
+    <mapping resource="cz/smartfine/server/queries/NamedQuery.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

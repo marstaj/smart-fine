@@ -1,7 +1,7 @@
 package cz.smartfine.server.business.client.mobile.providers;
 
-import cz.smartfine.networklayer.model.MobileDeviceDB;
-import cz.smartfine.networklayer.model.PolicemanDB;
+import cz.smartfine.model.MobileDeviceDB;
+import cz.smartfine.model.PolicemanDB;
 import cz.smartfine.networklayer.model.mobile.LoginFailReason;
 import cz.smartfine.networklayer.networkinterface.INetworkInterface;
 import cz.smartfine.server.HibernateUtil;
@@ -10,13 +10,12 @@ import cz.smartfine.server.business.client.mobile.providers.listeners.IBasicServ
 import cz.smartfine.server.business.client.model.PolicemanLoginDB;
 import cz.smartfine.server.networklayer.dataprotocols.mobile.BasicServiceProtocol;
 import java.util.Date;
-import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- * Třída provádějící autentizaci a pomocné úkony při správě spojení.
+ * Třída provádějící autentizaci a pomocné úkony při správě spojení mobilního klienta.
  *
  * @author Pavel Brož
  * @version 1.0 @created 27-4-2012 17:00:24
@@ -60,7 +59,7 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
 
     @Override
     public void onLoginRequest(int badgeNumber, int pin, String imei) {
-        System.out.println("SERVER: LOGIN->BG: " + badgeNumber + " PIN: " + pin + " IMEI: " + imei);
+        //System.out.println("SERVER: LOGIN->BG: " + badgeNumber + " PIN: " + pin + " IMEI: " + imei);
         AuthenticationStatus loginStatus = authenticate(badgeNumber, pin, imei);
         if (loginStatus.authenticated) {
             //nastaví serveru služební číslo a imei//
@@ -77,7 +76,7 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
             clientServer.setSpcCheckProvider(new SPCCheckProvider(networkInterface));
             clientServer.setTicketProvider(new TicketSyncProvider(networkInterface));
 
-            System.out.println("SERVER: -------------------- AUTHENTICATION SUCCESFUL --------------------");
+            //System.out.println("SERVER: -------------------- AUTHENTICATION SUCCESFUL --------------------");
             protocol.authenticationSuccessful(); //odeslání zprávy o úspěšném přihlášení
         } else { //nepřihlášen
             protocol.authenticationFail(loginStatus.failReason); //odeslání zprávy o neúspěšném přihlášení
@@ -86,7 +85,7 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
 
     @Override
     public void onAuthenticationRequest(int badgeNumber, int pin) {
-        System.out.println("SERVER: AUTHENTICATION->BG: " + badgeNumber + " PIN: " + pin);
+        //System.out.println("SERVER: AUTHENTICATION->BG: " + badgeNumber + " PIN: " + pin);
         AuthenticationStatus aStatus = authenticate(badgeNumber, pin);
         if (aStatus.authenticated) {
             protocol.authenticationSuccessful(); //odeslání zprávy o úspěšné autentizaci
@@ -98,20 +97,17 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
     @Override
     public void onNonLoginMessageReceived() {
         if (!loggedIn) {
-            System.out.println("SERVER: NON LOGIN MESSAGE RECEIVED");
             clientServer.close();
         }
     }
 
     @Override
     public void onLogoutMessageReceived() {
-        System.out.println("SERVER: LOGOUT MESSAGE RECEIVED");
         clientServer.close();
     }
 
     @Override
     public void onConnectionTerminated() {
-        System.out.println("SERVER: CONNECTION TERMINATED");
         clientServer.close();
     }
 
@@ -121,7 +117,6 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
 
     @Override
     public void onMessageReceived() {
-        System.out.println("SERVER: MESSAGE RECEIVED DATE: " + (new Date()).toString());
         clientServer.setLastContactTime(new Date());
     }
 
@@ -134,33 +129,31 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
             //KONTROLA EXISTENCE ZAŘÍZENÍ//
 
             //vybere záznamy o zařízení ze kterého přichází požadavek na autentizaci//
-            Query devQuery = session.createQuery("FROM MobileDeviceDB dev WHERE dev.imei = :imei");
+            Query devQuery = session.getNamedQuery("cz.smartfine.getdevice.by.imei");
             devQuery.setParameter("imei", imei); //nastaví číslo IMEI
+            devQuery.setMaxResults(1); //maximálně jeden výsledek
 
-            List devList = devQuery.list(); //spustí dotaz na DB
-            MobileDeviceDB dev;
-
+            MobileDeviceDB dev = (MobileDeviceDB) devQuery.uniqueResult();
             //dotaz musí vrátit nějaká data, jinak zařízení neexistuje//
-            if (devList.size() > 0) {
-                dev = ((List<MobileDeviceDB>) devList).get(0); //první záznam
-            } else { //žádný záznam
+            if (dev == null) {
                 return new AuthenticationStatus(false, LoginFailReason.UNKNOWN_IMEI);
+            }
+            //kontrola jestli není zařízení blokováno//
+            if (dev.isBlocked()) {
+                return new AuthenticationStatus(false, LoginFailReason.UNKNOWN_REASON);
             }
 
             //KONTROLA EXISTENCE SLUŽEBNÍHO ČÍSLA A SPRÁVNOSTI PINU//
 
             //vybere záznamy o policistovy, který se chce autentizovat//
-            Query polQuery = session.createQuery("FROM PolicemanLoginDB pol WHERE pol.badgeNumber = :bg AND pol.pin = :pin");
-            polQuery.setParameter("bg", badgeNumber); //nastaví služební číslo
+            Query polQuery = session.getNamedQuery("cz.smartfine.getpolicemanlogin.by.bn.pin");
+            polQuery.setParameter("bn", badgeNumber); //nastaví služební číslo
             polQuery.setParameter("pin", pin); //nastaví PIN
+            polQuery.setMaxResults(1); //maximálně jeden výsledek
 
-            List polList = polQuery.list(); //spustí dotaz na DB
-            PolicemanLoginDB pol;
-
+            PolicemanLoginDB pol = (PolicemanLoginDB) polQuery.uniqueResult();
             //dotaz musí vrátit nějaká data, jinak policista neexistuje//
-            if (polList.size() > 0) {
-                pol = ((List<PolicemanLoginDB>) polList).get(0); //první záznam
-            } else { //žádný záznam
+            if (pol == null) {
                 return new AuthenticationStatus(false, LoginFailReason.WRONG_BADGE_NUMBER_OR_PIN);
             }
 
@@ -174,7 +167,7 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
             return new AuthenticationStatus(false, LoginFailReason.IMEI_AND_BADGE_NUMBER_DONT_MATCH);
 
         } catch (HibernateException e) {
-            e.printStackTrace(); //TODO: NĚCO S TÍM UDĚLAT
+            //e.printStackTrace();
             return new AuthenticationStatus(false, LoginFailReason.UNKNOWN_REASON);
         } finally {
             session.getTransaction().commit();
@@ -190,20 +183,20 @@ public class BasicServiceProvider implements IBasicServiceProtocolListener {
             //KONTROLA EXISTENCE SLUŽEBNÍHO ČÍSLA A SPRÁVNOSTI PINU//
 
             //vybere záznamy o policistovy, který se chce autentizovat//
-            Query polQuery = session.createQuery("FROM PolicemanLoginDB pol WHERE pol.badgeNumber = :bg AND pol.pin = :pin");
-            polQuery.setParameter("bg", badgeNumber); //nastaví služební číslo
+            Query polQuery = session.getNamedQuery("cz.smartfine.getpolicemanlogin.by.bn.pin");
+            polQuery.setParameter("bn", badgeNumber); //nastaví služební číslo
             polQuery.setParameter("pin", pin); //nastaví PIN
+            polQuery.setMaxResults(1); //maximálně jeden výsledek
 
-            List polList = polQuery.list(); //spustí dotaz na DB
-
+            PolicemanLoginDB pol = (PolicemanLoginDB) polQuery.uniqueResult();
             //dotaz musí vrátit nějaká data, jinak policista neexistuje//
-            if (polList.size() > 0) {
-                return new AuthenticationStatus(true);
-            } else { //žádný záznam
+            if (pol == null) {
                 return new AuthenticationStatus(false, LoginFailReason.WRONG_BADGE_NUMBER_OR_PIN);
+            } else {
+                return new AuthenticationStatus(true);
             }
         } catch (HibernateException e) {
-            e.printStackTrace(); //TODO: NĚCO S TÍM UDĚLAT
+            //e.printStackTrace();
             return new AuthenticationStatus(false, LoginFailReason.UNKNOWN_REASON);
         } finally {
             session.getTransaction().commit();

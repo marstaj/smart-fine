@@ -3,7 +3,6 @@ package cz.smartfine.server.business;
 import cz.smartfine.server.business.client.mobile.MobileClientList;
 import cz.smartfine.server.business.client.mobile.MobileClientServer;
 import java.io.IOException;
-import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocket;
@@ -33,6 +32,7 @@ public class MobileClientAcceptor implements Runnable {
         try {
             sslServerSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(port);
         } catch (IOException ex) {
+            System.err.println("SERVER: NEMŮŽE NASLOUCHAT NA PORTU: " + port);
             return;
         }
 
