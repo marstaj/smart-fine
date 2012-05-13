@@ -6,7 +6,7 @@ Aplikaci pro chytré telefony, která velmi usnadní policistům udělování po
 = Členové týmu =
 Pavel Brož (brozpav1@fel.cvut.cz, 737 635 904)
 
-Martin Štajner (stajnmar@fel.cvut.cz, 732 173 025)
+Martin Štajner (stajnmar@fel.cvut.cz)
 
 = Dokumenty =
 [https://docs.google.com/spreadsheet/ccc?key=0AmLh4aPUNQq_dFpzcVU5RFdScGlmNkhuNE9vbHdCNWc#gid=0 Projektový deník]
