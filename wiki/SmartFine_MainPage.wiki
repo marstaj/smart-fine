@@ -1,5 +1,5 @@
 = Smart Fine =
-== Systém evidence pokut pomocí chytrých telefonu ==
+== Systém evidence dopravních přestupků a pohybu policistů pomocí mobilních telefonů ==
 
 Aplikaci pro chytré telefony, která velmi usnadní policistům udělování pokut. Aplikace by na základe údajů GPS měla předvyplnit ulici, umožnit vložit dokumentační fotografie, rozpoznat poznávací značku, nabídnout výběr z nejčastějších přestupků a údaje pak poslat na centrální server a mobilní tiskárnu. Vyplněním údajů o přestupku elektronickou formou přímo na místě se extrémně sníží administrativa, kterou jsou policisté nyní zatíženi.
 ----
