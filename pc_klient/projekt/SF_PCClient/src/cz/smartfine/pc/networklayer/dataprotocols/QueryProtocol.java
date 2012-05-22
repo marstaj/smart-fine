@@ -155,7 +155,7 @@ public class QueryProtocol implements IDataProtocol {
      */
     public void executeQuery(int id, byte type, String parameters) {
         if (networkInterface != null) {
-            System.out.println("PC: QUERY PROTOCOL EXEC QUERY");
+            //System.out.println("PC: QUERY PROTOCOL EXEC QUERY");
             networkInterface.sendData(createQueryMessage(id, type, parameters), this);
         }
     }

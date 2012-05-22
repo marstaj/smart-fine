@@ -32,10 +32,10 @@ public class MobileClientAcceptor implements Runnable {
         try {
             sslServerSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(port);
         } catch (IOException ex) {
-            System.err.println("SERVER: NEMŮŽE NASLOUCHAT NA PORTU: " + port);
+            System.err.println("SERVER: MOBILNI KLIENTSKY SERVER NEMUZE NASLOUCHAT NA PORTU: " + port);
             return;
         }
-
+        System.out.println("SERVER: MOBILNI KLIENTSKY SERVER SPUSTEN");
         try {
             SSLSocket clientSocket;
             //smyčka pro příjem klientů//

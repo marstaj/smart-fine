@@ -10,6 +10,11 @@
 <project name="SF_Server" default="default" basedir=".">
     <description>Builds, tests, and runs the project SF_Server.</description>
     <import file="nbproject/build-impl.xml"/>
+    <target name="-post-jar"> 
+        <copy file="sfserver.jks" flatten="true" todir="${dist.dir}"/>
+        <copy file="sfserver.passwd" flatten="true" todir="${dist.dir}"/>
+        <copy file="hibernate.cfg.xml" flatten="true" todir="${dist.dir}"/>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 

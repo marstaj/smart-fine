@@ -32,10 +32,10 @@ public class PCClientAcceptor implements Runnable {
         try {
             sslServerSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(port);
         } catch (IOException ex) {
-            System.err.println("SERVER PC: NEMŮŽE NASLOUCHAT NA PORTU: " + port);
+            System.err.println("SERVER: PC KLIENTSKY SERVER NEMUZE NASLOUCHAT NA PORTU: " + port);
             return;
         }
-
+        System.out.println("SERVER: PC KLIENTSKY SERVER SPUSTEN");
         try {
             SSLSocket clientSocket;
             //smyčka pro příjem klientů//
