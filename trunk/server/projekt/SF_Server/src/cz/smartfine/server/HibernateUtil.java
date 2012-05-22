@@ -1,5 +1,6 @@
 package cz.smartfine.server;
 
+import java.io.File;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
@@ -14,9 +15,13 @@ public class HibernateUtil {
     
     static {
         try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+            // Create the SessionFactory from standard (hibernate.cfg.xml) config file.
+            File cfgFile = new File("hibernate.cfg.xml");
+            if (cfgFile.exists()){
+                sessionFactory = new AnnotationConfiguration().configure(cfgFile).buildSessionFactory();
+            }else{
+                sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+            }
         } catch (Throwable ex) {
             // Log the exception. 
             System.err.println("Initial SessionFactory creation failed." + ex);

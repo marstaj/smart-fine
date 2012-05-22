@@ -150,7 +150,7 @@ public class PinProtocol implements IDataProtocol {
      */
     public void changePin(int badgeNumber, int pin) {
         if (networkInterface != null) {
-            System.out.println("PC: PIN PROTOCOL CHANGE PIN");
+            //System.out.println("PC: PIN PROTOCOL CHANGE PIN");
             networkInterface.sendData(createPinChangeMessage(badgeNumber, pin), this);
         }
     }

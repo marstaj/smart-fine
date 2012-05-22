@@ -69,11 +69,11 @@ public class SF_NL_TestActivity extends Activity implements
     }
 
     public void butConnectClick(View theButton) {
-        InputStream in = this.getResources().openRawResource(R.raw.ssltestcert);
+        InputStream in = this.getResources().openRawResource(R.raw.sfca);
 
         SecuredMobileClientLink link;
         try {
-            link = new SecuredMobileClientLink(address, in, "ssltest");
+            link = new SecuredMobileClientLink(address, in, "sfdemo");
             SimpleNetworkInterface ni = new SimpleNetworkInterface();
             cp = new ConnectionProvider(this.getBaseContext(), link, ni);
 

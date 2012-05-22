@@ -155,7 +155,7 @@ public class LoginProtocol implements IDataProtocol {
      */
     public void loginToServer(int badgeNumber, int pin) {
         if (networkInterface != null) {
-            System.out.println("PC: LOGIN PROTOCOL SEND LOGIN");
+            //System.out.println("PC: LOGIN PROTOCOL SEND LOGIN");
             networkInterface.sendData(createLoginMessage(badgeNumber, pin), this);
         }
     }
@@ -165,7 +165,7 @@ public class LoginProtocol implements IDataProtocol {
      */
     public void logoutFromServer() {
         if (networkInterface != null) {
-            System.out.println("PC: LOGIN PROTOCOL SEND LOGOUT");
+            //System.out.println("PC: LOGIN PROTOCOL SEND LOGOUT");
             networkInterface.sendData(createLogoutMessage(), this);
         }
     }
