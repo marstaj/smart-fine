@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="own_spinner">- Vlastní -</string>
+    <string name="notImplementedYet">Zatím nebylo implementováno.</string>
+    <string name="default_value">(value)</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="cancel">Zrušit</string>
+    <string name="deleteValue">Smazat položku </string>
+    <string name="please_wait">Prosím počkejte...</string>
+    <string name="view_required"> *</string>
+
+</resources>

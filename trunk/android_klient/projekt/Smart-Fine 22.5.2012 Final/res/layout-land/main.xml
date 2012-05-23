@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/logo" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/newTicketButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:onClick="newTicketClick"
+                android:text="@string/view_main_newTicketButton" android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/ticketListButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:onClick="ticketListClick"
+                android:text="@string/view_main_ticketListButton" android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/checkCardButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkCardClick"
+                android:text="@string/view_main_checkCardButton" android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/checkSMSParkingButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkSMSParkingClick"
+                android:text="@string/view_main_checkSMSParkingButton" android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/preferencesButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:onClick="preferencesClick"
+                android:text="@string/view_main_preferencesButton" android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/logoutButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:onClick="logoutClick"
+                android:text="Odhlásit" android:layout_weight="1"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

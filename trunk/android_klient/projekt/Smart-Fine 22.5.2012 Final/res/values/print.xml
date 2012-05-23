@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    <string name="printedTicket_title">VÝZVA</string>
+    <string name="printedTicket_subtitle">pro osobu podezřelou ze spáchání přestupku</string>
+    <string name="printedTicket_date">Datum:</string>
+    <string name="printedTicket_time">Čas:</string>
+    <string name="printedTicket_tow">Odtah:</string>
+    <string name="printedTicket_yes">ANO</string>
+    <string name="printedTicket_no">NE</string>
+    <string name="printedTicket_spz">RZ/SPZ:</string>
+    <string name="printedTicket_mpz">MPZ:</string>
+    <string name="printedTicket_spzColor">Barva SPZ:</string>
+    <string name="printedTicket_vehicleType">Druh vozidla:</string>
+    <string name="printedTicket_vehicleBrand">Tovární zn.:</string>
+    <string name="printedTicket_city">Město:</string>
+    <string name="printedTicket_street">Ulice:</string>
+    <string name="printedTicket_number">Č.p.:</string>
+    <string name="printedTicket_description">Popis jednání:</string>
+    <string name="printedTicket_law1">Dle §</string>
+    <string name="printedTicket_law2">odst.</string>
+    <string name="printedTicket_law3">písm.</string>
+    <string name="printedTicket_law4">zák. č.</string>
+    <string name="printedTicket_law5">Sb.</string>
+    <string name="printedTicket_info1">Dostavte se nejpozdeji do 5 dnů na služebnu městské</string>
+    <string name="printedTicket_info2">policie, uvedenou v této výzvě.</string>
+    <string name="printedTicket_stamp">Razítko</string>
+    <string name="printedTicket_signature">Podpis strážníka</string>
+</resources>

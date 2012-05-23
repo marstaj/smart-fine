@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="val_ticket_err_spz">SPZ musí být vyplněna. (5 \u2013 10)</string>
+	<string name="val_ticket_err_mpz">MPZ musí být vyplněna (1 \u2013 3), nebo vyberte hodnotu z nabídky.</string>
+	<string name="val_ticket_err_vehicleType">Druh vozidla musý být vyplněn. (1 \u2013 50)</string>
+	<string name="val_ticket_err_vehicleBrand">Tovární značku vozidla musí být vyplněna. (1 \u2013 50)</string>
+	<string name="val_ticket_err_city">Město musí být vyplněno. (1 \u2013 50)</string>
+	<string name="val_ticket_err_street">Ulice musí být vyplněna. (1 \u2013 255)</string>
+	<string name="val_ticket_err_number">Číslo ulice musí být vyplněno. (1 \u2013 255)</string>	
+	<string name="val_ticket_err_lawNumber">Číslo zákona musí být vyplněno.</string>
+	<string name="val_ticket_err_collection">Sbírka zákona musí být vyplněna.</string>		    
+	<string name="val_ticket_failure">Lístek se nepodařilo uložit.</string>
+	<string name="val_ticket_success">Parkovací lístek úspěšně uložen.</string>	
+	<string name="val_ticket_fotoDocumentation_failLoad">Nepodařilo se získat fotografii</string>
+	
+	<string name="ticket_delete_failure">Parkovací lístek se nepodařilo smazat.</string>
+	
+	<string name="val_syncadress_success">Nová adresa uložena.</string>
+	
+	<string name="val_pref_mac_err">Špatný formát MAC adresy.</string>
+	<string name="val_pref_syncserver_err">Špatný formát adresy serveru.</string>
+	
+	<string name="val_card_err">Číslo parkovací karty musí mít 10 znaků.</string>
+	
+	<string name="val_login_err_badgeNumber">Služební číslo nemá požadovanou délku 6.</string>
+	<string name="val_login_err_pin">Heslo nemá požadovanou délku 5.</string>	
+	<string name="val_login_wrongvalues">Špatné přihlašovací údaje.</string>
+	<string name="val_login_wrongpin">Heslo nesouhlasí.</string>
+	<string name="login_unknownerror">Neznámá chyba.</string> 
+	<string name="login_unknowndevice">Neznámé zařízení.</string>
+	<string name="login_imei_and_values_err">Služební číslo není přiřazeno k tomuto zařízení.</string> 
+	<string name="login_error">Došlo k chybě při přihlašování.</string>
+	
+	<string name="logout_success">Odhlášení proběhlo úspěšně.</string>
+	<string name="logout_error">Nepodařilo se připojit a odhlásit se ze serveru.</string>
+	<string name="upload_data_success">Data byla úspěšné nahrána na server.</string>
+	<string name="print_ticket_success">Lístek byl úspěšně vytisknut.</string>
+	
+	<string name="gps_location_failure">Nepodařilo se získat polohu.</string>
+	
+	<string name="inicialization_error">Chyba při inicializaci připojení na server.</string>
+	
+	<string name="connection_terminated">Spojení se serverem bylo ukončeno.</string>
+	<string name="connection_unsuccessful">Nepodařilo se připojit k serveru.</string>
+	
+	<string name="printer_connection_unsuccessful">Nepodařilo se připojit k tiskárně.</string>
+	
+	<string name="internet_need_gpsaddress">Pro automatické určení adresy je potřeba internetové připojení.</string>
+	<string name="internet_need_login">K přihlášení musíte být připojeni k internetu.</string>
+	<string name="internet_need_upload">K odeslání dat na server musíte být připojeni k internetu.</string>
+	<string name="internet_need_sms">K ověření parkování musíte být připojeni k internetu.</string>
+	<string name="internet_need_card">K ověření parkovací karty musíte být připojeni k internetu.</string>
+	
+	<string name="provider_missing">Není povolen ani jeden provider.</string>
+
+</resources>
