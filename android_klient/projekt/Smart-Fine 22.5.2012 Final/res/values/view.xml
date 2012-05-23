@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Smart-Fine</string>
+	<string name="ticket_edit_title">Vytvoření / úprava parkovacího lístku</string>
+	<string name="ticket_list_title">Uložené parkovací lístky</string>
+	<string name="ticket_detail_title">Detail parkovacího lístku</string>
+	<string name="preferences_title">Nastavení</string>
+	<string name="blue_card_title">Kontrola parkovací karty</string>
+	<string name="sms_parking_title">Kontrola SMS parkování</string>
+	<string name="frequent_values_title">Výběr oblíbených položek</string>
+	<string name="login_title">Přihlášení</string>
+	<string name="print_title">Tisk parkovacího lístku</string>
+
+	<string name="view_main_preferencesButton">Nastavení</string>
+	<string name="view_main_newTicketButton">Nový parkovací lístek</string>
+	<string name="view_main_ticketListButton">Uložené lístky</string>
+	<string name="view_main_checkCardButton">Kontrola parkovací karty</string>
+	<string name="view_main_checkSMSParkingButton">Kontrola SMS parkování</string>
+	    
+	<string name="view_ticket_spz">Vozidlo RZ/SPZ</string>
+	<string name="view_ticket_mpz">MPZ</string>
+	<string name="view_ticket_mpz1">Mezinárodní poznávací značka</string>
+	<string name="view_ticket_spzColor">Barva RZ/SPZ</string>
+	<string name="view_ticket_vehicleType">Druh vozidla</string>
+	<string name="view_ticket_vehicleBrand">Tovární značka</string>
+	<string name="view_ticket_address">Adresa</string>
+	<string name="view_ticket_location">Místo</string>
+	<string name="view_ticket_descriptionDZ">Popis jednání (DZ)</string>
+	<string name="view_ticket_tow">Odtah</string>
+	<string name="view_ticket_moveableDZ">Přenosné DZ</string>
+	<string name="view_ticket_id">Identifikační číslo</string>
+	<string name="view_ticket_law">Druh přestupku</string>
+	<string name="view_ticket_description">Popis situace</string>
+	<string name="view_ticket_city">Město</string>
+	<string name="view_ticket_street">Ulice</string>
+	<string name="view_ticket_number">Číslo</string>
+	<string name="view_ticket_photoDocumentation">Fotodokumentace</string>	
+	<string name="view_ticket_saveTicketButton">Uložit záznam</string>
+	<string name="view_ticket_dateTime">Datum a čas</string>
+	<string name="view_ticket_badgeNumber">Služební číslo</string>
+	<string name="view_ticket_printed">Vytištěno</string>	
+	<string name="view_ticket_dialogMenu_takeNewPicture">Vyfotit novou fotografii</string>
+	<string name="view_ticket_dialogMenu_browsePicture">Vybrat z galerie</string>
+	<string name="view_ticket_dialogMenu_title">Vyberte</string>	
+	<string name="view_ticket_law_ruleOfLaw">Paragraf (§)</string>
+	<string name="view_ticket_law_paragraph">Odstavec</string>
+	<string name="view_ticket_law_letter">Písmeno</string>
+	<string name="view_ticket_law_lawNumber">Číslo zákona</string>
+	<string name="view_ticket_law_collection">Sbírka</string>
+	
+	<string name="view_card_checkCardButton">Zkontrolovat kartu</string>
+	<string name="view_card_cardNumber">Číslo parkovací karty</string>
+	<string name="view_card_ok">Karta je v pořádku.</string>
+	<string name="view_card_stolen">Karta byla ukradena.</string>
+	<string name="view_card_unknown">Neznámý</string>
+	<string name="view_card_status">Status:</string>	
+	
+	<string name="view_sms_checkParkingButton">Zkontrolovat parkování</string>
+	<string name="view_sms_spz">SPZ vozidla</string>
+	
+	<string name="view_dialog_login">Prihlašování</string>
+	<string name="view_dialog_upload">Nahrávání na server</string>	
+	<string name="view_dialog_print">Tisk</string>
+	<string name="view_dialog_sms">Kontrola parkování</string>
+	<string name="view_dialog_card">Kontrola parkovací karty</string>
+	
+	<string name="view_alert_bluetooth">Pro připojení k tiskárně musíte zapnout Bluetooth. Chcete zapnout Bluetooth nyní?</string>
+	<string name="view_alert_upload">Oravdu chcete nahrát veškerá data na server?</string>
+	<string name="view_alert_delete">Opravdu chcete smazat tento parkovací lístek?</string>
+	<string name="view_alert_print">Opravdu chcete vytisknout tento parkovací lístek?</string>
+	
+	<string name="view_sms_allowed">Povoleno</string>
+	<string name="view_sms_notallowed">Nepovoleno</string>
+	<string name="view_sms_unknown">Neznámé</string>
+	
+	<string name="view_login_login">Přihlášení</string>
+	<string name="view_login_loginButton">Přihlásit se</string>
+	<string name="view_login_syncadress">Synchronizační adresa serveru</string>
+	<string name="view_login_changeAdressButton">Změnit adresu serveru</string>
+	<string name="view_login_changeButton">Změnit</string>
+	<string name="view_login_pin">Heslo (PIN)</string>
+	<string name="view_login_badgeNumber">Služební číslo</string>
+	
+	<string name="view_main_logoutButton">Odhlásit</string>
+	
+	<string name="view_ticketList_uploadButton">Nahrát záznamy na server</string>
+	<string name="view_ticketList_noTickets">Žádné parkovací lístky k dispozici...</string>
+	
+	
+	
+	
+</resources>

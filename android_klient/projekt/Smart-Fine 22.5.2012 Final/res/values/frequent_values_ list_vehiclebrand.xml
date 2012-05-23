@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ticket_vehicleBrand_array">
+        <item>Alfa Romeo‎</item>
+        <item>Aston Martin</item>
+        <item>Audi</item>
+        <item>Austin</item>
+        <item>Austin-Healey</item>‎        <item>Bentley</item>
+        <item>Benz</item>
+        <item>BMW‎</item>
+        <item>Bristol</item>
+        <item>Bugatti</item>
+        <item>Chevrolet</item>
+        <item>Chrysler‎</item>
+        <item>Citroën‎</item>
+        <item>Dacia‎</item>
+        <item>Daewoo</item>
+        <item>Daihatsu‎</item>
+        <item>Daimler</item>
+        <item>Dodge‎</item>
+        <item>Ferrari</item>
+        <item>Fiat</item>
+        <item>Ford‎</item>
+        <item>GMC‎</item>
+        <item>Honda‎</item>
+        <item>Hummer</item>
+        <item>Hyundai‎</item>
+        <item>Jaguar</item>
+        <item>Jeep‎</item>
+        <item>Kia</item>
+        <item>Lada</item>
+        <item>Lamborghini</item>
+        <item>Lancia</item>
+        <item>Land Rover</item>
+        <item>Laurin &amp; Klement</item>
+        <item>LIAZ</item>
+        <item>Lotus</item>
+        <item>Maserat</item>
+        <item>Mazda</item>
+        <item>Mercedes-Benz</item>
+        <item>Mini</item>
+        <item>Mitsubishi</item>‎        <item>Nissan</item>
+        <item>Opel</item>
+        <item>Peugeot‎</item>
+        <item>Porsche‎</item>
+        <item>Praga</item>
+        <item>Renault</item>
+        <item>Rolls-Royce</item>‎        <item>Rover‎</item>
+        <item>Saab‎</item>
+        <item>SEAT</item>
+        <item>Smart‎</item>
+        <item>Subaru</item>
+        <item>Suzuki‎</item>
+        <item>Tatra</item>
+        <item>Toyota‎</item>
+        <item>Triumph</item>
+        <item>UAZ‎</item>
+        <item>Volkswagen</item>
+        <item>Volvo‎</item>
+        <item>ZIL</item>
+        <item>ZIS‎</item>
+        <item>Škoda‎</item>
+    </string-array>
+
+</resources>

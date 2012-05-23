@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="first_category"
+        android:title="@string/pref_firstCategory" >
+        
+        <EditTextPreference
+            android:defaultValue="Praha"
+            android:dialogTitle="@string/pref_city_dialogtitle"
+            android:key="pref_city"
+            android:summary="@string/pref_city_summary"
+            android:title="@string/pref_city_title" />
+        
+        <EditTextPreference
+            android:defaultValue="192.168.0.121"
+            android:dialogTitle="@string/pref_syncserverurl_dialogtitle"
+            android:key="pref_syncserverurl"
+            android:summary="@string/pref_syncserverurl_summary"
+            android:title="@string/pref_syncserver_title" />
+        
+         <EditTextPreference
+            android:defaultValue=""
+            android:dialogTitle="@string/pref_btprinter_macaddress_title"
+            android:key="pref_btprinter_macaddress"
+            android:summary="@string/pref_btprinter_macaddress_summary"
+            android:title="@string/pref_btprinter_macaddress_dialogtitle" />
+        
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:key="second_category"
+        android:title="@string/pref_secondCategory" >
+        
+        <Preference
+            android:key="pref_frequentValues_mpz"
+            android:title="@string/pref_mpzTitle"
+            android:summary="@string/pref_mpzDescription" />
+        <Preference
+            android:key="pref_frequentValues_vehicleBrand"
+            android:title="@string/pref_vehicleBrandTitle"
+            android:summary="@string/pref_vehicleBrandDescription" />
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>
