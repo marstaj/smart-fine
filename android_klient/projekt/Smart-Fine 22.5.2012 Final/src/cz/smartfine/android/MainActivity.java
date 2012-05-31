@@ -141,7 +141,7 @@ public class MainActivity extends Activity {
 	public void logoutClick(View button) {
 
 		// Když není připojení k serveru
-		if (app.getConnectionProvider().isConnected()) {
+		if (!app.getConnectionProvider().isConnected()) {
 
 			final ProgressDialog dialog = new ProgressDialog(this);
 			dialog.setTitle("Odhlašování");

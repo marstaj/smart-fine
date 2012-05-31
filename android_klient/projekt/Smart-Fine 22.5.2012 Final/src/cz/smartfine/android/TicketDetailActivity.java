@@ -155,10 +155,52 @@ public class TicketDetailActivity extends Activity {
 	 */
 	public void editTicketClick(View button) {
 
+		startActivityForResult(new Intent(this, TicketLoginActivity.class), TICKET_LOGIN);
+		
 		// vytvoří Intent, vloží do něj index na zobrazení PL a spustí aktivitu
 		// pro editaci tohoto PL
-		this.startActivityForResult(new Intent(this, TicketEditActivity.class).putExtra("Ticket", ticketIndex), EDIT);
+		//this.startActivityForResult(new Intent(this, TicketEditActivity.class).putExtra("Ticket", ticketIndex), EDIT);
 
+	}
+
+	/**
+	 * Posluchač stisknutí tlačítka odstranění lístku
+	 * 
+	 * @param button
+	 *            Stisknuté tlačítko
+	 */
+	public void removeTicketClick(View button) {
+		// Dialog potvrzení vytisknutí lístku
+		Builder builder = new Builder(this);
+		builder.setMessage(getText(R.string.view_alert_delete));
+		builder.setCancelable(false);
+		builder.setPositiveButton(getText(R.string.yes), new OnClickListener() {
+
+			public void onClick(DialogInterface arg0, int arg1) {
+
+				app.getTicketDao().deleteTicket(showedTicket);
+				try {
+					// Ulozime listky do souboru
+					app.getTicketDao().saveAllTickets();
+					// Smazeme fotografie daneho listku
+					app.getPhotoDAO().deleteAllPhotosFromTicket(showedTicket);
+					setResult(RESULT_OK);
+					finish();
+				} catch (Exception e) {
+					// V pripade, ze se nepodari ulozit listky do souboru, listek se zase prida do seznamu a zobrazi se chybova hlaska
+					app.getTicketDao().saveTicket(showedTicket, ticketIndex);
+					Toaster.toast(R.string.ticket_delete_failure, Toaster.SHORT);
+				}
+
+			}
+		});
+
+		builder.setNegativeButton(getText(R.string.no), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+		builder.show();
 	}
 
 	// ==================================== OVERRIDE METHODS ==================================== //
@@ -299,46 +341,6 @@ public class TicketDetailActivity extends Activity {
 		dialog.show();
 
 		helper.print(PrefManager.getInstance().getBTPrinterMacAddress(appContext), showedTicket);
-	}
-
-	/**
-	 * Posluchač stisknutí tlačítka odstranění lístku
-	 * 
-	 * @param button
-	 *            Stisknuté tlačítko
-	 */
-	public void removeTicketClick(View button) {
-		// Dialog potvrzení vytisknutí lístku
-		Builder builder = new Builder(this);
-		builder.setMessage(getText(R.string.view_alert_delete));
-		builder.setCancelable(false);
-		builder.setPositiveButton(getText(R.string.yes), new OnClickListener() {
-
-			public void onClick(DialogInterface arg0, int arg1) {
-
-				app.getTicketDao().deleteTicket(showedTicket);
-				try {
-					// Ulozime listky do souboru
-					app.getTicketDao().saveAllTickets();
-					// Smazeme fotografie daneho listku
-					app.getPhotoDAO().deleteAllPhotosFromTicket(showedTicket);
-					setResult(RESULT_OK);
-					finish();
-				} catch (Exception e) {
-					// V pripade, ze se nepodari ulozit listky do souboru, listek se zase prida do seznamu a zobrazi se chybova hlaska
-					app.getTicketDao().saveTicket(showedTicket, ticketIndex);
-					Toaster.toast(R.string.ticket_delete_failure, Toaster.SHORT);
-				}
-
-			}
-		});
-
-		builder.setNegativeButton(getText(R.string.no), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
-			}
-		});
-		builder.show();
 	}
 
 	/**
