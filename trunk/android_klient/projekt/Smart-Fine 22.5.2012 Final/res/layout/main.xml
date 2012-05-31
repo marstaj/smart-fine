@@ -63,7 +63,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="logoutClick"
-            android:text="view_main_logoutButton" />
+            android:text="@string/view_main_logoutButton" />
     </LinearLayout>
 
 </LinearLayout>
