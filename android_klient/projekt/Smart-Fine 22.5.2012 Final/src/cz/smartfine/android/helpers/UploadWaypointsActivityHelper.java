@@ -94,7 +94,7 @@ public class UploadWaypointsActivityHelper extends Handler implements IGeoDataPr
 	 */
 	public void onConnectionTerminated() {
 		activity.dismissDialog();
-		Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated).toString());
+		Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated7).toString());
 
 	}
 

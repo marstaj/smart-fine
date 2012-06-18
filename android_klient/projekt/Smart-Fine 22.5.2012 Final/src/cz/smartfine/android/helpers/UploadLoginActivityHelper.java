@@ -134,7 +134,7 @@ public class UploadLoginActivityHelper extends Handler implements IAuthenticatio
 	 */
 	public void onConnectionTerminated() {
 		activity.dismissDialog(); 
-		Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated).toString());
+		Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated5).toString());
 
 	}
 

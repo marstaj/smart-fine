@@ -90,7 +90,7 @@ public class BlueCardActivityHelper extends Handler implements ISPCCheckProtocol
 	 */
 	public void onConnectionTerminated() {
 		activity.dismissDialog();
-		Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated).toString());
+		Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated1).toString());
 	}
 
 	/*

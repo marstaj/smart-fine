@@ -91,7 +91,7 @@ public class SMSParkingActivityHelper extends Handler implements ISMSParkingProt
 	 */
 	public void onConnectionTerminated() {
 		activity.dismissDialog();
-		Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated).toString());
+		Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated4).toString());
 	}
 
 	/*
