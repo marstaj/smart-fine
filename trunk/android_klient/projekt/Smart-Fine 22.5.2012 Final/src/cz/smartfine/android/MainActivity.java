@@ -143,7 +143,7 @@ public class MainActivity extends Activity {
 		// Když není připojení k serveru
 		if (!app.getConnectionProvider().isConnected()) {
 
-			final ProgressDialog dialog = new ProgressDialog(this);
+			dialog = new ProgressDialog(this);
 			dialog.setTitle("Odhlašování");
 			dialog.setMessage("Prosím počkejte...");
 			dialog.setIndeterminate(true);
@@ -172,20 +172,66 @@ public class MainActivity extends Activity {
 			Runnable rable = new Runnable() {
 				public void run() {
 					boolean conected = app.getConnectionProvider().connectAndLogin();
+					
+					// Kdyz nastane timeout
+					if (!timeout) {
 					Message msg = Message.obtain();
 					Bundle data = new Bundle();
 					data.putBoolean("connect", conected);
 					msg.setData(data);
 					handler.sendMessage(msg);
+					}
+					
+					handler.removeCallbacks(rTimeout);
 				}
 			};
 			final Thread thread = new Thread(rable);
+			timeout = false;
 			thread.start();
+			
+			// Spusteni odpocitavani timeoutu
+			handler.postDelayed(rTimeout, 10000); // Timeout po 10s
+			
 
 		} else {
 			logout();
 		}
 	}
+	
+	
+	// -------------------------------------------- timeout // TODO Dodelat poradne ten timeout... tady, i v MainLoginActivityHelper
+	
+	/**
+	 * Dialog
+	 */
+	ProgressDialog dialog;
+	
+	/**
+	 * Příznak, zda nastal timeout.
+	 */
+	private boolean timeout = false;
+	
+	/**
+	 * Vlákno, které se stará o připojení k serveru
+	 */
+	private Thread thread;
+	
+	/**
+	 * Nastavení timeoutu
+	 */
+	private Runnable rTimeout = new Runnable() {
+		public void run() {
+			if (thread != null) {
+				thread.interrupt();
+			}			
+			timeout = true;
+			dialog.dismiss();
+			// TODO text do XML
+			Toaster.toast("Čas odlášení vypršel.", Toaster.SHORT);
+		}
+	};
+	
+	// ----------------------------------------------------
 
 	/**
 	 * Obsluha tlačítka kontroly SMS parkování

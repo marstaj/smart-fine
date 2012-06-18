@@ -69,8 +69,6 @@ public class MainLoginActivityHelper extends Handler implements ILoginProviderLi
 		if (data.containsKey("connect")) {
 			if (data.getBoolean("connect")) {
 
-				// Ziskani TelephonyManager kvuli zjisteni IMEI cisla
-
 				// Prihlaseni
 				login(activity, Integer.valueOf(badgeNumber), Integer.valueOf(pin), getIMEI());
 
@@ -101,7 +99,8 @@ public class MainLoginActivityHelper extends Handler implements ILoginProviderLi
 			Messenger.sendStringMessage(handler, activity.getText(R.string.logout_success).toString());
 		} else {
 			activity.dismissDialog();
-			Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated).toString());
+			// TODO Debug 
+			// Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated2).toString());
 		}
 	}
 
@@ -149,7 +148,7 @@ public class MainLoginActivityHelper extends Handler implements ILoginProviderLi
 				break;
 			}
 			case CONNECTION_TERMINATED_FROM_SERVER : {
-				error = activity.getText(R.string.connection_terminated).toString();
+				error = activity.getText(R.string.connection_terminated3).toString();
 				break;
 			}
 		}
@@ -293,29 +292,55 @@ public class MainLoginActivityHelper extends Handler implements ILoginProviderLi
 	}
 
 	/**
-	 * Metoda se v nocém vlákně pokusí připojit k serveru
+	 * Metoda se v novém vlákně pokusí připojit k serveru
 	 */
 	public void connect() {
 		// Pripojeni na server ve zvlastnim vlakne
 		Runnable rable = new Runnable() {
 			public void run() {
 				boolean conected = activity.getApp().getConnectionProvider().connect();
-				Message msg = Message.obtain();
-				Bundle data = new Bundle();
-				data.putBoolean("connect", conected);
-				msg.setData(data);
-				handler.sendMessage(msg);
+
+				// Kdyz nastane timeout
+				if (!timeout) {
+					Message msg = Message.obtain();
+					Bundle data = new Bundle();
+					data.putBoolean("connect", conected);
+					msg.setData(data);
+					handler.sendMessage(msg);
+				}
+				handler.removeCallbacks(rTimeout);
 			}
 		};
-		final Thread thread = new Thread(rable);
+		thread = new Thread(rable);
+		timeout = false;
 		thread.start();
 
-		// Přidat nejakej timeout casovac?? TODO casovac
-		//		handler.postDelayed(new Runnable() {
-		//			public void run() {
-		//				thread.stop(); // tohle je deprecated :/				
-		//			}			
-		//		}, 20000);
+		// Spusteni odpocitavani timeoutu
+		handler.postDelayed(rTimeout, 10000); // Timeout po 10s
 	}
 
+	/**
+	 * Příznak, zda nastal timeout.
+	 */
+	private boolean timeout = false;
+	
+	/**
+	 * Vlákno, které se stará o připojení k serveru
+	 */
+	private Thread thread;
+	
+	/**
+	 * Nastavení timeoutu
+	 */
+	private Runnable rTimeout = new Runnable() {
+		public void run() {
+			if (thread != null) {
+				thread.interrupt();
+			}			
+			timeout = true;
+			activity.dismissDialog();
+			// TODO text do XML
+			Toaster.toast("Čas přihlášení vypršel.", Toaster.SHORT);
+		}
+	};
 }

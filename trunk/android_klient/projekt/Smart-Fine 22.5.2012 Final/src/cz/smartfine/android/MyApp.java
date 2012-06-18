@@ -140,9 +140,15 @@ public class MyApp extends Application {
 		InetSocketAddress inetAddress = new InetSocketAddress(address, 25000);
 
 		// pristup k certifikatu
+		
+		// TODO DEBUG CERT
 		InputStream in = this.getResources().openRawResource(R.raw.sfca);
+		//InputStream in = this.getResources().openRawResource(R.raw.ssltestcert);
 
+		
+		// TODO DEBUG CERT
 		SecuredClientLink ilink = new SecuredMobileClientLink(inetAddress, in, "sfdemo");
+		//SecuredClientLink ilink = new SecuredMobileClientLink(inetAddress, in, "ssltest");
 		INetworkInterface ni = new SimpleNetworkInterface();
 
 		connectionProvider = new ConnectionProvider(this, ilink, ni);

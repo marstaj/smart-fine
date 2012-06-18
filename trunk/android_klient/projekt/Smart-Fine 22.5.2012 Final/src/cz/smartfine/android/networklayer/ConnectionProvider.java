@@ -88,6 +88,7 @@ public class ConnectionProvider {
             mLink.connect();
             return mLink.isConnected();
         } catch (IOException e) {
+        	mLink.disconnect(); //
             return false;
         }
     }

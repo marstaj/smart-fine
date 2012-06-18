@@ -87,7 +87,7 @@ public class UploadTicketsActivityHelper extends Handler implements ITicketProto
 	 */
 	public void onConnectionTerminated() {
 		activity.dismissDialog();
-		Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated).toString());
+		Messenger.sendStringMessage(handler, activity.getText(R.string.connection_terminated6).toString());
 		activity.finishUpload();
 	}
 

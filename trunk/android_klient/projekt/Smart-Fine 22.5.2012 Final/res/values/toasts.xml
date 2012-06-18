@@ -41,6 +41,16 @@
 	<string name="inicialization_error">Chyba při inicializaci připojení na server.</string>
 	
 	<string name="connection_terminated">Spojení se serverem bylo ukončeno.</string>
+	<string name="connection_terminated1">Spojení se serverem bylo ukončeno.1</string>
+	<string name="connection_terminated2">Spojení se serverem bylo ukončeno.2</string>
+	<string name="connection_terminated3">Spojení se serverem bylo ukončeno.3</string>
+	<string name="connection_terminated4">Spojení se serverem bylo ukončeno.4</string>
+	<string name="connection_terminated5">Spojení se serverem bylo ukončeno.5</string>
+	<string name="connection_terminated6">Spojení se serverem bylo ukončeno.6</string>
+	<string name="connection_terminated7">Spojení se serverem bylo ukončeno.7</string>
+	<string name="connection_terminated8">Spojení se serverem bylo ukončeno.8</string>
+	<string name="connection_terminated9">Spojení se serverem bylo ukončeno.9</string>
+	
 	<string name="connection_unsuccessful">Nepodařilo se připojit k serveru.</string>
 	
 	<string name="printer_connection_unsuccessful">Nepodařilo se připojit k tiskárně.</string>
